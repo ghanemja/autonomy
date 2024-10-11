@@ -1,0 +1,2 @@
+Invoking command in '/home/janelleg/dev_ws/build/minibot': /usr/bin/cmake --build /home/janelleg/dev_ws/build/minibot -- -j8 -l8
+Invoked command in '/home/janelleg/dev_ws/build/minibot' returned '2': /usr/bin/cmake --build /home/janelleg/dev_ws/build/minibot -- -j8 -l8

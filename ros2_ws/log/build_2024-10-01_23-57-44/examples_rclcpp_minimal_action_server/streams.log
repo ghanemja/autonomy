@@ -1,0 +1,27 @@
+[0.018s] Invoking command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_action_server': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/janelleg/ros2_ws/build/examples_rclcpp_minimal_action_server -- -j8 -l8
+[0.123s] [35m[1mConsolidate compiler generated dependencies of target action_server_member_functions[0m
+[0.125s] [35m[1mConsolidate compiler generated dependencies of target action_server_not_composable[0m
+[0.161s] [ 50%] Built target action_server_not_composable
+[0.173s] [100%] Built target action_server_member_functions
+[0.201s] Invoked command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_action_server' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/janelleg/ros2_ws/build/examples_rclcpp_minimal_action_server -- -j8 -l8
+[0.263s] Invoking command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_action_server': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/janelleg/ros2_ws/build/examples_rclcpp_minimal_action_server
+[0.277s] -- Install configuration: ""
+[0.278s] -- Execute custom install script
+[0.278s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server/lib/examples_rclcpp_minimal_action_server/action_server_not_composable
+[0.279s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server/lib/examples_rclcpp_minimal_action_server/action_server_member_functions
+[0.279s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server/share/ament_index/resource_index/package_run_dependencies/examples_rclcpp_minimal_action_server
+[0.279s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server/share/ament_index/resource_index/parent_prefix_path/examples_rclcpp_minimal_action_server
+[0.280s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server/share/examples_rclcpp_minimal_action_server/environment/ament_prefix_path.sh
+[0.280s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server/share/examples_rclcpp_minimal_action_server/environment/ament_prefix_path.dsv
+[0.280s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server/share/examples_rclcpp_minimal_action_server/environment/path.sh
+[0.281s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server/share/examples_rclcpp_minimal_action_server/environment/path.dsv
+[0.281s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server/share/examples_rclcpp_minimal_action_server/local_setup.bash
+[0.281s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server/share/examples_rclcpp_minimal_action_server/local_setup.sh
+[0.282s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server/share/examples_rclcpp_minimal_action_server/local_setup.zsh
+[0.282s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server/share/examples_rclcpp_minimal_action_server/local_setup.dsv
+[0.282s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server/share/examples_rclcpp_minimal_action_server/package.dsv
+[0.307s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server/share/ament_index/resource_index/packages/examples_rclcpp_minimal_action_server
+[0.307s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server/share/examples_rclcpp_minimal_action_server/cmake/examples_rclcpp_minimal_action_serverConfig.cmake
+[0.307s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server/share/examples_rclcpp_minimal_action_server/cmake/examples_rclcpp_minimal_action_serverConfig-version.cmake
+[0.308s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server/share/examples_rclcpp_minimal_action_server/package.xml
+[0.311s] Invoked command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_action_server' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/janelleg/ros2_ws/build/examples_rclcpp_minimal_action_server

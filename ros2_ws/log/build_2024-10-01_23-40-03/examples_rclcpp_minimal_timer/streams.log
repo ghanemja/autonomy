@@ -1,0 +1,76 @@
+[0.019s] Invoking command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/janelleg/ros2_ws/src/examples/rclcpp/timers/minimal_timer -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer
+[0.141s] -- The C compiler identification is GNU 11.4.0
+[0.261s] -- The CXX compiler identification is GNU 11.4.0
+[0.276s] -- Detecting C compiler ABI info
+[0.429s] -- Detecting C compiler ABI info - done
+[0.445s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.446s] -- Detecting C compile features
+[0.447s] -- Detecting C compile features - done
+[0.453s] -- Detecting CXX compiler ABI info
+[0.645s] -- Detecting CXX compiler ABI info - done
+[0.667s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.668s] -- Detecting CXX compile features
+[0.669s] -- Detecting CXX compile features - done
+[0.673s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.028s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.197s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.246s] -- Found rclcpp: 16.0.10 (/opt/ros/humble/share/rclcpp/cmake)
+[1.330s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.341s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.357s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.387s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.428s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.513s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[1.518s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[1.712s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[1.779s] -- Found FastRTPS: /opt/ros/humble/include  
+[1.874s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.888s] -- Looking for pthread.h
+[2.069s] -- Looking for pthread.h - found
+[2.070s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[2.339s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[2.355s] -- Found Threads: TRUE  
+[2.572s] -- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[2.892s] -- Added test 'copyright' to check source files copyright and LICENSE
+[2.903s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[2.905s] -- Configured cppcheck include dirs: 
+[2.905s] -- Configured cppcheck exclude dirs and/or files: 
+[2.908s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[2.908s] -- Configured cpplint exclude dirs and/or files: 
+[2.921s] -- Added test 'lint_cmake' to check CMake code style
+[2.921s] -- Added test 'uncrustify' to check C / C++ code style
+[2.921s] -- Configured uncrustify additional arguments: 
+[2.921s] -- Added test 'xmllint' to check XML markup files
+[2.927s] -- Configuring done
+[3.012s] -- Generating done
+[3.037s] -- Build files have been written to: /home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer
+[3.090s] Invoked command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/janelleg/ros2_ws/src/examples/rclcpp/timers/minimal_timer -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer
+[3.091s] Invoking command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer -- -j8 -l8
+[3.378s] [ 25%] [32mBuilding CXX object CMakeFiles/timer_member_function.dir/member_function.cpp.o[0m
+[3.392s] [ 50%] [32mBuilding CXX object CMakeFiles/timer_lambda.dir/lambda.cpp.o[0m
+[17.195s] [ 75%] [32m[1mLinking CXX executable timer_lambda[0m
+[17.708s] [ 75%] Built target timer_lambda
+[17.919s] [100%] [32m[1mLinking CXX executable timer_member_function[0m
+[18.605s] [100%] Built target timer_member_function
+[18.660s] Invoked command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer -- -j8 -l8
+[18.824s] Invoking command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer
+[18.870s] -- Install configuration: ""
+[18.877s] -- Execute custom install script
+[18.882s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/lib/examples_rclcpp_minimal_timer/timer_lambda
+[18.934s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/lib/examples_rclcpp_minimal_timer/timer_member_function
+[18.991s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/ament_index/resource_index/package_run_dependencies/examples_rclcpp_minimal_timer
+[19.027s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/ament_index/resource_index/parent_prefix_path/examples_rclcpp_minimal_timer
+[19.056s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/environment/ament_prefix_path.sh
+[19.082s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/environment/ament_prefix_path.dsv
+[19.110s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/environment/path.sh
+[19.139s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/environment/path.dsv
+[19.164s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/local_setup.bash
+[19.191s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/local_setup.sh
+[19.219s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/local_setup.zsh
+[19.245s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/local_setup.dsv
+[19.271s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/package.dsv
+[19.301s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/ament_index/resource_index/packages/examples_rclcpp_minimal_timer
+[19.329s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/cmake/examples_rclcpp_minimal_timerConfig.cmake
+[19.356s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/cmake/examples_rclcpp_minimal_timerConfig-version.cmake
+[19.382s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/package.xml
+[19.425s] Invoked command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer

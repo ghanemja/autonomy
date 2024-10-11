@@ -1,0 +1,55 @@
+[0.026s] Invoking command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_subscriber': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/janelleg/ros2_ws/build/examples_rclcpp_minimal_subscriber -- -j8 -l8
+[0.155s] [35m[1mConsolidate compiler generated dependencies of target subscriber_member_function[0m
+[0.155s] [35m[1mConsolidate compiler generated dependencies of target subscriber_member_function_with_unique_network_flow_endpoints[0m
+[0.155s] [35m[1mConsolidate compiler generated dependencies of target subscriber_lambda[0m
+[0.156s] [35m[1mConsolidate compiler generated dependencies of target subscriber_member_function_with_topic_statistics[0m
+[0.156s] [35m[1mConsolidate compiler generated dependencies of target subscriber_member_function_with_type_adapter[0m
+[0.160s] [35m[1mConsolidate compiler generated dependencies of target wait_set_subscriber_library[0m
+[0.164s] [35m[1mConsolidate compiler generated dependencies of target subscriber_content_filtering[0m
+[0.164s] [35m[1mConsolidate compiler generated dependencies of target subscriber_not_composable[0m
+[0.202s] [  8%] Built target subscriber_member_function
+[0.208s] [ 16%] Built target subscriber_member_function_with_unique_network_flow_endpoints
+[0.209s] [ 25%] Built target subscriber_lambda
+[0.219s] [ 33%] Built target subscriber_member_function_with_topic_statistics
+[0.226s] [ 41%] Built target subscriber_member_function_with_type_adapter
+[0.228s] [ 50%] Built target subscriber_content_filtering
+[0.232s] [ 58%] Built target subscriber_not_composable
+[0.243s] [35m[1mConsolidate compiler generated dependencies of target static_wait_set_subscriber[0m
+[0.243s] [35m[1mConsolidate compiler generated dependencies of target wait_set_subscriber[0m
+[0.243s] [35m[1mConsolidate compiler generated dependencies of target time_triggered_wait_set_subscriber[0m
+[0.243s] [ 75%] Built target wait_set_subscriber_library
+[0.289s] [ 83%] Built target wait_set_subscriber
+[0.289s] [ 91%] Built target static_wait_set_subscriber
+[0.295s] [100%] Built target time_triggered_wait_set_subscriber
+[0.318s] Invoked command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_subscriber' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/janelleg/ros2_ws/build/examples_rclcpp_minimal_subscriber -- -j8 -l8
+[0.480s] Invoking command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_subscriber': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/janelleg/ros2_ws/build/examples_rclcpp_minimal_subscriber
+[0.493s] -- Install configuration: ""
+[0.494s] -- Execute custom install script
+[0.495s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib/examples_rclcpp_minimal_subscriber/wait_set_subscriber
+[0.495s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib/examples_rclcpp_minimal_subscriber/static_wait_set_subscriber
+[0.496s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib/examples_rclcpp_minimal_subscriber/time_triggered_wait_set_subscriber
+[0.496s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib/libwait_set_subscriber_library.so
+[0.497s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib/examples_rclcpp_minimal_subscriber/subscriber_lambda
+[0.497s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib/examples_rclcpp_minimal_subscriber/subscriber_member_function
+[0.498s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib/examples_rclcpp_minimal_subscriber/subscriber_member_function_with_topic_statistics
+[0.498s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib/examples_rclcpp_minimal_subscriber/subscriber_member_function_with_type_adapter
+[0.499s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib/examples_rclcpp_minimal_subscriber/subscriber_member_function_with_unique_network_flow_endpoints
+[0.499s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib/examples_rclcpp_minimal_subscriber/subscriber_not_composable
+[0.500s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib/examples_rclcpp_minimal_subscriber/subscriber_content_filtering
+[0.500s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/share/ament_index/resource_index/package_run_dependencies/examples_rclcpp_minimal_subscriber
+[0.500s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/share/ament_index/resource_index/parent_prefix_path/examples_rclcpp_minimal_subscriber
+[0.501s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/share/examples_rclcpp_minimal_subscriber/environment/ament_prefix_path.sh
+[0.501s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/share/examples_rclcpp_minimal_subscriber/environment/ament_prefix_path.dsv
+[0.501s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/share/examples_rclcpp_minimal_subscriber/environment/path.sh
+[0.502s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/share/examples_rclcpp_minimal_subscriber/environment/path.dsv
+[0.502s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/share/examples_rclcpp_minimal_subscriber/local_setup.bash
+[0.502s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/share/examples_rclcpp_minimal_subscriber/local_setup.sh
+[0.503s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/share/examples_rclcpp_minimal_subscriber/local_setup.zsh
+[0.503s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/share/examples_rclcpp_minimal_subscriber/local_setup.dsv
+[0.503s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/share/examples_rclcpp_minimal_subscriber/package.dsv
+[0.521s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/share/ament_index/resource_index/packages/examples_rclcpp_minimal_subscriber
+[0.522s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/share/ament_index/resource_index/rclcpp_components/examples_rclcpp_minimal_subscriber
+[0.523s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/share/examples_rclcpp_minimal_subscriber/cmake/examples_rclcpp_minimal_subscriberConfig.cmake
+[0.523s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/share/examples_rclcpp_minimal_subscriber/cmake/examples_rclcpp_minimal_subscriberConfig-version.cmake
+[0.523s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/share/examples_rclcpp_minimal_subscriber/package.xml
+[0.527s] Invoked command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_subscriber' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/janelleg/ros2_ws/build/examples_rclcpp_minimal_subscriber

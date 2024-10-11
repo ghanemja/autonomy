@@ -1,0 +1,46 @@
+[0.029s] Invoking command in '/home/janelleg/ros2_ws/build/cpp_srvcli': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/janelleg/ros2_ws/install/py_pubsub:/home/janelleg/ros2_ws/install/my_package:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble /usr/bin/cmake /home/janelleg/ros2_ws/src/cpp_srvcli -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/janelleg/ros2_ws/install/cpp_srvcli
+[0.050s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.365s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.380s] -- Found rclcpp: 16.0.10 (/opt/ros/humble/share/rclcpp/cmake)
+[0.447s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.451s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.464s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.486s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.518s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.586s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.591s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.808s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.912s] -- Found example_interfaces: 0.9.3 (/opt/ros/humble/share/example_interfaces/cmake)
+[1.160s] -- Configuring done
+[1.182s] -- Generating done
+[1.185s] -- Build files have been written to: /home/janelleg/ros2_ws/build/cpp_srvcli
+[1.200s] Invoked command in '/home/janelleg/ros2_ws/build/cpp_srvcli' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/janelleg/ros2_ws/install/py_pubsub:/home/janelleg/ros2_ws/install/my_package:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble /usr/bin/cmake /home/janelleg/ros2_ws/src/cpp_srvcli -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/janelleg/ros2_ws/install/cpp_srvcli
+[1.203s] Invoking command in '/home/janelleg/ros2_ws/build/cpp_srvcli': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/janelleg/ros2_ws/install/py_pubsub:/home/janelleg/ros2_ws/install/my_package:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble /usr/bin/cmake --build /home/janelleg/ros2_ws/build/cpp_srvcli -- -j8 -l8
+[1.289s] [35m[1mConsolidate compiler generated dependencies of target client[0m
+[1.296s] [35m[1mConsolidate compiler generated dependencies of target server[0m
+[1.332s] [ 25%] [32m[1mLinking CXX executable client[0m
+[1.342s] [ 50%] [32m[1mLinking CXX executable server[0m
+[1.711s] [ 75%] Built target client
+[1.793s] [100%] Built target server
+[1.822s] Invoked command in '/home/janelleg/ros2_ws/build/cpp_srvcli' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/janelleg/ros2_ws/install/py_pubsub:/home/janelleg/ros2_ws/install/my_package:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble /usr/bin/cmake --build /home/janelleg/ros2_ws/build/cpp_srvcli -- -j8 -l8
+[1.908s] Invoking command in '/home/janelleg/ros2_ws/build/cpp_srvcli': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/janelleg/ros2_ws/install/py_pubsub:/home/janelleg/ros2_ws/install/my_package:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble /usr/bin/cmake --install /home/janelleg/ros2_ws/build/cpp_srvcli
+[1.925s] -- Install configuration: ""
+[1.926s] -- Execute custom install script
+[1.927s] -- Symlinking: /home/janelleg/ros2_ws/install/cpp_srvcli/lib/cpp_srvcli/server
+[1.951s] -- Symlinking: /home/janelleg/ros2_ws/install/cpp_srvcli/lib/cpp_srvcli/client
+[1.967s] -- Symlinking: /home/janelleg/ros2_ws/install/cpp_srvcli/share/ament_index/resource_index/package_run_dependencies/cpp_srvcli
+[1.990s] -- Symlinking: /home/janelleg/ros2_ws/install/cpp_srvcli/share/ament_index/resource_index/parent_prefix_path/cpp_srvcli
+[2.007s] -- Symlinking: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/environment/ament_prefix_path.sh
+[2.026s] -- Symlinking: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/environment/ament_prefix_path.dsv
+[2.043s] -- Symlinking: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/environment/path.sh
+[2.063s] -- Symlinking: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/environment/path.dsv
+[2.079s] -- Symlinking: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/local_setup.bash
+[2.098s] -- Symlinking: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/local_setup.sh
+[2.114s] -- Symlinking: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/local_setup.zsh
+[2.133s] -- Symlinking: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/local_setup.dsv
+[2.149s] -- Symlinking: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/package.dsv
+[2.167s] -- Symlinking: /home/janelleg/ros2_ws/install/cpp_srvcli/share/ament_index/resource_index/packages/cpp_srvcli
+[2.193s] -- Symlinking: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/cmake/cpp_srvcliConfig.cmake
+[2.213s] -- Symlinking: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/cmake/cpp_srvcliConfig-version.cmake
+[2.235s] -- Symlinking: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/package.xml
+[2.257s] Invoked command in '/home/janelleg/ros2_ws/build/cpp_srvcli' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/janelleg/ros2_ws/install/py_pubsub:/home/janelleg/ros2_ws/install/my_package:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble /usr/bin/cmake --install /home/janelleg/ros2_ws/build/cpp_srvcli

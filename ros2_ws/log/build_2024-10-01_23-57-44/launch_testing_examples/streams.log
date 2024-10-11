@@ -1,0 +1,18 @@
+[1.102s] Invoking command in '/home/janelleg/ros2_ws/build/launch_testing_examples': PYTHONPATH=/home/janelleg/ros2_ws/build/launch_testing_examples/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/janelleg/ros2_ws/install/launch_testing_examples/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/janelleg/ros2_ws/build/launch_testing_examples/build --no-deps symlink_data
+[1.586s] running develop
+[1.586s] /usr/lib/python3/dist-packages/setuptools/command/easy_install.py:158: EasyInstallDeprecationWarning: easy_install command is deprecated. Use build and pip and other standards-based tools.
+[1.587s]   warnings.warn(
+[1.934s] running egg_info
+[1.934s] writing launch_testing_examples.egg-info/PKG-INFO
+[1.934s] writing dependency_links to launch_testing_examples.egg-info/dependency_links.txt
+[1.935s] writing entry points to launch_testing_examples.egg-info/entry_points.txt
+[1.939s] writing requirements to launch_testing_examples.egg-info/requires.txt
+[1.940s] writing top-level names to launch_testing_examples.egg-info/top_level.txt
+[1.942s] reading manifest file 'launch_testing_examples.egg-info/SOURCES.txt'
+[1.946s] writing manifest file 'launch_testing_examples.egg-info/SOURCES.txt'
+[1.952s] running build_ext
+[1.954s] Creating /home/janelleg/ros2_ws/install/launch_testing_examples/lib/python3.10/site-packages/launch-testing-examples.egg-link (link to .)
+[1.957s] 
+[1.958s] Installed /home/janelleg/ros2_ws/build/launch_testing_examples
+[1.958s] running symlink_data
+[2.033s] Invoked command in '/home/janelleg/ros2_ws/build/launch_testing_examples' returned '0': PYTHONPATH=/home/janelleg/ros2_ws/build/launch_testing_examples/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/janelleg/ros2_ws/install/launch_testing_examples/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/janelleg/ros2_ws/build/launch_testing_examples/build --no-deps symlink_data

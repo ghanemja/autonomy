@@ -1,0 +1,35 @@
+.. 16.633 NEET Autonomous Machines documentation master file, created by
+   sphinx-quickstart on Thu Aug 29 16:40:11 2024.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to 16.633 NEET Autonomous Machines's documentation!
+===========================================================
+
+
+.. toctree::
+   :caption: Exercise 01
+   
+   intro_ros
+   linux_overview
+   ros2_tutorials_01
+   
+.. toctree::
+   :caption: Exercise 02
+   
+   ros2_tutorials_02
+   
+.. toctree::
+   :caption: Exercise 03
+   
+   ros2_tutorials_03
+
+.. toctree::
+   :caption: Exercise 04
+   
+   mobile_robot_part01
+   
+.. toctree::
+   :caption: Exercise 05
+   
+   mobile_robot_part02

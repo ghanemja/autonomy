@@ -1,0 +1,23 @@
+[1.404s] Invoking command in '/home/janelleg/ros2_ws/build/examples_rclpy_minimal_action_server': PYTHONPATH=/home/janelleg/ros2_ws/build/examples_rclpy_minimal_action_server/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/janelleg/ros2_ws/build/examples_rclpy_minimal_action_server/build --no-deps symlink_data
+[1.904s] running develop
+[1.905s] /usr/lib/python3/dist-packages/setuptools/command/easy_install.py:158: EasyInstallDeprecationWarning: easy_install command is deprecated. Use build and pip and other standards-based tools.
+[1.905s]   warnings.warn(
+[2.177s] running egg_info
+[2.177s] writing examples_rclpy_minimal_action_server.egg-info/PKG-INFO
+[2.178s] writing dependency_links to examples_rclpy_minimal_action_server.egg-info/dependency_links.txt
+[2.178s] writing entry points to examples_rclpy_minimal_action_server.egg-info/entry_points.txt
+[2.178s] writing requirements to examples_rclpy_minimal_action_server.egg-info/requires.txt
+[2.178s] writing top-level names to examples_rclpy_minimal_action_server.egg-info/top_level.txt
+[2.181s] reading manifest file 'examples_rclpy_minimal_action_server.egg-info/SOURCES.txt'
+[2.183s] writing manifest file 'examples_rclpy_minimal_action_server.egg-info/SOURCES.txt'
+[2.185s] running build_ext
+[2.185s] Creating /home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server/lib/python3.10/site-packages/examples-rclpy-minimal-action-server.egg-link (link to .)
+[2.187s] Installing server script to /home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server/lib/examples_rclpy_minimal_action_server
+[2.188s] Installing server_defer script to /home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server/lib/examples_rclpy_minimal_action_server
+[2.188s] Installing server_not_composable script to /home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server/lib/examples_rclpy_minimal_action_server
+[2.188s] Installing server_queue_goals script to /home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server/lib/examples_rclpy_minimal_action_server
+[2.189s] Installing server_single_goal script to /home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server/lib/examples_rclpy_minimal_action_server
+[2.189s] 
+[2.189s] Installed /home/janelleg/ros2_ws/build/examples_rclpy_minimal_action_server
+[2.190s] running symlink_data
+[2.246s] Invoked command in '/home/janelleg/ros2_ws/build/examples_rclpy_minimal_action_server' returned '0': PYTHONPATH=/home/janelleg/ros2_ws/build/examples_rclpy_minimal_action_server/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/janelleg/ros2_ws/build/examples_rclpy_minimal_action_server/build --no-deps symlink_data

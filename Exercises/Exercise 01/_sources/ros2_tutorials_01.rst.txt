@@ -1,0 +1,39 @@
+======================
+ROS 2 Humble Tutorials 
+======================
+
+1 ROS_DOMAIN_ID Variable
+------------------------
+ROS 2 allows the flow of information between all computers connected to the same network, either physically connected or via WiFi. 
+ROS 2 nodes on the same domain can freely discover and send messages to each other, while ROS 2 nodes on different domains cannot. 
+All ROS 2 nodes use domain ID 0 by default. To avoid interference between different groups of computers running ROS 2 on the same network, 
+a different domain ID should be set for each group.
+
+Before you begin these tutorials, you should set your domain ID to the same as your development computer. 
+So, if your development computer is ``am-dev-01``, you would set your domain ID to to 1 (don't place the 0 in front of the 1). 
+ 
+In a terminal window, to set your domain ID (for am-dev-xx), you would type::
+
+	user@am-dev-xx:~$ export ROS_DOMAIN_ID=xx
+	
+.. note::
+	If your development computer is ``am-dev-01``, ``am-dev-02``, ``am-dev-03``, etc., you would set your domain ID to 1, 2, 3, etc. 
+	
+2 Beginner: Command Line Interface (CLI) Tools
+----------------------------------------------
+In order to learn the basics of using ROS, you should work your way through the following tutorials. 
+
+Beginner: Command Line Interface (CLI) Tools
+
+    * `Configuring environment <https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html>`_ (5 minutes)
+    * `Using turtlesim, ros2, and rqt <https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html>`_ (15 minutes)
+    * `Understanding nodes <https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Nodes/Understanding-ROS2-Nodes.html>`_ (10 minutes)
+    * `Understanding topics <https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html>`_ (20 minutes)
+    * `Understanding services <https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Services/Understanding-ROS2-Services.html>`_ (10 minutes)
+    * `Understanding parameters  <https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Parameters/Understanding-ROS2-Parameters.html>`_ (5 minutes)
+    * `Understanding actions  <https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Actions/Understanding-ROS2-Actions.html>`_ (15 minutes)
+    * `Using rqt_console to view logs  <https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Using-Rqt-Console/Using-Rqt-Console.html>`_ (5 minutes)
+    * `Launching nodes  <https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Launching-Multiple-Nodes/Launching-Multiple-Nodes.html>`_ (5 minutes)
+    * `Recording and playing back data  <https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Recording-And-Playing-Back-Data/Recording-And-Playing-Back-Data.html>`_ (10 minutes)
+
+

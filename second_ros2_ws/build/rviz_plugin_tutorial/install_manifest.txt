@@ -1,0 +1,3 @@
+/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/lib/libpoint_display.so
+/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/cmake/export_rviz_plugin_tutorialExport.cmake
+/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/cmake/export_rviz_plugin_tutorialExport-noconfig.cmake

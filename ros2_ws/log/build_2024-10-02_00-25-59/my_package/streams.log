@@ -1,0 +1,24 @@
+[1.302s] Invoking command in '/home/janelleg/ros2_ws/build/my_package': PYTHONPATH=/home/janelleg/ros2_ws/build/my_package/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/janelleg/ros2_ws/install/my_package/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/janelleg/ros2_ws/build/my_package/build --no-deps symlink_data
+[1.869s] running develop
+[2.177s] running egg_info
+[2.177s] creating my_package.egg-info
+[2.178s] writing my_package.egg-info/PKG-INFO
+[2.178s] writing dependency_links to my_package.egg-info/dependency_links.txt
+[2.178s] writing entry points to my_package.egg-info/entry_points.txt
+[2.179s] writing requirements to my_package.egg-info/requires.txt
+[2.179s] writing top-level names to my_package.egg-info/top_level.txt
+[2.179s] writing manifest file 'my_package.egg-info/SOURCES.txt'
+[2.181s] reading manifest file 'my_package.egg-info/SOURCES.txt'
+[2.182s] writing manifest file 'my_package.egg-info/SOURCES.txt'
+[2.185s] running build_ext
+[2.185s] Creating /home/janelleg/ros2_ws/install/my_package/lib/python3.10/site-packages/my-package.egg-link (link to .)
+[2.187s] Installing my_node script to /home/janelleg/ros2_ws/install/my_package/lib/my_package
+[2.187s] 
+[2.188s] Installed /home/janelleg/ros2_ws/build/my_package
+[2.188s] running symlink_data
+[2.188s] creating /home/janelleg/ros2_ws/install/my_package/share/ament_index
+[2.189s] creating /home/janelleg/ros2_ws/install/my_package/share/ament_index/resource_index
+[2.189s] creating /home/janelleg/ros2_ws/install/my_package/share/ament_index/resource_index/packages
+[2.189s] symbolically linking /home/janelleg/ros2_ws/build/my_package/resource/my_package -> /home/janelleg/ros2_ws/install/my_package/share/ament_index/resource_index/packages
+[2.189s] symbolically linking /home/janelleg/ros2_ws/build/my_package/package.xml -> /home/janelleg/ros2_ws/install/my_package/share/my_package
+[2.246s] Invoked command in '/home/janelleg/ros2_ws/build/my_package' returned '0': PYTHONPATH=/home/janelleg/ros2_ws/build/my_package/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/janelleg/ros2_ws/install/my_package/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/janelleg/ros2_ws/build/my_package/build --no-deps symlink_data

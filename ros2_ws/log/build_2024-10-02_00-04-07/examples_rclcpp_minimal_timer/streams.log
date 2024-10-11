@@ -1,0 +1,25 @@
+[0.017s] Invoking command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer -- -j8 -l8
+[0.187s] [ 50%] Built target timer_member_function
+[0.193s] [100%] Built target timer_lambda
+[0.217s] Invoked command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer -- -j8 -l8
+[0.289s] Invoking command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer
+[0.314s] -- Install configuration: ""
+[0.317s] -- Execute custom install script
+[0.317s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/lib/examples_rclcpp_minimal_timer/timer_lambda
+[0.318s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/lib/examples_rclcpp_minimal_timer/timer_member_function
+[0.318s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/ament_index/resource_index/package_run_dependencies/examples_rclcpp_minimal_timer
+[0.319s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/ament_index/resource_index/parent_prefix_path/examples_rclcpp_minimal_timer
+[0.320s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/environment/ament_prefix_path.sh
+[0.320s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/environment/ament_prefix_path.dsv
+[0.322s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/environment/path.sh
+[0.322s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/environment/path.dsv
+[0.325s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/local_setup.bash
+[0.325s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/local_setup.sh
+[0.325s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/local_setup.zsh
+[0.327s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/local_setup.dsv
+[0.328s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/package.dsv
+[0.348s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/ament_index/resource_index/packages/examples_rclcpp_minimal_timer
+[0.349s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/cmake/examples_rclcpp_minimal_timerConfig.cmake
+[0.350s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/cmake/examples_rclcpp_minimal_timerConfig-version.cmake
+[0.350s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer/share/examples_rclcpp_minimal_timer/package.xml
+[0.356s] Invoked command in '/home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/janelleg/ros2_ws/build/examples_rclcpp_minimal_timer

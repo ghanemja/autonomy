@@ -1,0 +1,17 @@
+[1.335s] Invoking command in '/home/janelleg/ros2_ws/build/examples_rclpy_pointcloud_publisher': PYTHONPATH=/home/janelleg/ros2_ws/build/examples_rclpy_pointcloud_publisher/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/janelleg/ros2_ws/build/examples_rclpy_pointcloud_publisher/build --no-deps symlink_data
+[1.938s] running develop
+[2.258s] running egg_info
+[2.259s] writing examples_rclpy_pointcloud_publisher.egg-info/PKG-INFO
+[2.259s] writing dependency_links to examples_rclpy_pointcloud_publisher.egg-info/dependency_links.txt
+[2.260s] writing entry points to examples_rclpy_pointcloud_publisher.egg-info/entry_points.txt
+[2.260s] writing requirements to examples_rclpy_pointcloud_publisher.egg-info/requires.txt
+[2.260s] writing top-level names to examples_rclpy_pointcloud_publisher.egg-info/top_level.txt
+[2.263s] reading manifest file 'examples_rclpy_pointcloud_publisher.egg-info/SOURCES.txt'
+[2.268s] writing manifest file 'examples_rclpy_pointcloud_publisher.egg-info/SOURCES.txt'
+[2.271s] running build_ext
+[2.272s] Creating /home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher/lib/python3.10/site-packages/examples-rclpy-pointcloud-publisher.egg-link (link to .)
+[2.273s] Installing pointcloud_publisher script to /home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher/lib/examples_rclpy_pointcloud_publisher
+[2.274s] 
+[2.274s] Installed /home/janelleg/ros2_ws/build/examples_rclpy_pointcloud_publisher
+[2.274s] running symlink_data
+[2.335s] Invoked command in '/home/janelleg/ros2_ws/build/examples_rclpy_pointcloud_publisher' returned '0': PYTHONPATH=/home/janelleg/ros2_ws/build/examples_rclpy_pointcloud_publisher/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/janelleg/ros2_ws/build/examples_rclpy_pointcloud_publisher/build --no-deps symlink_data

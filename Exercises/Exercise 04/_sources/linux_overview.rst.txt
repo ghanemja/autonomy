@@ -1,0 +1,63 @@
+
+==============
+Linux Overview
+==============
+
+In this class we will use ROS on a **Linux** **Debian** distribution called **Ubuntu**. There are many resources on the Internet related to 
+the various Linux distributions, but quit frankly, for a beginner, all of the terminology can be a bit overwhelming. 
+To help minimize any possible confusion down the road, let's briefly look at a few important items.
+
+1 Linux (Brief History)
+========================
+
+1.1 Unix 
+--------
+
+`Unix <https://en.wikipedia.org/wiki/Unix>`_ (YOO-niks) refers to a family of multitasking, multi-user computer operating 
+systems that derive from an original version develped by Bell Laboratories in 1969. Since that time, Unix and other Unix-like 
+operating systems have evolved, with Linux as one these systems. 
+
+1.2 Linux 
+---------
+
+`Linux <https://en.wikipedia.org/wiki/Linux>`_  (LIN-uuks) refers to an open-source Unix-like kernel and a generic name for a 
+family of open-source Unix-like operating systems based on the Linux kernel, an operating system 
+kernel first released in 1991 by Linus Torvalds. Linux is typically packaged 
+as a Linux distribution, which includes the kernel, supporting system software, and libraries. 
+Debian is one of several Linux distributions.  
+
+
+1.3 Debian 
+----------
+
+`Debian <https://en.wikipedia.org/wiki/Debian>`_  refers to a Linux distribution composed of free and open-source 
+software and optionally non-free firmware or software developed by the community-supported Debian Project. The first 
+version of Debian was released in 1993. Debian is one of the oldest operating systems based on the Linux kernel.
+
+1.4 Ubuntu 
+----------
+
+`Ubuntu <https://en.wikipedia.org/wiki/Ubuntu>`_  (uu-BUUN-too) referes to a Linux distribution derived from Debian and 
+comprised mostly of free and open-source software. Ubuntu has the following official editions: a) Desktop, b) Server, c) and
+Core for the Internet of Things and other imbedded devices. 
+
+Since the release of the first version in 2004, Ubuntu has become one of the most popular Linux distributions for general purposes 
+and it has a large online presence. Numerous community-editions of Ubuntu also exist, 
+in `flavors <https://ubuntu.com/desktop/flavours>`_, such as **Edubuntu**, **Kubuntu**, **Ubuntu MATE**, **Xubuntu**, and several others. 
+
+	
+.. note::
+	In this class, we'll use the desktop version of Ubuntu on our development machines (``am-dev-xx``), and we'll use the server version on our robots (``am-robot-xx``). 
+
+
+2 Linux Command Line for Beginners
+==================================
+
+Although Ubuntu Desktop has a graphical user interface (GUI) that uses a mouse for screen navigation, you will primarily use a
+**command line terminal** with ROS. As you will learn, the command line allows you to perform a variety of tasks much quicker
+than using the GUI. Many of these tasks include a) executing ROS commands, b) updating packages, c) installing applications, 
+d) setting up a communications port, e) downloading/uploading files, f) creating directories, g) copying files, h) moving files, etc. 
+
+If you have little or no experience using the Linux command line, please go through this 
+tutorial `The Linux command line for beginners <https://ubuntu.com/tutorials/command-line-for-beginners#1-overview>`_ as it contains a lot of important 
+information.

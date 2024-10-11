@@ -1,0 +1,7 @@
+[0.000000] (-) TimerEvent: {}
+[0.000459] (-) JobUnselected: {'identifier': 'rviz_plugin_tutorial_msgs'}
+[0.000760] (-) JobUnselected: {'identifier': 'urdf_tutorial_r2d2'}
+[0.000869] (rviz_plugin_tutorial) JobQueued: {'identifier': 'rviz_plugin_tutorial', 'dependencies': OrderedDict([('rviz_plugin_tutorial_msgs', '/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs')])}
+[0.000957] (rviz_plugin_tutorial) JobStarted: {'identifier': 'rviz_plugin_tutorial'}
+[0.020355] (rviz_plugin_tutorial) JobEnded: {'identifier': 'rviz_plugin_tutorial', 'rc': 1}
+[0.031300] (-) EventReactorShutdown: {}

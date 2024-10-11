@@ -1,0 +1,30 @@
+[0.026s] Invoking command in '/home/janelleg/ros2_ws/build/cpp_srvcli': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/janelleg/ros2_ws/install/py_pubsub:/home/janelleg/ros2_ws/install/my_package:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble /usr/bin/cmake --build /home/janelleg/ros2_ws/build/cpp_srvcli -- -j8 -l8
+[0.132s] [ 50%] [32mBuilding CXX object CMakeFiles/server.dir/src/add_two_ints_server.cpp.o[0m
+[0.133s] [ 50%] [32mBuilding CXX object CMakeFiles/client.dir/src/add_two_ints_client.cpp.o[0m
+[6.714s] [ 75%] [32m[1mLinking CXX executable server[0m
+[7.003s] [100%] [32m[1mLinking CXX executable client[0m
+[7.041s] [100%] Built target server
+[7.327s] [100%] Built target client
+[7.349s] Invoked command in '/home/janelleg/ros2_ws/build/cpp_srvcli' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/janelleg/ros2_ws/install/py_pubsub:/home/janelleg/ros2_ws/install/my_package:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble /usr/bin/cmake --build /home/janelleg/ros2_ws/build/cpp_srvcli -- -j8 -l8
+[7.445s] Invoking command in '/home/janelleg/ros2_ws/build/cpp_srvcli': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/janelleg/ros2_ws/install/py_pubsub:/home/janelleg/ros2_ws/install/my_package:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble /usr/bin/cmake --install /home/janelleg/ros2_ws/build/cpp_srvcli
+[7.463s] -- Install configuration: ""
+[7.463s] -- Installing: /home/janelleg/ros2_ws/install/cpp_srvcli/lib/cpp_srvcli/server
+[7.464s] -- Set runtime path of "/home/janelleg/ros2_ws/install/cpp_srvcli/lib/cpp_srvcli/server" to ""
+[7.464s] -- Installing: /home/janelleg/ros2_ws/install/cpp_srvcli/lib/cpp_srvcli/client
+[7.465s] -- Set runtime path of "/home/janelleg/ros2_ws/install/cpp_srvcli/lib/cpp_srvcli/client" to ""
+[7.466s] -- Installing: /home/janelleg/ros2_ws/install/cpp_srvcli/share/ament_index/resource_index/package_run_dependencies/cpp_srvcli
+[7.466s] -- Installing: /home/janelleg/ros2_ws/install/cpp_srvcli/share/ament_index/resource_index/parent_prefix_path/cpp_srvcli
+[7.466s] -- Installing: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/environment/ament_prefix_path.sh
+[7.467s] -- Installing: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/environment/ament_prefix_path.dsv
+[7.467s] -- Installing: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/environment/path.sh
+[7.467s] -- Installing: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/environment/path.dsv
+[7.468s] -- Installing: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/local_setup.bash
+[7.468s] -- Installing: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/local_setup.sh
+[7.468s] -- Installing: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/local_setup.zsh
+[7.468s] -- Installing: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/local_setup.dsv
+[7.469s] -- Installing: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/package.dsv
+[7.469s] -- Installing: /home/janelleg/ros2_ws/install/cpp_srvcli/share/ament_index/resource_index/packages/cpp_srvcli
+[7.469s] -- Installing: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/cmake/cpp_srvcliConfig.cmake
+[7.470s] -- Installing: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/cmake/cpp_srvcliConfig-version.cmake
+[7.472s] -- Installing: /home/janelleg/ros2_ws/install/cpp_srvcli/share/cpp_srvcli/package.xml
+[7.473s] Invoked command in '/home/janelleg/ros2_ws/build/cpp_srvcli' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/janelleg/ros2_ws/install/py_pubsub:/home/janelleg/ros2_ws/install/my_package:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble /usr/bin/cmake --install /home/janelleg/ros2_ws/build/cpp_srvcli

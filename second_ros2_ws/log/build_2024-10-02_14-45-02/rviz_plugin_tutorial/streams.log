@@ -1,0 +1,66 @@
+[0.027s] Invoking command in '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial': AMENT_PREFIX_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/janelleg/second_ros2_ws/src/rviz_plugin_tutorial/rviz_plugin_tutorial -DCMAKE_INSTALL_PREFIX=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial
+[0.045s] [33mCMake Warning (dev) in CMakeLists.txt:
+[0.046s]   No project() command is present.  The top-level CMakeLists.txt file must
+[0.046s]   contain a literal, direct call to the project() command.  Add a line of
+[0.046s]   code such as
+[0.046s] 
+[0.047s]     project(ProjectName)
+[0.047s] 
+[0.047s]   near the top of the file, but after cmake_minimum_required().
+[0.047s] 
+[0.047s]   CMake is pretending there is a "project(Project)" command on the first
+[0.048s]   line.
+[0.048s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[0.048s] [0m
+[0.141s] -- The C compiler identification is GNU 11.4.0
+[0.266s] -- The CXX compiler identification is GNU 11.4.0
+[0.284s] -- Detecting C compiler ABI info
+[0.439s] -- Detecting C compiler ABI info - done
+[0.460s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.460s] -- Detecting C compile features
+[0.462s] -- Detecting C compile features - done
+[0.469s] -- Detecting CXX compiler ABI info
+[0.635s] -- Detecting CXX compiler ABI info - done
+[0.656s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.656s] -- Detecting CXX compile features
+[0.657s] -- Detecting CXX compile features - done
+[0.659s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[0.913s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.928s] [33mCMake Warning (dev) at /opt/ros/humble/share/ament_cmake_core/cmake/core/list_append_unique.cmake:30 (if):
+[0.929s]   Policy CMP0057 is not set: Support new IN_LIST if() operator.  Run "cmake
+[0.929s]   --help-policy CMP0057" for policy details.  Use the cmake_policy command to
+[0.929s]   set the policy and suppress this warning.
+[0.930s] 
+[0.930s]   IN_LIST will be interpreted as an operator when the policy is set to NEW.
+[0.930s]   Since the policy is not set the OLD behavior will be used.
+[0.930s] Call Stack (most recent call first):
+[0.931s]   /opt/ros/humble/share/ament_cmake_ros/cmake/ament_cmake_export_dependencies-extras.cmake:84 (list_append_unique)
+[0.931s]   /opt/ros/humble/share/ament_cmake_ros/cmake/ament_cmake_rosConfig.cmake:41 (include)
+[0.931s]   CMakeLists.txt:1 (find_package)
+[0.931s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[0.932s] [0m
+[0.932s] [31mCMake Error at /opt/ros/humble/share/ament_cmake_core/cmake/core/list_append_unique.cmake:30 (if):
+[0.932s]   if given arguments:
+[0.932s] 
+[0.932s]     "NOT" "element" "IN_LIST" "ament_cmake_ros_RECURSIVE_DEPENDENCIES"
+[0.933s] 
+[0.933s]   Unknown arguments specified
+[0.933s] Call Stack (most recent call first):
+[0.933s]   /opt/ros/humble/share/ament_cmake_ros/cmake/ament_cmake_export_dependencies-extras.cmake:84 (list_append_unique)
+[0.934s]   /opt/ros/humble/share/ament_cmake_ros/cmake/ament_cmake_rosConfig.cmake:41 (include)
+[0.934s]   CMakeLists.txt:1 (find_package)
+[0.934s] 
+[0.934s] [0m
+[0.934s] [31mCMake Error in CMakeLists.txt:
+[0.934s]   No cmake_minimum_required command is present.  A line of code such as
+[0.934s] 
+[0.935s]     cmake_minimum_required(VERSION 3.22)
+[0.935s] 
+[0.935s]   should be added at the top of the file.  The version specified may be lower
+[0.935s]   if you wish to support older CMake versions for this project.  For more
+[0.935s]   information run "cmake --help-policy CMP0000".
+[0.936s] 
+[0.936s] [0m
+[0.936s] -- Configuring incomplete, errors occurred!
+[0.937s] See also "/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial/CMakeFiles/CMakeOutput.log".
+[0.938s] Invoked command in '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial' returned '1': AMENT_PREFIX_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/janelleg/second_ros2_ws/src/rviz_plugin_tutorial/rviz_plugin_tutorial -DCMAKE_INSTALL_PREFIX=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial

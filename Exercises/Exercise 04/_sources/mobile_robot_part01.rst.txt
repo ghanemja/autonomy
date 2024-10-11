@@ -1,0 +1,1286 @@
+====================
+Mobile Robot, Part 1
+====================
+	
+1 Mobile Robot Overview
+=======================
+.. figure:: images/MiniBot02.png
+		:width: 2772px
+		:height: 3515px
+		:align: center
+		:alt: MiniBot
+		:scale: 15 %
+
+
+The mobile robot (MiniBot) that we'll be modeling is shown above. It has FIT0450 DC motors with magnetic encoders (same motors used in 16.632) connected to an 
+`Adafruit DC Motor + Stepper FeatherWing driver <https://www.adafruit.com/product/3243>`_ that's plugged into an 
+`Adafruit HUZZAH32 – ESP32 Feather Board <https://www.adafruit.com/product/3619>`_. The ESP32 Feather Board is Arduino compatible with a built-in WiFi module, so we'll program it using the 
+Arduino language running `micro-ROS <https://micro.ros.org/>`_. 
+
+On top, the MiniBot has an `RPLidar A1M8 - 360 degree laser scanner <https://www.robotshop.com/products/rplidar-a1m8-360-degree-laser-scanner-development-kit?variant=42359633805473>`_
+and `camera <https://www.amazon.com/gp/product/B00N1YJKFS/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1>`_ attached to a Raspberry Pi 4 running Ubuntu and ROS2 Humble. 
+
+Getting everything running with ROS will take several steps, which include simulating the MiniBot and sensors in Gazebo, and using ROS to run both the simulation and the actual
+MiniBot itself. For this exercise, we'll focus on constructing the MiniBot base and simulating it in Gazebo. After we get this part running, we'll then add the sensors to our model. 
+Specifically, in this exercise, we plan to accomplish the following:
+
+* Create a URDF file for our MiniBot chassis, wheels, and ball caster (base assembly)
+* Visualize our MiniBot base assembly using RVIZ
+* Simulate our Minibot base assembly using Gazebo
+
+2 Set Your ROS_DOMAIN_ID Variable
+=================================
+As discussed in Section :ref:`ROS Domain ID`, you should set the domain ID to ensure you're only discovering ROS messages deployed by you 
+on your laptop. If you don't set a domain ID, you will receive ROS messages from other users on our network which will create some confusion and possibly a few errors.  
+
+To set the domain ID for your laptop ``am-dev-xx``, as our class standard,  type
+
+.. code-block:: bash
+
+	user@am-dev-xx:~$ export ROS_DOMAIN_ID=xx
+	
+.. note::
+	If your development computer has a number less that 10 such as ``am-dev-01``, ``am-dev-02``, ``am-dev-03``, etc., you would set your domain ID to 1, 2, 3, etc. 
+	
+3 Automatic Command Line Execution via the .bashrc File 
+=======================================================
+Now is a good time to introduce you to the ``.bashrc`` file which is located in your home directory ``user@am-dev-xx:~$``. 
+This file is executed whenever you open a new terminal window, and it contains a series of configurations for the given terminal session. 
+In your ``.bashrc`` file, you can automatically execute a command, such as setting your domain variable or even sourcing the ROS2 Humble underlay everytime you open a new terminal window.
+
+.. note::
+	Since your ``.bashrc`` file is hidden, if you want to see it in your home directory, you'll need to type ``ls -a`` as follows.
+
+	.. code-block:: bash 
+		
+		user@am-dev-xx:~$ ls -a
+	
+
+3.1 Modifying Your .bashrc File 
+-------------------------------
+You can modify your ``.bashrc`` file from the command line and also directly edit it using any text editor. You should currently have an editor called 
+`gedit <https://gedit-technology.github.io/apps/gedit/>`_, so we'll illustrate the editing process with it.
+
+.. note:: 
+	If don't already have ``gedit`` installed, you can install it as follows.
+	
+	.. code-block:: bash 
+	
+		$ sudo apt-get install gedit 
+		
+To use ``gedit`` to open and edit your ``.bashrc`` file, type the following.
+
+.. code-block:: bash 
+	
+	user@am-dev-xx:~$ gedit .bashrc
+
+Once open, your ``.bashrc`` file should look something like this.
+
+.. figure:: images/bashrc-01.png
+		:width: 901px
+		:height: 528px
+		:align: center
+		:alt: bashrc file
+		:scale: 60 %
+
+Along with setting our domain ID for each new terminal window, we'll also setup automatic sourcing of the ROS2 Humble underlay as well. 
+We'll go ahead and add these two tasks 
+
+.. code-block::
+
+	# replace xx with your laptop number or domain number
+	export ROS_DOMAIN_ID=xx
+	
+	# source the ROS2 Humble underlay 
+	source /opt/ros/humble/setup.bash
+
+to our  ``.bashrc`` file near the bottom. Hence, your ``.bashrc`` file should now look like.
+
+.. figure:: images/bashrc-02.png
+		:width: 901px
+		:height: 528px
+		:align: center
+		:alt: bashrc file
+		:scale: 60 %
+		
+
+Once you've made these additions, click Save and then exit ``gedit`` by clicking close (the x on the far right).
+Now, we'll source ``.bashrc`` so these changes take affect in the current window.
+
+.. code-block::
+
+	user@am-dev-xx:~$ source ~/.bashrc
+
+
+4 Setup the Development Workspace and Package
+=============================================
+
+4.1 Setup the Workspace
+-----------------------
+In our following exercises, we'll be developing our code on our development computer and then deploy any necessary packages to our robot, so our first
+task will be to create a workspace folder ``dev_ws`` in our home directory as follows. 
+
+.. code-block:: bash 
+	
+	user@am-dev-xx:~$ mkdir dev_ws
+
+Within this development folder, our Minibot package will lie inside a folder called ``src``, so let's create this folder now.  
+
+.. code-block:: bash
+	   
+	user@am-dev-xx:~/dev_ws$ mkdir src
+
+
+Now, we'll step back up one directory to our workspace ``dev_ws``, and then build our workspace with colcon.
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws$ colcon build
+
+After following these steps you should receive the "colcon build sucessful" message. If we now list the files inside our workspace, we'll  
+see that colcon has creatd a ``build``, ``install``, ``log`` directory.
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws$ ls
+	build install log src
+
+
+4.2 Create the Package 
+----------------------
+Since we create packages inside the ``src`` folder, so go inside that folder now. Notice it is currently empty.
+
+Now, if you haven't setup automatic sourcing in your ``.bashrc`` file, source the ROS 2 Humble underlay to access the ROS 2 commands.
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws/src$ source /opt/ros/humble/setup.bash
+
+Now, we can create our minibot package as follows. 
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws/src$ ros2 pkg create minibot
+
+Go inside the ``minibot`` directory.
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws/src$ cd minibot 
+	
+You'll now see the``CMakeLists.txt`` and ``package.xml`` files, as well as the ``include`` and ``src`` directories. 
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws/src/minibot$ ls
+	CMakeLists.txt include package.xml src
+
+Since we don't need the ``include`` folder nor this specific ``src`` folder, we'll remove them as follows.
+
+.. code-block:: bash 
+
+	user@am-dev-xx:~/dev_ws/src/minibot$ rm -rf include src
+
+	
+4.3 Create a URDF Folder
+------------------------
+Now, create a ``urdf`` folder inside the ``minibot`` folder. This is where we'll create and leave our robot urdf files. 
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws/src/minibot$ mkdir urdf
+
+We're now setup to create our robot model inside of the ``urdf`` folder. Before we start creating our model, let's review some concepts behind URDF files.
+
+
+5 URDF Overview
+===============
+A URDF (`Unified Robot Description Format <https://wiki.ros.org/urdf/XML/model>`_) file is an XML file used to describe a robot's structure 
+which consists of links and joints as shown below.
+
+.. figure:: images/urdf_structure.png
+		:width: 800px
+		:height: 994px
+		:align: center
+		:alt: URDF Structure
+		:scale: 40 %
+
+
+There is usually a single base link (Link 1 above) with other links attached to it via joints. A robot can have any number of links provided any two given links are 
+connected with a single joint. Each link and each joint must have a unique name. A typical XML file for a robot has the following structure. 
+	
+.. code-block:: xml 
+
+	<?xml version="1.0"?>
+	<robot name="robot_name">
+		<link name="link1_name"> ... </link>
+		<link name="link2_name"> ... </link>
+		<link name="link3_name"> ... </link>
+
+		<joint name="joint1_name">  ...  </joint>
+		<joint name="joint2_name">  ...  </joint>
+		<joint name="joint3_name">  ...  </joint>
+	</robot>
+
+
+5.1 Additional Notes on Coordinate Frames and Joints
+----------------------------------------------------
+Unfortunately, the ROS documentation uses the word **origin** to specify an entire **Cartesian coordinate frame** with its x, y, and z axes as well as its origin (traditionally the term 
+origin applies to a single point that indicates the intersection of the x, y, and z axes).  
+The coordinate frame called ``base_link`` is rigidly attached to the mobile robot base and its orientation is usually as follows:
+
+* x-forward
+* y-left
+* z-up
+
+When setting up the coordinate frames and joints in our robot, we should keep the following in mind:
+
+	1) Each link has a **local reference frame**. For the standard box, cylinder, and sphere, the local reference frame's origin is located at the center-of-mass (i.e., center of the box, 
+		cylinder, or sphere) with its z-axis pointing upward, x-axis forward, and y-axis towards the left. 
+	2) Each joint has associated with it two links: a **parent link** and a **child link**.
+	3) A joint's reference frame is specified relative to its parent's local reference frame using the origin tag, via a set of six rigid body transformations. 
+	4) The local reference frame for the child link is initially placed "coincident" with the joint's reference frame.
+	5) Each link has a so-called "visual origin" (or visual frame) which is actually a set of six independent transformations (relative to the local reference frame). The 
+	   visual frame places the link for "visual purposes." 
+	6) Once a link is placed visually, it still rotates/translates relative to the specified joint axis.
+	7) Its best to first specify the joint's reference frame when building your model. 
+
+5.2 Link Description 
+--------------------
+Each link has the following **visual**, **collision**, and **inertial** properties. We will discuss each property in the following sections. 
+
+**Visual Properties**
+	* geometry 
+	* origin
+	* material
+
+**Collision Properties** 
+	* geometry 
+	* origin 
+	
+**Inertial Properties** 
+	* mass 
+	* inertia 
+	
+
+5.3 Visual Properties 
+---------------------
+The visual properties of a link are for visualization purposes only. A link's visual properties consist of 
+a location for its *visual reference coordinate frame* (origin), its geometry (shape), 
+and material attributes such as color and/or texture. A link's visual properties are optional, but if you
+use them they must be included inside of ``<visual>`` tag as follows. 
+
+.. code-block:: xml 
+
+	<link name="link_name">
+		<visual> <!-- OPTIONAL -->
+			<origin xyz="x y z" rpy="roll pitch yaw"/> <!-- OPTIONAL -->
+			<geometry> <!-- REQUIRED -->
+				<!-- geometric shape: box, cylinder, sphere, or mesh -->
+			</geometry>
+			<material name="material_name"> <!-- OPTIONAL -->
+				<color rgba="r g b a" />
+				<texture filename="filename"/> 
+			</material>
+		</visual>
+	</link>
+
+5.3.1 Visual Origin
+^^^^^^^^^^^^^^^^^^^
+Each link has a "visual origin" which is actually a set of six independent transformations that locates the link for "visual purposes." Once placed visually, the link 
+still rotates/translates relative the specified location of the joint axis.
+
+The origin tag has the form
+
+.. code-block:: xml 
+
+	<origin xyz="x y z" rpy="roll pitch yaw"/>
+
+Where ``x``, ``y``, and ``z`` are translations from the link's local reference frame (origin) which lies at the link's center-of-mass, and ``roll``, 
+``pitch``, and ``yaw`` are absolute rotations about the local reference frame's ``x``, ``y``, and ``z`` axes, respectively.
+
+5.3.2 Visual Geometry
+^^^^^^^^^^^^^^^^^^^^^
+Describes the visual shape of the link in terms of a box, cylinder, sphere, or mesh file. Lenghts in 
+meters. Generic code block has the following form.
+
+.. code-block:: xml 
+
+	<geometry>
+		<geometric_shape />
+	</geometry>
+
+where ``<geometric_shape />`` can be any one of the following.
+
+ ========== ============================================ =================== 
+  Geometry   XML                                          Shape Local Origin            
+ ========== ============================================ =================== 
+  box        <box size="x y z"/>                          center of box     
+  cylinder   <cylinder radius="r" length="l"/>            center of cylinder     
+  sphere     <sphere radius="r"/>                         center of sphere     
+  mesh       <mesh filename="file_path" scale="x y z"/>   geometric center  
+ ========== ============================================ =================== 
+
+Each of the above geometric shapes have a local reference frame (origin) specified at the shape's center-of-mass as given in the table above. 
+
+5.3.3 Material
+^^^^^^^^^^^^^^
+The material of the visual element. You can specify the material properties inside the visual element or outside of it. To specify the material within the visual element, you
+use the following format.
+
+.. code-block:: xml 
+
+	<link name="link_name">
+		<visual> 
+			<origin xyz="x y z" rpy="roll pitch yaw"/> 
+			<geometry> 
+				<!-- geometric shape: box, cylinder, sphere, or mesh -->
+			</geometry>
+			<material name="material_name"> 
+				<color rgba="r g b a" /> 
+				<texture filename="filename"/> 
+			</material>
+		</visual>
+	</link>
+
+where, r g b a represent red/green/blue/alpha, each in the range of [0,1] and the material
+texture is specified by a filename.
+
+To specify the material outside of the visual element, you use the following format.
+
+.. code-block:: xml 
+
+	<material name="material_name"> 
+		<color rgba="r g b a" /> <!-- OPTIONAL -->
+		<texture filename="filename"/> <!-- OPTIONAL -->
+	</material>
+	
+	<link name="link_name">
+		<visual> <!-- OPTIONAL -->
+			<origin xyz="x y z" rpy="roll pitch yaw"/> <!-- OPTIONAL -->
+			<geometry> <!-- REQUIRED -->
+				<!-- geometric shape: box, cylinder, sphere, or mesh -->
+			</geometry>
+			<material name="material_name" /> 
+		</visual>
+	</link>
+	
+It is allowed to specify a material element outside of the 'link' object, in the top level 'robot' element. From within a link element you can then reference the material by name.
+name name of the material
+
+.. code-block:: xml 
+
+	<link name="link_name">
+		<visual> <!-- OPTIONAL -->
+			<geometry>
+				<!-- Geometry Specific Code -->
+			</geometry> <!-- REQUIRED -->
+			<origin rpy="r p y" xyz="x y z"/> <!-- OPTIONAL -->
+			<material name="color_name"/> <!-- OPTIONAL -->
+		</visual>
+		
+		<collision> <!-- OPTIONAL -->
+			<geometry> <!-- REQUIRED -->
+				<!-- Geometry Specific Code -->
+			</geometry>
+			<origin rpy="r p y" xyz="x y z"/> <!-- OPTIONAL -->
+		</collision>
+		
+		<inertial> <!-- OPTIONAL -->
+			<mass value = "mass_in_kg"/>
+			<inertia
+				ixx="ixx" ixy="ixy" ixz="ixz"
+				iyy="iyy" iyz="iyz"
+				izz="izz"/>
+		</inertial>
+	</link>
+	
+	
+6 MiniBot Base Assembly 
+=======================
+.. figure:: images/MiniBot03.png
+		:width: 949px
+		:height: 353px
+		:align: center
+		:alt: MiniBot Model
+		:scale: 50 %
+		
+For our Minibot we'll create a single model named ``minibot_base.xacro`` that contains the chassis, wheels, and ball caster, and we'll create separate models for the sensors such as the 
+camera and LiDAR. 
+By separating our models into different files, we'll have a more modular setup that allows us to more easily swap out or add additional sensors if necessary.  
+
+We will move the chassis_link backward along the x-axis in the negative direction in order to place the drive wheels in the front of the Minibot.
+
+.. note::
+	In our ``minibot_base`` we'll be using Xacro commands within our URDF file; hence, the ``.xacro`` extension is required. If we didn't use any Xacro commands, we would give our file a 
+	``.urdf`` extension and call it ``minibot_base.urdf``.
+	
+Go inside the ``urdf`` folder and open VSCode as follows 
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws/src/minibot/urdf$ code .
+
+Inside VSCode, add the ``urdf`` extension from smilerobotics and the ``ROS Snippets`` extension from Liews Wuttipat as this will add syntax highlighting and autocompletion to 
+your ``.urdf`` and ``.xacro`` code.
+
+Now, create the file ``minibot_base.xacro`` and type in the following.
+
+.. code-block:: xml 
+	
+	<?xml version="1.0"?>
+	<robot name="minibot_base" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+		<xacro:include filename="inertia_macros.xacro"/>
+	
+		<!-- add additional code here -->
+		
+	</robot>
+
+6.1 Colors
+----------
+Here, define a few colors that we'll use for our chassis, wheels, and ball caster. We'll specify our colors by name using red, green, blue, and alpha values. 
+
+.. code-block:: xml 
+	 
+	<!-- colors -->
+	<material name="white">
+		<color rgba="1 1 1 1"/>
+	</material>
+
+	<material name="black">
+		<color rgba="0 0 0 1"/>
+	</material>
+		
+	<material name="orange">
+		<color rgba="1 0.3 0.1 1"/>
+	</material>
+
+	<material name="blue">
+		<color rgba="0.2 0.2 1 1"/>
+	</material>
+
+	
+		
+6.2 Constants
+-------------
+Using Xacro we'll create a few constants that we'll use later in our model.  Here, we'll give the chassis length, width, and height all in meters inside
+of the robot tag.
+
+.. code-block:: xml 
+	
+	<!-- constants -->
+	<xacro:property name="chassis_length" value = "0.216" />
+	<xacro:property name="chassis_width" value = "0.114" />
+	<xacro:property name="chassis_height" value = "0.036" />
+	<xacro:property name="wheel_diam" value = "0.065" />
+	<xacro:property name="wheel_thickness" value = "0.015" />
+	<xacro:property name="wheel_offset_x" value = "${(chassis_length/2) - (wheel_diam/2)}" />
+	<xacro:property name="wheel_offset_y" value = "${(chassis_width/2) + (wheel_diam/2) }" />
+	<xacro:property name="wheel_offset_z" value = "${wheel_diam/2}" />
+	<xacro:property name="ball_caster_diam" value = "0.0254" />
+	<xacro:property name="ball_caster_offset_x" value = "-${(chassis_length/2) - ball_caster_diam}" /> 
+	<xacro:property name="ball_caster_offset_z" value = "-${((wheel_diam/2) - (ball_caster_diam/2))}" />
+	<xacro:property name="chassis_mass" value = "2" />
+	<xacro:property name="wheel_mass" value = "0.5" />
+	<xacro:property name="ball_caster_mass" value = "0.5" />
+		
+
+6.3 base_link 
+-------------
+All robot structures in ROS should have a ``base_link`` or a ``base_footprint`` that lies on the ground directly beneath the robot. 
+This ``base_link`` has no dimensions or weight, and it moves with the robot. The ``base_link``'s z-axis point upward, perpendicular to
+the floor, and for our purposes, its x-axis will point towards the front of our MiniBot. 
+
+.. code-block:: xml 
+
+	<!-- base_link -->
+	<link name="base_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0 0 0"/>
+            </geometry>
+        </visual>
+	</link>
+	
+
+6.4 Chassis 
+-----------
+
+.. figure:: images/MiniBot_Chassis.png
+		:width: 1422px
+		:height: 803px
+		:align: center
+		:alt: MiniBot Chassis
+		:scale: 40 %
+		
+rigid body transformation of chassis_link frame relative to base_link frame
+
+6.4.1 chassis_joint 
+^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: xml 
+
+	<!-- chassis_joint -->
+	<joint name="chassis_joint" type="fixed">
+		<parent link="base_link"/>
+		<child link="chassis_link"/>
+		<origin xyz="${-wheel_offset_x} 0 ${wheel_diam/2}" rpy="0 0 0"/> 
+	</joint>
+	
+6.4.2 chassis_link 
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: xml 
+
+	<!-- chassis_link -->
+	<link name="chassis_link">
+        <visual>
+            <geometry>
+                <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+            </geometry>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+            <material name="blue" />
+        </visual>
+		<collision>
+			<geometry>
+				<box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+			</geometry>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</collision>
+		<xacro:box_inertia m="${chassis_mass}" l="${chassis_length}" w="${chassis_width}" h="${chassis_height}" 
+		                   xyz="0 0 0" rpy="0 0 0" />
+	</link>
+	
+	
+
+6.5 Right Wheel
+---------------
+
+6.5.1 right_wheel_joint 
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: xml 
+	
+	<!-- right_wheel_joint -->
+	<joint name="right_wheel_joint" type="continuous">
+		<parent link="chassis_link"/>
+		<child link="right_wheel_link"/>
+		<origin xyz="${wheel_offset_x} ${-((chassis_width/2) + (wheel_thickness/2))} 0" rpy="${pi/2} 0 0"/>
+		<axis xyz="0 0 1"/>
+	</joint>
+	
+
+6.5.2 right_wheel_link
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: xml 
+
+	<!-- right_wheel_link -->
+	<link name="right_wheel_link">
+		<visual>
+			<geometry>
+				<cylinder length="${wheel_thickness}" radius="${wheel_diam/2}" />
+			</geometry>
+            <origin xyz="0 0 0"  rpy="0 0 0"/>
+			<material name="orange" />
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="${wheel_thickness}" radius="${wheel_diam/2}" />
+			</geometry>
+            <origin xyz="0 0 0"  rpy="0 0 0"/>
+		</collision>
+		<xacro:cylinder_inertia m="${wheel_mass}" h="${wheel_thickness}" r="${wheel_diam/2}"
+		                        xyz="0 0 0" rpy="0 0 0" />
+	</link>
+	
+
+6.5 Left Wheel
+--------------
+
+6.5.1 left_wheel_joint 
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: xml 
+
+	<!-- left_wheel_joint -->
+	<joint name="left_wheel_joint" type="continuous">
+		<parent link="chassis_link"/>
+		<child link="left_wheel_link"/>
+		<origin xyz="${wheel_offset_x} ${(chassis_width/2) + (wheel_thickness/2)} 0" rpy="${-pi/2} 0 0"/>
+		<axis xyz="0 0 1"/>
+	</joint>
+	
+	
+6.5.2 left_wheel_link
+^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: xml 
+
+	<!-- left_wheel_link -->
+	<link name="left_wheel_link">
+		<visual>
+			<geometry>
+				<cylinder length="${wheel_thickness}" radius="${wheel_diam/2}" />
+			</geometry>
+            <origin xyz="0 0 0"  rpy="0 0 0"/>
+			<material name="orange"/>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="${wheel_thickness}" radius="${wheel_diam/2}" />
+			</geometry>
+            <origin xyz="0 0 0"  rpy="0 0 0"/>
+		</collision>
+		<xacro:cylinder_inertia m="${wheel_mass}" h="${wheel_thickness}" r="${wheel_diam/2}"
+		                        xyz="0 0 0" rpy="0 0 0" />
+	</link>
+	
+6.6 Ball Caster 
+---------------
+
+6.6.1 caster_wheel_joint 
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: xml 
+
+	<!-- caster_wheel_joint -->
+	<joint name="caster_wheel_joint" type="fixed">
+		<parent link="chassis_link"/>
+		<child link="caster_wheel_link"/>
+		<origin xyz="${ball_caster_offset_x} 0 ${ball_caster_offset_z}" rpy="0 0 0"/>
+	</joint>
+	
+	
+6.6.2 caster_wheel_link
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: xml 
+
+	<!-- caster_wheel_link -->
+	<link name="caster_wheel_link">
+		<visual>
+			<geometry>
+				<sphere radius="${ball_caster_diam/2}" />
+			</geometry>
+			<origin xyz="0 0 0"  rpy="0 0 0"/>
+			<material name="orange"/>
+		</visual>
+		<collision>
+			<geometry>
+				<sphere radius="${ball_caster_diam/2}" />
+			</geometry>
+			<origin xyz="0 0 0"  rpy="0 0 0"/>
+		</collision>
+		<xacro:sphere_inertia m="${ball_caster_mass}" r="${ball_caster_diam/2}" xyz="0 0 0" rpy="0 0 0" />
+	</link>
+
+7 MiniBot Link Inertias
+=======================
+Create a file named ``inertia_macros.xacro`` and place it in your ``urdf`` folder. The overall structure of this file has the form.
+
+.. code-block:: xml
+
+	<?xml version="1.0"?>
+	<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+	<!-- place interia macros here -->
+
+	</robot>
+
+We'll use the inertia matrices for a box, cylinder, and sphere to model our chassis, wheel, and ball caster, respectively.
+
+7.1 Chassis Inertia 
+-------------------
+
+.. code-block:: xml
+
+	<xacro:macro name="box_inertia" params="m l w h xyz rpy">
+        <inertial>
+            <origin xyz="${xyz}" rpy="${rpy}" />
+            <mass value="${m}" />
+            <inertia ixx="${(m/12)*(w*w + h*h)}" ixy="0" ixz="0"
+                     iyy="${(m/12)*(l*l + h*h)}" iyz="0"
+                     izz="${(m/12)*(l*l + w*w)}" />
+        </inertial>
+	</xacro:macro>
+	
+	
+7.2 Wheel Inertia 
+-----------------
+
+.. code-block:: xml
+
+	<xacro:macro name="cylinder_inertia" params="m h r xyz rpy">
+        <inertial>
+            <origin xyz="${xyz}" rpy="${rpy}" />
+            <mass value="${m}" />
+            <inertia ixx="${(m/12)*(3*r*r + h*h)}" ixy="0" ixz="0"
+                     iyy="${(m/12)*(3*r*r + h*h)}" iyz="0"
+                     izz="${(m/12)*(r*r)}" />
+        </inertial>
+    </xacro:macro>
+	
+	
+7.3 Ball Caster Inertia 
+-----------------------
+
+.. code-block:: xml 
+
+	<xacro:macro name="sphere_inertia" params="m r xyz rpy">
+        <inertial>
+            <origin xyz="${xyz}" rpy="${rpy}" />
+            <mass value="${m}" />
+            <inertia ixx="${(2/5)*m*r*r}" ixy="0" ixz="0"
+                     iyy="${(2/5)*m*r*r}" iyz="0"
+                     izz="${(2/5)*m*r*r}" />
+        </inertial>
+	</xacro:macro> 
+	
+
+8 Install Relevant Packages 
+===========================
+Before installing the packages listed below, you should update and upgrade your system.
+
+.. code-block:: bash
+	
+	$ sudo apt-get update && sudo apt-get upgrade
+
+
+8.1 Install Xacro 
+-----------------
+
+.. code-block:: bash 
+
+	$ sudo apt install ros-humble-xacro
+
+
+8.2 Install joint_state_publisher
+---------------------------------
+
+.. code-block:: bash
+
+	$ sudo apt install ros-humble-joint-state-publisher 
+	
+
+8.3 Install joint_state_publisher_gui 
+-------------------------------------
+
+.. code-block:: bash
+
+	$ sudo apt install ros-humble-joint-state-publisher-gui 
+	
+
+8.3 Install ROS Gazebo Integration Packages
+-------------------------------------------
+
+.. code-block:: bash 
+
+	$ sudo apt install ros-humble-gazebo-ros-pkgs
+
+
+9 Visualize MiniBot using RVIZ
+==============================
+In this section we illustrate how to visualize our URDF MiniBot model using RVIZ. 
+
+9.1 Run robot_state_publisher
+-----------------------------
+Open a new window and run ``robot_state_publisher`` giving it our ``minibot_base.xacro`` model as our ``robot_description``. 
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws/src/minibot/urdf$ ros2 run robot_state_publisher robot_state_publisher --ros-args -p robot_description:="$(xacro minibot_base.xacro)"
+	
+	
+9.2 Run joint_state_publisher 
+-----------------------------
+Open a new window and run ``joint_state_publisher`` which allows us to joint values for the wheels. 
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws/src/minibot/urdf$ ros2 run joint_state_publisher_gui joint_state_publisher_gui
+
+
+9.3 Run RVIZ to Visualize Robot 
+-------------------------------
+Now that we have both robot-state-publisher and joint-state-publisher running, we'll visualize the MiniBot using RVIZ. 
+Open a new window and type the following.
+
+.. code-block:: bash
+
+	$ ros2 run rviz2 rviz2
+
+This will open up a RVIZ with an empty environment, and we'll need to set it up by specifying the **Fixed Frame** transform, adding the **RobotModel**, and adding the **TF**. 
+
+9.3.1 Select the Fixed Frame 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+On the left side of RVIZ there's a panel called **Displays** with a drop-down box that says **Global Options**. Under **Global Options** you'll see **Fixed Frame**. To the right of **Fixed Frame**, 
+you'll see **map**. Click **map** and then select **base_link** in the drop-down box as shown below.
+
+.. figure:: images/rviz-01.png
+		:width: 1422px
+		:height: 803px
+		:align: center
+		:alt: MiniBot Chassis
+		:scale: 40 %
+
+This places the ``base_link`` frame coincident with the map frame at the center of the grid. 
+
+9.3.2 Add RobotModel to Visualize 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+On the bottom left side of RVIZ click the **Add** button. 
+
+.. figure:: images/rviz-02.png
+		:width: 656px
+		:height: 405px
+		:align: center
+		:alt: RVIZ Add
+		:scale: 55 %
+		
+After clicking **Add** you'll see the **Create visualization** window with several items to visualize. Scroll down, select **RobotModel**, and then click **OK**.
+
+.. figure:: images/rviz-03.png
+		:width: 656px
+		:height: 859px
+		:align: center
+		:alt: RobotModel
+		:scale: 45 %
+		
+9.3.3 Add TF to Visualize 
+^^^^^^^^^^^^^^^^^^^^^^^^^		
+Click **Add** again, and in the **Create visualization** window select **TF**, and then click **OK**.
+
+.. figure:: images/rviz-04.png
+		:width: 715px
+		:height: 898px
+		:align: center
+		:alt: TF
+		:scale: 45 %
+		
+9.3.4 Select the robot_description Topic 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Now that we've added our RobotModel to **Displays**, we need to choose the **robot_description** topic which is located under **RobotModel** --> **Description Topic** ---> **robot_description** as 
+shown below.
+
+.. figure:: images/rviz-05.png
+		:width: 553px
+		:height: 589px
+		:align: center
+		:alt: robot_description
+		:scale: 50 %
+		
+Your MiniBot should now appear in the visualization environment as shown below with our MiniBot model and the TF. 
+
+.. figure:: images/rviz-06.png
+		:width: 620px
+		:height: 588px
+		:align: center
+		:alt: MiniBot 01
+		:scale: 60 %
+
+This image currently looks a bit cluttered, so if you want to hide the TF, uncheck the **TF** checkbox in the **Displays** panel as shown below. 
+
+.. figure:: images/rviz-07.png
+		:width: 375px
+		:height: 395px
+		:align: center
+		:alt: TF Checkbox
+		:scale: 60 %
+
+After rotating the view window, our MiniBot model looks as follows. 
+
+.. figure:: images/rviz-08.png
+		:width: 770px
+		:height: 521px
+		:align: center
+		:alt: MiniBot
+		:scale: 60 %
+		
+Keep this RVIZ session open and we'll see how to save it as a configuration file in the next section. 
+		
+9.4 Save Our RVIZ Configuration File for Later Use 
+--------------------------------------------------
+We'll now save the RVIZ configuration we set up in the previous section so we can automate the entire process via a launch file. 
+	
+First, open a new window, navigate to our minibot folder, and then create a new folder named ``rviz``.
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws/src/minibot$ mkdir rviz
+
+Now, go back into RVIZ and save your current session inside a configuration file ``minibot_config.rviz``, inside the ``rviz`` folder.
+
+.. figure:: images/rviz-09.png
+		:width: 378px
+		:height: 346px
+		:align: center
+		:alt: Save Config
+		:scale: 60 %
+		
+Again, make sure to save ``minibot_config.rviz`` inside the folder ``~/dev_ws/src/minibot/rviz``.
+	
+.. figure:: images/rviz-10.png
+		:width: 770px
+		:height: 368px
+		:align: center
+		:alt: minibot_config.rviz
+		:scale: 60 %
+		
+10 Create a Launch File for Visualization
+=========================================
+In this section we illustrate how to create a launch file (``display.launch.xml``) that performs all the tasks we covered previously to visualize our MiniBot model with RVIZ. 
+
+First, open a new window, navigate to our minibot folder, and then create a new folder named ``launch``.
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws/src/minibot$ mkdir launch
+	
+
+10.1 Create the Launch File
+---------------------------
+Go inside the ``launch`` folder and open VSCode.
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws/src/minibot/launch$ code .
+	
+Create a new file named ``display.launch.xml`` and paste the code below in it. 
+
+.. code-block:: xml 
+	:linenos:
+	
+	<launch>
+		<!-- find the minibot urdf file (inside the install folder) and assign the path to a variable -->
+		<let name="urdf_path" value="$(find-pkg-share minibot)/urdf/minibot_base.xacro" />
+
+		 <!-- find the rviz configuration file (inside the install folder) and assign the path to a variable -->
+		<let name="rviz_config_path" value="$(find-pkg-share minibot)/rviz/minibot_config.rviz" />
+
+		<!-- start the robot-state-publisher node -->
+		<node pkg="robot_state_publisher" exec="robot_state_publisher">
+			<param name="robot_description"
+				value="$(command 'xacro $(var urdf_path)')" />
+		</node>
+
+		<!-- start the joint-state-publisher-gui node -->
+		<node pkg="joint_state_publisher_gui" exec="joint_state_publisher_gui" />
+
+		<!-- start RVIZ2 with our save configuration File -->
+		<node pkg="rviz2" exec="rviz2" output="screen" 
+			  args="-d $(var rviz_config_path)"/>
+	</launch>
+
+This launch file performs the following five tasks:
+
+	1) It finds the path to the copy of ``minibot_base.xacro`` that colcon has created. 
+	2) It finds the path to the copy of ``minibot_config.rviz`` that colcon has created. 
+	3) It starts a robot-state-publisher node and gives it minibot_base.xacro as the robot_description.
+	4) it starts a joint-state-publsher-gui node.
+	5) It starts RVIZ with the configuration filed we previously saved.
+	
+
+10.2 Modify CMakeLists.txt 
+--------------------------
+`CMake <https://cmake.org/>`_  manages the build process for ROS, and the ``CMakeLists.txt`` file provides instructions to CMake on how to build our package. 
+Our starter ``CMakeLists.txt`` file was created when we created our minibot package in Section 4.2. 
+If you want more information on the contents/structure of a ``CMakeLists.txt`` file, you can find extensive documentation
+`here <https://docs.ros.org/en/humble/How-To-Guides/Ament-CMake-Documentation.html>`_. Fortunately, we only need to make a few modifications to 
+our ``CMakeLists.txt`` file which include installing the locations of our ``urdf``, ``rviz``, and ``launch`` folders we created previously. 
+
+.. note:: 
+	When editing files that use CMake in VSCode, you will find it handy to install the **CMake** language support extension (by twxs) as well as the 
+	**CMake Tools** extension by Microsoft. 
+
+To modify our ``CMakeLists.txt`` file, navigate to our minibot package folder and open VSCode.
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws/src/minibot$ code .
+
+Inside VSCode, open the file ``CMakeLists.txt`` and you'll see the following
+
+.. code-block:: cmake
+	:linenos:
+	
+	cmake_minimum_required(VERSION 3.8)
+	project(minibot)
+
+	if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+	  add_compile_options(-Wall -Wextra -Wpedantic)
+	endif()
+
+	# find dependencies
+	find_package(ament_cmake REQUIRED)
+	# uncomment the following section in order to fill in
+	# further dependencies manually.
+	# find_package(<dependency> REQUIRED)
+
+	if(BUILD_TESTING)
+	  find_package(ament_lint_auto REQUIRED)
+	  # the following line skips the linter which checks for copyrights
+	  # comment the line when a copyright and license is added to all source files
+	  set(ament_cmake_copyright_FOUND TRUE)
+	  # the following line skips cpplint (only works in a git repo)
+	  # comment the line when this package is in a git repo and when
+	  # a copyright and license is added to all source files
+	  set(ament_cmake_cpplint_FOUND TRUE)
+	  ament_lint_auto_find_test_dependencies()
+	endif()
+
+	ament_package()
+
+Since we don't have any package dependencies and we're not planning build testing, we'll first delete lines 10 -- 24. Now, we'll add code to install our ``urdf``, ``rviz``, and ``launch`` folders 
+as shown in our new lines 11 -- 15  below. 
+
+.. code-block:: cmake 
+	:linenos:
+	
+	cmake_minimum_required(VERSION 3.8)
+	project(minibot)
+
+	if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+	  add_compile_options(-Wall -Wextra -Wpedantic)
+	endif()
+
+	# find dependencies
+	find_package(ament_cmake REQUIRED)
+
+	# install package directories
+	install(
+	  DIRECTORY urdf launch rviz
+	  DESTINATION share/${PROJECT_NAME}/
+	)
+
+	ament_package()
+
+
+10.3 Build the Package 
+----------------------
+
+.. code-block:: bash
+	
+	user@am-dev-xx:~/dev_ws$ colcon build
+	
+10.4 Source the Workspace 
+-------------------------
+
+.. code-block:: bash
+	
+	user@am-dev-xx:~/dev_ws$ source install/setup.bash
+	
+10.5 Launch display.launch.xml 
+------------------------------
+We'll now use our launch file to display our MiniBot using RVIZ.  
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws$ ros2 launch minibot display.launch.xml
+	
+As you can see, RVIZ opens and displays our MiniBot with the same settings/configuration we previously saved. 
+
+.. figure:: images/rviz-08.png
+		:width: 770px
+		:height: 521px
+		:align: center
+		:alt: MiniBot
+		:scale: 60 %
+		
+	
+11 Simulate MiniBot using Gazebo
+================================
+We'll now demonstrate how to display our MiniBot model in Gazebo. 
+
+11.1 Gazebo Material Colors 
+---------------------------
+The colors we created in our URDF file will show up in RVIZ but not Gazebo. Instead, for Gazebo, we must use a Gazebo material tag to indicate link colors. 
+We can place our Gazebo maerial tags directly in ``minibot_base.xacro``, but we'll place our Gazebo tags in a separate file ``minibot_gazebo.xacro`` that 
+we'll also place in our ``urdf`` folder. 
+
+If don't already have VSCode open, Navigate to the ``urdf`` folder and open it.
+
+.. code-block:: bash 
+ 
+	user@am-dev-xx:~/dev_ws/src/minibot/urdf$ code .
+	
+While inside VSCode, create the file ``minibot_gazebo.xacro``  and paste the following code.
+
+.. code-block:: xml 
+	
+	<?xml version="1.0"?>
+	<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+		<!-- colors -->
+		<gazebo reference="chassis_link">
+			<material>Gazebo/Blue</material>
+		</gazebo>
+
+		<gazebo reference="right_wheel_link">
+			<material>Gazebo/Orange</material>
+		</gazebo>
+
+		<gazebo reference="left_wheel_link">
+			<material>Gazebo/Orange</material>
+		</gazebo>
+
+		<gazebo reference="caster_wheel_link">
+			<material>Gazebo/Orange</material>
+		</gazebo>
+
+	</robot>
+
+Now, open ``minibot_base.xacro`` and include ``minibot_gazebo.xacro`` on line 5 after we include ``inertia_macros.xacro`` as follows. 
+
+.. code-block:: xml 
+
+	<?xml version="1.0"?>
+	<robot name="minibot_base" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+		 <xacro:include filename="inertia_macros.xacro" />
+		 <xacro:include filename="minibot_gazebo.xacro" />
+
+		<!-- colors -->
+		<material name="white">
+			<color rgba="1 1 1 1"/>
+		</material>
+
+		<material name="black">
+			<color rgba="0 0 0 1"/>
+		</material>
+			
+		<material name="orange">
+			<color rgba="1 0.3 0.1 1"/>
+		</material>
+
+		<material name="blue">
+			<color rgba="0.2 0.2 1 1"/>
+		</material>
+	
+
+11.2 Run Robot State Publisher 
+------------------------------
+Open a new window and run ``robot_state_publisher`` giving it our ``minibot_base.xacro`` model as our ``robot_description``. 
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws/src/minibot/urdf$ ros2 run robot_state_publisher robot_state_publisher --ros-args -p robot_description:="$(xacro minibot_base.xacro)"
+	
+11.3 Launch Gazebo with Empty Environment
+-----------------------------------------
+
+.. code-block:: bash
+
+	$ ros2 launch gazebo_ros gazebo.launch.py
+
+
+11.4 Spawn MiniBot in Gazebo
+----------------------------
+
+.. code-block:: bash 
+
+	$ ros2 run gazebo_ros spawn_entity.py -topic robot_description -entity minibot
+
+
+11.5 Create the Launch File 
+---------------------------
+We'll now create a new launch file that opens Gazebo and spawns our MiniBot. 
+
+Go into the ``launch`` folder, create the file  ``minibot_gazebo.launch.xml``, and paste the following code.
+
+.. code-block:: xml 
+
+	<launch>
+		<!-- find the minibot urdf file (inside the install folder) and assign the path to a variable -->
+		<let name="urdf_path" value="$(find-pkg-share minibot)/urdf/minibot_base.xacro" />
+
+		<!-- find the rviz configuration file (inside the install folder) and assign the path to a variable -->
+		<let name="rviz_config_path" value="$(find-pkg-share minibot)/rviz/minibot_config.rviz" />
+	
+		<!-- start the robot-state-publisher node -->
+		<node pkg="robot_state_publisher" exec="robot_state_publisher">
+			<param name="robot_description"
+				value="$(command 'xacro $(var urdf_path)')" />
+		</node>
+
+		<!-- open Gazebo with an empty environment -->
+		<include file="$(find-pkg-share gazebo_ros)/launch/gazebo.launch.py" />
+
+		<!-- spawn minibot in Gazebo -->
+		<node pkg="gazebo_ros" exec="spawn_entity.py"
+			  args="-topic robot_description -entity minibot" />
+			  
+		<!-- start RVIZ2 with our save configuration File -->
+		<node pkg="rviz2" exec="rviz2" output="screen" 
+			  args="-d $(var rviz_config_path)"/>
+	</launch>
+
+This launch file performs the following four tasks:
+
+	1) It finds the path to the copy of ``minibot_base.xacro`` that colcon has created. 
+	2) It finds the path to the copy of ``minibot_config.rviz`` that colcon has created. 
+	3) It starts a robot-state-publisher node and gives it minibot_base.xacro as the robot_description.
+	4) It opens Gazebo with an empty environment.
+	5) It spawns our MiniBot in Gazebo.
+	6) It starts RVIZ with the configuration filed we previously saved.
+	
+	
+11.6 Modify package.xml 
+-----------------------
+Go into the ``minibot`` directory, open the file ``package.xml``, and add the ``minibot``, ``robot_state_publisher``, and ``gazebo_ros`` package dependencies.
+
+.. code-block:: xml 
+
+	<!-- packages -->
+	<exec_depend>robot_state_publisher</exec_depend>
+	<exec_depend>gazebo_ros</exec_depend>
+
+So, your ``package.xml`` file should look something like this.
+
+.. code-block:: xml 
+
+	<?xml version="1.0"?>
+	<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+	<package format="3">
+	  <name>minibot</name>
+	  <version>0.0.0</version>
+	  <description>TODO: Package description</description>
+	  <maintainer email="user@todo.todo">user</maintainer>
+	  <license>TODO: License declaration</license>
+
+	  <buildtool_depend>ament_cmake</buildtool_depend>
+
+	  <!-- packages -->
+	  <exec_depend>robot_state_publisher</exec_depend>
+	  <exec_depend>gazebo_ros</exec_depend>
+
+	  <test_depend>ament_lint_auto</test_depend>
+	  <test_depend>ament_lint_common</test_depend>
+
+	  <export>
+		<build_type>ament_cmake</build_type>
+	  </export>
+	</package>
+	
+11.7 Build the Package 
+----------------------
+
+.. code-block:: bash
+	
+	user@am-dev-xx:~/dev_ws$ colcon build
+	
+11.8 Source the Workspace 
+-------------------------
+
+.. code-block:: bash
+	
+	user@am-dev-xx:~/dev_ws$ source install/setup.bash	
+
+11.9 Launch minibot_gazebo.launch.xml 
+-------------------------------------
+
+.. code-block:: bash 
+
+	user@am-dev-xx:~/dev_ws$ ros2 launch minibot minibot_gazebo.launch.xml
+	

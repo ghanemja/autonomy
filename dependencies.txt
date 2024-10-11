@@ -1,0 +1,6 @@
+ros-humble-xacro
+ros-humble-joint-state-publisher
+ros-humble-joint-state-publisher-gui
+ros-humble-gazebo-ros-pkgs
+vim
+code

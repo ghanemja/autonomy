@@ -1,0 +1,186 @@
+====================
+Mobile Robot, Part 2
+====================
+	
+1 Gazebo World
+===============
+Gazebo Classic tutorials <https://classic.gazebosim.org/tutorials>
+
+First, open a new window, navigate to our minibot folder, and then create a new folder named ``worlds``.
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws/src/minibot$ mkdir worlds
+	
+world:=/src/minibot/worlds/world01.world 
+
+Install the worlds in ``CMakeLists.txt``
+
+.. code-block:: cmake 
+
+	# install package directories
+	install(
+	  DIRECTORY urdf launch rviz worlds
+	  DESTINATION share/${PROJECT_NAME}/
+	)
+
+Modify ``minibot_gazebo.launch.xml``
+
+.. code-block:: xml 
+	
+	<!-- open Gazebo with our world -->
+    <include file="$(find-pkg-share gazebo_ros)/launch/gazebo.launch.py" >
+        <arg name="world" value="$(find-pkg-share minibot)/worlds/world01.world" />
+    </include>
+	
+2 Gazebo Differential Drive Plugin
+==================================
+Gazebo has severa
+
+<https://github.com/ros-simulation/gazebo_ros_pkgs>
+
+In our ``minibot_gazebo.xacro`` file create another Gazebo tag and include lines 56 -- 92 inside it. 
+
+.. code-block:: xml
+	:linenos:
+	 
+	<?xml version="1.0"?>
+	<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+		<!-- colors -->
+		<gazebo reference="chassis_link">
+			<material>Gazebo/Blue</material>
+		</gazebo>
+
+		<gazebo reference="right_wheel_link">
+			<material>Gazebo/Orange</material>
+		</gazebo>
+
+		<gazebo reference="left_wheel_link">
+			<material>Gazebo/Orange</material>
+		</gazebo>
+
+		<gazebo reference="caster_wheel_link">
+			<material>Gazebo/Orange</material>
+		</gazebo>
+
+		<gazebo>
+			<plugin name="gazebo_ros_diff_drive" filename="libgazebo_ros_diff_drive.so">
+
+				<ros>
+
+				  <!-- Add a namespace -->
+				  <namespace>/test</namespace>
+		  
+				</ros>
+		  
+				<!-- Update rate in Hz -->
+				<update_rate>50</update_rate>
+		  
+				<!-- wheels -->
+				<left_joint>left_wheel_joint</left_joint>
+				<right_joint>right_wheel_joint</right_joint>
+		  
+				<!-- kinematics -->
+				<wheel_separation>1.25</wheel_separation>
+				<wheel_diameter>0.6</wheel_diameter>
+		  
+				<!-- limits -->
+				<max_wheel_torque>20</max_wheel_torque>
+				<max_wheel_acceleration>1.0</max_wheel_acceleration>
+		  
+				<!-- input -->
+				<command_topic>cmd_vel</command_topic>
+		  
+				<!-- output -->
+				<publish_odom>true</publish_odom>
+				<publish_odom_tf>true</publish_odom_tf>
+				<publish_wheel_tf>true</publish_wheel_tf>
+		  
+				<odometry_topic>odom</odometry_topic>
+				<odometry_frame>odom</odometry_frame>
+				<robot_base_frame>chassis</robot_base_frame>
+		  
+			  </plugin>
+		</gazebo>
+	
+	</robot>
+
+Modifications 
+
+	1) Remove lines 24 -- 29.
+	
+		.. code-block:: xml 
+			 
+			<ros>
+
+				<!-- Add a namespace -->
+				<namespace>/test</namespace>
+      
+			</ros>
+	
+	2) Modify lines 39 and 40.
+		
+		From 
+		
+		.. code-block:: xml 
+		
+			<wheel_separation>1.25</wheel_separation>
+			<wheel_diameter>0.6</wheel_diameter>
+	
+		To
+		
+		.. code-block:: xml 
+		
+			<wheel_separation>1.25</wheel_separation>
+            <wheel_diameter>0.6</wheel_diameter>
+			
+	3) Remove lines 46 -- 48.
+	
+		.. code-block:: xml 
+		
+			<!-- input -->
+			<command_topic>cmd_vel</command_topic>
+			
+	3) Modify line 56: change ``chassis`` to ``base_link``. 
+		From
+		
+		.. code-block:: xml
+		
+			<robot_base_frame>chassis</robot_base_frame>
+			
+		To
+		
+		.. code-block:: xml
+		
+			<robot_base_frame>base_link</robot_base_frame>
+	
+Ball Caster: Set the Coefficient of Friction
+============================================
+
+.. code-block:: xml 
+
+	<gazebo reference="caster_wheel_link">
+        <material>Gazebo/Orange</material>
+        <mu1 value="0.001" />
+        <mu2 value="0.001" />
+    </gazebo>
+	
+3 Teleop -Joy
+=============
+.. code-block:: bash 
+
+	$ ros2 run teleop_twist_keyboard teleop_twist_keyboard 
+	
+4 Launch MiniBot
+
+Reminder: Launch robot_state_publisher in sim mode
+
+Use sim time to true to keep all clock synchronized with Gazebo
+
+Launch robot_state_publisher with sim time enabled
+
+use_sim_time:=true
+
+Look at rsp.launch.py to to determine configuration 
+

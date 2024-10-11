@@ -1,0 +1,58 @@
+[0.020s] Invoking command in '/home/janelleg/ros2_ws/build/examples_rclcpp_wait_set': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/janelleg/ros2_ws/build/examples_rclcpp_wait_set -- -j8 -l8
+[0.114s] [35m[1mConsolidate compiler generated dependencies of target wait_set_talker[0m
+[0.120s] [35m[1mConsolidate compiler generated dependencies of target listener[0m
+[0.123s] [35m[1mConsolidate compiler generated dependencies of target talker[0m
+[0.125s] [35m[1mConsolidate compiler generated dependencies of target wait_set_listener[0m
+[0.130s] [35m[1mConsolidate compiler generated dependencies of target wait_set[0m
+[0.138s] [35m[1mConsolidate compiler generated dependencies of target wait_set_topics_and_timer[0m
+[0.139s] [35m[1mConsolidate compiler generated dependencies of target thread_safe_wait_set[0m
+[0.143s] [35m[1mConsolidate compiler generated dependencies of target static_wait_set[0m
+[0.182s] [  8%] Built target wait_set_talker
+[0.183s] [ 16%] Built target talker
+[0.189s] [ 25%] Built target wait_set
+[0.193s] [ 33%] Built target listener
+[0.198s] [ 41%] Built target wait_set_listener
+[0.198s] [ 50%] Built target static_wait_set
+[0.206s] [ 58%] Built target thread_safe_wait_set
+[0.206s] [ 66%] Built target wait_set_topics_and_timer
+[0.217s] [35m[1mConsolidate compiler generated dependencies of target wait_set_random_order[0m
+[0.219s] [35m[1mConsolidate compiler generated dependencies of target executor_random_order[0m
+[0.220s] [35m[1mConsolidate compiler generated dependencies of target wait_set_topics_with_different_rates[0m
+[0.230s] [35m[1mConsolidate compiler generated dependencies of target wait_set_composed[0m
+[0.262s] [ 75%] Built target wait_set_topics_with_different_rates
+[0.270s] [ 83%] Built target wait_set_random_order
+[0.271s] [ 91%] Built target executor_random_order
+[0.275s] [100%] Built target wait_set_composed
+[0.311s] Invoked command in '/home/janelleg/ros2_ws/build/examples_rclcpp_wait_set' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/janelleg/ros2_ws/build/examples_rclcpp_wait_set -- -j8 -l8
+[0.820s] Invoking command in '/home/janelleg/ros2_ws/build/examples_rclcpp_wait_set': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/janelleg/ros2_ws/build/examples_rclcpp_wait_set
+[0.842s] -- Install configuration: ""
+[0.844s] -- Execute custom install script
+[0.845s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/lib/examples_rclcpp_wait_set/wait_set_talker
+[0.846s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/lib/examples_rclcpp_wait_set/wait_set_listener
+[0.847s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/lib/libtalker.so
+[0.847s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/lib/liblistener.so
+[0.848s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/lib/examples_rclcpp_wait_set/wait_set
+[0.849s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/lib/examples_rclcpp_wait_set/static_wait_set
+[0.850s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/lib/examples_rclcpp_wait_set/thread_safe_wait_set
+[0.850s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/lib/examples_rclcpp_wait_set/wait_set_topics_and_timer
+[0.851s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/lib/examples_rclcpp_wait_set/wait_set_random_order
+[0.851s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/lib/examples_rclcpp_wait_set/executor_random_order
+[0.851s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/lib/examples_rclcpp_wait_set/wait_set_topics_with_different_rates
+[0.852s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/lib/examples_rclcpp_wait_set/wait_set_composed
+[0.852s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/share/ament_index/resource_index/package_run_dependencies/examples_rclcpp_wait_set
+[0.853s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/share/ament_index/resource_index/parent_prefix_path/examples_rclcpp_wait_set
+[0.854s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/share/examples_rclcpp_wait_set/environment/ament_prefix_path.sh
+[0.854s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/share/examples_rclcpp_wait_set/environment/ament_prefix_path.dsv
+[0.855s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/share/examples_rclcpp_wait_set/environment/path.sh
+[0.855s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/share/examples_rclcpp_wait_set/environment/path.dsv
+[0.856s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/share/examples_rclcpp_wait_set/local_setup.bash
+[0.856s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/share/examples_rclcpp_wait_set/local_setup.sh
+[0.857s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/share/examples_rclcpp_wait_set/local_setup.zsh
+[0.857s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/share/examples_rclcpp_wait_set/local_setup.dsv
+[0.857s] -- Symlinking: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/share/examples_rclcpp_wait_set/package.dsv
+[0.876s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/share/ament_index/resource_index/packages/examples_rclcpp_wait_set
+[0.876s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/share/ament_index/resource_index/rclcpp_components/examples_rclcpp_wait_set
+[0.876s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/share/examples_rclcpp_wait_set/cmake/examples_rclcpp_wait_setConfig.cmake
+[0.877s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/share/examples_rclcpp_wait_set/cmake/examples_rclcpp_wait_setConfig-version.cmake
+[0.877s] -- Up-to-date symlink: /home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/share/examples_rclcpp_wait_set/package.xml
+[0.882s] Invoked command in '/home/janelleg/ros2_ws/build/examples_rclcpp_wait_set' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/janelleg/ros2_ws/build/examples_rclcpp_wait_set

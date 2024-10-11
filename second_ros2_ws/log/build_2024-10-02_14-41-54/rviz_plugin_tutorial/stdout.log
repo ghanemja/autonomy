@@ -1,0 +1,5 @@
+-- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Configuring incomplete, errors occurred!
+See also "/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial/CMakeFiles/CMakeOutput.log".

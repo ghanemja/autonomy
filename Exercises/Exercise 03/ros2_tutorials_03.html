@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROS 2 Humble Tutorials, Part 3 &mdash; 16.633 NEET Autonomous Machines  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="ROS 2 Humble Tutorials, Part 2" href="ros2_tutorials_02.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/NEET-AutonomousMachines.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Exercise 01</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro_ros.html">Introduction to ROS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_overview.html">Linux Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_01.html">ROS 2 Humble Tutorials, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 02</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_02.html">ROS 2 Humble Tutorials, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 03</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ROS 2 Humble Tutorials, Part 3</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pdf-viewer">1 PDF Viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#launch">2 Launch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#urdf">3 URDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rviz">4 RViz</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">16.633 NEET Autonomous Machines</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ROS 2 Humble Tutorials, Part 3</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ros-2-humble-tutorials-part-3">
+<h1>ROS 2 Humble Tutorials, Part 3<a class="headerlink" href="#ros-2-humble-tutorials-part-3" title="Permalink to this heading"></a></h1>
+<section id="pdf-viewer">
+<h2>1 PDF Viewer<a class="headerlink" href="#pdf-viewer" title="Permalink to this heading"></a></h2>
+<p>When the need arises for you to view a pdf document, Ubuntu has a default viewer called <code class="docutils literal notranslate"><span class="pre">Evince</span></code> that you can use from the terminal window as follows</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ evince &lt;document_name&gt;
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">&lt;document_name&gt;</span></code> is the name of the document you would like to view.</p>
+</section>
+<section id="launch">
+<h2>2 Launch<a class="headerlink" href="#launch" title="Permalink to this heading"></a></h2>
+<p>ROS 2 Launch files allow you to start up and configure a number of executables containing ROS 2 nodes simultaneously.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Intermediate/Launch/Creating-Launch-Files.html">Creating a launch file.</a> (10 minutes)</p></li>
+</ul>
+</section>
+<section id="urdf">
+<h2>3 URDF<a class="headerlink" href="#urdf" title="Permalink to this heading"></a></h2>
+<p>URDF (Unified Robot Description Format) is a file format for specifying the geometry and organization of robots in ROS.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Building-a-Visual-Robot-Model-with-URDF-from-Scratch.html">Building a visual robot model from scratch</a> (20 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Building-a-Movable-Robot-Model-with-URDF.html">Building a movable robot model</a> (10 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Adding-Physical-and-Collision-Properties-to-a-URDF-Model.html">Adding physical and collision properties</a> (10 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Using-Xacro-to-Clean-Up-a-URDF-File.html">Using Xacro to clean up your code</a> (20 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Using-URDF-with-Robot-State-Publisher.html">Using URDF with robot_state_publisher</a> (15 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Exporting-an-URDF-File.html">Generating an URDF File</a> (5 minutes)</p></li>
+</ul>
+</section>
+<section id="rviz">
+<h2>4 RViz<a class="headerlink" href="#rviz" title="Permalink to this heading"></a></h2>
+<p>RViz is a 3D visualizer for the Robot Operating System (ROS) framework.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/i--Sd4xH9ZE" frameborder="0" allowfullscreen></iframe><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>RViz was installed on your laptop with the ROS2 Humble installation and you don’t need to install it again.</p>
+</div>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Intermediate/RViz/RViz-User-Guide/RViz-User-Guide.html">RViz User Guide</a> (20 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Intermediate/RViz/RViz-Custom-Display/RViz-Custom-Display.html">Building a Custom RViz Display</a> (20 minutes)</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ros2_tutorials_02.html" class="btn btn-neutral float-left" title="ROS 2 Humble Tutorials, Part 2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, MIT-NEET Autonomous Machines.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

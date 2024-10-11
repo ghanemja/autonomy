@@ -1,0 +1,1 @@
+/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial/ament_cmake_environment_hooks/local_setup.bash

@@ -1,0 +1,38 @@
+[0mCMake Error: Could not open file for write in copy operation /CTestConfiguration.ini.tmp[0m
+[0mCMake Error: : System Error: Permission denied[0m
+[31mCMake Error at /opt/ros/humble/share/ament_cmake_test/cmake/ament_cmake_test-extras.cmake:34 (configure_file):
+  configure_file Problem configuring file
+Call Stack (most recent call first):
+  /opt/ros/humble/share/ament_cmake_test/cmake/ament_cmake_testConfig.cmake:41 (include)
+  /opt/ros/humble/share/ament_cmake_pytest/cmake/ament_cmake_pytest-extras.cmake:17 (find_package)
+  /opt/ros/humble/share/ament_cmake_pytest/cmake/ament_cmake_pytestConfig.cmake:41 (include)
+  /opt/ros/humble/share/ament_cmake_ros/cmake/ament_cmake_ros-extras.cmake:19 (find_package)
+  /opt/ros/humble/share/ament_cmake_ros/cmake/ament_cmake_rosConfig.cmake:41 (include)
+  CMakeLists.txt:1 (find_package)
+
+[0m
+[33mCMake Warning (dev) at /opt/ros/humble/share/ament_cmake_core/cmake/core/list_append_unique.cmake:30 (if):
+  Policy CMP0057 is not set: Support new IN_LIST if() operator.  Run "cmake
+  --help-policy CMP0057" for policy details.  Use the cmake_policy command to
+  set the policy and suppress this warning.
+
+  IN_LIST will be interpreted as an operator when the policy is set to NEW.
+  Since the policy is not set the OLD behavior will be used.
+Call Stack (most recent call first):
+  /opt/ros/humble/share/ament_cmake_ros/cmake/ament_cmake_export_dependencies-extras.cmake:84 (list_append_unique)
+  /opt/ros/humble/share/ament_cmake_ros/cmake/ament_cmake_rosConfig.cmake:41 (include)
+  CMakeLists.txt:1 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+[0m
+[31mCMake Error at /opt/ros/humble/share/ament_cmake_core/cmake/core/list_append_unique.cmake:30 (if):
+  if given arguments:
+
+    "NOT" "element" "IN_LIST" "ament_cmake_ros_RECURSIVE_DEPENDENCIES"
+
+  Unknown arguments specified
+Call Stack (most recent call first):
+  /opt/ros/humble/share/ament_cmake_ros/cmake/ament_cmake_export_dependencies-extras.cmake:84 (list_append_unique)
+  /opt/ros/humble/share/ament_cmake_ros/cmake/ament_cmake_rosConfig.cmake:41 (include)
+  CMakeLists.txt:1 (find_package)
+
+[0m

@@ -1,0 +1,30 @@
+<launch>
+        <!-- find the minibot urdf file (inside the install folder) and assign the path to a variable -->
+        <let name="urdf_path" value="$(find-pkg-share minibot)/urdf/minibot_base.xacro" />
+
+        <!-- find the rviz configuration file (inside the install folder) and assign the path to a variable -->
+        <let name="rviz_config_path" value="$(find-pkg-share minibot)/rviz/minibot_config.rviz" />
+
+        <!-- start the robot-state-publisher node -->
+        <node pkg="robot_state_publisher" exec="robot_state_publisher">
+                <param name="robot_description"
+                        value="$(command 'xacro $(var urdf_path)')" />
+                <param name="use_sim_time" value="true"/>
+        </node>
+
+        <!-- open Gazebo with an empty environment -->
+        <!-- <include file="$(find-pkg-share gazebo_ros)/launch/gazebo.launch.py" /> -->
+
+        <!-- open Gazebo with our saved world -->
+        <include file="$(find-pkg-share gazebo_ros)/launch/gazebo.launch.py" >
+                <arg name="world" value="$(find-pkg-share minibot)/worlds/world01.world" />
+        </include>
+
+        <!-- spawn minibot in Gazebo -->
+        <node pkg="gazebo_ros" exec="spawn_entity.py"
+                  args="-topic robot_description -entity minibot" />
+
+        <!-- start RVIZ2 with our save configuration File -->
+        <node pkg="rviz2" exec="rviz2" output="screen"
+                  args="-d $(var rviz_config_path)"/>
+</launch>

@@ -1,0 +1,29 @@
+[1.218s] Invoking command in '/home/janelleg/second_ros2_ws/build/urdf_tutorial_r2d2': PYTHONPATH=/home/janelleg/second_ros2_ws/build/urdf_tutorial_r2d2/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/janelleg/second_ros2_ws/install/urdf_tutorial_r2d2/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/janelleg/second_ros2_ws/build/urdf_tutorial_r2d2/build --no-deps symlink_data
+[1.735s] running develop
+[2.012s] running egg_info
+[2.012s] creating urdf_tutorial_r2d2.egg-info
+[2.013s] writing urdf_tutorial_r2d2.egg-info/PKG-INFO
+[2.013s] writing dependency_links to urdf_tutorial_r2d2.egg-info/dependency_links.txt
+[2.013s] writing entry points to urdf_tutorial_r2d2.egg-info/entry_points.txt
+[2.014s] writing requirements to urdf_tutorial_r2d2.egg-info/requires.txt
+[2.014s] writing top-level names to urdf_tutorial_r2d2.egg-info/top_level.txt
+[2.014s] writing manifest file 'urdf_tutorial_r2d2.egg-info/SOURCES.txt'
+[2.016s] reading manifest file 'urdf_tutorial_r2d2.egg-info/SOURCES.txt'
+[2.017s] writing manifest file 'urdf_tutorial_r2d2.egg-info/SOURCES.txt'
+[2.020s] running build_ext
+[2.020s] Creating /home/janelleg/second_ros2_ws/install/urdf_tutorial_r2d2/lib/python3.10/site-packages/urdf-tutorial-r2d2.egg-link (link to .)
+[2.021s] Installing state_publisher script to /home/janelleg/second_ros2_ws/install/urdf_tutorial_r2d2/lib/urdf_tutorial_r2d2
+[2.022s] 
+[2.023s] Installed /home/janelleg/second_ros2_ws/build/urdf_tutorial_r2d2
+[2.023s] running symlink_data
+[2.023s] creating /home/janelleg/second_ros2_ws/install/urdf_tutorial_r2d2/share/ament_index
+[2.023s] creating /home/janelleg/second_ros2_ws/install/urdf_tutorial_r2d2/share/ament_index/resource_index
+[2.023s] creating /home/janelleg/second_ros2_ws/install/urdf_tutorial_r2d2/share/ament_index/resource_index/packages
+[2.024s] symbolically linking /home/janelleg/second_ros2_ws/build/urdf_tutorial_r2d2/resource/urdf_tutorial_r2d2 -> /home/janelleg/second_ros2_ws/install/urdf_tutorial_r2d2/share/ament_index/resource_index/packages
+[2.024s] symbolically linking /home/janelleg/second_ros2_ws/build/urdf_tutorial_r2d2/package.xml -> /home/janelleg/second_ros2_ws/install/urdf_tutorial_r2d2/share/urdf_tutorial_r2d2
+[2.024s] creating /home/janelleg/second_ros2_ws/install/urdf_tutorial_r2d2/share/urdf_tutorial_r2d2/launch
+[2.024s] symbolically linking /home/janelleg/second_ros2_ws/build/urdf_tutorial_r2d2/launch/demo.launch.py -> /home/janelleg/second_ros2_ws/install/urdf_tutorial_r2d2/share/urdf_tutorial_r2d2/launch
+[2.025s] symbolically linking /home/janelleg/second_ros2_ws/build/urdf_tutorial_r2d2/urdf/r2d2.urdf.xml -> /home/janelleg/second_ros2_ws/install/urdf_tutorial_r2d2/share/urdf_tutorial_r2d2
+[2.025s] symbolically linking /home/janelleg/second_ros2_ws/build/urdf_tutorial_r2d2/urdf/state_publisher.py -> /home/janelleg/second_ros2_ws/install/urdf_tutorial_r2d2/share/urdf_tutorial_r2d2
+[2.025s] symbolically linking /home/janelleg/second_ros2_ws/build/urdf_tutorial_r2d2/urdf/r2d2.rviz -> /home/janelleg/second_ros2_ws/install/urdf_tutorial_r2d2/share/urdf_tutorial_r2d2
+[2.085s] Invoked command in '/home/janelleg/second_ros2_ws/build/urdf_tutorial_r2d2' returned '0': PYTHONPATH=/home/janelleg/second_ros2_ws/build/urdf_tutorial_r2d2/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/janelleg/second_ros2_ws/install/urdf_tutorial_r2d2/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/janelleg/second_ros2_ws/build/urdf_tutorial_r2d2/build --no-deps symlink_data

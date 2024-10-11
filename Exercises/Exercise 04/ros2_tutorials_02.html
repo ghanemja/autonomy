@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROS 2 Humble Tutorials, Part 2 &mdash; 16.633 NEET Autonomous Machines  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ROS 2 Humble Tutorials, Part 3" href="ros2_tutorials_03.html" />
+    <link rel="prev" title="ROS 2 Humble Tutorials, Part 1" href="ros2_tutorials_01.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/NEET-AutonomousMachines.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Exercise 01</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro_ros.html">Introduction to ROS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_overview.html">Linux Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_01.html">ROS 2 Humble Tutorials, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 02</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ROS 2 Humble Tutorials, Part 2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-vscode">1 Installing VSCode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#beginner-client-libraries">2 Beginner: Client Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-colcon-build">3 Using colcon build</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#parallel-process-a-specified-number-of-packages">3.1 Parallel Process a Specified Number of Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#process-only-one-package-at-a-time">3.2 Process only One Package at a Time</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">4 Beginner: Client Libraries</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 03</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_03.html">ROS 2 Humble Tutorials, Part 3</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 04</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part01.html">Mobile Robot, Part 1</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">16.633 NEET Autonomous Machines</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ROS 2 Humble Tutorials, Part 2</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ros-2-humble-tutorials-part-2">
+<h1>ROS 2 Humble Tutorials, Part 2<a class="headerlink" href="#ros-2-humble-tutorials-part-2" title="Link to this heading"></a></h1>
+<section id="installing-vscode">
+<h2>1 Installing VSCode<a class="headerlink" href="#installing-vscode" title="Link to this heading"></a></h2>
+<p>To complete the ROS tutorials on this page, you’ll need to install a Python/C++ editor and we recommend using <a class="reference external" href="https://code.visualstudio.com/">VSCode</a>.
+You can find information about
+installing VSCode on a Linux machine <a class="reference external" href="https://code.visualstudio.com/docs/setup/linux">here</a>, and you can install it manually by copying/pasting
+the following script in a terminal window.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>wget<span class="w"> </span>gpg
+wget<span class="w"> </span>-qO-<span class="w"> </span>https://packages.microsoft.com/keys/microsoft.asc<span class="w"> </span><span class="p">|</span><span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>&gt;<span class="w"> </span>packages.microsoft.gpg
+sudo<span class="w"> </span>install<span class="w"> </span>-D<span class="w"> </span>-o<span class="w"> </span>root<span class="w"> </span>-g<span class="w"> </span>root<span class="w"> </span>-m<span class="w"> </span><span class="m">644</span><span class="w"> </span>packages.microsoft.gpg<span class="w"> </span>/etc/apt/keyrings/packages.microsoft.gpg
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main&quot;</span><span class="w"> </span><span class="p">|</span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/vscode.list<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+rm<span class="w"> </span>-f<span class="w"> </span>packages.microsoft.gpg
+</pre></div>
+</div>
+<p>After installing this apt repository and key, you should update the package cache and install the package by copying/pasting the following into the same terminal window.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>apt-transport-https
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>code<span class="w"> </span><span class="c1"># or code-insiders</span>
+</pre></div>
+</div>
+<p>If you’ve never used VSCode, the Internet has many resources and you can try <a class="reference external" href="https://code.visualstudio.com/docs/introvideos/basics">Getting started with Visual Studio Code</a>.</p>
+</section>
+<section id="beginner-client-libraries">
+<h2>2 Beginner: Client Libraries<a class="headerlink" href="#beginner-client-libraries" title="Link to this heading"></a></h2>
+<p>The following tuturials illustrate key concepts in ROS which include publishers, subscribers, services, clients, and parameters in both
+C++ and Python. You’re encouraged to review the tutorials for both languages, however, you only need to choose one for now. For most of you, the
+Python tutorials are probably the most logical choice.</p>
+<p>Also, there are a lot of steps involved, and I don’t believe its necessary to memorize everything as we’ll use the given code as templates later on.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Check your network settings and make sure you’re connected to our WiFi network <code class="docutils literal notranslate"><span class="pre">am-network-01</span></code>. You should autonmatically connect without entering a password. If you’re
+asked to enter a password, then enter <code class="docutils literal notranslate"><span class="pre">neet-robotics01*</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please remember to set your domain ID while working with ROS in our classroom. In a terminal window, to set your domain ID (for your machine am-dev-xx), you would type</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~$<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">ROS_DOMAIN_ID</span><span class="o">=</span>xx
+</pre></div>
+</div>
+<p>If your development computer is <code class="docutils literal notranslate"><span class="pre">am-dev-01</span></code>, <code class="docutils literal notranslate"><span class="pre">am-dev-02</span></code>, <code class="docutils literal notranslate"><span class="pre">am-dev-03</span></code>, etc., you would set your domain ID to 1, 2, 3, etc.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Recall from the previous tutorial that in order to use ROS2 in a specific terminal window, you must source the ROS2 Humble <code class="docutils literal notranslate"><span class="pre">setup.bash</span></code> file which is located
+in the <code class="docutils literal notranslate"><span class="pre">/opt/ros/humble/</span></code> folder as follows</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash
+</pre></div>
+</div>
+<p>If you don’t source this file, you will not be able to use any ROS2 commands in the current terminal window.</p>
+</div>
+</section>
+<section id="using-colcon-build">
+<h2>3 Using colcon build<a class="headerlink" href="#using-colcon-build" title="Link to this heading"></a></h2>
+<p>If you use the colon build command (without any arguments) in the ROS2 tutorials given below, your computer will freeze up. The reason for this freezing is that colon uses a type of
+parallel processing to build packages, and our laptops don’t have enough RAM to parallel process all the packages in this tutorial with their current algorithm. Keep in mind, however, your computer
+won’t freeze with a smaller packages.</p>
+<p>You can find some information on <code class="docutils literal notranslate"><span class="pre">colcon</span></code> <a class="reference external" href="https://answers.ros.org/question/368249/colcon-build-number-of-threads/">here</a> and
+<a class="reference external" href="https://colcon.readthedocs.io/en/released/reference/executor-arguments.html">here</a> which list two quick fixes:</p>
+<section id="parallel-process-a-specified-number-of-packages">
+<h3>3.1 Parallel Process a Specified Number of Packages<a class="headerlink" href="#parallel-process-a-specified-number-of-packages" title="Link to this heading"></a></h3>
+<p>You can tell colcon to parallel process a smaller number of packages with the command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>colcon<span class="w"> </span>--parallel-workers<span class="w"> </span>NUMBER
+</pre></div>
+</div>
+<p>where NUMBER is the number of packages you want to parallel process. For instance, if you use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>colon<span class="w"> </span>--parallel-workers<span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+<p>This will work for the tutorial given below.</p>
+</section>
+<section id="process-only-one-package-at-a-time">
+<h3>3.2 Process only One Package at a Time<a class="headerlink" href="#process-only-one-package-at-a-time" title="Link to this heading"></a></h3>
+<p>You can tell colcon to process only one package at a time with the command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>colcon<span class="w"> </span>--executor<span class="w"> </span>sequential
+</pre></div>
+</div>
+<p>I suppose you also can try</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>colon<span class="w"> </span>--parallel-workers<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+<p>for sequential execution.</p>
+</section>
+</section>
+<section id="id3">
+<h2>4 Beginner: Client Libraries<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Colcon-Tutorial.html">Using colcon to build packages</a> (20 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html">Creating a workspace</a> (20 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">Creating a package</a> (15 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Publisher-And-Subscriber.html">Writing a simple publisher and subscriber (C++)</a> (20 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html">Writing a simple publisher and subscriber (Python)</a> (20 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Service-And-Client.html">Writing a simple service and client (C++)</a> (20 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html">Writing a simple service and client (Python)</a> (20 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Custom-ROS2-Interfaces.html">Creating custom msg and srv files</a> (20 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Single-Package-Define-And-Use-Interface.html">Implementing custom interfaces</a> (15 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Using-Parameters-In-A-Class-CPP.html">Using parameters in a class (C++)</a> (20 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Using-Parameters-In-A-Class-Python.html">Using parameters in a class (Python)</a> (20 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Getting-Started-With-Ros2doctor.html">Using rosdoctor to identify issues</a> (10 minutes)</p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Pluginlib.html">Creating and using plugins (C++)</a> (20 minutes)</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ros2_tutorials_01.html" class="btn btn-neutral float-left" title="ROS 2 Humble Tutorials, Part 1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ros2_tutorials_03.html" class="btn btn-neutral float-right" title="ROS 2 Humble Tutorials, Part 3" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, MIT-NEET Autonomous Machines.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

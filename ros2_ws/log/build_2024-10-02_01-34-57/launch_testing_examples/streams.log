@@ -1,0 +1,16 @@
+[1.356s] Invoking command in '/home/janelleg/ros2_ws/build/launch_testing_examples': PYTHONPATH=/home/janelleg/ros2_ws/build/launch_testing_examples/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/janelleg/ros2_ws/install/launch_testing_examples/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/janelleg/ros2_ws/build/launch_testing_examples/build --no-deps symlink_data
+[1.939s] running develop
+[2.247s] running egg_info
+[2.248s] writing launch_testing_examples.egg-info/PKG-INFO
+[2.248s] writing dependency_links to launch_testing_examples.egg-info/dependency_links.txt
+[2.248s] writing entry points to launch_testing_examples.egg-info/entry_points.txt
+[2.248s] writing requirements to launch_testing_examples.egg-info/requires.txt
+[2.249s] writing top-level names to launch_testing_examples.egg-info/top_level.txt
+[2.250s] reading manifest file 'launch_testing_examples.egg-info/SOURCES.txt'
+[2.256s] writing manifest file 'launch_testing_examples.egg-info/SOURCES.txt'
+[2.262s] running build_ext
+[2.262s] Creating /home/janelleg/ros2_ws/install/launch_testing_examples/lib/python3.10/site-packages/launch-testing-examples.egg-link (link to .)
+[2.263s] 
+[2.264s] Installed /home/janelleg/ros2_ws/build/launch_testing_examples
+[2.264s] running symlink_data
+[2.329s] Invoked command in '/home/janelleg/ros2_ws/build/launch_testing_examples' returned '0': PYTHONPATH=/home/janelleg/ros2_ws/build/launch_testing_examples/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/janelleg/ros2_ws/install/launch_testing_examples/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/janelleg/ros2_ws/build/launch_testing_examples/build --no-deps symlink_data

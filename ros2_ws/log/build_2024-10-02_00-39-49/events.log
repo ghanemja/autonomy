@@ -1,0 +1,301 @@
+[0.000000] (-) TimerEvent: {}
+[0.001186] (-) JobUnselected: {'identifier': 'examples_rclcpp_async_client'}
+[0.001324] (-) JobUnselected: {'identifier': 'examples_rclcpp_cbg_executor'}
+[0.001644] (-) JobUnselected: {'identifier': 'examples_rclcpp_minimal_action_client'}
+[0.001813] (-) JobUnselected: {'identifier': 'examples_rclcpp_minimal_action_server'}
+[0.002233] (-) JobUnselected: {'identifier': 'examples_rclcpp_minimal_client'}
+[0.002492] (-) JobUnselected: {'identifier': 'examples_rclcpp_minimal_composition'}
+[0.002563] (-) JobUnselected: {'identifier': 'examples_rclcpp_minimal_publisher'}
+[0.002653] (-) JobUnselected: {'identifier': 'examples_rclcpp_minimal_service'}
+[0.002892] (-) JobUnselected: {'identifier': 'examples_rclcpp_minimal_subscriber'}
+[0.002963] (-) JobUnselected: {'identifier': 'examples_rclcpp_minimal_timer'}
+[0.003082] (-) JobUnselected: {'identifier': 'examples_rclcpp_multithreaded_executor'}
+[0.003277] (-) JobUnselected: {'identifier': 'examples_rclcpp_wait_set'}
+[0.003354] (-) JobUnselected: {'identifier': 'examples_rclpy_executors'}
+[0.003423] (-) JobUnselected: {'identifier': 'examples_rclpy_guard_conditions'}
+[0.003495] (-) JobUnselected: {'identifier': 'examples_rclpy_minimal_action_client'}
+[0.003639] (-) JobUnselected: {'identifier': 'examples_rclpy_minimal_action_server'}
+[0.003737] (-) JobUnselected: {'identifier': 'examples_rclpy_minimal_client'}
+[0.003828] (-) JobUnselected: {'identifier': 'examples_rclpy_minimal_publisher'}
+[0.003895] (-) JobUnselected: {'identifier': 'examples_rclpy_minimal_service'}
+[0.003962] (-) JobUnselected: {'identifier': 'examples_rclpy_minimal_subscriber'}
+[0.004029] (-) JobUnselected: {'identifier': 'examples_rclpy_pointcloud_publisher'}
+[0.004095] (-) JobUnselected: {'identifier': 'launch_testing_examples'}
+[0.004308] (-) JobUnselected: {'identifier': 'my_package'}
+[0.004731] (-) JobUnselected: {'identifier': 'turtlesim'}
+[0.004805] (cpp_pubsub) JobQueued: {'identifier': 'cpp_pubsub', 'dependencies': OrderedDict()}
+[0.004881] (cpp_pubsub) JobStarted: {'identifier': 'cpp_pubsub'}
+[0.021433] (cpp_pubsub) JobProgress: {'identifier': 'cpp_pubsub', 'progress': 'cmake'}
+[0.022578] (cpp_pubsub) Command: {'cmd': ['/usr/bin/cmake', '/home/janelleg/ros2_ws/src/cpp_pubsub', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/janelleg/ros2_ws/install/cpp_pubsub'], 'cwd': '/home/janelleg/ros2_ws/build/cpp_pubsub', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'janelleg'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/janelleg/ros2_ws/install/turtlesim/lib:/home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/lib:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_composition/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/janelleg'), ('OLDPWD', '/home/janelleg/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1344'), ('SYSTEMD_EXEC_PID', '1517'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1001/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '21640'), ('_colcon_cd_root', '/opt/ros/humble/'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/janelleg/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'janelleg'), ('JOURNAL_STREAM', '8:14611'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'janelleg'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/am-dev-15:@/tmp/.ICE-unix/1473,unix/am-dev-15:/tmp/.ICE-unix/1473'), ('INVOCATION_ID', '29f7048c4d764760acf85350f77e8a24'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1001'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1001/.mutter-Xwaylandauth.8T7UU2'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1001/keyring/ssh'), ('ROS_DOMAIN_ID', '15'), ('AMENT_PREFIX_PATH', '/home/janelleg/ros2_ws/install/turtlesim:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/home/janelleg/ros2_ws/install/examples_rclcpp_wait_set:/home/janelleg/ros2_ws/install/examples_rclcpp_multithreaded_executor:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_service:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_composition:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_client:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclcpp_cbg_executor:/home/janelleg/ros2_ws/install/examples_rclcpp_async_client:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:29d00b3b-9fd7-4ca6-8ed7-9815350c12c4'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/janelleg/ros2_ws/build/cpp_pubsub'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/janelleg/ros2_ws/install/turtlesim/local/lib/python3.10/dist-packages:/home/janelleg/ros2_ws/build/launch_testing_examples:/home/janelleg/ros2_ws/install/launch_testing_examples/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_executors:/home/janelleg/ros2_ws/install/examples_rclpy_executors/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/janelleg/ros2_ws/install/turtlesim:/home/janelleg/ros2_ws/install/examples_rclcpp_wait_set:/home/janelleg/ros2_ws/install/examples_rclcpp_multithreaded_executor:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_service:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_composition:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_client:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclcpp_cbg_executor:/home/janelleg/ros2_ws/install/examples_rclcpp_async_client:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble')]), 'shell': False}
+[0.098965] (-) TimerEvent: {}
+[0.164243] (cpp_pubsub) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.199278] (-) TimerEvent: {}
+[0.299918] (-) TimerEvent: {}
+[0.300619] (cpp_pubsub) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.320636] (cpp_pubsub) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.400129] (-) TimerEvent: {}
+[0.490425] (cpp_pubsub) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.500295] (-) TimerEvent: {}
+[0.510151] (cpp_pubsub) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.510885] (cpp_pubsub) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.511952] (cpp_pubsub) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.519592] (cpp_pubsub) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.600467] (-) TimerEvent: {}
+[0.701042] (-) TimerEvent: {}
+[0.705556] (cpp_pubsub) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.727165] (cpp_pubsub) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.727754] (cpp_pubsub) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.728821] (cpp_pubsub) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.745718] (cpp_pubsub) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.801235] (-) TimerEvent: {}
+[0.901867] (-) TimerEvent: {}
+[1.002483] (-) TimerEvent: {}
+[1.103085] (-) TimerEvent: {}
+[1.178549] (cpp_pubsub) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[1.203375] (-) TimerEvent: {}
+[1.304101] (-) TimerEvent: {}
+[1.363161] (cpp_pubsub) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[1.404406] (-) TimerEvent: {}
+[1.458881] (cpp_pubsub) StdoutLine: {'line': b'-- Found rclcpp: 16.0.10 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[1.504681] (-) TimerEvent: {}
+[1.574063] (cpp_pubsub) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[1.589104] (cpp_pubsub) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[1.604976] (-) TimerEvent: {}
+[1.611545] (cpp_pubsub) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[1.654721] (cpp_pubsub) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.697210] (cpp_pubsub) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[1.705264] (-) TimerEvent: {}
+[1.805976] (-) TimerEvent: {}
+[1.815543] (cpp_pubsub) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[1.824917] (cpp_pubsub) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[1.906173] (-) TimerEvent: {}
+[2.006892] (-) TimerEvent: {}
+[2.065673] (cpp_pubsub) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[2.107104] (-) TimerEvent: {}
+[2.146458] (cpp_pubsub) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[2.207260] (-) TimerEvent: {}
+[2.264041] (cpp_pubsub) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[2.307614] (cpp_pubsub) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[2.308218] (-) TimerEvent: {}
+[2.408839] (-) TimerEvent: {}
+[2.474538] (cpp_pubsub) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[2.475411] (cpp_pubsub) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[2.509196] (-) TimerEvent: {}
+[2.609974] (-) TimerEvent: {}
+[2.645442] (cpp_pubsub) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[2.649411] (cpp_pubsub) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[2.710262] (-) TimerEvent: {}
+[2.810964] (-) TimerEvent: {}
+[2.911685] (-) TimerEvent: {}
+[2.953322] (cpp_pubsub) StdoutLine: {'line': b'-- Configuring done\n'}
+[2.973090] (cpp_pubsub) StdoutLine: {'line': b'-- Generating done\n'}
+[2.975780] (cpp_pubsub) StdoutLine: {'line': b'-- Build files have been written to: /home/janelleg/ros2_ws/build/cpp_pubsub\n'}
+[2.993332] (cpp_pubsub) CommandEnded: {'returncode': 0}
+[2.995241] (cpp_pubsub) JobProgress: {'identifier': 'cpp_pubsub', 'progress': 'build'}
+[2.999157] (cpp_pubsub) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/janelleg/ros2_ws/build/cpp_pubsub', '--', '-j8', '-l8'], 'cwd': '/home/janelleg/ros2_ws/build/cpp_pubsub', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'janelleg'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/janelleg/ros2_ws/install/turtlesim/lib:/home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/lib:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_composition/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/janelleg'), ('OLDPWD', '/home/janelleg/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1344'), ('SYSTEMD_EXEC_PID', '1517'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1001/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '21640'), ('_colcon_cd_root', '/opt/ros/humble/'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/janelleg/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'janelleg'), ('JOURNAL_STREAM', '8:14611'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'janelleg'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/am-dev-15:@/tmp/.ICE-unix/1473,unix/am-dev-15:/tmp/.ICE-unix/1473'), ('INVOCATION_ID', '29f7048c4d764760acf85350f77e8a24'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1001'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1001/.mutter-Xwaylandauth.8T7UU2'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1001/keyring/ssh'), ('ROS_DOMAIN_ID', '15'), ('AMENT_PREFIX_PATH', '/home/janelleg/ros2_ws/install/turtlesim:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/home/janelleg/ros2_ws/install/examples_rclcpp_wait_set:/home/janelleg/ros2_ws/install/examples_rclcpp_multithreaded_executor:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_service:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_composition:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_client:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclcpp_cbg_executor:/home/janelleg/ros2_ws/install/examples_rclcpp_async_client:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:29d00b3b-9fd7-4ca6-8ed7-9815350c12c4'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/janelleg/ros2_ws/build/cpp_pubsub'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/janelleg/ros2_ws/install/turtlesim/local/lib/python3.10/dist-packages:/home/janelleg/ros2_ws/build/launch_testing_examples:/home/janelleg/ros2_ws/install/launch_testing_examples/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_executors:/home/janelleg/ros2_ws/install/examples_rclpy_executors/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/janelleg/ros2_ws/install/turtlesim:/home/janelleg/ros2_ws/install/examples_rclcpp_wait_set:/home/janelleg/ros2_ws/install/examples_rclcpp_multithreaded_executor:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_service:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_composition:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_client:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclcpp_cbg_executor:/home/janelleg/ros2_ws/install/examples_rclcpp_async_client:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble')]), 'shell': False}
+[3.011941] (-) TimerEvent: {}
+[3.102269] (cpp_pubsub) StdoutLine: {'line': b'[ 25%] \x1b[32mBuilding CXX object CMakeFiles/listener.dir/src/subscriber_member_function.cpp.o\x1b[0m\n'}
+[3.106622] (cpp_pubsub) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/talker.dir/src/publisher_member_function.cpp.o\x1b[0m\n'}
+[3.112193] (-) TimerEvent: {}
+[3.212797] (-) TimerEvent: {}
+[3.313458] (-) TimerEvent: {}
+[3.414180] (-) TimerEvent: {}
+[3.514868] (-) TimerEvent: {}
+[3.615552] (-) TimerEvent: {}
+[3.716320] (-) TimerEvent: {}
+[3.817070] (-) TimerEvent: {}
+[3.917723] (-) TimerEvent: {}
+[4.018448] (-) TimerEvent: {}
+[4.119169] (-) TimerEvent: {}
+[4.219936] (-) TimerEvent: {}
+[4.320583] (-) TimerEvent: {}
+[4.421347] (-) TimerEvent: {}
+[4.522069] (-) TimerEvent: {}
+[4.622821] (-) TimerEvent: {}
+[4.723450] (-) TimerEvent: {}
+[4.824217] (-) TimerEvent: {}
+[4.924946] (-) TimerEvent: {}
+[5.025601] (-) TimerEvent: {}
+[5.126350] (-) TimerEvent: {}
+[5.227091] (-) TimerEvent: {}
+[5.327876] (-) TimerEvent: {}
+[5.428640] (-) TimerEvent: {}
+[5.529375] (-) TimerEvent: {}
+[5.630106] (-) TimerEvent: {}
+[5.730857] (-) TimerEvent: {}
+[5.831622] (-) TimerEvent: {}
+[5.932347] (-) TimerEvent: {}
+[6.033062] (-) TimerEvent: {}
+[6.133818] (-) TimerEvent: {}
+[6.234461] (-) TimerEvent: {}
+[6.335288] (-) TimerEvent: {}
+[6.436016] (-) TimerEvent: {}
+[6.536774] (-) TimerEvent: {}
+[6.637542] (-) TimerEvent: {}
+[6.738287] (-) TimerEvent: {}
+[6.839017] (-) TimerEvent: {}
+[6.939780] (-) TimerEvent: {}
+[7.040539] (-) TimerEvent: {}
+[7.141287] (-) TimerEvent: {}
+[7.242020] (-) TimerEvent: {}
+[7.342781] (-) TimerEvent: {}
+[7.443549] (-) TimerEvent: {}
+[7.544279] (-) TimerEvent: {}
+[7.645022] (-) TimerEvent: {}
+[7.745644] (-) TimerEvent: {}
+[7.846379] (-) TimerEvent: {}
+[7.947150] (-) TimerEvent: {}
+[8.047885] (-) TimerEvent: {}
+[8.148654] (-) TimerEvent: {}
+[8.249380] (-) TimerEvent: {}
+[8.350015] (-) TimerEvent: {}
+[8.451905] (-) TimerEvent: {}
+[8.552659] (-) TimerEvent: {}
+[8.653385] (-) TimerEvent: {}
+[8.754146] (-) TimerEvent: {}
+[8.854780] (-) TimerEvent: {}
+[8.955526] (-) TimerEvent: {}
+[9.056252] (-) TimerEvent: {}
+[9.157002] (-) TimerEvent: {}
+[9.257694] (-) TimerEvent: {}
+[9.358439] (-) TimerEvent: {}
+[9.459184] (-) TimerEvent: {}
+[9.559898] (-) TimerEvent: {}
+[9.660661] (-) TimerEvent: {}
+[9.761393] (-) TimerEvent: {}
+[9.862162] (-) TimerEvent: {}
+[9.962873] (-) TimerEvent: {}
+[10.063501] (-) TimerEvent: {}
+[10.164245] (-) TimerEvent: {}
+[10.264955] (-) TimerEvent: {}
+[10.365598] (-) TimerEvent: {}
+[10.466328] (-) TimerEvent: {}
+[10.567039] (-) TimerEvent: {}
+[10.667781] (-) TimerEvent: {}
+[10.768397] (-) TimerEvent: {}
+[10.869140] (-) TimerEvent: {}
+[10.969846] (-) TimerEvent: {}
+[11.070588] (-) TimerEvent: {}
+[11.171299] (-) TimerEvent: {}
+[11.272003] (-) TimerEvent: {}
+[11.372731] (-) TimerEvent: {}
+[11.473416] (-) TimerEvent: {}
+[11.574075] (-) TimerEvent: {}
+[11.674850] (-) TimerEvent: {}
+[11.762166] (cpp_pubsub) StdoutLine: {'line': b'[ 75%] \x1b[32m\x1b[1mLinking CXX executable talker\x1b[0m\n'}
+[11.775169] (-) TimerEvent: {}
+[11.875876] (-) TimerEvent: {}
+[11.976624] (-) TimerEvent: {}
+[12.077347] (-) TimerEvent: {}
+[12.139233] (cpp_pubsub) StdoutLine: {'line': b'[ 75%] Built target talker\n'}
+[12.177544] (-) TimerEvent: {}
+[12.278299] (-) TimerEvent: {}
+[12.379023] (-) TimerEvent: {}
+[12.479772] (-) TimerEvent: {}
+[12.580536] (-) TimerEvent: {}
+[12.681289] (-) TimerEvent: {}
+[12.782013] (-) TimerEvent: {}
+[12.882787] (-) TimerEvent: {}
+[12.983546] (-) TimerEvent: {}
+[13.084276] (-) TimerEvent: {}
+[13.185000] (-) TimerEvent: {}
+[13.285781] (-) TimerEvent: {}
+[13.386524] (-) TimerEvent: {}
+[13.487333] (-) TimerEvent: {}
+[13.588034] (-) TimerEvent: {}
+[13.688789] (-) TimerEvent: {}
+[13.789573] (-) TimerEvent: {}
+[13.890360] (-) TimerEvent: {}
+[13.990986] (-) TimerEvent: {}
+[14.091498] (-) TimerEvent: {}
+[14.192070] (-) TimerEvent: {}
+[14.292581] (-) TimerEvent: {}
+[14.393185] (-) TimerEvent: {}
+[14.493667] (-) TimerEvent: {}
+[14.594247] (-) TimerEvent: {}
+[14.694767] (-) TimerEvent: {}
+[14.795313] (-) TimerEvent: {}
+[14.895907] (-) TimerEvent: {}
+[14.996413] (-) TimerEvent: {}
+[15.096995] (-) TimerEvent: {}
+[15.197518] (-) TimerEvent: {}
+[15.298100] (-) TimerEvent: {}
+[15.398627] (-) TimerEvent: {}
+[15.499237] (-) TimerEvent: {}
+[15.599767] (-) TimerEvent: {}
+[15.700356] (-) TimerEvent: {}
+[15.800990] (-) TimerEvent: {}
+[15.901492] (-) TimerEvent: {}
+[16.002091] (-) TimerEvent: {}
+[16.102663] (-) TimerEvent: {}
+[16.203270] (-) TimerEvent: {}
+[16.303785] (-) TimerEvent: {}
+[16.404326] (-) TimerEvent: {}
+[16.504907] (-) TimerEvent: {}
+[16.605437] (-) TimerEvent: {}
+[16.706029] (-) TimerEvent: {}
+[16.806530] (-) TimerEvent: {}
+[16.907095] (-) TimerEvent: {}
+[17.007636] (-) TimerEvent: {}
+[17.108353] (-) TimerEvent: {}
+[17.208921] (-) TimerEvent: {}
+[17.309532] (-) TimerEvent: {}
+[17.410106] (-) TimerEvent: {}
+[17.510613] (-) TimerEvent: {}
+[17.611262] (-) TimerEvent: {}
+[17.711976] (-) TimerEvent: {}
+[17.812710] (-) TimerEvent: {}
+[17.913454] (-) TimerEvent: {}
+[18.014196] (-) TimerEvent: {}
+[18.114936] (-) TimerEvent: {}
+[18.215646] (-) TimerEvent: {}
+[18.316373] (-) TimerEvent: {}
+[18.417163] (-) TimerEvent: {}
+[18.517971] (-) TimerEvent: {}
+[18.618673] (-) TimerEvent: {}
+[18.719415] (-) TimerEvent: {}
+[18.820208] (-) TimerEvent: {}
+[18.921129] (-) TimerEvent: {}
+[19.021670] (-) TimerEvent: {}
+[19.122330] (-) TimerEvent: {}
+[19.138870] (cpp_pubsub) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable listener\x1b[0m\n'}
+[19.222580] (-) TimerEvent: {}
+[19.323226] (-) TimerEvent: {}
+[19.423851] (-) TimerEvent: {}
+[19.524561] (-) TimerEvent: {}
+[19.625167] (-) TimerEvent: {}
+[19.725758] (-) TimerEvent: {}
+[19.826362] (-) TimerEvent: {}
+[19.891796] (cpp_pubsub) StdoutLine: {'line': b'[100%] Built target listener\n'}
+[19.918074] (cpp_pubsub) CommandEnded: {'returncode': 0}
+[19.926584] (-) TimerEvent: {}
+[19.993248] (cpp_pubsub) JobProgress: {'identifier': 'cpp_pubsub', 'progress': 'install'}
+[20.011159] (cpp_pubsub) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/janelleg/ros2_ws/build/cpp_pubsub'], 'cwd': '/home/janelleg/ros2_ws/build/cpp_pubsub', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'janelleg'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/janelleg/ros2_ws/install/turtlesim/lib:/home/janelleg/ros2_ws/install/examples_rclcpp_wait_set/lib:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_composition/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/janelleg'), ('OLDPWD', '/home/janelleg/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1344'), ('SYSTEMD_EXEC_PID', '1517'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1001/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '21640'), ('_colcon_cd_root', '/opt/ros/humble/'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/janelleg/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'janelleg'), ('JOURNAL_STREAM', '8:14611'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'janelleg'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/am-dev-15:@/tmp/.ICE-unix/1473,unix/am-dev-15:/tmp/.ICE-unix/1473'), ('INVOCATION_ID', '29f7048c4d764760acf85350f77e8a24'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1001'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1001/.mutter-Xwaylandauth.8T7UU2'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1001/keyring/ssh'), ('ROS_DOMAIN_ID', '15'), ('AMENT_PREFIX_PATH', '/home/janelleg/ros2_ws/install/turtlesim:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/home/janelleg/ros2_ws/install/examples_rclcpp_wait_set:/home/janelleg/ros2_ws/install/examples_rclcpp_multithreaded_executor:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_service:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_composition:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_client:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclcpp_cbg_executor:/home/janelleg/ros2_ws/install/examples_rclcpp_async_client:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:29d00b3b-9fd7-4ca6-8ed7-9815350c12c4'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/janelleg/ros2_ws/build/cpp_pubsub'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/janelleg/ros2_ws/install/turtlesim/local/lib/python3.10/dist-packages:/home/janelleg/ros2_ws/build/launch_testing_examples:/home/janelleg/ros2_ws/install/launch_testing_examples/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions/lib/python3.10/site-packages:/home/janelleg/ros2_ws/build/examples_rclpy_executors:/home/janelleg/ros2_ws/install/examples_rclpy_executors/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/janelleg/ros2_ws/install/turtlesim:/home/janelleg/ros2_ws/install/examples_rclcpp_wait_set:/home/janelleg/ros2_ws/install/examples_rclcpp_multithreaded_executor:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_timer:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_service:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_composition:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_client:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclcpp_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclcpp_cbg_executor:/home/janelleg/ros2_ws/install/examples_rclcpp_async_client:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble')]), 'shell': False}
+[20.026774] (-) TimerEvent: {}
+[20.032829] (cpp_pubsub) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[20.033763] (cpp_pubsub) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[20.034402] (cpp_pubsub) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/ros2_ws/install/cpp_pubsub/lib/cpp_pubsub/talker\n'}
+[20.053353] (cpp_pubsub) StdoutLine: {'line': b'-- Up-to-date symlink: /home/janelleg/ros2_ws/install/cpp_pubsub/lib/cpp_pubsub/talker\n'}
+[20.053960] (cpp_pubsub) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/ros2_ws/install/cpp_pubsub/lib/cpp_pubsub/listener\n'}
+[20.071502] (cpp_pubsub) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/ros2_ws/install/cpp_pubsub/share/ament_index/resource_index/package_run_dependencies/cpp_pubsub\n'}
+[20.106590] (cpp_pubsub) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/ros2_ws/install/cpp_pubsub/share/ament_index/resource_index/parent_prefix_path/cpp_pubsub\n'}
+[20.125691] (cpp_pubsub) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/ros2_ws/install/cpp_pubsub/share/cpp_pubsub/environment/ament_prefix_path.sh\n'}
+[20.126937] (-) TimerEvent: {}
+[20.145676] (cpp_pubsub) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/ros2_ws/install/cpp_pubsub/share/cpp_pubsub/environment/ament_prefix_path.dsv\n'}
+[20.165242] (cpp_pubsub) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/ros2_ws/install/cpp_pubsub/share/cpp_pubsub/environment/path.sh\n'}
+[20.185026] (cpp_pubsub) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/ros2_ws/install/cpp_pubsub/share/cpp_pubsub/environment/path.dsv\n'}
+[20.202834] (cpp_pubsub) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/ros2_ws/install/cpp_pubsub/share/cpp_pubsub/local_setup.bash\n'}
+[20.227158] (-) TimerEvent: {}
+[20.227737] (cpp_pubsub) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/ros2_ws/install/cpp_pubsub/share/cpp_pubsub/local_setup.sh\n'}
+[20.243621] (cpp_pubsub) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/ros2_ws/install/cpp_pubsub/share/cpp_pubsub/local_setup.zsh\n'}
+[20.259891] (cpp_pubsub) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/ros2_ws/install/cpp_pubsub/share/cpp_pubsub/local_setup.dsv\n'}
+[20.280027] (cpp_pubsub) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/ros2_ws/install/cpp_pubsub/share/cpp_pubsub/package.dsv\n'}
+[20.299852] (cpp_pubsub) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/ros2_ws/install/cpp_pubsub/share/ament_index/resource_index/packages/cpp_pubsub\n'}
+[20.315973] (cpp_pubsub) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/ros2_ws/install/cpp_pubsub/share/cpp_pubsub/cmake/cpp_pubsubConfig.cmake\n'}
+[20.327285] (-) TimerEvent: {}
+[20.333217] (cpp_pubsub) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/ros2_ws/install/cpp_pubsub/share/cpp_pubsub/cmake/cpp_pubsubConfig-version.cmake\n'}
+[20.349577] (cpp_pubsub) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/ros2_ws/install/cpp_pubsub/share/cpp_pubsub/package.xml\n'}
+[20.376076] (cpp_pubsub) CommandEnded: {'returncode': 0}
+[20.427443] (-) TimerEvent: {}
+[20.484584] (cpp_pubsub) JobEnded: {'identifier': 'cpp_pubsub', 'rc': 0}
+[20.486433] (-) EventReactorShutdown: {}

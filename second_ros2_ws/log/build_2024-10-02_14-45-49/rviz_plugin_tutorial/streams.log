@@ -1,0 +1,114 @@
+[0.029s] Invoking command in '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial': AMENT_PREFIX_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/janelleg/second_ros2_ws/src/rviz_plugin_tutorial/rviz_plugin_tutorial -DCMAKE_INSTALL_PREFIX=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial
+[0.054s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.304s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.317s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[0.325s] -- Found pluginlib: 5.1.0 (/opt/ros/humble/share/pluginlib/cmake)
+[0.400s] -- Found rviz_common: 11.2.13 (/opt/ros/humble/share/rviz_common/cmake)
+[0.427s] -- Setting assimp_DIR to: '/opt/ros/humble/share/rviz_assimp_vendor/cmake/../../../opt/rviz_assimp_vendor/lib/cmake/assimp-4.1'
+[0.440s] -- Setting OGRE_DIR to: '/opt/ros/humble/share/rviz_ogre_vendor/cmake/../../../opt/rviz_ogre_vendor/lib/OGRE/cmake'
+[0.444s] -- Found OGRE
+[0.444s] --   static     : OFF
+[0.444s] --   components : HLMS;MeshLodGenerator;Overlay;Paging;Property;RTShaderSystem;Terrain;Volume
+[0.444s] --   plugins    : Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI
+[0.445s] --   media      : /opt/ros/humble/opt/rviz_ogre_vendor/share/OGRE/Media
+[0.445s] -- OGRE_LIBRARIES: OgreHLMS;OgreMeshLodGenerator;OgreOverlay;OgrePaging;OgreProperty;OgreRTShaderSystem;OgreTerrain;OgreVolume;OgreMain
+[0.445s] -- OGRE_LIBRARY_DIRS: /opt/ros/humble/opt/rviz_ogre_vendor/lib
+[0.446s] -- OGRE_PLUGINS: Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI
+[0.446s] -- OGRE_PLUGIN_DIR: /opt/ros/humble/opt/rviz_ogre_vendor/lib/OGRE
+[0.446s] -- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_RELEASE: /opt/ros/humble/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
+[0.446s] -- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_DEBUG: /opt/ros/humble/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
+[0.447s] -- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_RELEASE: /opt/ros/humble/opt/rviz_ogre_vendor/lib/libOgreMain.so
+[0.447s] -- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_DEBUG: /opt/ros/humble/opt/rviz_ogre_vendor/lib/libOgreMain.so
+[0.454s] -- Could not find freeimage library
+[0.488s] -- Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.2.11") 
+[0.498s] -- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so   
+[0.682s] -- Found X11: /usr/include   
+[0.683s] -- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so
+[0.847s] -- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so - found
+[0.847s] -- Looking for gethostbyname
+[1.005s] -- Looking for gethostbyname - found
+[1.006s] -- Looking for connect
+[1.161s] -- Looking for connect - found
+[1.162s] -- Looking for remove
+[1.311s] -- Looking for remove - found
+[1.311s] -- Looking for shmat
+[1.467s] -- Looking for shmat - found
+[1.467s] -- Looking for IceConnectionNumber in ICE
+[1.620s] -- Looking for IceConnectionNumber in ICE - found
+[1.831s] -- library: /usr/lib/x86_64-linux-gnu/libcurl.so
+[1.885s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.893s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.909s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.932s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.958s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.107s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[2.111s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[2.159s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[2.289s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[2.295s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[2.319s] -- Found FastRTPS: /opt/ros/humble/include  
+[2.325s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[2.344s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[2.367s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[2.382s] -- Looking for pthread.h
+[2.540s] -- Looking for pthread.h - found
+[2.541s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[2.706s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[2.710s] -- Found Threads: TRUE  
+[2.871s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[2.872s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[3.094s] -- Found rviz_plugin_tutorial_msgs: 0.0.0 (/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake)
+[3.126s] -- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[3.299s] -- Added test 'copyright' to check source files copyright and LICENSE
+[3.301s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[3.301s] -- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/janelleg/second_ros2_ws/src/rviz_plugin_tutorial/rviz_plugin_tutorial/include>
+[3.301s] -- Configured cppcheck exclude dirs and/or files: 
+[3.303s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[3.303s] -- Configured cpplint exclude dirs and/or files: 
+[3.304s] -- Added test 'lint_cmake' to check CMake code style
+[3.305s] -- Added test 'uncrustify' to check C / C++ code style
+[3.306s] -- Configured uncrustify additional arguments: 
+[3.306s] -- Added test 'xmllint' to check XML markup files
+[3.310s] -- Configuring done
+[3.362s] -- Generating done
+[3.366s] -- Build files have been written to: /home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial
+[3.389s] Invoked command in '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial' returned '0': AMENT_PREFIX_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/janelleg/second_ros2_ws/src/rviz_plugin_tutorial/rviz_plugin_tutorial -DCMAKE_INSTALL_PREFIX=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial
+[3.391s] Invoking command in '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial': AMENT_PREFIX_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial -- -j8 -l8
+[3.498s] [ 16%] [34m[1mAutomatic MOC for target point_display[0m
+[3.573s] [ 16%] Built target point_display_autogen
+[3.595s] [ 33%] [34m[1mGenerating include/rviz_plugin_tutorial/moc_point_display.cpp[0m
+[3.646s] [ 66%] [32mBuilding CXX object CMakeFiles/point_display.dir/point_display_autogen/mocs_compilation.cpp.o[0m
+[3.646s] [ 66%] [32mBuilding CXX object CMakeFiles/point_display.dir/include/rviz_plugin_tutorial/moc_point_display.cpp.o[0m
+[3.651s] [ 83%] [32mBuilding CXX object CMakeFiles/point_display.dir/src/point_display.cpp.o[0m
+[27.290s] [100%] [32m[1mLinking CXX shared library libpoint_display.so[0m
+[29.469s] [100%] Built target point_display
+[29.494s] Invoked command in '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial' returned '0': AMENT_PREFIX_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial -- -j8 -l8
+[29.596s] Invoking command in '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial': AMENT_PREFIX_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial
+[29.609s] -- Install configuration: ""
+[29.611s] -- Execute custom install script
+[29.612s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/include/rviz_plugin_tutorial/point_display.hpp
+[29.631s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/rviz_common_plugins.xml
+[29.653s] -- Up-to-date symlink: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial//rviz_common_plugins.xml
+[29.654s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/ament_index/resource_index/package_run_dependencies/rviz_plugin_tutorial
+[29.673s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/ament_index/resource_index/parent_prefix_path/rviz_plugin_tutorial
+[29.692s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/environment/ament_prefix_path.sh
+[29.708s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/environment/ament_prefix_path.dsv
+[29.729s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/environment/path.sh
+[29.752s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/environment/path.dsv
+[29.768s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/local_setup.bash
+[29.786s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/local_setup.sh
+[29.802s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/local_setup.zsh
+[29.820s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/local_setup.dsv
+[29.836s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/package.dsv
+[29.856s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/ament_index/resource_index/packages/rviz_plugin_tutorial
+[29.872s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/ament_index/resource_index/rviz_common__pluginlib__plugin/rviz_plugin_tutorial
+[29.893s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/cmake/ament_cmake_export_include_directories-extras.cmake
+[29.913s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/cmake/ament_cmake_export_targets-extras.cmake
+[29.930s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/cmake/rviz_plugin_tutorialConfig.cmake
+[29.950s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/cmake/rviz_plugin_tutorialConfig-version.cmake
+[29.966s] -- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/package.xml
+[29.988s] -- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/lib/libpoint_display.so
+[29.998s] -- Set runtime path of "/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/lib/libpoint_display.so" to ""
+[29.998s] -- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/cmake/export_rviz_plugin_tutorialExport.cmake
+[29.998s] -- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial/share/rviz_plugin_tutorial/cmake/export_rviz_plugin_tutorialExport-noconfig.cmake
+[30.002s] Invoked command in '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial' returned '0': AMENT_PREFIX_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial

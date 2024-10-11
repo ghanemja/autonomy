@@ -1,0 +1,38 @@
+[1.422s] Invoking command in '/home/janelleg/ros2_ws/src/python_parameters': PYTHONPATH=/home/janelleg/ros2_ws/build/python_parameters/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/janelleg/ros2_ws/install/python_parameters/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/python_parameters build --build-base /home/janelleg/ros2_ws/build/python_parameters/build install --record /home/janelleg/ros2_ws/build/python_parameters/install.log --single-version-externally-managed install_data
+[1.971s] running egg_info
+[1.972s] creating ../../build/python_parameters/python_parameters.egg-info
+[1.972s] writing ../../build/python_parameters/python_parameters.egg-info/PKG-INFO
+[1.973s] writing dependency_links to ../../build/python_parameters/python_parameters.egg-info/dependency_links.txt
+[1.973s] writing entry points to ../../build/python_parameters/python_parameters.egg-info/entry_points.txt
+[1.973s] writing requirements to ../../build/python_parameters/python_parameters.egg-info/requires.txt
+[1.973s] writing top-level names to ../../build/python_parameters/python_parameters.egg-info/top_level.txt
+[1.974s] writing manifest file '../../build/python_parameters/python_parameters.egg-info/SOURCES.txt'
+[1.977s] reading manifest file '../../build/python_parameters/python_parameters.egg-info/SOURCES.txt'
+[1.977s] adding license file 'LICENSE'
+[1.978s] writing manifest file '../../build/python_parameters/python_parameters.egg-info/SOURCES.txt'
+[1.979s] running build
+[1.979s] running build_py
+[1.979s] creating /home/janelleg/ros2_ws/build/python_parameters/build
+[1.980s] creating /home/janelleg/ros2_ws/build/python_parameters/build/lib
+[1.980s] creating /home/janelleg/ros2_ws/build/python_parameters/build/lib/python_parameters
+[1.980s] copying python_parameters/python_parameters_node.py -> /home/janelleg/ros2_ws/build/python_parameters/build/lib/python_parameters
+[1.981s] copying python_parameters/__init__.py -> /home/janelleg/ros2_ws/build/python_parameters/build/lib/python_parameters
+[1.981s] running install
+[1.981s] running install_lib
+[1.981s] creating /home/janelleg/ros2_ws/install/python_parameters/lib/python3.10/site-packages/python_parameters
+[1.982s] copying /home/janelleg/ros2_ws/build/python_parameters/build/lib/python_parameters/python_parameters_node.py -> /home/janelleg/ros2_ws/install/python_parameters/lib/python3.10/site-packages/python_parameters
+[1.982s] copying /home/janelleg/ros2_ws/build/python_parameters/build/lib/python_parameters/__init__.py -> /home/janelleg/ros2_ws/install/python_parameters/lib/python3.10/site-packages/python_parameters
+[1.982s] byte-compiling /home/janelleg/ros2_ws/install/python_parameters/lib/python3.10/site-packages/python_parameters/python_parameters_node.py to python_parameters_node.cpython-310.pyc
+[1.983s] byte-compiling /home/janelleg/ros2_ws/install/python_parameters/lib/python3.10/site-packages/python_parameters/__init__.py to __init__.cpython-310.pyc
+[1.984s] running install_data
+[1.984s] creating /home/janelleg/ros2_ws/install/python_parameters/share/ament_index
+[1.984s] creating /home/janelleg/ros2_ws/install/python_parameters/share/ament_index/resource_index
+[1.985s] creating /home/janelleg/ros2_ws/install/python_parameters/share/ament_index/resource_index/packages
+[1.985s] copying resource/python_parameters -> /home/janelleg/ros2_ws/install/python_parameters/share/ament_index/resource_index/packages
+[1.985s] copying package.xml -> /home/janelleg/ros2_ws/install/python_parameters/share/python_parameters
+[1.985s] running install_egg_info
+[1.988s] Copying ../../build/python_parameters/python_parameters.egg-info to /home/janelleg/ros2_ws/install/python_parameters/lib/python3.10/site-packages/python_parameters-0.0.0-py3.10.egg-info
+[1.989s] running install_scripts
+[2.034s] Installing minimal_param_node script to /home/janelleg/ros2_ws/install/python_parameters/lib/python_parameters
+[2.035s] writing list of installed files to '/home/janelleg/ros2_ws/build/python_parameters/install.log'
+[2.092s] Invoked command in '/home/janelleg/ros2_ws/src/python_parameters' returned '0': PYTHONPATH=/home/janelleg/ros2_ws/build/python_parameters/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/janelleg/ros2_ws/install/python_parameters/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/python_parameters build --build-base /home/janelleg/ros2_ws/build/python_parameters/build install --record /home/janelleg/ros2_ws/build/python_parameters/install.log --single-version-externally-managed install_data

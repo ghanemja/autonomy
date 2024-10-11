@@ -1,0 +1,246 @@
+[0.025s] Invoking command in '/home/janelleg/ros2_ws/build/more_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/janelleg/ros2_ws/install/py_pubsub:/home/janelleg/ros2_ws/install/my_package:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble /usr/bin/cmake /home/janelleg/ros2_ws/src/more_interfaces -DCMAKE_INSTALL_PREFIX=/home/janelleg/ros2_ws/install/more_interfaces
+[0.149s] -- The C compiler identification is GNU 11.4.0
+[0.274s] -- The CXX compiler identification is GNU 11.4.0
+[0.290s] -- Detecting C compiler ABI info
+[0.454s] -- Detecting C compiler ABI info - done
+[0.470s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.470s] -- Detecting C compile features
+[0.471s] -- Detecting C compile features - done
+[0.478s] -- Detecting CXX compiler ABI info
+[0.659s] -- Detecting CXX compiler ABI info - done
+[0.675s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.675s] -- Detecting CXX compile features
+[0.677s] -- Detecting CXX compile features - done
+[0.684s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.124s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.383s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[1.398s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.419s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.529s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.308s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[2.823s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[3.436s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[3.498s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") 
+[3.504s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[3.571s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") 
+[3.571s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[3.572s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[3.572s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[3.633s] -- Found PythonExtra: .so  
+[3.741s] -- Found rclcpp: 16.0.10 (/opt/ros/humble/share/rclcpp/cmake)
+[3.883s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[3.892s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[4.110s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[4.170s] -- Found FastRTPS: /opt/ros/humble/include  
+[4.264s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[4.290s] -- Looking for pthread.h
+[4.450s] -- Looking for pthread.h - found
+[4.450s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[4.643s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[4.646s] -- Found Threads: TRUE  
+[4.812s] -- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[4.878s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[4.879s] -- Configured cppcheck include dirs: 
+[4.880s] -- Configured cppcheck exclude dirs and/or files: 
+[4.881s] -- Added test 'lint_cmake' to check CMake code style
+[4.884s] -- Added test 'uncrustify' to check C / C++ code style
+[4.884s] -- Configured uncrustify additional arguments: 
+[4.886s] -- Added test 'xmllint' to check XML markup files
+[4.891s] -- Configuring done
+[4.953s] -- Generating done
+[4.963s] -- Build files have been written to: /home/janelleg/ros2_ws/build/more_interfaces
+[4.984s] Invoked command in '/home/janelleg/ros2_ws/build/more_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/janelleg/ros2_ws/install/py_pubsub:/home/janelleg/ros2_ws/install/my_package:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble /usr/bin/cmake /home/janelleg/ros2_ws/src/more_interfaces -DCMAKE_INSTALL_PREFIX=/home/janelleg/ros2_ws/install/more_interfaces
+[4.989s] Invoking command in '/home/janelleg/ros2_ws/build/more_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/janelleg/ros2_ws/install/py_pubsub:/home/janelleg/ros2_ws/install/my_package:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble /usr/bin/cmake --build /home/janelleg/ros2_ws/build/more_interfaces -- -j8 -l8
+[5.082s] [  3%] [34m[1mGenerating C code for ROS interfaces[0m
+[5.108s] [  6%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[5.123s] [  6%] Built target ament_cmake_python_copy_more_interfaces
+[5.774s] [  9%] [32mBuilding C object CMakeFiles/more_interfaces__rosidl_generator_c.dir/rosidl_generator_c/more_interfaces/msg/detail/address_book__functions.c.o[0m
+[5.827s] running egg_info
+[5.828s] creating more_interfaces.egg-info
+[5.829s] writing more_interfaces.egg-info/PKG-INFO
+[5.829s] writing dependency_links to more_interfaces.egg-info/dependency_links.txt
+[5.829s] writing top-level names to more_interfaces.egg-info/top_level.txt
+[5.829s] writing manifest file 'more_interfaces.egg-info/SOURCES.txt'
+[5.836s] reading manifest file 'more_interfaces.egg-info/SOURCES.txt'
+[5.837s] writing manifest file 'more_interfaces.egg-info/SOURCES.txt'
+[5.868s] [  9%] Built target more_interfaces__cpp
+[5.888s] [ 12%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[5.890s] [ 15%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[5.897s] [ 18%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[5.902s] [ 18%] Built target ament_cmake_python_build_more_interfaces_egg
+[5.932s] [ 21%] [32m[1mLinking C shared library libmore_interfaces__rosidl_generator_c.so[0m
+[6.008s] [ 21%] Built target more_interfaces__rosidl_generator_c
+[6.030s] [ 24%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[6.035s] [ 27%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[6.043s] [ 30%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[6.426s] [ 33%] [32mBuilding CXX object CMakeFiles/more_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/more_interfaces/msg/detail/address_book__type_support.cpp.o[0m
+[6.574s] [ 36%] [32mBuilding CXX object CMakeFiles/more_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/more_interfaces/msg/address_book__type_support.cpp.o[0m
+[6.639s] [ 39%] [32m[1mLinking CXX shared library libmore_interfaces__rosidl_typesupport_c.so[0m
+[6.739s] [ 39%] Built target more_interfaces__rosidl_typesupport_c
+[6.753s] [ 42%] [32mBuilding CXX object CMakeFiles/more_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/more_interfaces/msg/address_book__type_support.cpp.o[0m
+[6.877s] [ 45%] [32mBuilding CXX object CMakeFiles/more_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/more_interfaces/msg/detail/dds_fastrtps/address_book__type_support.cpp.o[0m
+[6.897s] [ 48%] [32mBuilding CXX object CMakeFiles/more_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/more_interfaces/msg/detail/address_book__type_support_c.cpp.o[0m
+[6.980s] [ 51%] [32mBuilding C object CMakeFiles/more_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/more_interfaces/msg/detail/address_book__type_support.c.o[0m
+[7.056s] [ 54%] [32m[1mLinking C shared library libmore_interfaces__rosidl_typesupport_introspection_c.so[0m
+[7.123s] [ 54%] Built target more_interfaces__rosidl_typesupport_introspection_c
+[7.314s] [ 57%] [32m[1mLinking CXX shared library libmore_interfaces__rosidl_typesupport_cpp.so[0m
+[7.412s] [ 57%] Built target more_interfaces__rosidl_typesupport_cpp
+[7.457s] [ 60%] [32mBuilding CXX object CMakeFiles/publish_address_book.dir/src/publish_address_book.cpp.o[0m
+[7.751s] [ 63%] [32m[1mLinking CXX shared library libmore_interfaces__rosidl_typesupport_fastrtps_c.so[0m
+[7.765s] [ 66%] [32m[1mLinking CXX shared library libmore_interfaces__rosidl_typesupport_introspection_cpp.so[0m
+[7.898s] [ 66%] Built target more_interfaces__rosidl_typesupport_introspection_cpp
+[7.909s] [ 66%] Built target more_interfaces__rosidl_typesupport_fastrtps_c
+[8.141s] [ 69%] [32m[1mLinking CXX shared library libmore_interfaces__rosidl_typesupport_fastrtps_cpp.so[0m
+[8.304s] [ 69%] Built target more_interfaces__rosidl_typesupport_fastrtps_cpp
+[8.350s] [ 69%] Built target more_interfaces
+[8.394s] [ 72%] [34m[1mGenerating Python code for ROS interfaces[0m
+[9.100s] [ 72%] Built target more_interfaces__py
+[9.149s] [ 75%] [32mBuilding C object CMakeFiles/more_interfaces__rosidl_generator_py.dir/rosidl_generator_py/more_interfaces/msg/_address_book_s.c.o[0m
+[9.359s] [ 78%] [32m[1mLinking C shared library rosidl_generator_py/more_interfaces/libmore_interfaces__rosidl_generator_py.so[0m
+[9.469s] [ 78%] Built target more_interfaces__rosidl_generator_py
+[9.524s] [ 81%] [32mBuilding C object CMakeFiles/more_interfaces__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/more_interfaces/_more_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[9.525s] [ 84%] [32mBuilding C object CMakeFiles/more_interfaces__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/more_interfaces/_more_interfaces_s.ep.rosidl_typesupport_c.c.o[0m
+[9.532s] [ 87%] [32mBuilding C object CMakeFiles/more_interfaces__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/more_interfaces/_more_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[9.738s] [ 90%] [32m[1mLinking C shared library rosidl_generator_py/more_interfaces/more_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so[0m
+[9.787s] [ 93%] [32m[1mLinking C shared library rosidl_generator_py/more_interfaces/more_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so[0m
+[9.811s] [ 93%] Built target more_interfaces__rosidl_typesupport_c__pyext
+[9.827s] [ 96%] [32m[1mLinking C shared library rosidl_generator_py/more_interfaces/more_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so[0m
+[9.863s] [ 96%] Built target more_interfaces__rosidl_typesupport_fastrtps_c__pyext
+[9.899s] [ 96%] Built target more_interfaces__rosidl_typesupport_introspection_c__pyext
+[16.744s] [100%] [32m[1mLinking CXX executable publish_address_book[0m
+[17.132s] [100%] Built target publish_address_book
+[17.160s] Invoked command in '/home/janelleg/ros2_ws/build/more_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/janelleg/ros2_ws/install/py_pubsub:/home/janelleg/ros2_ws/install/my_package:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble /usr/bin/cmake --build /home/janelleg/ros2_ws/build/more_interfaces -- -j8 -l8
+[17.365s] Invoking command in '/home/janelleg/ros2_ws/build/more_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/janelleg/ros2_ws/install/py_pubsub:/home/janelleg/ros2_ws/install/my_package:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble /usr/bin/cmake --install /home/janelleg/ros2_ws/build/more_interfaces
+[17.383s] -- Install configuration: ""
+[17.384s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/ament_index/resource_index/rosidl_interfaces/more_interfaces
+[17.384s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces
+[17.385s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg
+[17.385s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/rosidl_generator_c__visibility_control.h
+[17.385s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail
+[17.386s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail/address_book__functions.c
+[17.386s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail/address_book__type_support.h
+[17.386s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail/address_book__functions.h
+[17.387s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail/address_book__struct.h
+[17.387s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/address_book.h
+[17.387s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/environment/library_path.sh
+[17.388s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/environment/library_path.dsv
+[17.388s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/lib/libmore_interfaces__rosidl_generator_c.so
+[17.388s] -- Set runtime path of "/home/janelleg/ros2_ws/install/more_interfaces/lib/libmore_interfaces__rosidl_generator_c.so" to ""
+[17.388s] -- Up-to-date: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces
+[17.389s] -- Up-to-date: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg
+[17.389s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[17.389s] -- Up-to-date: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail
+[17.390s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail/address_book__rosidl_typesupport_fastrtps_c.h
+[17.390s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/lib/libmore_interfaces__rosidl_typesupport_fastrtps_c.so
+[17.390s] -- Set runtime path of "/home/janelleg/ros2_ws/install/more_interfaces/lib/libmore_interfaces__rosidl_typesupport_fastrtps_c.so" to ""
+[17.391s] -- Up-to-date: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces
+[17.391s] -- Up-to-date: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg
+[17.391s] -- Up-to-date: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail
+[17.392s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail/address_book__type_support.c
+[17.392s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail/address_book__rosidl_typesupport_introspection_c.h
+[17.393s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[17.394s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/lib/libmore_interfaces__rosidl_typesupport_introspection_c.so
+[17.394s] -- Set runtime path of "/home/janelleg/ros2_ws/install/more_interfaces/lib/libmore_interfaces__rosidl_typesupport_introspection_c.so" to ""
+[17.395s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/lib/libmore_interfaces__rosidl_typesupport_c.so
+[17.395s] -- Set runtime path of "/home/janelleg/ros2_ws/install/more_interfaces/lib/libmore_interfaces__rosidl_typesupport_c.so" to ""
+[17.395s] -- Up-to-date: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces
+[17.395s] -- Up-to-date: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg
+[17.396s] -- Up-to-date: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail
+[17.396s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail/address_book__traits.hpp
+[17.396s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail/address_book__builder.hpp
+[17.397s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail/address_book__struct.hpp
+[17.397s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/address_book.hpp
+[17.397s] -- Up-to-date: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces
+[17.397s] -- Up-to-date: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg
+[17.398s] -- Up-to-date: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail
+[17.398s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail/dds_fastrtps
+[17.398s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail/address_book__rosidl_typesupport_fastrtps_cpp.hpp
+[17.398s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[17.398s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/lib/libmore_interfaces__rosidl_typesupport_fastrtps_cpp.so
+[17.399s] -- Set runtime path of "/home/janelleg/ros2_ws/install/more_interfaces/lib/libmore_interfaces__rosidl_typesupport_fastrtps_cpp.so" to ""
+[17.399s] -- Up-to-date: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces
+[17.399s] -- Up-to-date: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg
+[17.399s] -- Up-to-date: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail
+[17.400s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail/address_book__type_support.cpp
+[17.400s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/include/more_interfaces/more_interfaces/msg/detail/address_book__rosidl_typesupport_introspection_cpp.hpp
+[17.400s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/lib/libmore_interfaces__rosidl_typesupport_introspection_cpp.so
+[17.400s] -- Set runtime path of "/home/janelleg/ros2_ws/install/more_interfaces/lib/libmore_interfaces__rosidl_typesupport_introspection_cpp.so" to ""
+[17.401s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/lib/libmore_interfaces__rosidl_typesupport_cpp.so
+[17.401s] -- Set runtime path of "/home/janelleg/ros2_ws/install/more_interfaces/lib/libmore_interfaces__rosidl_typesupport_cpp.so" to ""
+[17.401s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/environment/pythonpath.sh
+[17.401s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/environment/pythonpath.dsv
+[17.401s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces-0.0.0-py3.10.egg-info
+[17.402s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces-0.0.0-py3.10.egg-info/dependency_links.txt
+[17.402s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces-0.0.0-py3.10.egg-info/SOURCES.txt
+[17.402s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces-0.0.0-py3.10.egg-info/top_level.txt
+[17.402s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces-0.0.0-py3.10.egg-info/PKG-INFO
+[17.402s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces
+[17.402s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/_more_interfaces_s.ep.rosidl_typesupport_c.c
+[17.403s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/msg
+[17.403s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/msg/_address_book.py
+[17.403s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/msg/_address_book_s.c
+[17.403s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/msg/__init__.py
+[17.403s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/more_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[17.403s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/_more_interfaces_s.ep.rosidl_typesupport_introspection_c.c
+[17.403s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/more_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[17.403s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/more_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[17.403s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/libmore_interfaces__rosidl_generator_py.so
+[17.403s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/__init__.py
+[17.403s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/_more_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
+[17.498s] Listing '/home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces'...
+[17.498s] Compiling '/home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/__init__.py'...
+[17.498s] Listing '/home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/msg'...
+[17.498s] Compiling '/home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/msg/__init__.py'...
+[17.499s] Compiling '/home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/msg/_address_book.py'...
+[17.508s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/more_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[17.509s] -- Set runtime path of "/home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/more_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so" to ""
+[17.510s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/more_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[17.510s] -- Set runtime path of "/home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/more_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so" to ""
+[17.510s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/more_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[17.510s] -- Set runtime path of "/home/janelleg/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages/more_interfaces/more_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so" to ""
+[17.510s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/lib/libmore_interfaces__rosidl_generator_py.so
+[17.511s] -- Set runtime path of "/home/janelleg/ros2_ws/install/more_interfaces/lib/libmore_interfaces__rosidl_generator_py.so" to ""
+[17.511s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/msg/AddressBook.idl
+[17.512s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/msg/AddressBook.msg
+[17.512s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/lib/more_interfaces/publish_address_book
+[17.515s] -- Set runtime path of "/home/janelleg/ros2_ws/install/more_interfaces/lib/more_interfaces/publish_address_book" to ""
+[17.515s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/ament_index/resource_index/package_run_dependencies/more_interfaces
+[17.515s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/ament_index/resource_index/parent_prefix_path/more_interfaces
+[17.516s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/environment/ament_prefix_path.sh
+[17.516s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/environment/ament_prefix_path.dsv
+[17.517s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/environment/path.sh
+[17.517s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/environment/path.dsv
+[17.518s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/local_setup.bash
+[17.518s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/local_setup.sh
+[17.518s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/local_setup.zsh
+[17.518s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/local_setup.dsv
+[17.519s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/package.dsv
+[17.519s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/ament_index/resource_index/packages/more_interfaces
+[17.519s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/export_more_interfaces__rosidl_generator_cExport.cmake
+[17.520s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/export_more_interfaces__rosidl_generator_cExport-noconfig.cmake
+[17.520s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/export_more_interfaces__rosidl_typesupport_fastrtps_cExport.cmake
+[17.521s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/export_more_interfaces__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[17.521s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/more_interfaces__rosidl_typesupport_introspection_cExport.cmake
+[17.521s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/more_interfaces__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[17.521s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/more_interfaces__rosidl_typesupport_cExport.cmake
+[17.522s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/more_interfaces__rosidl_typesupport_cExport-noconfig.cmake
+[17.522s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/export_more_interfaces__rosidl_generator_cppExport.cmake
+[17.522s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/export_more_interfaces__rosidl_typesupport_fastrtps_cppExport.cmake
+[17.522s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/export_more_interfaces__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[17.523s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/more_interfaces__rosidl_typesupport_introspection_cppExport.cmake
+[17.523s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/more_interfaces__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[17.523s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/more_interfaces__rosidl_typesupport_cppExport.cmake
+[17.525s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/more_interfaces__rosidl_typesupport_cppExport-noconfig.cmake
+[17.525s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/export_more_interfaces__rosidl_generator_pyExport.cmake
+[17.527s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/export_more_interfaces__rosidl_generator_pyExport-noconfig.cmake
+[17.528s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake
+[17.529s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/rosidl_cmake-extras.cmake
+[17.529s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake
+[17.530s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/ament_cmake_export_libraries-extras.cmake
+[17.531s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/ament_cmake_export_targets-extras.cmake
+[17.531s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[17.532s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[17.532s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/more_interfacesConfig.cmake
+[17.532s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/cmake/more_interfacesConfig-version.cmake
+[17.532s] -- Installing: /home/janelleg/ros2_ws/install/more_interfaces/share/more_interfaces/package.xml
+[17.533s] Invoked command in '/home/janelleg/ros2_ws/build/more_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/janelleg/ros2_ws/install/py_pubsub:/home/janelleg/ros2_ws/install/my_package:/home/janelleg/ros2_ws/install/launch_testing_examples:/home/janelleg/ros2_ws/install/examples_rclpy_pointcloud_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_subscriber:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_service:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_publisher:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_client:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_server:/home/janelleg/ros2_ws/install/examples_rclpy_minimal_action_client:/home/janelleg/ros2_ws/install/examples_rclpy_guard_conditions:/home/janelleg/ros2_ws/install/examples_rclpy_executors:/opt/ros/humble /usr/bin/cmake --install /home/janelleg/ros2_ws/build/more_interfaces

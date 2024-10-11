@@ -1,0 +1,5 @@
+[0.000000] (-) TimerEvent: {}
+[0.001271] (-) JobUnselected: {'identifier': 'rviz_plugin_tutorial'}
+[0.001400] (-) JobUnselected: {'identifier': 'rviz_plugin_tutorial_msgs'}
+[0.001436] (-) JobUnselected: {'identifier': 'urdf_tutorial_r2d2'}
+[0.001472] (-) EventReactorShutdown: {}

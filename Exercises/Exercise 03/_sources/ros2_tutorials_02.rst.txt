@@ -1,0 +1,103 @@
+==============================
+ROS 2 Humble Tutorials, Part 2
+==============================
+
+1 Installing VSCode
+===================
+To complete the ROS tutorials on this page, you'll need to install a Python/C++ editor and we recommend using `VSCode <https://code.visualstudio.com/>`_. 
+You can find information about
+installing VSCode on a Linux machine `here <https://code.visualstudio.com/docs/setup/linux>`_, and you can install it manually by copying/pasting 
+the following script in a terminal window.
+::
+	sudo apt-get install wget gpg
+	wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+	sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+	echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
+	rm -f packages.microsoft.gpg
+	
+After installing this apt repository and key, you should update the package cache and install the package by copying/pasting the following into the same terminal window.
+::
+	sudo apt install apt-transport-https
+	sudo apt update
+	sudo apt install code # or code-insiders
+	
+If you've never used VSCode, the Internet has many resources and you can try `Getting started with Visual Studio Code <https://code.visualstudio.com/docs/introvideos/basics>`_.
+
+2 Beginner: Client Libraries
+============================
+The following tuturials illustrate key concepts in ROS which include publishers, subscribers, services, clients, and parameters in both 
+C++ and Python. You're encouraged to review the tutorials for both languages, however, you only need to choose one for now. For most of you, the
+Python tutorials are probably the most logical choice. 
+
+Also, there are a lot of steps involved, and I don't believe its necessary to memorize everything as we'll use the given code as templates later on. 
+
+.. note:: 
+	Check your network settings and make sure you're connected to our WiFi network ``am-network-01``. You should autonmatically connect without entering a password. If you're 
+	asked to enter a password, then enter ``neet-robotics01*``.
+	
+.. note:: 
+	Please remember to set your domain ID while working with ROS in our classroom. In a terminal window, to set your domain ID (for your machine am-dev-xx), you would type
+	::
+		user@am-dev-xx:~$ export ROS_DOMAIN_ID=xx
+		
+	If your development computer is ``am-dev-01``, ``am-dev-02``, ``am-dev-03``, etc., you would set your domain ID to 1, 2, 3, etc. 
+	
+.. note::
+	Recall from the previous tutorial that in order to use ROS2 in a specific terminal window, you must source the ROS2 Humble ``setup.bash`` file which is located 
+	in the ``/opt/ros/humble/`` folder as follows
+	::
+		$ source /opt/ros/humble/setup.bash
+	If you don't source this file, you will not be able to use any ROS2 commands in the current terminal window.
+	
+3 Using colcon build
+====================
+If you use the colon build command (without any arguments) in the ROS2 tutorials given below, your computer will freeze up. The reason for this freezing is that colon uses a type of 
+parallel processing to build packages, and our laptops don't have enough RAM to parallel process all the packages in this tutorial with their current algorithm. Keep in mind, however, your computer 
+won't freeze with a smaller packages. 
+
+You can find some information on ``colcon`` `here <https://answers.ros.org/question/368249/colcon-build-number-of-threads/>`_ and 
+`here <https://colcon.readthedocs.io/en/released/reference/executor-arguments.html>`_ which list two quick fixes:
+
+3.1 Parallel Process a Specified Number of Packages
+---------------------------------------------------
+You can tell colcon to parallel process a smaller number of packages with the command
+:: 
+	$ colcon --parallel-workers NUMBER
+
+where NUMBER is the number of packages you want to parallel process. For instance, if you use
+::
+	$ colon --parallel-workers 2, 
+
+This will work for the tutorial given below.
+
+3.2 Process only One Package at a Time
+--------------------------------------
+You can tell colcon to process only one package at a time with the command
+::
+	$ colcon --executor sequential
+
+I suppose you also can try 
+::
+	$ colon --parallel-workers 1 
+	
+for sequential execution. 
+
+
+4 Beginner: Client Libraries
+============================
+
+* `Using colcon to build packages <https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Colcon-Tutorial.html>`_ (20 minutes)
+* `Creating a workspace <https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html>`_ (20 minutes)
+* `Creating a package <https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html>`_ (15 minutes)
+* `Writing a simple publisher and subscriber (C++) <https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Publisher-And-Subscriber.html>`_ (20 minutes)
+* `Writing a simple publisher and subscriber (Python) <https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html>`_ (20 minutes)
+* `Writing a simple service and client (C++) <https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Service-And-Client.html>`_ (20 minutes)
+* `Writing a simple service and client (Python)  <https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html>`_ (20 minutes)
+* `Creating custom msg and srv files  <https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Custom-ROS2-Interfaces.html>`_ (20 minutes)
+* `Implementing custom interfaces  <https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Single-Package-Define-And-Use-Interface.html>`_ (15 minutes)
+* `Using parameters in a class (C++)  <https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Using-Parameters-In-A-Class-CPP.html>`_ (20 minutes)
+* `Using parameters in a class (Python)  <https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Using-Parameters-In-A-Class-Python.html>`_ (20 minutes)
+* `Using rosdoctor to identify issues  <https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Getting-Started-With-Ros2doctor.html>`_ (10 minutes)
+* `Creating and using plugins (C++) <https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Pluginlib.html>`_ (20 minutes)
+
+

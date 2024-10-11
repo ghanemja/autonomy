@@ -1,0 +1,83 @@
+[0.000000] (-) TimerEvent: {}
+[0.001203] (-) JobUnselected: {'identifier': 'rviz_plugin_tutorial_msgs'}
+[0.001340] (-) JobUnselected: {'identifier': 'urdf_tutorial_r2d2'}
+[0.001395] (rviz_plugin_tutorial) JobQueued: {'identifier': 'rviz_plugin_tutorial', 'dependencies': OrderedDict([('rviz_plugin_tutorial_msgs', '/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs')])}
+[0.001445] (rviz_plugin_tutorial) JobStarted: {'identifier': 'rviz_plugin_tutorial'}
+[0.021776] (rviz_plugin_tutorial) JobProgress: {'identifier': 'rviz_plugin_tutorial', 'progress': 'cmake'}
+[0.022973] (rviz_plugin_tutorial) Command: {'cmd': ['/usr/bin/cmake', '/home/janelleg/second_ros2_ws/src/rviz_plugin_tutorial/rviz_plugin_tutorial', '-DCMAKE_INSTALL_PREFIX=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial'], 'cwd': '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'janelleg'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/janelleg'), ('OLDPWD', '/home/janelleg/second_ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1344'), ('SYSTEMD_EXEC_PID', '1517'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1001/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '21640'), ('_colcon_cd_root', '/opt/ros/humble/'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'janelleg'), ('JOURNAL_STREAM', '8:14611'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'janelleg'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/am-dev-15:@/tmp/.ICE-unix/1473,unix/am-dev-15:/tmp/.ICE-unix/1473'), ('INVOCATION_ID', '29f7048c4d764760acf85350f77e8a24'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1001'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1001/.mutter-Xwaylandauth.8T7UU2'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1001/keyring/ssh'), ('ROS_DOMAIN_ID', '15'), ('AMENT_PREFIX_PATH', '/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:2637c119-cc19-4d6f-9393-cbd72309d01b'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs:/opt/ros/humble')]), 'shell': False}
+[0.046536] (rviz_plugin_tutorial) StderrLine: {'line': b'\x1b[33mCMake Warning (dev) in CMakeLists.txt:\n'}
+[0.047093] (rviz_plugin_tutorial) StderrLine: {'line': b'  No project() command is present.  The top-level CMakeLists.txt file must\n'}
+[0.047348] (rviz_plugin_tutorial) StderrLine: {'line': b'  contain a literal, direct call to the project() command.  Add a line of\n'}
+[0.047559] (rviz_plugin_tutorial) StderrLine: {'line': b'  code such as\n'}
+[0.047763] (rviz_plugin_tutorial) StderrLine: {'line': b'\n'}
+[0.047965] (rviz_plugin_tutorial) StderrLine: {'line': b'    project(ProjectName)\n'}
+[0.048213] (rviz_plugin_tutorial) StderrLine: {'line': b'\n'}
+[0.048414] (rviz_plugin_tutorial) StderrLine: {'line': b'  near the top of the file, but after cmake_minimum_required().\n'}
+[0.048610] (rviz_plugin_tutorial) StderrLine: {'line': b'\n'}
+[0.048804] (rviz_plugin_tutorial) StderrLine: {'line': b'  CMake is pretending there is a "project(Project)" command on the first\n'}
+[0.048999] (rviz_plugin_tutorial) StderrLine: {'line': b'  line.\n'}
+[0.049220] (rviz_plugin_tutorial) StderrLine: {'line': b'This warning is for project developers.  Use -Wno-dev to suppress it.\n'}
+[0.049421] (rviz_plugin_tutorial) StderrLine: {'line': b'\x1b[0m\n'}
+[0.099037] (-) TimerEvent: {}
+[0.141975] (rviz_plugin_tutorial) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.199277] (-) TimerEvent: {}
+[0.267563] (rviz_plugin_tutorial) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.284855] (rviz_plugin_tutorial) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.299529] (-) TimerEvent: {}
+[0.400351] (-) TimerEvent: {}
+[0.440046] (rviz_plugin_tutorial) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.461246] (rviz_plugin_tutorial) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.461764] (rviz_plugin_tutorial) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.462795] (rviz_plugin_tutorial) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.470226] (rviz_plugin_tutorial) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.500542] (-) TimerEvent: {}
+[0.601254] (-) TimerEvent: {}
+[0.636433] (rviz_plugin_tutorial) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.656666] (rviz_plugin_tutorial) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.657278] (rviz_plugin_tutorial) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.658421] (rviz_plugin_tutorial) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.660289] (rviz_plugin_tutorial) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)\n'}
+[0.701542] (-) TimerEvent: {}
+[0.802279] (-) TimerEvent: {}
+[0.902823] (-) TimerEvent: {}
+[0.914418] (rviz_plugin_tutorial) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[0.929421] (rviz_plugin_tutorial) StderrLine: {'line': b'\x1b[33mCMake Warning (dev) at /opt/ros/humble/share/ament_cmake_core/cmake/core/list_append_unique.cmake:30 (if):\n'}
+[0.929858] (rviz_plugin_tutorial) StderrLine: {'line': b'  Policy CMP0057 is not set: Support new IN_LIST if() operator.  Run "cmake\n'}
+[0.930436] (rviz_plugin_tutorial) StderrLine: {'line': b'  --help-policy CMP0057" for policy details.  Use the cmake_policy command to\n'}
+[0.930747] (rviz_plugin_tutorial) StderrLine: {'line': b'  set the policy and suppress this warning.\n'}
+[0.931007] (rviz_plugin_tutorial) StderrLine: {'line': b'\n'}
+[0.931312] (rviz_plugin_tutorial) StderrLine: {'line': b'  IN_LIST will be interpreted as an operator when the policy is set to NEW.\n'}
+[0.931558] (rviz_plugin_tutorial) StderrLine: {'line': b'  Since the policy is not set the OLD behavior will be used.\n'}
+[0.931791] (rviz_plugin_tutorial) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[0.931994] (rviz_plugin_tutorial) StderrLine: {'line': b'  /opt/ros/humble/share/ament_cmake_ros/cmake/ament_cmake_export_dependencies-extras.cmake:84 (list_append_unique)\n'}
+[0.932236] (rviz_plugin_tutorial) StderrLine: {'line': b'  /opt/ros/humble/share/ament_cmake_ros/cmake/ament_cmake_rosConfig.cmake:41 (include)\n'}
+[0.932448] (rviz_plugin_tutorial) StderrLine: {'line': b'  CMakeLists.txt:1 (find_package)\n'}
+[0.932651] (rviz_plugin_tutorial) StderrLine: {'line': b'This warning is for project developers.  Use -Wno-dev to suppress it.\n'}
+[0.932858] (rviz_plugin_tutorial) StderrLine: {'line': b'\x1b[0m\n'}
+[0.933088] (rviz_plugin_tutorial) StderrLine: {'line': b'\x1b[31mCMake Error at /opt/ros/humble/share/ament_cmake_core/cmake/core/list_append_unique.cmake:30 (if):\n'}
+[0.933310] (rviz_plugin_tutorial) StderrLine: {'line': b'  if given arguments:\n'}
+[0.933517] (rviz_plugin_tutorial) StderrLine: {'line': b'\n'}
+[0.933722] (rviz_plugin_tutorial) StderrLine: {'line': b'    "NOT" "element" "IN_LIST" "ament_cmake_ros_RECURSIVE_DEPENDENCIES"\n'}
+[0.933937] (rviz_plugin_tutorial) StderrLine: {'line': b'\n'}
+[0.934176] (rviz_plugin_tutorial) StderrLine: {'line': b'  Unknown arguments specified\n'}
+[0.934408] (rviz_plugin_tutorial) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[0.934649] (rviz_plugin_tutorial) StderrLine: {'line': b'  /opt/ros/humble/share/ament_cmake_ros/cmake/ament_cmake_export_dependencies-extras.cmake:84 (list_append_unique)\n'}
+[0.934871] (rviz_plugin_tutorial) StderrLine: {'line': b'  /opt/ros/humble/share/ament_cmake_ros/cmake/ament_cmake_rosConfig.cmake:41 (include)\n'}
+[0.935289] (rviz_plugin_tutorial) StderrLine: {'line': b'  CMakeLists.txt:1 (find_package)\n'}
+[0.935538] (rviz_plugin_tutorial) StderrLine: {'line': b'\n'}
+[0.935642] (rviz_plugin_tutorial) StderrLine: {'line': b'\x1b[0m\n'}
+[0.935729] (rviz_plugin_tutorial) StderrLine: {'line': b'\x1b[31mCMake Error in CMakeLists.txt:\n'}
+[0.935811] (rviz_plugin_tutorial) StderrLine: {'line': b'  No cmake_minimum_required command is present.  A line of code such as\n'}
+[0.935892] (rviz_plugin_tutorial) StderrLine: {'line': b'\n'}
+[0.935971] (rviz_plugin_tutorial) StderrLine: {'line': b'    cmake_minimum_required(VERSION 3.22)\n'}
+[0.936073] (rviz_plugin_tutorial) StderrLine: {'line': b'\n'}
+[0.936152] (rviz_plugin_tutorial) StderrLine: {'line': b'  should be added at the top of the file.  The version specified may be lower\n'}
+[0.936231] (rviz_plugin_tutorial) StderrLine: {'line': b'  if you wish to support older CMake versions for this project.  For more\n'}
+[0.936666] (rviz_plugin_tutorial) StderrLine: {'line': b'  information run "cmake --help-policy CMP0000".\n'}
+[0.936791] (rviz_plugin_tutorial) StderrLine: {'line': b'\n'}
+[0.937439] (rviz_plugin_tutorial) StderrLine: {'line': b'\x1b[0m\n'}
+[0.937619] (rviz_plugin_tutorial) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[0.937870] (rviz_plugin_tutorial) StdoutLine: {'line': b'See also "/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial/CMakeFiles/CMakeOutput.log".\n'}
+[0.938962] (rviz_plugin_tutorial) CommandEnded: {'returncode': 1}
+[0.980552] (rviz_plugin_tutorial) JobEnded: {'identifier': 'rviz_plugin_tutorial', 'rc': 1}
+[0.991605] (-) EventReactorShutdown: {}

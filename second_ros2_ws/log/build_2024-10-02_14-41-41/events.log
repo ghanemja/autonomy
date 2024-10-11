@@ -1,0 +1,302 @@
+[0.000000] (-) TimerEvent: {}
+[0.000738] (-) JobUnselected: {'identifier': 'rviz_plugin_tutorial'}
+[0.000982] (-) JobUnselected: {'identifier': 'urdf_tutorial_r2d2'}
+[0.001068] (rviz_plugin_tutorial_msgs) JobQueued: {'identifier': 'rviz_plugin_tutorial_msgs', 'dependencies': OrderedDict()}
+[0.001142] (rviz_plugin_tutorial_msgs) JobStarted: {'identifier': 'rviz_plugin_tutorial_msgs'}
+[0.015813] (rviz_plugin_tutorial_msgs) JobProgress: {'identifier': 'rviz_plugin_tutorial_msgs', 'progress': 'cmake'}
+[0.017126] (rviz_plugin_tutorial_msgs) Command: {'cmd': ['/usr/bin/cmake', '/home/janelleg/second_ros2_ws/src/rviz_plugin_tutorial/rviz_plugin_tutorial_msgs', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs'], 'cwd': '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial_msgs', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'janelleg'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/janelleg'), ('OLDPWD', '/home/janelleg/second_ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1344'), ('SYSTEMD_EXEC_PID', '1517'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1001/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '21640'), ('_colcon_cd_root', '/opt/ros/humble/'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'janelleg'), ('JOURNAL_STREAM', '8:14611'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'janelleg'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/am-dev-15:@/tmp/.ICE-unix/1473,unix/am-dev-15:/tmp/.ICE-unix/1473'), ('INVOCATION_ID', '29f7048c4d764760acf85350f77e8a24'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1001'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1001/.mutter-Xwaylandauth.8T7UU2'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1001/keyring/ssh'), ('ROS_DOMAIN_ID', '15'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:2637c119-cc19-4d6f-9393-cbd72309d01b'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial_msgs'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.098332] (-) TimerEvent: {}
+[0.139459] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.198592] (-) TimerEvent: {}
+[0.267609] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.283704] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.298851] (-) TimerEvent: {}
+[0.399704] (-) TimerEvent: {}
+[0.429350] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.444803] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.445490] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.446166] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.452528] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.499901] (-) TimerEvent: {}
+[0.600682] (-) TimerEvent: {}
+[0.620564] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.638101] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.638780] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.639773] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.643246] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.700810] (-) TimerEvent: {}
+[0.801349] (-) TimerEvent: {}
+[0.901866] (-) TimerEvent: {}
+[0.963376] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[1.002030] (-) TimerEvent: {}
+[1.092481] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[1.102226] (-) TimerEvent: {}
+[1.138339] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)\n'}
+[1.144312] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.155195] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[1.202460] (-) TimerEvent: {}
+[1.229009] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[1.292820] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Found std_msgs: 4.2.4 (/opt/ros/humble/share/std_msgs/cmake)\n'}
+[1.302585] (-) TimerEvent: {}
+[1.403085] (-) TimerEvent: {}
+[1.503631] (-) TimerEvent: {}
+[1.604185] (-) TimerEvent: {}
+[1.704690] (-) TimerEvent: {}
+[1.805241] (-) TimerEvent: {}
+[1.898774] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)\n'}
+[1.905464] (-) TimerEvent: {}
+[2.005954] (-) TimerEvent: {}
+[2.106505] (-) TimerEvent: {}
+[2.207053] (-) TimerEvent: {}
+[2.307557] (-) TimerEvent: {}
+[2.356813] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[2.407859] (-) TimerEvent: {}
+[2.508585] (-) TimerEvent: {}
+[2.609251] (-) TimerEvent: {}
+[2.710020] (-) TimerEvent: {}
+[2.810584] (-) TimerEvent: {}
+[2.911123] (-) TimerEvent: {}
+[2.960726] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[3.007982] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") \n'}
+[3.010471] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)\n'}
+[3.011216] (-) TimerEvent: {}
+[3.066372] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") \n'}
+[3.066833] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[3.067071] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10\n'}
+[3.067289] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so\n'}
+[3.111469] (-) TimerEvent: {}
+[3.112812] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Found PythonExtra: .so  \n'}
+[3.210574] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[3.211585] (-) TimerEvent: {}
+[3.245131] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b"-- Added test 'copyright' to check source files copyright and LICENSE\n"}
+[3.247648] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[3.249401] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[3.255100] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Configuring done\n'}
+[3.311854] (-) TimerEvent: {}
+[3.312455] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Generating done\n'}
+[3.316461] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Build files have been written to: /home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial_msgs\n'}
+[3.327332] (rviz_plugin_tutorial_msgs) CommandEnded: {'returncode': 0}
+[3.329990] (rviz_plugin_tutorial_msgs) JobProgress: {'identifier': 'rviz_plugin_tutorial_msgs', 'progress': 'build'}
+[3.330047] (rviz_plugin_tutorial_msgs) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial_msgs', '--', '-j8', '-l8'], 'cwd': '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial_msgs', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'janelleg'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/janelleg'), ('OLDPWD', '/home/janelleg/second_ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1344'), ('SYSTEMD_EXEC_PID', '1517'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1001/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '21640'), ('_colcon_cd_root', '/opt/ros/humble/'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'janelleg'), ('JOURNAL_STREAM', '8:14611'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'janelleg'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/am-dev-15:@/tmp/.ICE-unix/1473,unix/am-dev-15:/tmp/.ICE-unix/1473'), ('INVOCATION_ID', '29f7048c4d764760acf85350f77e8a24'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1001'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1001/.mutter-Xwaylandauth.8T7UU2'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1001/keyring/ssh'), ('ROS_DOMAIN_ID', '15'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:2637c119-cc19-4d6f-9393-cbd72309d01b'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial_msgs'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[3.412040] (-) TimerEvent: {}
+[3.429903] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[  3%] \x1b[34m\x1b[1mGenerating C code for ROS interfaces\x1b[0m\n'}
+[3.445099] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[  6%] \x1b[34m\x1b[1mGenerating C++ code for ROS interfaces\x1b[0m\n'}
+[3.471015] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[  6%] Built target ament_cmake_python_symlink_rviz_plugin_tutorial_msgs\n'}
+[3.512238] (-) TimerEvent: {}
+[3.612875] (-) TimerEvent: {}
+[3.713513] (-) TimerEvent: {}
+[3.814205] (-) TimerEvent: {}
+[3.914844] (-) TimerEvent: {}
+[3.956580] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'running egg_info\n'}
+[3.957549] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'creating rviz_plugin_tutorial_msgs.egg-info\n'}
+[3.957936] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'writing rviz_plugin_tutorial_msgs.egg-info/PKG-INFO\n'}
+[3.958219] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'writing dependency_links to rviz_plugin_tutorial_msgs.egg-info/dependency_links.txt\n'}
+[3.958574] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'writing top-level names to rviz_plugin_tutorial_msgs.egg-info/top_level.txt\n'}
+[3.958841] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b"writing manifest file 'rviz_plugin_tutorial_msgs.egg-info/SOURCES.txt'\n"}
+[3.960939] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[  9%] \x1b[32mBuilding C object CMakeFiles/rviz_plugin_tutorial_msgs__rosidl_generator_c.dir/rosidl_generator_c/rviz_plugin_tutorial_msgs/msg/detail/point2_d__functions.c.o\x1b[0m\n'}
+[3.962712] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b"reading manifest file 'rviz_plugin_tutorial_msgs.egg-info/SOURCES.txt'\n"}
+[3.963801] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b"writing manifest file 'rviz_plugin_tutorial_msgs.egg-info/SOURCES.txt'\n"}
+[4.015216] (-) TimerEvent: {}
+[4.018949] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[  9%] Built target ament_cmake_python_build_rviz_plugin_tutorial_msgs_egg\n'}
+[4.067992] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 12%] \x1b[32m\x1b[1mLinking C shared library librviz_plugin_tutorial_msgs__rosidl_generator_c.so\x1b[0m\n'}
+[4.115513] (-) TimerEvent: {}
+[4.152865] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 12%] Built target rviz_plugin_tutorial_msgs__rosidl_generator_c\n'}
+[4.172879] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 16%] \x1b[34m\x1b[1mGenerating C type support dispatch for ROS interfaces\x1b[0m\n'}
+[4.175022] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 19%] \x1b[34m\x1b[1mGenerating C type support for eProsima Fast-RTPS\x1b[0m\n'}
+[4.175921] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 19%] Built target rviz_plugin_tutorial_msgs__cpp\n'}
+[4.181321] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 22%] \x1b[34m\x1b[1mGenerating C introspection for ROS interfaces\x1b[0m\n'}
+[4.198603] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 25%] \x1b[34m\x1b[1mGenerating C++ introspection for ROS interfaces\x1b[0m\n'}
+[4.202142] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 29%] \x1b[34m\x1b[1mGenerating C++ type support dispatch for ROS interfaces\x1b[0m\n'}
+[4.207443] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 32%] \x1b[34m\x1b[1mGenerating C++ type support for eProsima Fast-RTPS\x1b[0m\n'}
+[4.215649] (-) TimerEvent: {}
+[4.316177] (-) TimerEvent: {}
+[4.416933] (-) TimerEvent: {}
+[4.517472] (-) TimerEvent: {}
+[4.616706] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 35%] \x1b[32mBuilding CXX object CMakeFiles/rviz_plugin_tutorial_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/rviz_plugin_tutorial_msgs/msg/point2_d__type_support.cpp.o\x1b[0m\n'}
+[4.617566] (-) TimerEvent: {}
+[4.677413] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 38%] \x1b[32m\x1b[1mLinking CXX shared library librviz_plugin_tutorial_msgs__rosidl_typesupport_c.so\x1b[0m\n'}
+[4.692405] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 41%] \x1b[32mBuilding CXX object CMakeFiles/rviz_plugin_tutorial_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/rviz_plugin_tutorial_msgs/msg/detail/dds_fastrtps/point2_d__type_support.cpp.o\x1b[0m\n'}
+[4.717750] (-) TimerEvent: {}
+[4.767173] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 41%] Built target rviz_plugin_tutorial_msgs__rosidl_typesupport_c\n'}
+[4.817989] (-) TimerEvent: {}
+[4.918713] (-) TimerEvent: {}
+[4.945905] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 45%] \x1b[32mBuilding CXX object CMakeFiles/rviz_plugin_tutorial_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/rviz_plugin_tutorial_msgs/msg/detail/point2_d__type_support_c.cpp.o\x1b[0m\n'}
+[4.977195] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 48%] \x1b[32mBuilding CXX object CMakeFiles/rviz_plugin_tutorial_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/rviz_plugin_tutorial_msgs/msg/point2_d__type_support.cpp.o\x1b[0m\n'}
+[4.979274] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 51%] \x1b[32mBuilding CXX object CMakeFiles/rviz_plugin_tutorial_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/rviz_plugin_tutorial_msgs/msg/detail/point2_d__type_support.cpp.o\x1b[0m\n'}
+[5.018930] (-) TimerEvent: {}
+[5.045114] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 54%] \x1b[32mBuilding C object CMakeFiles/rviz_plugin_tutorial_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/rviz_plugin_tutorial_msgs/msg/detail/point2_d__type_support.c.o\x1b[0m\n'}
+[5.119177] (-) TimerEvent: {}
+[5.143971] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 58%] \x1b[32m\x1b[1mLinking C shared library librviz_plugin_tutorial_msgs__rosidl_typesupport_introspection_c.so\x1b[0m\n'}
+[5.203843] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 58%] Built target rviz_plugin_tutorial_msgs__rosidl_typesupport_introspection_c\n'}
+[5.219365] (-) TimerEvent: {}
+[5.319982] (-) TimerEvent: {}
+[5.420729] (-) TimerEvent: {}
+[5.494028] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 61%] \x1b[32m\x1b[1mLinking CXX shared library librviz_plugin_tutorial_msgs__rosidl_typesupport_fastrtps_cpp.so\x1b[0m\n'}
+[5.520918] (-) TimerEvent: {}
+[5.545568] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 64%] \x1b[32m\x1b[1mLinking CXX shared library librviz_plugin_tutorial_msgs__rosidl_typesupport_cpp.so\x1b[0m\n'}
+[5.621107] (-) TimerEvent: {}
+[5.643580] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 64%] Built target rviz_plugin_tutorial_msgs__rosidl_typesupport_cpp\n'}
+[5.671402] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 64%] Built target rviz_plugin_tutorial_msgs__rosidl_typesupport_fastrtps_cpp\n'}
+[5.721442] (-) TimerEvent: {}
+[5.822174] (-) TimerEvent: {}
+[5.867484] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 67%] \x1b[32m\x1b[1mLinking CXX shared library librviz_plugin_tutorial_msgs__rosidl_typesupport_fastrtps_c.so\x1b[0m\n'}
+[5.922510] (-) TimerEvent: {}
+[6.023156] (-) TimerEvent: {}
+[6.024575] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 67%] Built target rviz_plugin_tutorial_msgs__rosidl_typesupport_fastrtps_c\n'}
+[6.033898] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 70%] \x1b[32m\x1b[1mLinking CXX shared library librviz_plugin_tutorial_msgs__rosidl_typesupport_introspection_cpp.so\x1b[0m\n'}
+[6.123567] (-) TimerEvent: {}
+[6.170249] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 70%] Built target rviz_plugin_tutorial_msgs__rosidl_typesupport_introspection_cpp\n'}
+[6.212686] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 70%] Built target rviz_plugin_tutorial_msgs\n'}
+[6.223674] (-) TimerEvent: {}
+[6.259026] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 74%] \x1b[34m\x1b[1mGenerating Python code for ROS interfaces\x1b[0m\n'}
+[6.323945] (-) TimerEvent: {}
+[6.424666] (-) TimerEvent: {}
+[6.525438] (-) TimerEvent: {}
+[6.626153] (-) TimerEvent: {}
+[6.726926] (-) TimerEvent: {}
+[6.816422] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 74%] Built target rviz_plugin_tutorial_msgs__py\n'}
+[6.827164] (-) TimerEvent: {}
+[6.860235] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 77%] \x1b[32mBuilding C object CMakeFiles/rviz_plugin_tutorial_msgs__rosidl_generator_py.dir/rosidl_generator_py/rviz_plugin_tutorial_msgs/msg/_point2_d_s.c.o\x1b[0m\n'}
+[6.927510] (-) TimerEvent: {}
+[7.028258] (-) TimerEvent: {}
+[7.056749] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 80%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/rviz_plugin_tutorial_msgs/librviz_plugin_tutorial_msgs__rosidl_generator_py.so\x1b[0m\n'}
+[7.128527] (-) TimerEvent: {}
+[7.144315] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 80%] Built target rviz_plugin_tutorial_msgs__rosidl_generator_py\n'}
+[7.186104] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 83%] \x1b[32mBuilding C object CMakeFiles/rviz_plugin_tutorial_msgs__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/rviz_plugin_tutorial_msgs/_rviz_plugin_tutorial_msgs_s.ep.rosidl_typesupport_c.c.o\x1b[0m\n'}
+[7.193966] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 87%] \x1b[32mBuilding C object CMakeFiles/rviz_plugin_tutorial_msgs__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/rviz_plugin_tutorial_msgs/_rviz_plugin_tutorial_msgs_s.ep.rosidl_typesupport_introspection_c.c.o\x1b[0m\n'}
+[7.196535] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 90%] \x1b[32mBuilding C object CMakeFiles/rviz_plugin_tutorial_msgs__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/rviz_plugin_tutorial_msgs/_rviz_plugin_tutorial_msgs_s.ep.rosidl_typesupport_fastrtps_c.c.o\x1b[0m\n'}
+[7.228780] (-) TimerEvent: {}
+[7.329482] (-) TimerEvent: {}
+[7.378410] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 93%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[7.379055] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 96%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[7.429664] (-) TimerEvent: {}
+[7.453228] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 96%] Built target rviz_plugin_tutorial_msgs__rosidl_typesupport_c__pyext\n'}
+[7.461143] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[ 96%] Built target rviz_plugin_tutorial_msgs__rosidl_typesupport_fastrtps_c__pyext\n'}
+[7.495101] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[7.529841] (-) TimerEvent: {}
+[7.573214] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'[100%] Built target rviz_plugin_tutorial_msgs__rosidl_typesupport_introspection_c__pyext\n'}
+[7.596875] (rviz_plugin_tutorial_msgs) CommandEnded: {'returncode': 0}
+[7.630072] (-) TimerEvent: {}
+[7.730773] (-) TimerEvent: {}
+[7.753471] (rviz_plugin_tutorial_msgs) JobProgress: {'identifier': 'rviz_plugin_tutorial_msgs', 'progress': 'install'}
+[7.771150] (rviz_plugin_tutorial_msgs) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial_msgs'], 'cwd': '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial_msgs', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'janelleg'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/janelleg'), ('OLDPWD', '/home/janelleg/second_ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1344'), ('SYSTEMD_EXEC_PID', '1517'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1001/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '21640'), ('_colcon_cd_root', '/opt/ros/humble/'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'janelleg'), ('JOURNAL_STREAM', '8:14611'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'janelleg'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/am-dev-15:@/tmp/.ICE-unix/1473,unix/am-dev-15:/tmp/.ICE-unix/1473'), ('INVOCATION_ID', '29f7048c4d764760acf85350f77e8a24'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1001'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1001/.mutter-Xwaylandauth.8T7UU2'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1001/keyring/ssh'), ('ROS_DOMAIN_ID', '15'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:2637c119-cc19-4d6f-9393-cbd72309d01b'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/janelleg/second_ros2_ws/build/rviz_plugin_tutorial_msgs'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[7.789450] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[7.790738] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[7.791253] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/ament_index/resource_index/rosidl_interfaces/rviz_plugin_tutorial_msgs\n'}
+[7.808063] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/include/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs/msg/detail/point2_d__functions.h\n'}
+[7.825009] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/include/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs/msg/detail/point2_d__struct.h\n'}
+[7.830903] (-) TimerEvent: {}
+[7.843309] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/include/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs/msg/detail/point2_d__type_support.h\n'}
+[7.861912] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/include/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs/msg/point2_d.h\n'}
+[7.880121] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/include/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs/msg/rosidl_generator_c__visibility_control.h\n'}
+[7.899114] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/environment/library_path.sh\n'}
+[7.917153] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/environment/library_path.dsv\n'}
+[7.931189] (-) TimerEvent: {}
+[7.935115] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/include/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs/msg/detail/point2_d__rosidl_typesupport_fastrtps_c.h\n'}
+[7.951374] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/include/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs/msg/rosidl_typesupport_fastrtps_c__visibility_control.h\n'}
+[7.969255] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/include/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs/msg/detail/point2_d__rosidl_typesupport_introspection_c.h\n'}
+[7.988407] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/include/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs/msg/rosidl_typesupport_introspection_c__visibility_control.h\n'}
+[8.004735] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/include/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs/msg/detail/point2_d__builder.hpp\n'}
+[8.019832] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/include/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs/msg/detail/point2_d__struct.hpp\n'}
+[8.031643] (-) TimerEvent: {}
+[8.035015] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/include/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs/msg/detail/point2_d__traits.hpp\n'}
+[8.053809] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/include/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs/msg/point2_d.hpp\n'}
+[8.076660] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/include/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs/msg/detail/point2_d__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[8.092686] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/include/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h\n'}
+[8.108937] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/include/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs/msg/detail/point2_d__rosidl_typesupport_introspection_cpp.hpp\n'}
+[8.126748] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/environment/pythonpath.sh\n'}
+[8.131654] (-) TimerEvent: {}
+[8.144778] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/environment/pythonpath.dsv\n'}
+[8.168343] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs-0.0.0-py3.10.egg-info/PKG-INFO\n'}
+[8.187220] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs-0.0.0-py3.10.egg-info/SOURCES.txt\n'}
+[8.205594] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs-0.0.0-py3.10.egg-info/dependency_links.txt\n'}
+[8.222118] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs-0.0.0-py3.10.egg-info/top_level.txt\n'}
+[8.231839] (-) TimerEvent: {}
+[8.240003] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/__init__.py\n'}
+[8.260556] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/_rviz_plugin_tutorial_msgs_s.ep.rosidl_typesupport_c.c\n'}
+[8.281470] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/_rviz_plugin_tutorial_msgs_s.ep.rosidl_typesupport_fastrtps_c.c\n'}
+[8.298737] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/_rviz_plugin_tutorial_msgs_s.ep.rosidl_typesupport_introspection_c.c\n'}
+[8.319295] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/librviz_plugin_tutorial_msgs__rosidl_generator_py.so\n'}
+[8.332004] (-) TimerEvent: {}
+[8.336677] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/msg/__init__.py\n'}
+[8.358587] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/msg/_point2_d.py\n'}
+[8.375048] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/msg/_point2_d_s.c\n'}
+[8.397777] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\n'}
+[8.413917] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\n'}
+[8.432230] (-) TimerEvent: {}
+[8.433473] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\n'}
+[8.452291] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\n'}
+[8.452943] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\n'}
+[8.453196] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Up-to-date symlink: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/rviz_plugin_tutorial_msgs_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\n'}
+[8.453460] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/msg/Point2D.idl\n'}
+[8.473168] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/msg/Point2D.msg\n'}
+[8.490630] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/ament_index/resource_index/package_run_dependencies/rviz_plugin_tutorial_msgs\n'}
+[8.509942] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/ament_index/resource_index/parent_prefix_path/rviz_plugin_tutorial_msgs\n'}
+[8.526159] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/environment/ament_prefix_path.sh\n'}
+[8.532525] (-) TimerEvent: {}
+[8.542020] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/environment/ament_prefix_path.dsv\n'}
+[8.561409] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/environment/path.sh\n'}
+[8.577471] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/environment/path.dsv\n'}
+[8.597614] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/local_setup.bash\n'}
+[8.616592] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/local_setup.sh\n'}
+[8.632750] (-) TimerEvent: {}
+[8.634753] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/local_setup.zsh\n'}
+[8.651923] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/local_setup.dsv\n'}
+[8.674281] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/package.dsv\n'}
+[8.693177] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/ament_index/resource_index/packages/rviz_plugin_tutorial_msgs\n'}
+[8.709549] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/rosidl_cmake-extras.cmake\n'}
+[8.725316] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[8.733041] (-) TimerEvent: {}
+[8.741210] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[8.763082] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[8.785129] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[8.802873] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake\n'}
+[8.821791] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake\n'}
+[8.833309] (-) TimerEvent: {}
+[8.841419] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/rviz_plugin_tutorial_msgsConfig.cmake\n'}
+[8.858634] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/rviz_plugin_tutorial_msgsConfig-version.cmake\n'}
+[8.879544] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Symlinking: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/package.xml\n'}
+[8.896870] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib/librviz_plugin_tutorial_msgs__rosidl_generator_c.so\n'}
+[8.897507] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib/librviz_plugin_tutorial_msgs__rosidl_generator_c.so" to ""\n'}
+[8.897924] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib/librviz_plugin_tutorial_msgs__rosidl_typesupport_fastrtps_c.so\n'}
+[8.898233] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib/librviz_plugin_tutorial_msgs__rosidl_typesupport_fastrtps_c.so" to ""\n'}
+[8.898610] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib/librviz_plugin_tutorial_msgs__rosidl_typesupport_introspection_c.so\n'}
+[8.899038] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib/librviz_plugin_tutorial_msgs__rosidl_typesupport_introspection_c.so" to ""\n'}
+[8.899295] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib/librviz_plugin_tutorial_msgs__rosidl_typesupport_c.so\n'}
+[8.899676] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib/librviz_plugin_tutorial_msgs__rosidl_typesupport_c.so" to ""\n'}
+[8.899898] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib/librviz_plugin_tutorial_msgs__rosidl_typesupport_fastrtps_cpp.so\n'}
+[8.900120] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib/librviz_plugin_tutorial_msgs__rosidl_typesupport_fastrtps_cpp.so" to ""\n'}
+[8.900397] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib/librviz_plugin_tutorial_msgs__rosidl_typesupport_introspection_cpp.so\n'}
+[8.900640] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib/librviz_plugin_tutorial_msgs__rosidl_typesupport_introspection_cpp.so" to ""\n'}
+[8.900848] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib/librviz_plugin_tutorial_msgs__rosidl_typesupport_cpp.so\n'}
+[8.901055] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib/librviz_plugin_tutorial_msgs__rosidl_typesupport_cpp.so" to ""\n'}
+[8.933546] (-) TimerEvent: {}
+[8.970593] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b"Listing '/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs'...\n"}
+[8.971043] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b"Compiling '/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/__init__.py'...\n"}
+[8.971275] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b"Listing '/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/msg'...\n"}
+[8.971520] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b"Compiling '/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/msg/__init__.py'...\n"}
+[8.971765] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b"Compiling '/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/local/lib/python3.10/dist-packages/rviz_plugin_tutorial_msgs/msg/_point2_d.py'...\n"}
+[8.980788] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib/librviz_plugin_tutorial_msgs__rosidl_generator_py.so\n'}
+[8.981471] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/lib/librviz_plugin_tutorial_msgs__rosidl_generator_py.so" to ""\n'}
+[8.981817] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/export_rviz_plugin_tutorial_msgs__rosidl_generator_cExport.cmake\n'}
+[8.982067] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/export_rviz_plugin_tutorial_msgs__rosidl_generator_cExport-noconfig.cmake\n'}
+[8.982427] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/export_rviz_plugin_tutorial_msgs__rosidl_typesupport_fastrtps_cExport.cmake\n'}
+[8.983036] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/export_rviz_plugin_tutorial_msgs__rosidl_typesupport_fastrtps_cExport-noconfig.cmake\n'}
+[8.983298] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/rviz_plugin_tutorial_msgs__rosidl_typesupport_introspection_cExport.cmake\n'}
+[8.983674] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/rviz_plugin_tutorial_msgs__rosidl_typesupport_introspection_cExport-noconfig.cmake\n'}
+[8.984165] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/rviz_plugin_tutorial_msgs__rosidl_typesupport_cExport.cmake\n'}
+[8.984462] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/rviz_plugin_tutorial_msgs__rosidl_typesupport_cExport-noconfig.cmake\n'}
+[8.984694] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/export_rviz_plugin_tutorial_msgs__rosidl_generator_cppExport.cmake\n'}
+[8.984902] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/export_rviz_plugin_tutorial_msgs__rosidl_typesupport_fastrtps_cppExport.cmake\n'}
+[8.985111] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/export_rviz_plugin_tutorial_msgs__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake\n'}
+[8.985318] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/rviz_plugin_tutorial_msgs__rosidl_typesupport_introspection_cppExport.cmake\n'}
+[8.985549] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/rviz_plugin_tutorial_msgs__rosidl_typesupport_introspection_cppExport-noconfig.cmake\n'}
+[8.985784] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/rviz_plugin_tutorial_msgs__rosidl_typesupport_cppExport.cmake\n'}
+[8.985990] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/rviz_plugin_tutorial_msgs__rosidl_typesupport_cppExport-noconfig.cmake\n'}
+[8.986194] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/export_rviz_plugin_tutorial_msgs__rosidl_generator_pyExport.cmake\n'}
+[8.986406] (rviz_plugin_tutorial_msgs) StdoutLine: {'line': b'-- Installing: /home/janelleg/second_ros2_ws/install/rviz_plugin_tutorial_msgs/share/rviz_plugin_tutorial_msgs/cmake/export_rviz_plugin_tutorial_msgs__rosidl_generator_pyExport-noconfig.cmake\n'}
+[8.988444] (rviz_plugin_tutorial_msgs) CommandEnded: {'returncode': 0}
+[9.033673] (-) TimerEvent: {}
+[9.134561] (-) TimerEvent: {}
+[9.181659] (rviz_plugin_tutorial_msgs) JobEnded: {'identifier': 'rviz_plugin_tutorial_msgs', 'rc': 0}
+[9.183084] (-) EventReactorShutdown: {}
