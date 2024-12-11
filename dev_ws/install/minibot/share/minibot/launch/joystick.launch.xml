@@ -1,0 +1,13 @@
+<launch>
+
+        <!-- start the joystick node -->
+        <node pkg="joy" exec="joy_node" name="joy_node">
+                <param from="$(find-pkg-share minibot)/config/joystick.yaml" />
+        </node>
+
+        <!-- start the teleop node -->
+        <node pkg="teleop_twist_joy" exec="teleop_node" name="teleop_node">
+                <param from="$(find-pkg-share minibot)/config/joystick.yaml" />
+        </node>
+
+</launch>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raspberry Pi Camera Setup &mdash; 16.633 NEET Autonomous Machines  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/NEET-AutonomousMachines.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Exercise 01</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro_ros.html">Introduction to ROS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_overview.html">Linux Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_01.html">ROS 2 Humble Tutorials, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 02</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_02.html">ROS 2 Humble Tutorials, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 03</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_03.html">ROS 2 Humble Tutorials, Part 3</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 04</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part01.html">Mobile Robot, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 05</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part02.html">Mobile Robot, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 06</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part03.html">Mobile Robot, Part 3</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 07</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part04.html">Mobile Robot, Part 4</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="raspberry_pi_setup.html">Raspberry Pi Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="camera_RPi_setup.html">Camera Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rplidar_a1_setup.html">RPLIDAR A1 Setup</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">16.633 NEET Autonomous Machines</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Raspberry Pi Camera Setup</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="raspberry-pi-camera-setup">
+<h1>Raspberry Pi Camera Setup<a class="headerlink" href="#raspberry-pi-camera-setup" title="Permalink to this heading"></a></h1>
+<p>In this class we’ll be exploring how to use ROS to connect to a virtual camera in simulation or a real camera.</p>
+<p>How Cameras and Images Work
+How Cameras and images are integrated into ROS
+How to use Gazebo to Simulate a Virtual camera
+How to Connect a Real Camera to a Raspberry Pi</p>
+<section id="camera-types">
+<h2>Camera Types<a class="headerlink" href="#camera-types" title="Permalink to this heading"></a></h2>
+<p>when a camera takes an image it basically takes all the light that’s just bouncing around in the world it
+focuses it through a lens through an aperture and onto a sensor and that data is then stored as a 2d array of
+measurements that are called pixels now for a grayscale image this is pretty straightforward each pixel just measures
+the intensity of the light that hits it but for colored images it gets a bit more complex there are a few different methods that</p>
+</section>
+<section id="installations">
+<h2>Installations<a class="headerlink" href="#installations" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Here, we assume you’re setting up a camera on the Raspberry Pi 4 or 5 used as a robot computer with the user name
+<code class="docutils literal notranslate"><span class="pre">neet</span></code> per our class setup convention. If you’re using a different user name, then modify these instructions as
+appropriate.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-xx:~$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-xx:~$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-xx:~$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libraspberrypi-bin<span class="w"> </span>v4l-utils<span class="w"> </span>ros-humble-v4l2-camera
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-xx:~$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-humble-image-transport-plugins
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-01:~$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-humble-rqt-image-view
+</pre></div>
+</div>
+<p>After installating the above, run the command <code class="docutils literal notranslate"><span class="pre">groups</span></code> to see which groups the current user is part of</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-xx:~$<span class="w"> </span>groups
+</pre></div>
+</div>
+<p>and you’ll receive an output similar to the following</p>
+<p>Make sure the user <code class="docutils literal notranslate"><span class="pre">neet</span></code> belongs to the video group as illustrated above.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you don’t see video in your group listing, you’ll need to add the user <code class="docutils literal notranslate"><span class="pre">neet</span></code> as follows</p>
+<p>After running this command, you should log off the robot computer and then reboot it.</p>
+</div>
+</section>
+<section id="enable-the-camera">
+<h2>Enable the Camera<a class="headerlink" href="#enable-the-camera" title="Permalink to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-xx:~$<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>raspi-config
+</pre></div>
+</div>
+<p>After this installation run the following</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-xx:~$<span class="w"> </span>sudo<span class="w"> </span>raspi-config
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Step 1: select <a href="#id1"><span class="problematic" id="id2">``</span></a>3 Interface Options … ``</p></li>
+<li><p>Step 2: select <a href="#id3"><span class="problematic" id="id4">``</span></a>I1 Legacy Camera … ``</p></li>
+<li><p>Step 3: Would you like to enable legacy camera support? <code class="docutils literal notranslate"><span class="pre">Yes</span></code></p></li>
+<li><p>Step 4: click <code class="docutils literal notranslate"><span class="pre">Ok</span></code></p></li>
+<li><p>Step 5: select <a href="#id5"><span class="problematic" id="id6">``</span></a>3 Interface Options … ``</p></li>
+<li><p>Step 6: select <code class="docutils literal notranslate"><span class="pre">I4</span> <span class="pre">SPI</span> <span class="pre">Enable/disable</span> <span class="pre">automatic</span> <span class="pre">...</span></code></p></li>
+<li><p>Step 7: Would you like the SPI interface to be enabled? <code class="docutils literal notranslate"><span class="pre">Yes</span></code></p></li>
+<li><p>Step 8: The SPI interface is enabled. Click <code class="docutils literal notranslate"><span class="pre">Ok</span></code></p></li>
+<li><p>Step 9: select <a href="#id7"><span class="problematic" id="id8">``</span></a>3 Interface Options … ``</p></li>
+<li><p>Step 10: select <code class="docutils literal notranslate"><span class="pre">I5</span> <span class="pre">I2C</span> <span class="pre">Enable/disable</span> <span class="pre">automatic</span> <span class="pre">...</span></code></p></li>
+<li><p>Step 11: Would you like the ARM I2C interface to be enabled? <code class="docutils literal notranslate"><span class="pre">Yes</span></code></p></li>
+<li><p>Step 12: The ARM I2C interface is enabled. Click <code class="docutils literal notranslate"><span class="pre">Ok</span></code></p></li>
+<li><p>Step 13: select <code class="docutils literal notranslate"><span class="pre">Finish</span></code></p></li>
+<li><p>Step 14: Would you like to reboot now? <code class="docutils literal notranslate"><span class="pre">Yes</span></code></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-xx:~$<span class="w"> </span>vcgencmd<span class="w"> </span>get_camera
+</pre></div>
+</div>
+<p>You should receive the following output</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">supported</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">detected</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span>libcamera<span class="w"> </span><span class="nv">interfaces</span><span class="o">=</span><span class="m">0</span>
+</pre></div>
+</div>
+<p>If the camera isn’t detected, please check to ribbon cable to make sure its properly inserted. If this doesn’t solve the problem, you may have a defective camera.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-01:~$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>v4l2_camera<span class="w"> </span>v4l2_camera_node<span class="w"> </span>--ros-args<span class="w"> </span>-p<span class="w"> </span>image_size:<span class="o">=</span><span class="s2">&quot;[640,480]&quot;</span><span class="w"> </span>-p<span class="w"> </span>camera_frame_id:<span class="o">=</span>camera_optical_link
+</pre></div>
+</div>
+<p>For this next step, you’ll type the following command on a terminal window on your <strong>development</strong> computer</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>rqt_image_view<span class="w"> </span>rqt_image_view
+</pre></div>
+</div>
+<p>Error message</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>could<span class="w"> </span>not<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>display
+This<span class="w"> </span>application<span class="w"> </span>failed<span class="w"> </span>to<span class="w"> </span>start<span class="w"> </span>because<span class="w"> </span>no<span class="w"> </span>Qt<span class="w"> </span>platform<span class="w"> </span>plugin<span class="w"> </span>could<span class="w"> </span>be<span class="w"> </span>initialized.<span class="w"> </span>Reinstalling<span class="w"> </span>the<span class="w"> </span>application<span class="w"> </span>may<span class="w"> </span>fix<span class="w"> </span>this<span class="w"> </span>problem.
+
+Available<span class="w"> </span>platform<span class="w"> </span>plugins<span class="w"> </span>are:<span class="w"> </span>eglfs,<span class="w"> </span>linuxfb,<span class="w"> </span>minimal,<span class="w"> </span>minimalegl,<span class="w"> </span>offscreen,<span class="w"> </span>vnc,<span class="w"> </span>xcb.
+
+<span class="o">[</span>ros2run<span class="o">]</span>:<span class="w"> </span>Process<span class="w"> </span>exited<span class="w"> </span>with<span class="w"> </span>failure<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, MIT-NEET Autonomous Machines.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

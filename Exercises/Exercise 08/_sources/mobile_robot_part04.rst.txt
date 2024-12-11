@@ -1,0 +1,445 @@
+:orphan:
+
+.. role:: red
+.. role:: green
+.. role:: blue
+
+====================
+Mobile Robot, Part 4
+====================
+.. figure:: images/MiniBot02.png
+		:width: 2772px
+		:height: 3515px
+		:align: center
+		:alt: MiniBot
+		:scale: 15 %
+
+|
+
+In this exercise you'll have the opportunity to use ROS 2 on the robot platform shown above. It has FIT0450 DC motors with magnetic encoders connected to an 
+`Adafruit DC Motor + Stepper FeatherWing driver <https://www.adafruit.com/product/3243>`_ that's plugged into an 
+`Adafruit HUZZAH32 – ESP32 Feather Board <https://www.adafruit.com/product/3619>`_. The ESP32 Feather Board is Arduino compatible with a built-in WiFi module, so we'll program it using the 
+Arduino language running `micro-ROS <https://micro.ros.org/>`_. 
+
+On top, the MiniBot has an `RPLidar A1M8 - 360 degree laser scanner <https://www.robotshop.com/products/rplidar-a1m8-360-degree-laser-scanner-development-kit?variant=42359633805473>`_
+and `camera <https://www.amazon.com/gp/product/B00N1YJKFS/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1>`_ attached to a Raspberry Pi 4 running Ubuntu and ROS2 Humble. 
+
+We have set up robots ``am-robot-01``, ``am-robot-02``, and ``am-robot-03`` with the domain IDs given in the chart below. 
+
++-------------+---------------+
+| Robot Name  | ROS Domain ID |
++-------------+---------------+
+| am-robot-01 | 101           |
++-------------+---------------+
+| am-robot-02 | 102           |
++-------------+---------------+
+| am-robot-03 | 103           |
++-------------+---------------+
+
+
+.. note:: There are few places in this exercise where it is important to set the correct domain ID to insure proper communication between your development computer and robot, so please read carefully. 
+
+.. note:: In addition to setting the correct domain ID, you also must insure that your development computer is connected to our WiFi network ``am-network-01``. 
+
+This exercise has the following major parts:
+
+	1) Install micro-ROS on your development computer
+	2) Install Arduino on your development computer and setup IDE for ESP32 development
+	3) Flash differential drive controller to robot (Arduino code)
+	4) Remote login to robot's Raspberry Pi to run the camera and LiDAR nodes
+	5) Run camera and LiDAR nodes on your development computer (this communication is between your development computer and Raspberry Pi via WiFi)
+	6) Create amd run a micro-ROS agent that allows communication between your development computer and ESP32 on robot (this communication is between your development computer and ESP32 via WiFi)
+	7) Launch ``joystick.launch.xml`` on your development computer to drive the robot
+	
+To save time, the robot's Raspberry Pi has been pre-configured with Ubuntu 22.04.x running ROS2 Humble, and the camera and LiDAR sensors have been set up and pre-configured. You can find
+details on how to set up and configure these devices in these sections: :doc:`Raspberry Pi Setup </raspberry_pi_setup>`, :doc:`Camera Setup </camera_RPi_setup>`, 
+:doc:`RPLiDAR A1 Setup </rplidar_a1_setup>`.
+	
+.. note:: The response with this current setup hasn't been optimized, and there is considerable latency between the Playstation joystick controller and the FeatherWing motor driver running the robot's motors, 
+	so don't expect an instantaneous response. Alternatives also exist, such as driving the motors with a motor shield connected to the Raspberry Pi. 
+	
+
+1 Install the micro-ROS Build System 
+====================================
+|
+
+.. figure:: images/micro-ROS_big_logo.png
+		:width: 1280px
+		:height: 433px
+		:align: center
+		:scale: 20 %
+		
+|	
+
+`micro-ROS <https://micro.ros.org/>`_ is the framework that bridges the gap between micro-controllers and larger processing units in robotic applications as it brings the ROS2 programming 
+interface to these smaller resource-constrained devices. 
+
+Follow the steps given below to install the micro-ROS build system on your development computer:
+
+.. code-block:: bash 
+
+	# Step 1: source the ROS 2 Humble installation
+	user@am-dev-xx:~$ source /opt/ros/humble/setup.bash
+
+	# Step 2: create a micro-ROS workspace and download the micro-ROS tools
+	user@am-dev-xx:~$ mkdir microros_ws
+	user@am-dev-xx:~$ cd microros_ws
+	user@am-dev-xx:~/microros_ws$ git clone -b $ROS_DISTRO https://github.com/micro-ROS/micro_ros_setup.git src/micro_ros_setup
+
+	# Step 3: update dependencies using rosdep
+	user@am-dev-xx:~/microros_ws$ sudo apt update && rosdep update
+	user@am-dev-xx:~/microros_ws$ rosdep install --from-paths src --ignore-src -y
+
+	# Step 4: install pip
+	user@am-dev-xx:~/microros_ws$ sudo apt-get install python3-pip
+
+	# Step 5: build micro-ROS tools and source them
+	user@am-dev-xx:~/microros_ws$ colcon build
+	user@am-dev-xx:~/microros_ws$ source install/local_setup.bash
+	
+.. note:: 
+	Similarly to the ROS 2 commands, to use the micro-ROS commands in any given terminal window, you'll need to source the above ``local_setup.bash`` file, which you can do in any 
+	directory by providing the absolute path to ``local_setup.bash`` as follows:
+	
+	.. code-block:: bash
+	
+		$ source ~/microros_ws/install/local_setup.bash
+
+
+2 Install and Setup Arduino IDE for ESP32 Devices and Micro ROS
+===============================================================
+As mentioned previously, our MiniBot uses an
+`Adafruit DC Motor + Stepper FeatherWing driver <https://www.adafruit.com/product/3243>`_  plugged into an 
+`Adafruit HUZZAH32 – ESP32 Feather Board <https://www.adafruit.com/product/3619>`_. This motor driver requires use of several Adafruit libraries, and we'll find our overall task much easier by using 
+the Arduino IDE to manage these libraries for us. Hence, our first task involves downloading the Arduino IDE onto our development computer using  ``snap``. Open a terminal window and type the following:
+
+.. code-block:: bash 
+	
+		user@am-dev-xx:~$ sudo snap install arduino
+
+This will install Arduino 1.8.19 on your development computer. You can find its launch icon by searching the ``Applications`` menu. 
+
+
+2.1 Install ESP32 Library in Arduino IDE 
+----------------------------------------
+To access the ESP32 library within the Arduino IDE, open the ``Preferences`` section under ``File --> Preferences``. Once open, you'll see an option to enter a URL to obtain the ESP32 board information. 
+In the blank text field next to ``Additional Boards Managers URLs``, type the following (see image below for exact location):
+
+.. code-block:: bash
+
+	https://dl.espressif.com/dl/package_esp32_index.json
+
+|
+
+.. figure:: images/espressif01.png
+		:width: 869px
+		:height: 587px
+		:align: center
+		:scale: 75 %
+		
+|	
+
+2.2 Install ESP32 Boards Manager 
+--------------------------------
+At the top of the Arduino IDE, go to the Boards Manager under ``Tools --> Boards Manager`` and type ``esp32`` in the search field, and install  
+the ``esp32 by Espressif Systems`` library as shown below. 
+
+.. figure:: images/espressif02.png
+		:width: 1002px
+		:height: 568px
+		:align: center
+		:scale: 70 %
+		
+|	
+
+You now should be able to flash any ESP32 board via the Arduino IDE on your development computer. 
+
+2.3 Install the Adafruit Motor Shield V2 Library 
+------------------------------------------------
+Install the latest version of the Adafruit Motor Shield V2 Library (currently 1.1.3).
+
+.. figure:: images/Adafruit_MotorShield.png
+		:width: 996px
+		:height: 575px
+		:align: center
+		:scale: 70 %
+		
+|	
+
+2.4 Install micro_ros_arduino (Humble Distribution)
+---------------------------------------------------
+Install ``micro_ros_arduino`` by Pablo Garrido, latest verions for ROS 2 Humble (Version 2.0.7-humble).
+
+.. figure:: images/micro_ros_arduino_humble.png
+		:width: 998px
+		:height: 560px
+		:align: center
+		:scale: 60 %
+		
+
+
+3 Flash Differential Drive Controller to Robot
+==============================================
+
+3.1 Install pyserial 
+--------------------
+To access the serial port, the Arduino IDE on Ubuntu requires ``pyserial``, so we'll install it here.
+
+.. code-block:: bash 
+
+	user@am-dev-xx:~$ python3 -m pip install pyserial
+
+
+3.2 Flash the Differential Drive Controller 
+-------------------------------------------
+Navigate to your ``minibot`` folder and create an ``arduino`` folder as follows:
+
+.. code-block:: bash 
+
+	user@am-dev-xx:~/dev_ws/src/minibot$ mkdir arduino
+
+
+Now, save the code below it inside the ``arduino`` folder as ``MiniBot_Drive_Micro_ROS.ino`` with the following modifications:
+
+	- Line 104: the third field contains the IP address for the Raspberry Pi ("192.168.0.38"). You must find the IP address for your robot (using the steps in the next section) and replace "192.168.0.38" with the actual IP address you find. 
+		
+	- Line 109: you must change this domain ID to match the one for your robot: either ``101``, ``102``, or ``103``. 
+
+.. literalinclude:: code/MiniBot_Drive_Micro_ROS.ino
+	:language: Arduino
+	:linenos:
+	:caption: MiniBot_Drive_Micro_ROS.ino
+	
+:Step 1: remove the ESP32 power cable (power provided to ESP32 from Raspberry Pi)
+
+.. figure:: images/ESP32_power_cable.jpg
+		:width: 481px
+		:height: 640px
+		:align: center
+		:scale: 60 %
+
+|
+	
+:Step 2: plugin a USB cable from your development computer into to the ESP32.
+
+:Step 3: setup permission to read/write to serial Port (/dev/ttyUSB0)
+
+	.. code-block:: bash 
+
+		user@am-dev-xx:~$ sudo chmod 777 /dev/ttyUSB0
+	
+:Step 4: select the board as ``Adafruit ESP32 Feather`` under ``Tools --> Board: --> ESP32 Arduino --> Adafruit ESP32 Feather``.
+
+.. figure:: images/ESP32_Feather.png
+		:width: 1277px
+		:height: 930px
+		:align: center
+		:scale: 50 %
+		
+|	
+
+:Step 5: select the port as ``/dev/ttyUSB0`` under ``Tools --> Port: --> /dev/ttyUSB0`` 
+
+.. figure:: images/Port_ttyUSB0.png
+		:width: 884px
+		:height: 711px
+		:align: center
+		:scale: 60 %
+		
+|	
+
+:Step 6: upload the code. This code runs the node ``micro_ros_arduino_wifi_node`` and it subscribes to the Twist message ``cmd_vel`` which you'll provide later by launching ``joystick.launch.xml`` that we created in Exercise 6. 
+
+:Step 7: remove your development computer's USB cable from the ESP32.
+
+:Step 8: plugin the ESP32 power cable.
+
+4 Remote Login to Robot's Raspberry Pi
+======================================
+Turn on your robot's Raspberry Pi. Since it has been pre-configured to connect to our WiFi network ``am-network-01``, you can login to it via ssh, but
+you'll first need to get its IP address using an IP address scanner. 
+
+
+4.1 Download IP Address Scanner 
+-------------------------------
+To determine the IP address of your robot's Raspberry Pi, you'll need to use an IP address scanner such as 
+`Angry IP Scanner <https://angryip.org/download/>`_. On Linux, download the version that says ``x86 64-bit DEB Package for Ubuntu/Debian/Mint``.
+
+In your downloads folder, you should now have the file ``ipscan_3.9.1_amd64.deb``.
+
+
+Navigate to your downloads folder.
+
+.. code-block:: bash 
+
+    user@am-dev-xx:~$ cd ~/Downloads 
+
+Type the following to install Angry IP Scanner on your computer. 
+
+.. code-block:: bash 
+
+     user@am-dev-xx:~/Downloads$ sudo dpkg -i ipscan_3.9.1_amd64.deb
+
+4.2 Remote Login to Robot 
+-------------------------
+Open up Angry IP Scanner and press the ``Start`` button. To find the IP address of your robot, look under the ``Hostname`` column  for ``am-robot-0x.local``.
+Select and copy the IP address. Open a new terminal window and type 
+
+Add ``MacVendor``
+
+.. code-block::  bash
+
+     user@am-dev-xx:~$ ssh neet@ip-address
+
+and use the password ``1234`` to login. 
+
+Once you've connected to the Raspberry Pi, you should see the prompt ``neet@am-robot-0x:~$`` which indicates you now can type shell commands. You'll use this terminal window and 
+remote connection to run the LiDAR.
+
+To run the camera, you'll need to establish another remote connection in a separate terminal window, so follow the steps above to open another remote connect to the robot.
+ 
+4.3 Set Your Domain ID 
+----------------------
+In both remote connections to your robot, set the domain ID in both remote to match your robot's using the chart below.
+
++-------------+---------------+
+| Robot Name  | ROS Domain ID |
++-------------+---------------+
+| am-robot-01 | 101           |
++-------------+---------------+
+| am-robot-02 | 102           |
++-------------+---------------+
+| am-robot-03 | 103           |
++-------------+---------------+
+
+
+.. code-block:: bash
+
+    neet@am-robot-0x:~$ export ROS_DOMAIN_ID=10x
+	
+4.4 Run the LiDAR
+-----------------
+To run the LiDAR, type the following.
+		
+.. code-block:: bash 
+
+	# source the ROS 2 underlay to access ROS 2 commands
+	neet@am-robot-0x:~$ source /opt/ros/humble/setup.bash
+	
+	# run the lidar node
+	neet@am-robot-0x:~$ ros2 run rplidar_ros rplidar_composition --ros-args -p serial_port:=/dev/ttyUSB1  -p frame_id:=lidar_link -p angle_compensate:=true -p scan_mode:=Standard
+
+	
+4.5 Run the Camera
+------------------
+To run the camera, type the following:
+
+.. code-block:: bash 
+
+	# run the camera node
+    neet@am-robot-0x:~$ ros2 run v4l2_camera v4l2_camera_node --ros-args -p image_size:="[640,480]" -p camera_frame_id:=camera_optical_link
+
+
+5 Access Camera and LiDAR Data Streams on Your Development Computer
+===================================================================
+
+5.1 Set Your Domain ID 
+----------------------
+Set your domain ID to match your robot's using the chart below.
+
++-------------+---------------+
+| Robot Name  | ROS Domain ID |
++-------------+---------------+
+| am-robot-01 | 101           |
++-------------+---------------+
+| am-robot-02 | 102           |
++-------------+---------------+
+| am-robot-03 | 103           |
++-------------+---------------+
+
+
+.. code-block:: bash
+
+    user@am-dev-xx:~$ export ROS_DOMAIN_ID=10X
+	
+.. note:: You must set this same domain ID in every terminal window you open from here on. 
+
+5.2 To Access Camera Topic
+--------------------------
+To access the camera feed, type the following command in a terminal window on your development computer.
+
+.. code-block:: bash
+
+    user@am-dev-xx:~$ ros2 run rqt_image_view rqt_image_view
+	
+5.3 To Access LiDAR Topic
+-------------------------
+To access the LiDAR feed, run ``rviz2`` and choose the ``/scan`` topic. 
+
+:Step 1: run rviz2
+
+.. code-block:: bash 
+ 
+    user@am-dev-xx:~/ros2_ws$ rviz2 
+	
+:Step 2: inside ``rviz21``, add a ``LaserScan`` 
+
+:Step 3: choose the ``/scan`` topic
+
+:Step 4: under ``Fixed Frame`` type ``laser_frame`` (or select ``laser`` if available)
+
+:Step 5: under ``Size``, make the points 0.03 m
+
+You should now see the point cloud representation of the LiDAR within RVIZ.
+
+6 Create and Run micro-ROS Agent 
+================================
+To drive the robot, you'll need to create and run a micro-ROS agent to communicate with the ESP32 board. 
+
+6.1 Create micro-ROS Agent
+--------------------------
+The micro-ROS app is now ready to be connected to a micro-ROS agent to start talking with the rest of the ROS 2 world. 
+To do that, let’s first of all create a micro-ROS agent. Open a new window and type the following:
+ 
+.. code-block:: bash 
+	
+	# Download micro-ROS-Agent packages
+	user@am-dev-xx:~/microros_ws$ ros2 run micro_ros_setup create_agent_ws.sh
+	
+Now, let’s build the agent packages and, when this is done, source the installation:
+
+.. code-block:: bash
+
+	# Build step
+	user@am-dev-xx:~/microros_ws$ ros2 run micro_ros_setup build_agent.sh
+	user@am-dev-xx:~/microros_ws$ source install/local_setup.bash
+	
+	
+6.2 Run the micro-ROS Agent
+---------------------------
+At this point, you should have both the client and the agent correctly installed in your host machine.
+
+To give micro-ROS access to the ROS 2 dataspace via WiFi, type the following:
+
+.. code-block:: bash 
+ 
+	# Run a micro-ROS agent
+	user@am-dev-xx:~/microros_ws$ ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888
+
+
+	
+7 Launch joystick.launch.xml
+============================
+To drive your robot, you'll need to a joystick node we created in Section 1.5, Code for joystick.launch.xml in Exercise 6.
+
+:Step 1: connect the Playstation controller to your development computer via Bluetooth.
+
+:Step 2: launch a joystick node as shown below.
+
+.. code-block:: bash 
+
+	user@am-dev-xx:~/dev_ws$ ros2 launch minibot joystick.launch.xml
+	
+If everything works, you should be able to drive the MiniBot with the Playstation controller. Our system has considerable latency (sluggishness) because we're going from the Playstation controller to 
+development computer via Bluetooth, and then from development computer to ESP32 via WiFi. A better approach involves going directly from the Playstation controller to the ESP32, and this will be
+a future hack. 

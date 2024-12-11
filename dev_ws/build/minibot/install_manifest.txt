@@ -1,10 +1,15 @@
 /home/janelleg/dev_ws/install/minibot/share/minibot//urdf/minibot_gazebo.xacro
+/home/janelleg/dev_ws/install/minibot/share/minibot//urdf/minibot.xacro
+/home/janelleg/dev_ws/install/minibot/share/minibot//urdf/lidar.xacro
 /home/janelleg/dev_ws/install/minibot/share/minibot//urdf/inertia_macros.xacro
+/home/janelleg/dev_ws/install/minibot/share/minibot//urdf/camera.xacro
 /home/janelleg/dev_ws/install/minibot/share/minibot//urdf/minibot_base.xacro
 /home/janelleg/dev_ws/install/minibot/share/minibot//launch/display.launch.xml
+/home/janelleg/dev_ws/install/minibot/share/minibot//launch/joystick.launch.xml
 /home/janelleg/dev_ws/install/minibot/share/minibot//launch/minibot_gazebo.launch.xml
 /home/janelleg/dev_ws/install/minibot/share/minibot//rviz/minibot_config.rviz
 /home/janelleg/dev_ws/install/minibot/share/minibot//worlds/world01.world
+/home/janelleg/dev_ws/install/minibot/share/minibot//config/joystick.yaml
 /home/janelleg/dev_ws/install/minibot/share/ament_index/resource_index/package_run_dependencies/minibot
 /home/janelleg/dev_ws/install/minibot/share/ament_index/resource_index/parent_prefix_path/minibot
 /home/janelleg/dev_ws/install/minibot/share/minibot/environment/ament_prefix_path.sh

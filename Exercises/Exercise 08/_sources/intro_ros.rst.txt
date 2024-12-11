@@ -1,0 +1,77 @@
+.. default-role:: math
+
+===================
+Introduction to ROS
+===================
+	
+1 Origins of ROS
+====================
+In the year 2000, the first pieces of what eventually would become ROS (Robot Operating System) began coalescing at Stanford University.
+Eric Berger and Keenan Wyrobek, PhD students working in Kenneth Salisbury's Personal Robotics Program at Stanford. 
+While working on robots to do manipulation tasks in human environments, the two students noticed that many of their colleagues were held back by 
+the diverse nature of robotics: an excellent software developer might not have the hardware knowledge required, or someone developing state of the 
+art path planning might not know how to do the computer vision required. In an attempt to remedy this situation, the two students set out to make 
+a baseline system that would provide a starting place for others in academia to build upon. In the words of Eric Berger, 
+"something that didn’t suck, in all of those different dimensions" (`Wikipedia <https://en.wikipedia.org/wiki/Robot_Operating_System>`_).
+
+.. figure:: images/ROS_Reinventing_The_Wheel.png
+		:width: 4428px
+		:height: 5737px
+		:align: center
+		:alt: Reinventing the Wheel
+		:scale: 10 %
+		
+		Comic commissioned at Willow Garage, from Jorge Cham, to illustrate the wasted time in robotics R&D.
+		
+2 What is ROS 
+=============
+Wyrobek and Berger later met Scott Hassan (a key player at Google) who provided them funding and set them up in his Willow Garage incubator to create the “Linux of Robotics."
+Over the years, at their Willow Garage facility, they enlisted the help of many robotics researchers to develop ROS 1 which enabled entrepreneurs and corporations to build products and 
+businesses on top of ROS. The `Open Source Robotics Foundation <https://www.openrobotics.org/>`_ would become an enduring steward of ROS. And the ROS community would grow exponentially.
+
+ROS isn't an operating system, and its essentially
+a software development kit that helps you build robot applications. The video below gives you a good idea about what ROS does. 
+
+.. raw:: html
+
+    <iframe width="560" height="315" src="https://player.vimeo.com/video/639236696" frameborder="0" allowfullscreen></iframe>
+	
+
+3 ROS Support
+=============
+There are several mechanisms in place to provide support to the ROS community, each with its own purpose: package documentation, Q&A forum, discussion forum, package index, 
+and of course the issue trackers. It is important to pick the right resource to reduce response time, avoid message duplication, and promote the discussion of new ideas.
+
+3.1 `ROS Package Documentation <https://docs.ros.org/>`_
+--------------------------------------------------------
+Documentation for core ROS packages as well as package specific content is hosted on docs.ros.org. On this site you can find the core tutorials and documentation for the project 
+as well as generated API documentation for individual packages (`ROS Package Documentation <https://docs.ros.org/>`_ ).
+
+3.2 `Robotics Stack Exchange <https://robotics.stackexchange.com/>`_
+--------------------------------------------------------------------
+If the documentation doesn’t address your problem, Robotics Stack Exchange is next. Take heart: it is very likely that someone else has faced the same problem before, and that 
+it’s covered among the more than 60,000 questions at ROS Answers. Start by searching for questions similar to yours; if your question isn’t already asked, post a new one. 
+Be sure to check the guidelines on how to prepare your question before posting (`Robotics Stack Exchange <https://robotics.stackexchange.com/>`_ ).
+
+3.3 `ROS Discourse Forums <https://discourse.ros.org/>`_
+--------------------------------------------------------
+To stay up-to-date on the latest developments within the ROS community, you’ll want to join the ROS Discourse forums. These forums are the place for announcements, news, 
+and discussions of general interest. The ROS Discourse is not the right place to ask troubleshooting questions or report bugs; please use the other support resources listed above instead
+(`ROS Discourse Forums <https://discourse.ros.org/>`_ ).
+
+3.4 `Open Robotics Discord Server <https://www.ros.org/blog/discord/>`_
+-----------------------------------------------------------------------
+Open Robotics hosts a community Discord server where ROS, Gazebo, and Open-RMF users can meet with each other, chat, and coordinate on open-source development. If you are looking to 
+connect with ROS users this a great place to start (`Open Robotics Discord Server <https://www.ros.org/blog/discord/>`_ ).
+
+3.5 `ROS Index <https://index.ros.org/>`_
+-----------------------------------------
+When you want to find out information about a specific package the index is the best place to start. It connects you to all the important locations relevant to a package. In addition 
+to the official documentation for ROS packages, the wiki contains two key resources you should consult: the Troubleshooting guide and the FAQ. Solutions to many common problems are 
+covered in these two pages. If you have ever used PyPI you should feel right at home on ROS Index (`ROS Index <https://index.ros.org/>`_ ).
+
+3.6 `Issue Trackers <https://github.com/ros2/ros2/issues>`_
+-----------------------------------------------------------
+When you’ve identified a bug (e.g., as a result of a discussion at Robotics Stack Exchange), or when you want to request a new feature, head to the issue trackers. Links are provided in 
+the packages metadata available on ROS Index. When reporting a bug, be sure to provide a detailed description of the problem, the environment in which it occurs, any detail that may help 
+developers to reproduce the issue, and if possible, a debug backtrace (`Issue Trackers <https://github.com/ros2/ros2/issues>`_ ).

@@ -1,0 +1,50 @@
+[0.023s] Invoking command in '/home/janelleg/dev_ws/src/build/minibot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/janelleg/dev_ws/src/minibot -DCMAKE_INSTALL_PREFIX=/home/janelleg/dev_ws/src/install/minibot
+[0.221s] -- The C compiler identification is GNU 11.4.0
+[0.381s] -- The CXX compiler identification is GNU 11.4.0
+[0.400s] -- Detecting C compiler ABI info
+[0.562s] -- Detecting C compiler ABI info - done
+[0.579s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.588s] -- Detecting C compile features
+[0.589s] -- Detecting C compile features - done
+[0.598s] -- Detecting CXX compiler ABI info
+[0.787s] -- Detecting CXX compiler ABI info - done
+[0.803s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.803s] -- Detecting CXX compile features
+[0.805s] -- Detecting CXX compile features - done
+[0.823s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.181s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.526s] -- Configuring done
+[1.530s] -- Generating done
+[1.531s] -- Build files have been written to: /home/janelleg/dev_ws/src/build/minibot
+[1.539s] Invoked command in '/home/janelleg/dev_ws/src/build/minibot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/janelleg/dev_ws/src/minibot -DCMAKE_INSTALL_PREFIX=/home/janelleg/dev_ws/src/install/minibot
+[1.544s] Invoking command in '/home/janelleg/dev_ws/src/build/minibot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/janelleg/dev_ws/src/build/minibot -- -j8 -l8
+[1.628s] Invoked command in '/home/janelleg/dev_ws/src/build/minibot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/janelleg/dev_ws/src/build/minibot -- -j8 -l8
+[1.700s] Invoking command in '/home/janelleg/dev_ws/src/build/minibot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/janelleg/dev_ws/src/build/minibot
+[1.714s] -- Install configuration: ""
+[1.715s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot//urdf
+[1.715s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot//urdf/minibot_gazebo.xacro
+[1.723s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot//urdf/inertia_macros.xacro
+[1.723s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot//urdf/minibot_base.xacro
+[1.724s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot//launch
+[1.724s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot//launch/display.launch.xml
+[1.724s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot//launch/minibot_gazebo.launch.xml
+[1.724s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot//rviz
+[1.724s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot//rviz/minibot_config.rviz
+[1.724s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot//worlds
+[1.724s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot//worlds/world01.world
+[1.725s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/ament_index/resource_index/package_run_dependencies/minibot
+[1.725s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/ament_index/resource_index/parent_prefix_path/minibot
+[1.725s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot/environment/ament_prefix_path.sh
+[1.725s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot/environment/ament_prefix_path.dsv
+[1.726s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot/environment/path.sh
+[1.726s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot/environment/path.dsv
+[1.726s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot/local_setup.bash
+[1.726s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot/local_setup.sh
+[1.726s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot/local_setup.zsh
+[1.726s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot/local_setup.dsv
+[1.727s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot/package.dsv
+[1.727s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/ament_index/resource_index/packages/minibot
+[1.728s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot/cmake/minibotConfig.cmake
+[1.728s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot/cmake/minibotConfig-version.cmake
+[1.728s] -- Installing: /home/janelleg/dev_ws/src/install/minibot/share/minibot/package.xml
+[1.732s] Invoked command in '/home/janelleg/dev_ws/src/build/minibot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/janelleg/dev_ws/src/build/minibot

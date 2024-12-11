@@ -1,0 +1,185 @@
+.. _tello_sdk_2_0_user_guide:
+.. include:: <isoamsa.txt>
+
+========================
+Tello SDK 2.0 User Guide
+========================
+
+.. note::
+	You can download the unedited :download:`Tello SDK 2.0 User Guide <documents/Tello_SDK_2.0_User_Guide.pdf>` by clicking this link. 
+	This page contains essential information from this guide with several additions/corrections to make this information more usuable for this class.
+	
+Introduction
+=================
+The Tello SDK connects to the aircraft through a WiFi UDP port, allowing users to control the 
+aircraft with text commands. After downloading and installing Python, download the Tello3.py file
+via the link: `https://dl-cdn.ryzerobotics.com/downloads/tello/20180222/Tello3.py <https://dl-cdn.ryzerobotics.com/downloads/tello/20180222/Tello3.py>`_
+
+* Tello3.py is a sample program based on Python that establishes a UDP communication port, which can implement simple interaction with Tello, including 
+  sending SDK instructions to Tello and receiving Tello information. Tello3.py is for reference only and the user can develop more.
+  
+.. literalinclude:: code/Tello3.py
+   :linenos:
+
+Architecture
+============
+Use Wi-Fi to establish a connection between the Tello and PC, Mac, or mobile device. 
+
+Send Command & Receive Response
+-------------------------------
+
+:Tello IP: 192.168.10.1 
+:UDP PORT: 8889 |hArr| PC/Mac/Mobile
+:Step 1: Set up a UDP client on the PC, Mac, or mobile device to send and receive messages from the Tello via the same port.
+:Step 2: Before sending any other commands, send “command” to the Tello via UDP PORT 8889 to initiate SDK mode.
+
+Receive Tello State
+-------------------
+
+:Tello IP: 192.168.10.1
+:UDP Server: 0.0.0.0 
+:UDP PORT: 8890
+:Step 3: Set up a UDP server on the PC, Mac, or mobile device and check the message from IP 0.0.0.0 via UDP PORT 8890. Steps 1 and 2 must be completed before attempting step 3. 
+	For more details, refer to the Tello State section.
+
+Receive Tello Video Stream
+--------------------------
+
+:Tello IP: 192.168.10.1 
+:UDP Server: 0.0.0.0 
+:UDP PORT: 11111
+:Step 4: Set up a UDP server on the PC, Mac, or mobile device and check the message from IP 0.0.0.0 via UDP PORT 11111.
+:Step 5: Send “streamon” to the Tello via UDP PORT 8889 to start streaming. Steps 1 and 2 must be completed before attempting step 5.
+
+Tello Command Types and Results
+===============================
+The Tello SDK includes three basic command types.
+
+**1) Control Commands (xxx)**
+	* Returns “ok” if the command was successful.
+	* Returns “error” or an informational result code if the command failed
+
+**2) Set Command (xxx a)** to set new sub-parameter values
+	* Returns “ok” if the command was successful.
+	* Returns “error” or an informational result code if the command failed
+
+
+
+
+Tello Commands
+==============
+
+Control Commands
+----------------
+
+.. csv-table:: 
+   :file: tello_control_commands.csv
+   :header-rows: 1
+   
+   
+Set Commands
+-------------
+
+.. csv-table:: 
+   :file: tello_set_commands.csv
+   :header-rows: 1
+   
+   
+Read Commands
+-------------
+ 
+   
+   +----------+------------------------------------+-------------------+
+   | Command  | Description                        | Possible Response |
+   +==========+====================================+===================+
+   | speed?   | Obtain current speed (cm/s).       | x = 10 to 100     |
+   +----------+------------------------------------+-------------------+
+   | battery? | Obtain current battery percentage. | x = 0 to 100      |
+   +----------+------------------------------------+-------------------+
+   | time?    | Obtain current flight time.        | time              |
+   +----------+------------------------------------+-------------------+
+   | wifi?    | Obtain Wi-Fi SNR.                  | snr               |
+   +----------+------------------------------------+-------------------+
+   | sdk?     | Obtain the Tello SDK version.      | sdk version       |
+   +----------+------------------------------------+-------------------+
+   | sn?      | Obtain the Tello serial number.    | serial number     |
+   +----------+------------------------------------+-------------------+
+   
+Tello State
+===========
+
+Data Type: String
+-----------------
+
+**Data string received when the mission pad detection feature is enabled**:
+
+"%d;h:%d;bat:%d;baro:%f;\\r\\n"
+
+
+**Data string received when the mission pad detection feature is disabled**:
+"pitch:%d;roll:%d;yaw:%d;vgx:%d;vgy:%d;vgz:%d;templ:%d;temph:%d;tof:%d;h:%d;bat:%d;baro:% .2f; time:%d;agx:%.2f;agy:%.2f;agz:%.2f;\\r\\n"
+
+
+**Description**
+
+:mid: the ID of the Mission Pad detected. If no Mission Pad is detected, a “-1” message will be received instead.
+:x: the x coordinate detected on the Mission Pad. If there is no Mission Pad, a “0" message will be received instead.
+:y: the y coordinate detected on the Mission Pad. If there is no Mission Pad, a “0" message will be received instead.
+:z: the z coordinate detected on the Mission Pad. If there is no Mission Pad, a “0" message will be received instead.
+:pitch: the degree of the attitude pitch.
+:roll: the degree of the attitude roll.
+:yaw: the degree of the attitude yaw.
+:vgx: the speed of x axis.
+:vgy: the speed of the y axis.
+:vgz: the speed of the z axis.
+:templ: the lowest temperature in degree Celsius.
+:temph: the highest temperature in degree Celsius
+:tof: the time of flight distance in cm.
+:h: the height in cm.
+:bat: the percentage of the current battery level.
+:baro: the barometer measurement in cm.
+:time: the amount of time the motor has been used.
+:agx: the acceleration of the x axis.
+:agy: the acceleration of the y axis.
+:agz: the acceleration of the z axis.
+
+
+mid Commands
+------------
+mid commands are only used with a Mission Pad. mid commands include:
+
++---------------------------------------------------+
+| mon                                               |
++---------------------------------------------------+
+| moff                                              |
++---------------------------------------------------+
+| mdirection x                                      |
++---------------------------------------------------+
+| go x y z speed mid                                |
++---------------------------------------------------+
+| curve x1 y1 z1 x2 y2 z2 speed mid                 |
++---------------------------------------------------+
+| jump x y z speed yaw mid1 mid2                    |
++---------------------------------------------------+
+
+
+For more details, read the :ref:`Mission Pad User Guide`.
+
+Safety Feature
+--------------
+If there is no command for 15 seconds, the Tello will land automatically.
+
+
+
+Reset Tello Wi-Fi
+=================
+Make sure the Tello is turned on and press and hold the power button for five seconds. The indicators will turn off and blink yellow slowly. When the Wi-Fi
+SSID and password is reset to the default settings, the indicator blinks yellow quickly. Note that in default there is no password set.
+
+
+
+
+   
+   
+
+   

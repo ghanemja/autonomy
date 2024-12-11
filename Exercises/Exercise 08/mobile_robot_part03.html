@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile Robot, Part 3 &mdash; 16.633 NEET Autonomous Machines  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Mobile Robot, Part 4" href="mobile_robot_part04.html" />
+    <link rel="prev" title="Mobile Robot, Part 2" href="mobile_robot_part02.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/NEET-AutonomousMachines.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Exercise 01</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro_ros.html">Introduction to ROS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_overview.html">Linux Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_01.html">ROS 2 Humble Tutorials, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 02</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_02.html">ROS 2 Humble Tutorials, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 03</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_03.html">ROS 2 Humble Tutorials, Part 3</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 04</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part01.html">Mobile Robot, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 05</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part02.html">Mobile Robot, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 06</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mobile Robot, Part 3</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#joystick-controller">1 Joystick Controller</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pair-the-controller-with-your-computer">1.1 Pair the Controller with Your Computer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#determine-the-joystick-axes-and-button-numbers">1.2 Determine the Joystick Axes and Button Numbers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#joystick-node-configuration-parameters">1.3 Joystick Node Configuration Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-joystick-yaml">1.4 Create joystick.yaml</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#joy-node-parameter-listing">1.4.1 joy_node Parameter Listing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#teleop-node-parameter-listing">1.4.2 teleop_node Parameter Listing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#code-for-joystick-yaml">1.4.3 Code for joystick.yaml</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#code-for-joystick-launch-xml">1.5 Code for joystick.launch.xml</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#updates-to-existing-code">2 Updates to Existing Code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#code-for-minibot-xacro">2.1 Code for minibot.xacro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-for-minibot-base-xacro">2.2 Update for minibot_base.xacro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#updates-for-minibot-gazebo-launch-xml">2.3 Updates for minibot_gazebo.launch.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-cmakelists-txt">2.4 Update CMakeLists.txt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#lidar-sensor">3 LiDAR Sensor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#lidar-specifications">3.1 LiDAR Specifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urdf-construction">3.2 URDF Construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gazebo-parameters">3.3 Gazebo Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#template">3.3.1 Template</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#actual">3.3.2 Actual</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#code-for-lidar-xacro">3.4 Code for lidar.xacro</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#camera-sensor">4 Camera Sensor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#camera-specifications">4.1 Camera Specifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urdf">4.2 URDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">4.3 Gazebo Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">4.3.1 Template</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">4.3.2 Actual</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#code-for-camera-xacro">4.4 Code for camera.xacro</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#drive-minibot-inside-gazebo-with-joystick-controller">5 Drive MiniBot Inside Gazebo with Joystick Controller</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build-the-package">5.1 Build the Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source-the-workspace">5.2 Source the Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#launch-minibot-gazebo-launch-xml">5.3 Launch minibot_gazebo.launch.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#visualizing-camera-data">5.4 Visualizing Camera Data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 07</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part04.html">Mobile Robot, Part 4</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 08</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tello_edu_overview.html">Tello Edu Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_sdk_2_0.html">Programming via Tello SDK 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_djitellopy.html">Programming via DJITelloPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Mobile Robot Setup Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="raspberry_pi_setup.html">Raspberry Pi Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="camera_RPi_setup.html">Camera Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rplidar_a1_setup.html">RPLiDAR A1 Setup</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tello User Manuals and Specifications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tello_edu_specs.html">Tello Edu Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_user_manual.html">Tello User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_sdk_2_0_user_guide.html">Tello SDK 2.0 User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="td1_controller.html">Td1 Controller Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batteries_charging.html">Batteries/Charging</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">16.633 NEET Autonomous Machines</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Mobile Robot, Part 3</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mobile-robot-part-3">
+<h1>Mobile Robot, Part 3<a class="headerlink" href="#mobile-robot-part-3" title="Permalink to this heading"></a></h1>
+<p>In this exercise, you’ll learn the following:</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p>How to set up a joystick controller for use in ROS;</p></li>
+<li><p>How to use <code class="docutils literal notranslate"><span class="pre">joy_node</span></code> to obtain joystick axes/button presses;</p></li>
+<li><p>How to use <code class="docutils literal notranslate"><span class="pre">teleop_node</span></code> to convert joystick messages into velocity commands for our robot;</p></li>
+<li><p>How to simulate a LiDAR sensor in Gazebo; and</p></li>
+<li><p>How to simulate a camera sensor in Gazebo.</p></li>
+</ol>
+</div></blockquote>
+<section id="joystick-controller">
+<h2>1 Joystick Controller<a class="headerlink" href="#joystick-controller" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/PS5_DualSense_Controller00.jpg"><img alt="_images/PS5_DualSense_Controller00.jpg" src="_images/PS5_DualSense_Controller00.jpg" style="width: 410.84999999999997px; height: 198.9px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>The joystick controller that we’ll be using is a PlayStation 5 DualSense Wireless Controller shown above. This controller has more features than we plan to use but
+most importantly it connects to our laptops wirelessly over a ROS node (<code class="docutils literal notranslate"><span class="pre">teleop_twist_joy</span></code>). Subsequently, this ROS node converts our joystick/button presses into a
+<code class="docutils literal notranslate"><span class="pre">twist</span></code> topic (<code class="docutils literal notranslate"><span class="pre">/cmd_vel</span></code>) we can use  to drive our robot.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are other wireless controllers that serve the same purpose of providing a wireless
+connection to your laptop, so if you’re planning something like this on your own, a less expensive controller will also work.</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>After completing this exercise, please make sure to return the DualSense controller to your instructor as we have a limited number available for classroom use. If you need to check one out, please
+notify your instructor and make sure to return the controller on the next school day.</p>
+</div>
+<section id="pair-the-controller-with-your-computer">
+<h3>1.1 Pair the Controller with Your Computer<a class="headerlink" href="#pair-the-controller-with-your-computer" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>On your laptop, open Settings, select Bluetooth, and turn Bluetooth on.</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><figure class="align-center">
+<a class="reference internal image-reference" href="_images/PS5_DualSense_Controller02.png"><img alt="_images/PS5_DualSense_Controller02.png" src="_images/PS5_DualSense_Controller02.png" style="width: 582.4px; height: 299.2px;" /></a>
+</figure>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Simultaneously press the two buttons shown below.</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><figure class="align-center">
+<a class="reference internal image-reference" href="_images/PS5_DualSense_Controller01.png"><img alt="_images/PS5_DualSense_Controller01.png" src="_images/PS5_DualSense_Controller01.png" style="width: 373.75px; height: 271.7px;" /></a>
+</figure>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><p>Hold these two buttons down until you see <code class="docutils literal notranslate"><span class="pre">DualSense</span> <span class="pre">Wireless</span> <span class="pre">Controller</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">Not</span> <span class="pre">Set</span> <span class="pre">Up</span></code> as shown below.</p>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><figure class="align-center">
+<a class="reference internal image-reference" href="_images/PS5_DualSense_Controller03.png"><img alt="_images/PS5_DualSense_Controller03.png" src="_images/PS5_DualSense_Controller03.png" style="width: 431.6px; height: 56.550000000000004px;" /></a>
+</figure>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Press the <code class="docutils literal notranslate"><span class="pre">Not</span> <span class="pre">Set</span> <span class="pre">Up</span></code> button on your screen. If successful, you should immediately see the <code class="docutils literal notranslate"><span class="pre">DualSense</span> <span class="pre">Wireless</span> <span class="pre">Controller</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">Connected</span></code> message.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Once connected, your controller should remain connected to your laptop until you disconnect from the controller, or when you shut down your laptop.
+Your controller is connected when the blue lights on the top are solid.</p>
+</div>
+</section>
+<section id="determine-the-joystick-axes-and-button-numbers">
+<h3>1.2 Determine the Joystick Axes and Button Numbers<a class="headerlink" href="#determine-the-joystick-axes-and-button-numbers" title="Permalink to this heading"></a></h3>
+<p>To determine the joystick axes and button numbers that work in ROS, you can use the joystick tester application <code class="docutils literal notranslate"><span class="pre">jstest-gtk</span></code>.
+You can install <code class="docutils literal notranslate"><span class="pre">jstest-gtk</span></code> by typing the following in a terminal window.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>jstest-gtk
+</pre></div>
+</div>
+<p>To run <code class="docutils literal notranslate"><span class="pre">jstest-gtk</span></code>, type the following.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>jstest-gtk
+</pre></div>
+</div>
+<p>Once open, you should see the <code class="docutils literal notranslate"><span class="pre">Joystick</span> <span class="pre">Preferences</span></code> screen as illustrated below. Select the <code class="docutils literal notranslate"><span class="pre">DualSense</span> <span class="pre">Wireless</span> <span class="pre">Controller</span></code> and then click the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> button.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/PS5_DualSense_Controller04.png"><img alt="_images/PS5_DualSense_Controller04.png" src="_images/PS5_DualSense_Controller04.png" style="width: 375.20000000000005px; height: 286.40000000000003px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>You now should see the <code class="docutils literal notranslate"><span class="pre">DualSense</span> <span class="pre">Wireless</span> <span class="pre">Controller</span></code> screen as illustrated below.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/PS5_DualSense_Controller05.png"><img alt="_images/PS5_DualSense_Controller05.png" src="_images/PS5_DualSense_Controller05.png" style="width: 448.0px; height: 480.0px;" /></a>
+</figure>
+<p>As you move the left/right joysticks and press the buttons on the controller, the orange bars corresponding to the eight axes will move, and the 12 buttons will light up.
+We’ll use the following axes and buttons to configure our joystick in ROS.</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p>Axis 1 (left joystick): forward/reverse motion along the x-axis.</p></li>
+<li><p>Axis 4 (right joystick): right/left rotation around the z-axis (yaw motion)</p></li>
+<li><p>Button 4: deadman switch</p></li>
+<li><p>Button 5: turbo speed</p></li>
+</ol>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The deadman switch (button 4) activates the joystick controls (axes 1 and 4, and button 5). In other words, if button 4 isn’t pressed, axes 1 and 4, and button 5 will not work.</p>
+</div>
+</section>
+<section id="joystick-node-configuration-parameters">
+<h3>1.3 Joystick Node Configuration Parameters<a class="headerlink" href="#joystick-node-configuration-parameters" title="Permalink to this heading"></a></h3>
+<p>To use our joystick controller in ROS, we’ll need to set a few parameters when we spin up the <code class="docutils literal notranslate"><span class="pre">joy_node</span></code>. We can set these parameters from the command line, however, it will
+be much easier to set them inside a parameter configuration file, such as a YAML file.
+YAML files are used in ROS to load node configuration parameters to the <a class="reference external" href="https://wiki.ros.org/Parameter%20Server">ROS Parameter Server</a>.</p>
+<p>We’ll store our joystick parameters in the file <code class="docutils literal notranslate"><span class="pre">joystick.yaml</span></code> and we’ll place this file inside a <code class="docutils literal notranslate"><span class="pre">config</span></code> folder. First, we’ll create our <code class="docutils literal notranslate"><span class="pre">config</span></code> folder
+inside our <code class="docutils literal notranslate"><span class="pre">minibot</span></code> package folder as follows.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src/minibot$<span class="w"> </span>mkdir<span class="w"> </span>config
+</pre></div>
+</div>
+</section>
+<section id="create-joystick-yaml">
+<h3>1.4 Create joystick.yaml<a class="headerlink" href="#create-joystick-yaml" title="Permalink to this heading"></a></h3>
+<p>We’ll now create the file <code class="docutils literal notranslate"><span class="pre">joystick.yaml</span></code> and place it inside our <code class="docutils literal notranslate"><span class="pre">config</span></code> folder. This file contains parameters that initialize our <code class="docutils literal notranslate"><span class="pre">joy_node</span></code> and
+<code class="docutils literal notranslate"><span class="pre">teleop_node</span></code>. A list of parameters for <code class="docutils literal notranslate"><span class="pre">joy_node</span></code> are located <a class="reference external" href="https://index.ros.org/p/joy/">here</a> and the parameters for <code class="docutils literal notranslate"><span class="pre">teleop_node</span></code> (within the
+<code class="docutils literal notranslate"><span class="pre">teleop_twist_joy</span></code> package are located <a class="reference external" href="https://wiki.ros.org/teleop_twist_joy">here</a> and <a class="reference external" href="https://docs.ros.org/en/ros2_packages/iron/api/teleop_twist_joy/standard_docs/README.html">here</a>.</p>
+<section id="joy-node-parameter-listing">
+<h4>1.4.1 joy_node Parameter Listing<a class="headerlink" href="#joy-node-parameter-listing" title="Permalink to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">joy</span></code> package acts as a generic Linux joystick driver, and it contains <code class="docutils literal notranslate"><span class="pre">joy_node</span></code>, a node that interfaces a generic Linux-compatible joystick to ROS. The
+<code class="docutils literal notranslate"><span class="pre">joy_node</span></code> publishes the joy message <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/joy</span></code>, and it has the following parameters:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">device_id</span> <span class="pre">(int,</span> <span class="pre">default:</span> <span class="pre">0)</span></code></dt><dd><ul>
+<li><p>The joystick device to use. ros2 run joy joy_enumerate_devices wil list the attached devices.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">device_name</span> <span class="pre">(string,</span> <span class="pre">default:</span> <span class="pre">“”)</span></code></dt><dd><ul>
+<li><p>The joystick name to use. This can be useful when multiple different joysticks are attached. If both device_name and device_id are specified, device_name takes precedence.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">deadzone</span> <span class="pre">(double,</span> <span class="pre">default:</span> <span class="pre">0.05)</span></code></dt><dd><ul>
+<li><p>Amount by which the joystick has to move before it is considered to be off-center. This parameter is specified relative to an axis normalized between -1 and 1. Thus, 0.1 means that the joystick has to move 10% of the way to the edge of an axis’s range before that axis will output a non-zero value.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">autorepeat_rate</span> <span class="pre">(double,</span> <span class="pre">default:</span> <span class="pre">20.0)</span></code></dt><dd><ul>
+<li><p>Rate in Hz at which a joystick that has a non-changing state will resend the previously sent message. If set to 0.0, autorepeat will be disabled, meaning joy messages will only be published when the joystick changes. Cannot be larger than 1000.0.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">sticky_buttons</span> <span class="pre">(bool,</span> <span class="pre">default:</span> <span class="pre">false)</span></code></dt><dd><ul>
+<li><p>Whether buttons are “sticky”. If this is false (the default), then a button press will result in a 1 being output, and a button release will result in a 0 being output. If this is true, then a button press will toggle the current state of the button, and a button release will do nothing. Thus, hitting the button while it is currently 0 will switch it to 1, and keep it at 1 until the button is pressed again.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">coalesce_interval_ms</span> <span class="pre">(int,</span> <span class="pre">default:</span> <span class="pre">1)</span></code></dt><dd><ul>
+<li><p>The number of milliseconds to wait after an axis event before publishing a message. Since the kernel sends an event for every change, this can significantly reduce the number of messages published. Setting it to 0 disables this behavior. The default of 1 ms is a good compromise between message delays and number of messages published.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="teleop-node-parameter-listing">
+<h4>1.4.2 teleop_node Parameter Listing<a class="headerlink" href="#teleop-node-parameter-listing" title="Permalink to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">telop_twist_joy</span></code> package provides a generic facility for tele-operating robots with a standard joystick, as it converts joy messages to velocity commands.
+The <code class="docutils literal notranslate"><span class="pre">telop_node</span></code> within the <code class="docutils literal notranslate"><span class="pre">telop_twist_joy</span></code> package subscribes to and republishes <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/joy</span></code> as scaled <code class="docutils literal notranslate"><span class="pre">geometry_msgs/msg/Twist</span></code> messages.
+The <code class="docutils literal notranslate"><span class="pre">telop_node</span></code> has the following parameters:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">require_enable_button</span> <span class="pre">(bool,</span> <span class="pre">default:</span> <span class="pre">true)</span></code></dt><dd><ul>
+<li><p>Whether to require the enable button for enabling movement.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">enable_button</span> <span class="pre">(int,</span> <span class="pre">default:</span> <span class="pre">0)</span></code></dt><dd><ul>
+<li><p>Joystick button to enable regular-speed movement.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">enable_turbo_button</span> <span class="pre">(int,</span> <span class="pre">default:</span> <span class="pre">-1)</span></code></dt><dd><ul>
+<li><p>Joystick button to enable high-speed movement (disabled when -1).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">axis_linear.&lt;axis&gt;</span></code></dt><dd><ul>
+<li><p>Joystick axis to use for linear movement control.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">axis_linear.x</span> <span class="pre">(int,</span> <span class="pre">default:</span> <span class="pre">5)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">axis_linear.y</span> <span class="pre">(int,</span> <span class="pre">default:</span> <span class="pre">-1)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">axis_linear.z</span> <span class="pre">(int,</span> <span class="pre">default:</span> <span class="pre">-1)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">scale_linear.&lt;axis&gt;</span></code></dt><dd><ul>
+<li><p>Scale to apply to joystick linear axis for regular-speed movement.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scale_linear.x</span> <span class="pre">(double,</span> <span class="pre">default:</span> <span class="pre">0.5)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scale_linear.y</span> <span class="pre">(double,</span> <span class="pre">default:</span> <span class="pre">0.0)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scale_linear.z</span> <span class="pre">(double,</span> <span class="pre">default:</span> <span class="pre">0.0)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">scale_linear_turbo.&lt;axis&gt;</span></code></dt><dd><ul>
+<li><p>Scale to apply to joystick linear axis for high-speed movement.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scale_linear_turbo.x</span> <span class="pre">(double,</span> <span class="pre">default:</span> <span class="pre">1.0)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scale_linear_turbo.y</span> <span class="pre">(double,</span> <span class="pre">default:</span> <span class="pre">0.0)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scale_linear_turbo.z</span> <span class="pre">(double,</span> <span class="pre">default:</span> <span class="pre">0.0)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">axis_angular.&lt;axis&gt;</span></code></dt><dd><ul>
+<li><p>Joystick axis to use for angular movement control.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">axis_angular.yaw</span> <span class="pre">(int,</span> <span class="pre">default:</span> <span class="pre">2)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">axis_angular.pitch</span> <span class="pre">(int,</span> <span class="pre">default:</span> <span class="pre">-1)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">axis_angular.roll</span> <span class="pre">(int,</span> <span class="pre">default:</span> <span class="pre">-1)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">scale_angular.&lt;axis&gt;</span></code></dt><dd><ul>
+<li><p>Scale to apply to joystick angular axis.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scale_angular.yaw</span> <span class="pre">(double,</span> <span class="pre">default:</span> <span class="pre">0.5)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scale_angular.pitch</span> <span class="pre">(double,</span> <span class="pre">default:</span> <span class="pre">0.0)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scale_angular.roll</span> <span class="pre">(double,</span> <span class="pre">default:</span> <span class="pre">0.0)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">scale_angular_turbo.&lt;axis&gt;</span></code></dt><dd><ul>
+<li><p>Scale to apply to joystick angular axis for high-speed movement.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scale_angular_turbo.yaw</span> <span class="pre">(double,</span> <span class="pre">default:</span> <span class="pre">1.0)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scale_angular_turbo.pitch</span> <span class="pre">(double,</span> <span class="pre">default:</span> <span class="pre">0.0)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scale_angular_turbo.roll</span> <span class="pre">(double,</span> <span class="pre">default:</span> <span class="pre">0.0)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">inverted_reverse</span> <span class="pre">(bool,</span> <span class="pre">default:</span> <span class="pre">false)</span></code></dt><dd><ul>
+<li><p>Whether to invert turning left-right while reversing (useful for differential wheeled robots).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">publish_stamped_twist</span> <span class="pre">(bool,</span> <span class="pre">default:</span> <span class="pre">false)</span></code></dt><dd><ul>
+<li><p>Whether to publish <code class="docutils literal notranslate"><span class="pre">geometry_msgs/msg/TwistStamped</span></code> for command velocity messages.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">frame</span> <span class="pre">(string,</span> <span class="pre">default:</span> <span class="pre">'teleop_twist_joy')</span></code></dt><dd><ul>
+<li><p>Frame name used for the header of TwistStamped messages.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="code-for-joystick-yaml">
+<h4>1.4.3 Code for joystick.yaml<a class="headerlink" href="#code-for-joystick-yaml" title="Permalink to this heading"></a></h4>
+<p>Below is the code (with parameter settings) we’ll use in our <code class="docutils literal notranslate"><span class="pre">joystick.yaml</span></code> file. Make sure to place this file inside your <code class="docutils literal notranslate"><span class="pre">config</span></code> folder. See the parameter listings given above for more details.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># parameters for joy_node</span>
+<span class="linenos"> 2</span><span class="nt">joy_node</span><span class="p">:</span>
+<span class="linenos"> 3</span><span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="linenos"> 4</span><span class="w">        </span><span class="nt">device_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="linenos"> 5</span><span class="w">        </span><span class="nt">deadzone</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<span class="linenos"> 6</span><span class="w">        </span><span class="nt">autorepeat_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="c1"># parameters for teleop_node</span>
+<span class="linenos"> 9</span><span class="nt">teleop_node</span><span class="p">:</span>
+<span class="linenos">10</span><span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="linenos">11</span><span class="w">        </span><span class="nt">axis_linear.x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"> </span><span class="c1"># forward/reverse axis</span>
+<span class="linenos">12</span><span class="w">        </span><span class="nt">scale_linear.x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<span class="linenos">13</span><span class="w">        </span><span class="nt">scale_linear_turbo.x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="linenos">14</span><span class="w">        </span><span class="nt">axis_angular.yaw</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w"> </span><span class="c1"># right/left axis</span>
+<span class="linenos">15</span><span class="w">        </span><span class="nt">scale_angular.yaw</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.75</span>
+<span class="linenos">16</span><span class="w">        </span><span class="nt">scale_angular_turbo.yaw</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="linenos">17</span><span class="w">        </span><span class="nt">require_enable_button</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="linenos">18</span><span class="w">        </span><span class="nt">enable_button</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w">  </span><span class="c1"># deadman button</span>
+<span class="linenos">19</span><span class="w">        </span><span class="nt">enable_turbo_button</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span><span class="w">  </span><span class="c1"># turbo button</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="code-for-joystick-launch-xml">
+<span id="joysticklaunch"></span><h3>1.5 Code for joystick.launch.xml<a class="headerlink" href="#code-for-joystick-launch-xml" title="Permalink to this heading"></a></h3>
+<p>To test our joystick parameters and make sure they work properly, we’ll create a launch file <code class="docutils literal notranslate"><span class="pre">joystick.launch.xml</span></code> that loads up our joystick parameters.</p>
+<p>Create a file <code class="docutils literal notranslate"><span class="pre">joystick.launch.xml</span></code> with the contents given below. Place this file inside your <code class="docutils literal notranslate"><span class="pre">launch</span></code> folder.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nt">&lt;launch&gt;</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="w">        </span><span class="cm">&lt;!-- start the joystick node --&gt;</span>
+<span class="linenos"> 4</span><span class="w">        </span><span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;joy&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;joy_node&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joy_node&quot;</span><span class="nt">&gt;</span>
+<span class="linenos"> 5</span><span class="w">                </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">from=</span><span class="s">&quot;$(find-pkg-share minibot)/config/joystick.yaml&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos"> 6</span><span class="w">        </span><span class="nt">&lt;/node&gt;</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="cm">&lt;!-- start the teleop node --&gt;</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;teleop_twist_joy&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;teleop_node&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;teleop_node&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">10</span><span class="w">                </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">from=</span><span class="s">&quot;$(find-pkg-share minibot)/config/joystick.yaml&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">11</span><span class="w">        </span><span class="nt">&lt;/node&gt;</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="nt">&lt;/launch&gt;</span>
+</pre></div>
+</div>
+<p>Now, make sure you’re inside the <code class="docutils literal notranslate"><span class="pre">dev_ws</span></code> workspace and build it using colcon.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span>colcon<span class="w"> </span>build
+</pre></div>
+</div>
+<p>Now, source the workspace <code class="docutils literal notranslate"><span class="pre">setup.bash</span></code> file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+<p>Now, go into Settings and make sure your joystick is still connected to Bluetooth. You may need to press the PlayStation button to turn it back on.</p>
+<p>Now, launch <code class="docutils literal notranslate"><span class="pre">joystick.launch.xml</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>minibot<span class="w"> </span>joystick.launch.xml
+</pre></div>
+</div>
+<p>We’re interested in the <code class="docutils literal notranslate"><span class="pre">/cmd_vel</span></code> topic which has twist coordinates for velocity.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/cmd_vel
+</pre></div>
+</div>
+<p>After pressing the deadman button, your screen should look like the following.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/PS5_DualSense_Controller06.png"><img alt="_images/PS5_DualSense_Controller06.png" src="_images/PS5_DualSense_Controller06.png" style="width: 460.59999999999997px; height: 329.7px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Now, as you move the left joystick up/down, you’ll get values for <code class="docutils literal notranslate"><span class="pre">axis_linear.x</span></code>, and as you move the right joystick up/down, you’ll get values for <code class="docutils literal notranslate"><span class="pre">axis_linear.yaw</span></code>.
+We’ll publish these <code class="docutils literal notranslate"><span class="pre">/cmd_vel</span></code> values and Gazebo, as a subscriber, will use these values to drive our MiniBot.</p>
+</section>
+</section>
+<section id="updates-to-existing-code">
+<h2>2 Updates to Existing Code<a class="headerlink" href="#updates-to-existing-code" title="Permalink to this heading"></a></h2>
+<p>We’ll now call the URDF files for our base (<code class="docutils literal notranslate"><span class="pre">minibot_base.xacro</span></code>), LiDAR (<code class="docutils literal notranslate"><span class="pre">lidar.xacro</span></code>), and camera (<code class="docutils literal notranslate"><span class="pre">camera.xacro</span></code>) from a more general URDF file called
+<code class="docutils literal notranslate"><span class="pre">minibot.xacro</span></code>. This requires:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>the creation of <code class="docutils literal notranslate"><span class="pre">minibot.xacro</span></code> and</p></li>
+<li><p>a slight update to <code class="docutils literal notranslate"><span class="pre">minibot_base.xacro</span></code> .</p></li>
+</ol>
+</div></blockquote>
+<p>In addition to these two updates, we’ll make the following updates to our launch file <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.launch.xml</span></code>:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>inside <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.launch.xml</span></code>, load the <code class="docutils literal notranslate"><span class="pre">minibot.xacro</span></code> file instead of <code class="docutils literal notranslate"><span class="pre">minibot_base.xacro</span></code> and</p></li>
+<li><p>inside <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.launch.xml</span></code>, launch both the <code class="docutils literal notranslate"><span class="pre">joy_node</span></code> and <code class="docutils literal notranslate"><span class="pre">teleop_node</span></code> for joystick control.</p></li>
+</ol>
+</div></blockquote>
+<section id="code-for-minibot-xacro">
+<h3>2.1 Code for minibot.xacro<a class="headerlink" href="#code-for-minibot-xacro" title="Permalink to this heading"></a></h3>
+<p>Place the code below in your <code class="docutils literal notranslate"><span class="pre">minibot.xacro</span></code> file.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="linenos">2</span><span class="nt">&lt;robot</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;minibot&quot;</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="w"> </span><span class="nt">&gt;</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="w">        </span><span class="nt">&lt;xacro:include</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;minibot_base.xacro&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">5</span><span class="w">        </span><span class="nt">&lt;xacro:include</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;lidar.xacro&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">6</span><span class="w">        </span><span class="nt">&lt;xacro:include</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;camera.xacro&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">7</span>
+<span class="linenos">8</span><span class="nt">&lt;/robot&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="update-for-minibot-base-xacro">
+<h3>2.2 Update for minibot_base.xacro<a class="headerlink" href="#update-for-minibot-base-xacro" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Inside <code class="docutils literal notranslate"><span class="pre">minibot_base.xacro</span></code>, replace <code class="docutils literal notranslate"><span class="pre">&lt;robot</span> <span class="pre">name=&quot;minibot_base&quot;</span> <span class="pre">xmlns:xacro=&quot;http://www.ros.org/wiki/xacro&quot;&gt;</span></code> with <code class="docutils literal notranslate"><span class="pre">&lt;robot</span> <span class="pre">xmlns:xacro=&quot;http://www.ros.org/wiki/xacro&quot;</span> <span class="pre">&gt;</span></code>.</p></li>
+<li><p>Inside <code class="docutils literal notranslate"><span class="pre">minibot_base.xacro</span></code>, if you haven’t done so already, flip the rotational direction of the right wheel’s joint axis by placing a negative sign on the z-component as follows.</p></li>
+</ol>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- right_wheel_joint --&gt;</span>
+<span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;right_wheel_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;continuous&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;chassis_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;right_wheel_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;${wheel_offset_x} ${-((chassis_width/2) + (wheel_thickness/2))} 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;${pi/2} 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 -1&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We need to flip the rotational direction of the right wheel’s joint axis to correspond with the rotational direction of the gazebo differential drive plugin.
+If you don’t make this correction, it will appear as if the left/right joysticks on your controller are reversed with the left joystick turning the MiniBot quickly with the linear forward/reverse
+speed, and the right joystick driving forward/reverse slowly with the turning speed.</p>
+</div>
+</section>
+<section id="updates-for-minibot-gazebo-launch-xml">
+<h3>2.3 Updates for minibot_gazebo.launch.xml<a class="headerlink" href="#updates-for-minibot-gazebo-launch-xml" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Inside <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.launch.xml</span></code>, load the <code class="docutils literal notranslate"><span class="pre">minibot.xacro</span></code> file instead of <code class="docutils literal notranslate"><span class="pre">minibot_base.xacro</span></code> (see line 2 below).</p></li>
+<li><p>Inside <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.launch.xml</span></code>, add the <code class="docutils literal notranslate"><span class="pre">joy_node</span></code> and <code class="docutils literal notranslate"><span class="pre">teleop_node</span></code> to launch.</p></li>
+</ol>
+<p>Your updated <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.launch.xml</span></code> file should look like the following.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nt">&lt;launch&gt;</span>
+<span class="linenos"> 2</span><span class="w">        </span><span class="cm">&lt;!-- find the minibot urdf file (inside the install folder) and assign the path to a variable --&gt;</span>
+<span class="linenos"> 3</span><span class="w">        </span><span class="nt">&lt;let</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;urdf_path&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;$(find-pkg-share minibot)/urdf/minibot.xacro&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="w">        </span><span class="cm">&lt;!-- find the rviz configuration file (inside the install folder) and assign the path to a variable --&gt;</span>
+<span class="linenos"> 6</span><span class="w">        </span><span class="nt">&lt;let</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;rviz_config_path&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;$(find-pkg-share minibot)/rviz/minibot_config.rviz&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="cm">&lt;!-- start the robot-state-publisher node --&gt;</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;robot_state_publisher&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;robot_state_publisher&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">10</span><span class="w">                </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;robot_description&quot;</span>
+<span class="linenos">11</span><span class="w">                        </span><span class="na">value=</span><span class="s">&quot;$(command &#39;xacro $(var urdf_path)&#39;)&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">12</span><span class="w">                </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;use_sim_time&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">13</span><span class="w">        </span><span class="nt">&lt;/node&gt;</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="w">        </span><span class="cm">&lt;!-- open Gazebo with our saved world --&gt;</span>
+<span class="linenos">16</span><span class="w">        </span><span class="nt">&lt;include</span><span class="w"> </span><span class="na">file=</span><span class="s">&quot;$(find-pkg-share gazebo_ros)/launch/gazebo.launch.py&quot;</span><span class="w"> </span><span class="nt">&gt;</span>
+<span class="linenos">17</span><span class="w">                </span><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;world&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;$(find-pkg-share minibot)/worlds/world01.world&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">18</span><span class="w">        </span><span class="nt">&lt;/include&gt;</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="w">        </span><span class="cm">&lt;!-- spawn minibot in Gazebo --&gt;</span>
+<span class="linenos">21</span><span class="w">        </span><span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;gazebo_ros&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;spawn_entity.py&quot;</span>
+<span class="linenos">22</span><span class="w">                  </span><span class="na">args=</span><span class="s">&quot;-topic robot_description -entity minibot&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="w">        </span><span class="cm">&lt;!-- start the joint-state-publisher-gui node --&gt;</span>
+<span class="linenos">25</span><span class="w">        </span><span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;joint_state_publisher_gui&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;joint_state_publisher_gui&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="w">        </span><span class="cm">&lt;!-- start RVIZ2 with our save configuration File --&gt;</span>
+<span class="linenos">28</span><span class="w">        </span><span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;rviz2&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;rviz2&quot;</span><span class="w"> </span><span class="na">output=</span><span class="s">&quot;screen&quot;</span>
+<span class="linenos">29</span><span class="w">                  </span><span class="na">args=</span><span class="s">&quot;-d $(var rviz_config_path)&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="w">        </span><span class="cm">&lt;!-- start the joystick node --&gt;</span>
+<span class="linenos">32</span><span class="w">        </span><span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;joy&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;joy_node&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">33</span><span class="w">                </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">from=</span><span class="s">&quot;$(find-pkg-share minibot)/config/joystick.yaml&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">34</span><span class="w">        </span><span class="nt">&lt;/node&gt;</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="w">        </span><span class="cm">&lt;!-- start the teleop node --&gt;</span>
+<span class="linenos">37</span><span class="w">        </span><span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;teleop_twist_joy&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;teleop_node&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;teleop_node&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">38</span><span class="w">                </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">from=</span><span class="s">&quot;$(find-pkg-share minibot)/config/joystick.yaml&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">39</span><span class="w">        </span><span class="nt">&lt;/node&gt;</span>
+<span class="linenos">40</span><span class="nt">&lt;/launch&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="update-cmakelists-txt">
+<h3>2.4 Update CMakeLists.txt<a class="headerlink" href="#update-cmakelists-txt" title="Permalink to this heading"></a></h3>
+<p>In your <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file, add the <code class="docutils literal notranslate"><span class="pre">config</span></code> directory on line 13 after the <code class="docutils literal notranslate"><span class="pre">urdf</span></code>, <code class="docutils literal notranslate"><span class="pre">launch</span></code>, <code class="docutils literal notranslate"><span class="pre">rviz</span></code>, and <code class="docutils literal notranslate"><span class="pre">worlds</span></code>  directories as shown below.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>cmake_minimum_required(VERSION<span class="w"> </span>3.8)
+<span class="linenos"> 2</span>project(minibot)
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span>if(CMAKE_COMPILER_IS_GNUCXX<span class="w"> </span>OR<span class="w"> </span>CMAKE_CXX_COMPILER_ID<span class="w"> </span>MATCHES<span class="w"> </span>&quot;Clang&quot;)
+<span class="linenos"> 5</span><span class="w">  </span>add_compile_options(-Wall<span class="w"> </span>-Wextra<span class="w"> </span>-Wpedantic)
+<span class="linenos"> 6</span>endif()
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>#<span class="w"> </span>find<span class="w"> </span>dependencies
+<span class="linenos"> 9</span>find_package(ament_cmake<span class="w"> </span>REQUIRED)
+<span class="linenos">10</span>
+<span class="linenos">11</span>#<span class="w"> </span>install<span class="w"> </span>package<span class="w"> </span>directories
+<span class="linenos">12</span>install(
+<span class="linenos">13</span><span class="w">  </span>DIRECTORY<span class="w"> </span>urdf<span class="w"> </span>launch<span class="w"> </span>rviz<span class="w"> </span>worlds<span class="w"> </span>config
+<span class="linenos">14</span><span class="w">  </span>DESTINATION<span class="w"> </span>share/${PROJECT_NAME}/
+<span class="linenos">15</span>)
+<span class="linenos">16</span>
+<span class="linenos">17</span>ament_package()
+</pre></div>
+</div>
+</section>
+</section>
+<section id="lidar-sensor">
+<h2>3 LiDAR Sensor<a class="headerlink" href="#lidar-sensor" title="Permalink to this heading"></a></h2>
+<section id="lidar-specifications">
+<h3>3.1 LiDAR Specifications<a class="headerlink" href="#lidar-specifications" title="Permalink to this heading"></a></h3>
+<p>Brand: RPLidar A1M8 - 360 Degree Laser Scanner</p>
+<ul class="simple">
+<li><p>Distance Range: 0.15 - 12 m (with white object to be reflected in the test)</p></li>
+<li><p>Angular Field of View: 0~360°</p></li>
+<li><p>Resolution: 0.5-1.0% (minimum 0.5 mm) &#64; &lt; 1.5 m</p></li>
+<li><p>Angular Resolution: Less than or equal to 1° (when scanning at 5.5Hz)</p></li>
+<li><p>Sampling frequency: 4000 - 8000 Hz</p></li>
+<li><p>Scan frequency: 1~10Hz, typical value 5.5Hz (when RPLIDAR takes 360 points per scan, scan frequency is the typical value)</p></li>
+</ul>
+</section>
+<section id="urdf-construction">
+<h3>3.2 URDF Construction<a class="headerlink" href="#urdf-construction" title="Permalink to this heading"></a></h3>
+<p>Construction of the URDF for our LiDAR sensor consists of the following.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- constants --&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar_diam&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.07&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar_height&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.055&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar_offset_x&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;${chassis_length/2 - 0.055}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar_offset_z&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;${lidar_height/2 + chassis_height/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar_mass&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.5&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+
+<span class="cm">&lt;!-- lidar_joint --&gt;</span>
+<span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fixed&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;chassis_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;lidar_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;${lidar_offset_x} 0 ${lidar_offset_z}&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+
+<span class="cm">&lt;!-- lidar_link --&gt;</span>
+<span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;visual&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;cylinder</span><span class="w"> </span><span class="na">length=</span><span class="s">&quot;${lidar_height}&quot;</span><span class="w"> </span><span class="na">radius=</span><span class="s">&quot;${lidar_diam/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">    </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w">  </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;green&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/visual&gt;</span>
+<span class="w">        </span><span class="nt">&lt;collision&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;cylinder</span><span class="w"> </span><span class="na">length=</span><span class="s">&quot;${lidar_height}&quot;</span><span class="w"> </span><span class="na">radius=</span><span class="s">&quot;${lidar_diam/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">    </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w">  </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/collision&gt;</span>
+<span class="w">        </span><span class="nt">&lt;xacro:cylinder_inertia</span><span class="w"> </span><span class="na">m=</span><span class="s">&quot;${lidar_mass}&quot;</span><span class="w"> </span><span class="na">h=</span><span class="s">&quot;${lidar_height}&quot;</span><span class="w"> </span><span class="na">r=</span><span class="s">&quot;${lidar_diam/2}&quot;</span>
+<span class="w">                                </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/link&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="gazebo-parameters">
+<h3>3.3 Gazebo Parameters<a class="headerlink" href="#gazebo-parameters" title="Permalink to this heading"></a></h3>
+<section id="template">
+<h4>3.3.1 Template<a class="headerlink" href="#template" title="Permalink to this heading"></a></h4>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- Gazebo parameters for lidar sensor --&gt;</span>
+<span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;name_of_link_reference&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;material&gt;</span>Gazebo_material<span class="nt">&lt;/material&gt;</span>
+<span class="w">        </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;name_of_lidar&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;ray&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;pose&gt;</span>x<span class="w"> </span>y<span class="w"> </span>z<span class="w"> </span>Rx<span class="w"> </span>Ry<span class="w"> </span>Rz<span class="nt">&lt;/pose&gt;</span>
+<span class="w">                </span><span class="nt">&lt;visualize&gt;</span>visualize_boolean<span class="nt">&lt;/visualize&gt;</span>
+<span class="w">                </span><span class="nt">&lt;update_rate&gt;</span>freq_in_hz<span class="nt">&lt;/update_rate&gt;</span>
+<span class="w">                </span><span class="nt">&lt;ray&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;scan&gt;</span>
+<span class="w">                                </span><span class="nt">&lt;horizontal&gt;</span>
+<span class="w">                                        </span><span class="nt">&lt;samples&gt;</span>number_of_points<span class="nt">&lt;/samples&gt;</span>
+<span class="w">                                        </span><span class="nt">&lt;resolution&gt;</span>scan_resolution<span class="nt">&lt;/resolution&gt;</span>
+<span class="w">                                        </span><span class="nt">&lt;min_angle&gt;</span>min_angle_in_rad<span class="nt">&lt;/min_angle&gt;</span>
+<span class="w">                                        </span><span class="nt">&lt;max_angle&gt;</span>max_angle_in_rad<span class="nt">&lt;/max_angle&gt;</span>
+<span class="w">                                </span><span class="nt">&lt;/horizontal&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/scan&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;range&gt;</span>
+<span class="w">                                </span><span class="nt">&lt;min&gt;</span>min_dist_in_meters<span class="nt">&lt;/min&gt;</span>
+<span class="w">                                </span><span class="nt">&lt;max&gt;</span>max_dist_in_meters<span class="nt">&lt;/max&gt;</span>
+<span class="w">                                </span><span class="nt">&lt;resolution&gt;</span>resolution_in_meters<span class="nt">&lt;/resolution&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/range&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/ray&gt;</span>
+<span class="w">                </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;name_of_plugin&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros_ray_sensor.so&quot;</span><span class="nt">&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;ros&gt;</span>
+<span class="w">                                </span><span class="nt">&lt;argument&gt;</span>~/out:=scan<span class="nt">&lt;/argument&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/ros&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;output_type&gt;</span>sensor_msgs/LaserScan<span class="nt">&lt;/output_type&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;frame_name&gt;</span>name_of_link_reference<span class="nt">&lt;/frame_name&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/sensor&gt;</span>
+<span class="nt">&lt;/gazebo&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="actual">
+<h4>3.3.2 Actual<a class="headerlink" href="#actual" title="Permalink to this heading"></a></h4>
+<p>Using our LiDAR specifications, we have the following.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cm">&lt;!-- Gazebo parameters for lidar sensor --&gt;</span>
+<span class="w">     </span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;lidar_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;material&gt;</span>Gazebo/Green<span class="nt">&lt;/material&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;laser&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;ray&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;pose&gt;</span><span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span><span class="nt">&lt;/pose&gt;</span>
+<span class="w">        </span><span class="nt">&lt;visualize&gt;</span>true<span class="nt">&lt;/visualize&gt;</span>
+<span class="w">        </span><span class="nt">&lt;update_rate&gt;</span>10<span class="nt">&lt;/update_rate&gt;</span>
+<span class="w">        </span><span class="nt">&lt;ray&gt;</span>
+<span class="w">            </span><span class="nt">&lt;scan&gt;</span>
+<span class="w">                </span><span class="nt">&lt;horizontal&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;samples&gt;</span>360<span class="nt">&lt;/samples&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;min_angle&gt;</span>-3.14<span class="nt">&lt;/min_angle&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;max_angle&gt;</span>3.14<span class="nt">&lt;/max_angle&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/horizontal&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/scan&gt;</span>
+<span class="w">            </span><span class="nt">&lt;range&gt;</span>
+<span class="w">                </span><span class="nt">&lt;min&gt;</span>0.3<span class="nt">&lt;/min&gt;</span>
+<span class="w">                </span><span class="nt">&lt;max&gt;</span>12<span class="nt">&lt;/max&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/range&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/ray&gt;</span>
+<span class="w">        </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;laser_controller&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros_ray_sensor.so&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;ros&gt;</span>
+<span class="w">                </span><span class="nt">&lt;argument&gt;</span>~/out:=scan<span class="nt">&lt;/argument&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/ros&gt;</span>
+<span class="w">            </span><span class="nt">&lt;output_type&gt;</span>sensor_msgs/LaserScan<span class="nt">&lt;/output_type&gt;</span>
+<span class="w">            </span><span class="nt">&lt;frame_name&gt;</span>laser_frame<span class="nt">&lt;/frame_name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/sensor&gt;</span>
+<span class="nt">&lt;/gazebo&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="code-for-lidar-xacro">
+<h3>3.4 Code for lidar.xacro<a class="headerlink" href="#code-for-lidar-xacro" title="Permalink to this heading"></a></h3>
+<p>The final code for our LiDAR sensor in <code class="docutils literal notranslate"><span class="pre">lidar.xacro</span></code> looks like the following.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="linenos"> 2</span><span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="w"> </span><span class="nt">&gt;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="w">        </span><span class="cm">&lt;!-- constants --&gt;</span>
+<span class="linenos"> 5</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar_diam&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.07&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos"> 6</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar_height&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.055&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos"> 7</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar_offset_x&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;${chassis_length/2 - 0.055}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar_offset_z&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;${lidar_height/2 + chassis_height/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar_mass&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.5&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="w">        </span><span class="cm">&lt;!-- lidar_joint --&gt;</span>
+<span class="linenos">12</span><span class="w">        </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fixed&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">13</span><span class="w">                </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;chassis_link&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">14</span><span class="w">                </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;lidar_link&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">15</span><span class="w">                </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;${lidar_offset_x} 0 ${lidar_offset_z}&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">16</span><span class="w">        </span><span class="nt">&lt;/joint&gt;</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="w">        </span><span class="cm">&lt;!-- lidar_link --&gt;</span>
+<span class="linenos">19</span><span class="w">        </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar_link&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">20</span><span class="w">                </span><span class="nt">&lt;visual&gt;</span>
+<span class="linenos">21</span><span class="w">                        </span><span class="nt">&lt;geometry&gt;</span>
+<span class="linenos">22</span><span class="w">                                </span><span class="nt">&lt;cylinder</span><span class="w"> </span><span class="na">length=</span><span class="s">&quot;${lidar_height}&quot;</span><span class="w"> </span><span class="na">radius=</span><span class="s">&quot;${lidar_diam/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">23</span><span class="w">                        </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="linenos">24</span><span class="w">                        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w">  </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">25</span><span class="w">                        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;green&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">26</span><span class="w">                </span><span class="nt">&lt;/visual&gt;</span>
+<span class="linenos">27</span><span class="w">                </span><span class="nt">&lt;collision&gt;</span>
+<span class="linenos">28</span><span class="w">                        </span><span class="nt">&lt;geometry&gt;</span>
+<span class="linenos">29</span><span class="w">                                </span><span class="nt">&lt;cylinder</span><span class="w"> </span><span class="na">length=</span><span class="s">&quot;${lidar_height}&quot;</span><span class="w"> </span><span class="na">radius=</span><span class="s">&quot;${lidar_diam/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">30</span><span class="w">                        </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="linenos">31</span><span class="w">                        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w">  </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">32</span><span class="w">                </span><span class="nt">&lt;/collision&gt;</span>
+<span class="linenos">33</span><span class="w">                </span><span class="nt">&lt;xacro:cylinder_inertia</span><span class="w"> </span><span class="na">m=</span><span class="s">&quot;${lidar_mass}&quot;</span><span class="w"> </span><span class="na">h=</span><span class="s">&quot;${lidar_height}&quot;</span><span class="w"> </span><span class="na">r=</span><span class="s">&quot;${lidar_diam/2}&quot;</span>
+<span class="linenos">34</span><span class="w">                                                                </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">35</span><span class="w">        </span><span class="nt">&lt;/link&gt;</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="w">        </span><span class="cm">&lt;!-- Gazebo parameters for lidar --&gt;</span>
+<span class="linenos">38</span><span class="w">         </span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;lidar_link&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">39</span><span class="w">                </span><span class="nt">&lt;material&gt;</span>Gazebo/Green<span class="nt">&lt;/material&gt;</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span><span class="w">                </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;laser&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;ray&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">42</span><span class="w">                        </span><span class="nt">&lt;pose&gt;</span><span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span><span class="nt">&lt;/pose&gt;</span>
+<span class="linenos">43</span><span class="w">                        </span><span class="nt">&lt;visualize&gt;</span>true<span class="nt">&lt;/visualize&gt;</span>
+<span class="linenos">44</span><span class="w">                        </span><span class="nt">&lt;update_rate&gt;</span>10<span class="nt">&lt;/update_rate&gt;</span>
+<span class="linenos">45</span><span class="w">                        </span><span class="nt">&lt;ray&gt;</span>
+<span class="linenos">46</span><span class="w">                                </span><span class="nt">&lt;scan&gt;</span>
+<span class="linenos">47</span><span class="w">                                        </span><span class="nt">&lt;horizontal&gt;</span>
+<span class="linenos">48</span><span class="w">                                                </span><span class="nt">&lt;samples&gt;</span>360<span class="nt">&lt;/samples&gt;</span>
+<span class="linenos">49</span><span class="w">                                                </span><span class="nt">&lt;min_angle&gt;</span>-3.14<span class="nt">&lt;/min_angle&gt;</span>
+<span class="linenos">50</span><span class="w">                                                </span><span class="nt">&lt;max_angle&gt;</span>3.14<span class="nt">&lt;/max_angle&gt;</span>
+<span class="linenos">51</span><span class="w">                                        </span><span class="nt">&lt;/horizontal&gt;</span>
+<span class="linenos">52</span><span class="w">                                </span><span class="nt">&lt;/scan&gt;</span>
+<span class="linenos">53</span><span class="w">                                </span><span class="nt">&lt;range&gt;</span>
+<span class="linenos">54</span><span class="w">                                        </span><span class="nt">&lt;min&gt;</span>0.3<span class="nt">&lt;/min&gt;</span>
+<span class="linenos">55</span><span class="w">                                        </span><span class="nt">&lt;max&gt;</span>12<span class="nt">&lt;/max&gt;</span>
+<span class="linenos">56</span><span class="w">                                </span><span class="nt">&lt;/range&gt;</span>
+<span class="linenos">57</span><span class="w">                        </span><span class="nt">&lt;/ray&gt;</span>
+<span class="linenos">58</span><span class="w">                        </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;laser_controller&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros_ray_sensor.so&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">59</span><span class="w">                                </span><span class="nt">&lt;ros&gt;</span>
+<span class="linenos">60</span><span class="w">                                        </span><span class="nt">&lt;argument&gt;</span>~/out:=scan<span class="nt">&lt;/argument&gt;</span>
+<span class="linenos">61</span><span class="w">                                </span><span class="nt">&lt;/ros&gt;</span>
+<span class="linenos">62</span><span class="w">                                </span><span class="nt">&lt;output_type&gt;</span>sensor_msgs/LaserScan<span class="nt">&lt;/output_type&gt;</span>
+<span class="linenos">63</span><span class="w">                                </span><span class="nt">&lt;frame_name&gt;</span>laser_frame<span class="nt">&lt;/frame_name&gt;</span>
+<span class="linenos">64</span><span class="w">                        </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="linenos">65</span><span class="w">                </span><span class="nt">&lt;/sensor&gt;</span>
+<span class="linenos">66</span><span class="w">        </span><span class="nt">&lt;/gazebo&gt;</span>
+<span class="linenos">67</span><span class="nt">&lt;/robot&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="camera-sensor">
+<h2>4 Camera Sensor<a class="headerlink" href="#camera-sensor" title="Permalink to this heading"></a></h2>
+<section id="camera-specifications">
+<h3>4.1 Camera Specifications<a class="headerlink" href="#camera-specifications" title="Permalink to this heading"></a></h3>
+<p>Brand: Sainsmart Wide Angle FOV160° 5-Megapixel Camera Module for Raspberry Pi</p>
+<p>Specifications
+* 2592 pixels x 1944 pixels (still image)
+* 640 pixels x 480 pixels &#64; 60 frames/sec
+* Field of View (FOV): 160 degrees (2.79 radians)</p>
+</section>
+<section id="urdf">
+<h3>4.2 URDF<a class="headerlink" href="#urdf" title="Permalink to this heading"></a></h3>
+<p>Construction of the URDF for our camera sensor consists of the following.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- constants --&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_length&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.02&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_width&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.025&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_height&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.025&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mass&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.1&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mount_length&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.01&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mount_width&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.080&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mount_heigth&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.115&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mount_mass&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.1&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_offset_x&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;${camera_length/2 + camera_mount_length/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_offset_z&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;${camera_mount_heigth/2 - camera_height/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mount_offset_x&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;-0.035&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mount_offset_z&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;${camera_mount_heigth/2 + chassis_height/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+
+<span class="cm">&lt;!-- camera_mount_joint --&gt;</span>
+<span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mount_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fixed&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;chassis_link&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;camera_mount_link&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;${camera_mount_offset_x} 0 ${camera_mount_offset_z}&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+
+<span class="cm">&lt;!-- camera_mount_link --&gt;</span>
+<span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mount_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;visual&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;box</span><span class="w"> </span><span class="na">size=</span><span class="s">&quot;${camera_mount_length} ${camera_mount_width} ${camera_mount_heigth}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">                </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;blue&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/visual&gt;</span>
+<span class="w">        </span><span class="nt">&lt;collision&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;box</span><span class="w"> </span><span class="na">size=</span><span class="s">&quot;${camera_mount_length} ${camera_mount_width} ${camera_mount_heigth}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">                </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/collision&gt;</span>
+<span class="w">        </span><span class="nt">&lt;xacro:box_inertia</span><span class="w"> </span><span class="na">m=</span><span class="s">&quot;${camera_mass}&quot;</span><span class="w"> </span><span class="na">l=</span><span class="s">&quot;${camera_mount_length}&quot;</span><span class="w"> </span><span class="na">w=</span><span class="s">&quot;${camera_mount_width}&quot;</span><span class="w"> </span><span class="na">h=</span><span class="s">&quot;${camera_mount_heigth}&quot;</span>
+<span class="w">                                                </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/link&gt;</span>
+
+<span class="cm">&lt;!-- camera_joint --&gt;</span>
+<span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fixed&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;camera_mount_link&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;camera_link&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;${camera_offset_x} 0 ${camera_offset_z}&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+
+<span class="cm">&lt;!-- camera_link --&gt;</span>
+<span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;visual&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;box</span><span class="w"> </span><span class="na">size=</span><span class="s">&quot;${camera_length} ${camera_width} ${camera_height}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">                </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;red&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/visual&gt;</span>
+<span class="w">        </span><span class="nt">&lt;collision&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;box</span><span class="w"> </span><span class="na">size=</span><span class="s">&quot;${camera_length} ${camera_width} ${camera_height}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">                </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/collision&gt;</span>
+<span class="w">        </span><span class="nt">&lt;xacro:box_inertia</span><span class="w"> </span><span class="na">m=</span><span class="s">&quot;${camera_mass}&quot;</span><span class="w"> </span><span class="na">l=</span><span class="s">&quot;${camera_length}&quot;</span><span class="w"> </span><span class="na">w=</span><span class="s">&quot;${camera_width}&quot;</span><span class="w"> </span><span class="na">h=</span><span class="s">&quot;${camera_height}&quot;</span>
+<span class="w">                                                </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/link&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>4.3 Gazebo Parameters<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<section id="id4">
+<h4>4.3.1 Template<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cm">&lt;!-- Gazebo parameters for camera sensor --&gt;</span>
+<span class="linenos"> 2</span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;name_of_link&quot;</span><span class="nt">&gt;</span>
+<span class="linenos"> 3</span><span class="w">        </span><span class="nt">&lt;material&gt;</span>Gazebo_material<span class="nt">&lt;/material&gt;</span>
+<span class="linenos"> 4</span><span class="w">        </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;camera&quot;</span><span class="nt">&gt;</span>
+<span class="linenos"> 5</span><span class="w">                </span><span class="nt">&lt;pose&gt;</span>x<span class="w"> </span>y<span class="w"> </span>z<span class="w"> </span>Rx<span class="w"> </span>Ry<span class="w"> </span>Rz<span class="nt">&lt;/pose&gt;</span>
+<span class="linenos"> 6</span><span class="w">                </span><span class="nt">&lt;visualize&gt;</span>true<span class="nt">&lt;/visualize&gt;</span>
+<span class="linenos"> 7</span><span class="w">                </span><span class="nt">&lt;update_rate&gt;</span>frequency_in_hz<span class="nt">&lt;/update_rate&gt;</span>
+<span class="linenos"> 8</span><span class="w">                </span><span class="nt">&lt;camera&gt;</span>
+<span class="linenos"> 9</span><span class="w">                        </span><span class="nt">&lt;horizontal_fov&gt;</span>fov_in_radians<span class="nt">&lt;/horizontal_fov&gt;</span>
+<span class="linenos">10</span><span class="w">                        </span><span class="nt">&lt;image&gt;</span>
+<span class="linenos">11</span><span class="w">                                </span><span class="nt">&lt;format&gt;</span>R8G8B8<span class="nt">&lt;/format&gt;</span>
+<span class="linenos">12</span><span class="w">                                </span><span class="nt">&lt;width&gt;</span>width_in_pixels<span class="nt">&lt;/width&gt;</span>
+<span class="linenos">13</span><span class="w">                                </span><span class="nt">&lt;height&gt;</span>height_in_pixels<span class="nt">&lt;/height&gt;</span>
+<span class="linenos">14</span><span class="w">                        </span><span class="nt">&lt;/image&gt;</span>
+<span class="linenos">15</span><span class="w">                        </span><span class="nt">&lt;clip&gt;</span>
+<span class="linenos">16</span><span class="w">                                </span><span class="nt">&lt;near&gt;</span>near_plane_in_meters<span class="nt">&lt;/near&gt;</span>
+<span class="linenos">17</span><span class="w">                                </span><span class="nt">&lt;far&gt;</span>far_plane_in_meters<span class="nt">&lt;/far&gt;</span>
+<span class="linenos">18</span><span class="w">                        </span><span class="nt">&lt;/clip&gt;</span>
+<span class="linenos">19</span><span class="w">                </span><span class="nt">&lt;/camera&gt;</span>
+<span class="linenos">20</span><span class="w">                </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_controller&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros_camera.so&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">21</span><span class="w">                        </span><span class="nt">&lt;frame_name&gt;</span>name_of_joint<span class="nt">&lt;/frame_name&gt;</span>
+<span class="linenos">22</span><span class="w">                </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="linenos">23</span><span class="w">        </span><span class="nt">&lt;/sensor&gt;</span>
+<span class="linenos">24</span><span class="nt">&lt;/gazebo&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h4>4.3.2 Actual<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h4>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- Gazebo parameters for camera sensor --&gt;</span>
+<span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;camera_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;material&gt;</span>Gazebo/Red<span class="nt">&lt;/material&gt;</span>
+
+<span class="w">        </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;camera&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;pose&gt;</span><span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span><span class="nt">&lt;/pose&gt;</span>
+<span class="w">                </span><span class="nt">&lt;visualize&gt;</span>true<span class="nt">&lt;/visualize&gt;</span>
+<span class="w">                </span><span class="nt">&lt;update_rate&gt;</span>10<span class="nt">&lt;/update_rate&gt;</span>
+<span class="w">                </span><span class="nt">&lt;camera&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;horizontal_fov&gt;</span>1.089<span class="nt">&lt;/horizontal_fov&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;image&gt;</span>
+<span class="w">                                </span><span class="nt">&lt;format&gt;</span>R8G8B8<span class="nt">&lt;/format&gt;</span>
+<span class="w">                                </span><span class="nt">&lt;width&gt;</span>640<span class="nt">&lt;/width&gt;</span>
+<span class="w">                                </span><span class="nt">&lt;height&gt;</span>480<span class="nt">&lt;/height&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/image&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;clip&gt;</span>
+<span class="w">                                </span><span class="nt">&lt;near&gt;</span>0.05<span class="nt">&lt;/near&gt;</span>
+<span class="w">                                </span><span class="nt">&lt;far&gt;</span>8.0<span class="nt">&lt;/far&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/clip&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/camera&gt;</span>
+<span class="w">                </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_controller&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros_camera.so&quot;</span><span class="nt">&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;frame_name&gt;</span>camera_link_optical<span class="nt">&lt;/frame_name&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/sensor&gt;</span>
+<span class="nt">&lt;/gazebo&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="code-for-camera-xacro">
+<h3>4.4 Code for camera.xacro<a class="headerlink" href="#code-for-camera-xacro" title="Permalink to this heading"></a></h3>
+<p>The final code for our camera sensor in <code class="docutils literal notranslate"><span class="pre">camera.xacro</span></code> looks like the following.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="linenos"> 2</span><span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="w"> </span><span class="nt">&gt;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="w">        </span><span class="cm">&lt;!-- constants --&gt;</span>
+<span class="linenos"> 5</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_length&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.02&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos"> 6</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_width&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.025&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos"> 7</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_height&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.025&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mass&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.1&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mount_length&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.01&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">10</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mount_width&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.080&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">11</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mount_heigth&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.115&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">12</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mount_mass&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.1&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">13</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_offset_x&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;${camera_length/2 + camera_mount_length/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">14</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_offset_z&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;${camera_mount_heigth/2 - camera_height/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">15</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mount_offset_x&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;-0.035&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">16</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mount_offset_z&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;${camera_mount_heigth/2 + chassis_height/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="w">        </span><span class="cm">&lt;!-- camera_mount_joint --&gt;</span>
+<span class="linenos">19</span><span class="w">        </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mount_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fixed&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">20</span><span class="w">                </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;chassis_link&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">21</span><span class="w">                </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;camera_mount_link&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">22</span><span class="w">                </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;${camera_mount_offset_x} 0 ${camera_mount_offset_z}&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">23</span><span class="w">        </span><span class="nt">&lt;/joint&gt;</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="w">        </span><span class="cm">&lt;!-- camera_mount_link --&gt;</span>
+<span class="linenos">26</span><span class="w">        </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_mount_link&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">27</span><span class="w">                </span><span class="nt">&lt;visual&gt;</span>
+<span class="linenos">28</span><span class="w">                        </span><span class="nt">&lt;geometry&gt;</span>
+<span class="linenos">29</span><span class="w">                                </span><span class="nt">&lt;box</span><span class="w"> </span><span class="na">size=</span><span class="s">&quot;${camera_mount_length} ${camera_mount_width} ${camera_mount_heigth}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">30</span><span class="w">                        </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="linenos">31</span><span class="w">                        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">32</span><span class="w">                        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;blue&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">33</span><span class="w">                </span><span class="nt">&lt;/visual&gt;</span>
+<span class="linenos">34</span><span class="w">                </span><span class="nt">&lt;collision&gt;</span>
+<span class="linenos">35</span><span class="w">                        </span><span class="nt">&lt;geometry&gt;</span>
+<span class="linenos">36</span><span class="w">                                </span><span class="nt">&lt;box</span><span class="w"> </span><span class="na">size=</span><span class="s">&quot;${camera_mount_length} ${camera_mount_width} ${camera_mount_heigth}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">37</span><span class="w">                        </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="linenos">38</span><span class="w">                        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">39</span><span class="w">                </span><span class="nt">&lt;/collision&gt;</span>
+<span class="linenos">40</span><span class="w">                </span><span class="nt">&lt;xacro:box_inertia</span><span class="w"> </span><span class="na">m=</span><span class="s">&quot;${camera_mass}&quot;</span><span class="w"> </span><span class="na">l=</span><span class="s">&quot;${camera_mount_length}&quot;</span><span class="w"> </span><span class="na">w=</span><span class="s">&quot;${camera_mount_width}&quot;</span><span class="w"> </span><span class="na">h=</span><span class="s">&quot;${camera_mount_heigth}&quot;</span>
+<span class="linenos">41</span><span class="w">                                                   </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">42</span><span class="w">        </span><span class="nt">&lt;/link&gt;</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span><span class="w">        </span><span class="cm">&lt;!-- camera_joint --&gt;</span>
+<span class="linenos">45</span><span class="w">        </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fixed&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">46</span><span class="w">                </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;camera_mount_link&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">47</span><span class="w">                </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;camera_link&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">48</span><span class="w">                </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;${camera_offset_x} 0 ${camera_offset_z}&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">49</span><span class="w">        </span><span class="nt">&lt;/joint&gt;</span>
+<span class="linenos">50</span>
+<span class="linenos">51</span><span class="w">        </span><span class="cm">&lt;!-- camera_link --&gt;</span>
+<span class="linenos">52</span><span class="w">        </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_link&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">53</span><span class="w">                </span><span class="nt">&lt;visual&gt;</span>
+<span class="linenos">54</span><span class="w">                        </span><span class="nt">&lt;geometry&gt;</span>
+<span class="linenos">55</span><span class="w">                                </span><span class="nt">&lt;box</span><span class="w"> </span><span class="na">size=</span><span class="s">&quot;${camera_length} ${camera_width} ${camera_height}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">56</span><span class="w">                        </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="linenos">57</span><span class="w">                        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">58</span><span class="w">                        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;red&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">59</span><span class="w">                </span><span class="nt">&lt;/visual&gt;</span>
+<span class="linenos">60</span><span class="w">                </span><span class="nt">&lt;collision&gt;</span>
+<span class="linenos">61</span><span class="w">                        </span><span class="nt">&lt;geometry&gt;</span>
+<span class="linenos">62</span><span class="w">                                </span><span class="nt">&lt;box</span><span class="w"> </span><span class="na">size=</span><span class="s">&quot;${camera_length} ${camera_width} ${camera_height}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">63</span><span class="w">                        </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="linenos">64</span><span class="w">                        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">65</span><span class="w">                </span><span class="nt">&lt;/collision&gt;</span>
+<span class="linenos">66</span><span class="w">                </span><span class="nt">&lt;xacro:box_inertia</span><span class="w"> </span><span class="na">m=</span><span class="s">&quot;${camera_mass}&quot;</span><span class="w"> </span><span class="na">l=</span><span class="s">&quot;${camera_length}&quot;</span><span class="w"> </span><span class="na">w=</span><span class="s">&quot;${camera_width}&quot;</span><span class="w"> </span><span class="na">h=</span><span class="s">&quot;${camera_height}&quot;</span>
+<span class="linenos">67</span><span class="w">                                                   </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">68</span><span class="w">        </span><span class="nt">&lt;/link&gt;</span>
+<span class="linenos">69</span>
+<span class="linenos">70</span><span class="w">        </span><span class="cm">&lt;!-- Gazebo parameters for camera sensor --&gt;</span>
+<span class="linenos">71</span><span class="w">        </span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;camera_link&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">72</span><span class="w">                </span><span class="nt">&lt;material&gt;</span>Gazebo/Red<span class="nt">&lt;/material&gt;</span>
+<span class="linenos">73</span>
+<span class="linenos">74</span><span class="w">                </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;camera&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">75</span><span class="w">                        </span><span class="nt">&lt;pose&gt;</span><span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span>0<span class="w"> </span><span class="nt">&lt;/pose&gt;</span>
+<span class="linenos">76</span><span class="w">                        </span><span class="nt">&lt;visualize&gt;</span>true<span class="nt">&lt;/visualize&gt;</span>
+<span class="linenos">77</span><span class="w">                        </span><span class="nt">&lt;update_rate&gt;</span>10<span class="nt">&lt;/update_rate&gt;</span>
+<span class="linenos">78</span><span class="w">                        </span><span class="nt">&lt;camera&gt;</span>
+<span class="linenos">79</span><span class="w">                                </span><span class="nt">&lt;horizontal_fov&gt;</span>1.089<span class="nt">&lt;/horizontal_fov&gt;</span>
+<span class="linenos">80</span><span class="w">                                </span><span class="nt">&lt;image&gt;</span>
+<span class="linenos">81</span><span class="w">                                        </span><span class="nt">&lt;format&gt;</span>R8G8B8<span class="nt">&lt;/format&gt;</span>
+<span class="linenos">82</span><span class="w">                                        </span><span class="nt">&lt;width&gt;</span>640<span class="nt">&lt;/width&gt;</span>
+<span class="linenos">83</span><span class="w">                                        </span><span class="nt">&lt;height&gt;</span>480<span class="nt">&lt;/height&gt;</span>
+<span class="linenos">84</span><span class="w">                                </span><span class="nt">&lt;/image&gt;</span>
+<span class="linenos">85</span><span class="w">                                </span><span class="nt">&lt;clip&gt;</span>
+<span class="linenos">86</span><span class="w">                                        </span><span class="nt">&lt;near&gt;</span>0.05<span class="nt">&lt;/near&gt;</span>
+<span class="linenos">87</span><span class="w">                                        </span><span class="nt">&lt;far&gt;</span>8.0<span class="nt">&lt;/far&gt;</span>
+<span class="linenos">88</span><span class="w">                                </span><span class="nt">&lt;/clip&gt;</span>
+<span class="linenos">89</span><span class="w">                        </span><span class="nt">&lt;/camera&gt;</span>
+<span class="linenos">90</span><span class="w">                        </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_controller&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros_camera.so&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">91</span><span class="w">                                </span><span class="nt">&lt;frame_name&gt;</span>camera_link_optical<span class="nt">&lt;/frame_name&gt;</span>
+<span class="linenos">92</span><span class="w">                        </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="linenos">93</span><span class="w">                </span><span class="nt">&lt;/sensor&gt;</span>
+<span class="linenos">94</span><span class="w">        </span><span class="nt">&lt;/gazebo&gt;</span>
+<span class="linenos">95</span>
+<span class="linenos">96</span>
+<span class="linenos">97</span><span class="nt">&lt;/robot&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="drive-minibot-inside-gazebo-with-joystick-controller">
+<h2>5 Drive MiniBot Inside Gazebo with Joystick Controller<a class="headerlink" href="#drive-minibot-inside-gazebo-with-joystick-controller" title="Permalink to this heading"></a></h2>
+<p>Now, we’re finally ready to drive our MiniBot inside our Gazebo world using the differential drive controller and the joystick.</p>
+<section id="build-the-package">
+<h3>5.1 Build the Package<a class="headerlink" href="#build-the-package" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span>colcon<span class="w"> </span>build
+</pre></div>
+</div>
+</section>
+<section id="source-the-workspace">
+<h3>5.2 Source the Workspace<a class="headerlink" href="#source-the-workspace" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+</section>
+<section id="launch-minibot-gazebo-launch-xml">
+<h3>5.3 Launch minibot_gazebo.launch.xml<a class="headerlink" href="#launch-minibot-gazebo-launch-xml" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>minibot<span class="w"> </span>minibot_gazebo.launch.xml
+</pre></div>
+</div>
+</section>
+<section id="visualizing-camera-data">
+<h3>5.4 Visualizing Camera Data<a class="headerlink" href="#visualizing-camera-data" title="Permalink to this heading"></a></h3>
+<p>While we drive our MiniBot inside Gazebo, if we want to view our camera data, we could type <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">echo</span> <span class="pre">/camera/image_raw</span></code>, but this would only print a string of numbers. However, to visualize our
+data, we can use RVIZ by adding <code class="docutils literal notranslate"><span class="pre">Image</span></code> in our <code class="docutils literal notranslate"><span class="pre">Displays</span></code> panel as follows.</p>
+<ol class="arabic simple">
+<li><p>Click the <code class="docutils literal notranslate"><span class="pre">Add</span></code> button at the bottom of the <code class="docutils literal notranslate"><span class="pre">Displays</span></code> panel.</p></li>
+<li><p>When the <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">visualization</span></code> window opens, select <code class="docutils literal notranslate"><span class="pre">Image</span></code> and then click <code class="docutils literal notranslate"><span class="pre">OK</span></code>.</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Camera_Data_RVIZ01.png"><img alt="_images/Camera_Data_RVIZ01.png" src="_images/Camera_Data_RVIZ01.png" style="width: 350.0px; height: 487.2px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Now, under <code class="docutils literal notranslate"><span class="pre">Image</span></code>, select the <code class="docutils literal notranslate"><span class="pre">/camera/image_raw</span></code> topic.</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Camera_Data_RVIZ02.png"><img alt="_images/Camera_Data_RVIZ02.png" src="_images/Camera_Data_RVIZ02.png" style="width: 278.59999999999997px; height: 174.29999999999998px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>You now should see a small window with an image of what the camera sees in our Gazebo simulation.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Camera_Data_RVIZ03.png"><img alt="_images/Camera_Data_RVIZ03.png" src="_images/Camera_Data_RVIZ03.png" style="width: 278.59999999999997px; height: 174.29999999999998px;" /></a>
+</figure>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mobile_robot_part02.html" class="btn btn-neutral float-left" title="Mobile Robot, Part 2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mobile_robot_part04.html" class="btn btn-neutral float-right" title="Mobile Robot, Part 4" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, MIT-NEET Autonomous Machines.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

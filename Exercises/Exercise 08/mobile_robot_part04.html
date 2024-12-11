@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile Robot, Part 4 &mdash; 16.633 NEET Autonomous Machines  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tello Edu Overview" href="tello_edu_overview.html" />
+    <link rel="prev" title="Mobile Robot, Part 3" href="mobile_robot_part03.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/NEET-AutonomousMachines.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Exercise 01</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro_ros.html">Introduction to ROS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_overview.html">Linux Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_01.html">ROS 2 Humble Tutorials, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 02</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_02.html">ROS 2 Humble Tutorials, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 03</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_03.html">ROS 2 Humble Tutorials, Part 3</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 04</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part01.html">Mobile Robot, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 05</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part02.html">Mobile Robot, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 06</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part03.html">Mobile Robot, Part 3</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 07</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mobile Robot, Part 4</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-the-micro-ros-build-system">1 Install the micro-ROS Build System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-and-setup-arduino-ide-for-esp32-devices-and-micro-ros">2 Install and Setup Arduino IDE for ESP32 Devices and Micro ROS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-esp32-library-in-arduino-ide">2.1 Install ESP32 Library in Arduino IDE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-esp32-boards-manager">2.2 Install ESP32 Boards Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-the-adafruit-motor-shield-v2-library">2.3 Install the Adafruit Motor Shield V2 Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-micro-ros-arduino-humble-distribution">2.4 Install micro_ros_arduino (Humble Distribution)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#flash-differential-drive-controller-to-robot">3 Flash Differential Drive Controller to Robot</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-pyserial">3.1 Install pyserial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flash-the-differential-drive-controller">3.2 Flash the Differential Drive Controller</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#remote-login-to-robot-s-raspberry-pi">4 Remote Login to Robot’s Raspberry Pi</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#download-ip-address-scanner">4.1 Download IP Address Scanner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#remote-login-to-robot">4.2 Remote Login to Robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-your-domain-id">4.3 Set Your Domain ID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-lidar">4.4 Run the LiDAR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-camera">4.5 Run the Camera</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#access-camera-and-lidar-data-streams-on-your-development-computer">5 Access Camera and LiDAR Data Streams on Your Development Computer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">5.1 Set Your Domain ID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#to-access-camera-topic">5.2 To Access Camera Topic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#to-access-lidar-topic">5.3 To Access LiDAR Topic</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#create-and-run-micro-ros-agent">6 Create and Run micro-ROS Agent</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-micro-ros-agent">6.1 Create micro-ROS Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-micro-ros-agent">6.2 Run the micro-ROS Agent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#launch-joystick-launch-xml">7 Launch joystick.launch.xml</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 08</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tello_edu_overview.html">Tello Edu Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_sdk_2_0.html">Programming via Tello SDK 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_djitellopy.html">Programming via DJITelloPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Mobile Robot Setup Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="raspberry_pi_setup.html">Raspberry Pi Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="camera_RPi_setup.html">Camera Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rplidar_a1_setup.html">RPLiDAR A1 Setup</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tello User Manuals and Specifications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tello_edu_specs.html">Tello Edu Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_user_manual.html">Tello User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_sdk_2_0_user_guide.html">Tello SDK 2.0 User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="td1_controller.html">Td1 Controller Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batteries_charging.html">Batteries/Charging</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">16.633 NEET Autonomous Machines</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Mobile Robot, Part 4</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mobile-robot-part-4">
+<h1>Mobile Robot, Part 4<a class="headerlink" href="#mobile-robot-part-4" title="Permalink to this heading"></a></h1>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/MiniBot02.png"><img alt="MiniBot" src="_images/MiniBot02.png" style="width: 415.8px; height: 527.25px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>In this exercise you’ll have the opportunity to use ROS 2 on the robot platform shown above. It has FIT0450 DC motors with magnetic encoders connected to an
+<a class="reference external" href="https://www.adafruit.com/product/3243">Adafruit DC Motor + Stepper FeatherWing driver</a> that’s plugged into an
+<a class="reference external" href="https://www.adafruit.com/product/3619">Adafruit HUZZAH32 – ESP32 Feather Board</a>. The ESP32 Feather Board is Arduino compatible with a built-in WiFi module, so we’ll program it using the
+Arduino language running <a class="reference external" href="https://micro.ros.org/">micro-ROS</a>.</p>
+<p>On top, the MiniBot has an <a class="reference external" href="https://www.robotshop.com/products/rplidar-a1m8-360-degree-laser-scanner-development-kit?variant=42359633805473">RPLidar A1M8 - 360 degree laser scanner</a>
+and <a class="reference external" href="https://www.amazon.com/gp/product/B00N1YJKFS/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&amp;psc=1">camera</a> attached to a Raspberry Pi 4 running Ubuntu and ROS2 Humble.</p>
+<p>We have set up robots <code class="docutils literal notranslate"><span class="pre">am-robot-01</span></code>, <code class="docutils literal notranslate"><span class="pre">am-robot-02</span></code>, and <code class="docutils literal notranslate"><span class="pre">am-robot-03</span></code> with the domain IDs given in the chart below.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Robot Name</p></td>
+<td><p>ROS Domain ID</p></td>
+</tr>
+<tr class="row-even"><td><p>am-robot-01</p></td>
+<td><p>101</p></td>
+</tr>
+<tr class="row-odd"><td><p>am-robot-02</p></td>
+<td><p>102</p></td>
+</tr>
+<tr class="row-even"><td><p>am-robot-03</p></td>
+<td><p>103</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are few places in this exercise where it is important to set the correct domain ID to insure proper communication between your development computer and robot, so please read carefully.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In addition to setting the correct domain ID, you also must insure that your development computer is connected to our WiFi network <code class="docutils literal notranslate"><span class="pre">am-network-01</span></code>.</p>
+</div>
+<p>This exercise has the following major parts:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Install micro-ROS on your development computer</p></li>
+<li><p>Install Arduino on your development computer and setup IDE for ESP32 development</p></li>
+<li><p>Flash differential drive controller to robot (Arduino code)</p></li>
+<li><p>Remote login to robot’s Raspberry Pi to run the camera and LiDAR nodes</p></li>
+<li><p>Run camera and LiDAR nodes on your development computer (this communication is between your development computer and Raspberry Pi via WiFi)</p></li>
+<li><p>Create amd run a micro-ROS agent that allows communication between your development computer and ESP32 on robot (this communication is between your development computer and ESP32 via WiFi)</p></li>
+<li><p>Launch <code class="docutils literal notranslate"><span class="pre">joystick.launch.xml</span></code> on your development computer to drive the robot</p></li>
+</ol>
+</div></blockquote>
+<p>To save time, the robot’s Raspberry Pi has been pre-configured with Ubuntu 22.04.x running ROS2 Humble, and the camera and LiDAR sensors have been set up and pre-configured. You can find
+details on how to set up and configure these devices in these sections: <a class="reference internal" href="raspberry_pi_setup.html"><span class="doc">Raspberry Pi Setup</span></a>, <a class="reference internal" href="camera_RPi_setup.html"><span class="doc">Camera Setup</span></a>,
+<a class="reference internal" href="rplidar_a1_setup.html"><span class="doc">RPLiDAR A1 Setup</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The response with this current setup hasn’t been optimized, and there is considerable latency between the Playstation joystick controller and the FeatherWing motor driver running the robot’s motors,
+so don’t expect an instantaneous response. Alternatives also exist, such as driving the motors with a motor shield connected to the Raspberry Pi.</p>
+</div>
+<section id="install-the-micro-ros-build-system">
+<h2>1 Install the micro-ROS Build System<a class="headerlink" href="#install-the-micro-ros-build-system" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/micro-ROS_big_logo.png"><img alt="_images/micro-ROS_big_logo.png" src="_images/micro-ROS_big_logo.png" style="width: 256.0px; height: 86.60000000000001px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><a class="reference external" href="https://micro.ros.org/">micro-ROS</a> is the framework that bridges the gap between micro-controllers and larger processing units in robotic applications as it brings the ROS2 programming
+interface to these smaller resource-constrained devices.</p>
+<p>Follow the steps given below to install the micro-ROS build system on your development computer:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 1: source the ROS 2 Humble installation</span>
+user@am-dev-xx:~$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash
+
+<span class="c1"># Step 2: create a micro-ROS workspace and download the micro-ROS tools</span>
+user@am-dev-xx:~$<span class="w"> </span>mkdir<span class="w"> </span>microros_ws
+user@am-dev-xx:~$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>microros_ws
+user@am-dev-xx:~/microros_ws$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span><span class="nv">$ROS_DISTRO</span><span class="w"> </span>https://github.com/micro-ROS/micro_ros_setup.git<span class="w"> </span>src/micro_ros_setup
+
+<span class="c1"># Step 3: update dependencies using rosdep</span>
+user@am-dev-xx:~/microros_ws$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rosdep<span class="w"> </span>update
+user@am-dev-xx:~/microros_ws$<span class="w"> </span>rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>--ignore-src<span class="w"> </span>-y
+
+<span class="c1"># Step 4: install pip</span>
+user@am-dev-xx:~/microros_ws$<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-pip
+
+<span class="c1"># Step 5: build micro-ROS tools and source them</span>
+user@am-dev-xx:~/microros_ws$<span class="w"> </span>colcon<span class="w"> </span>build
+user@am-dev-xx:~/microros_ws$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>install/local_setup.bash
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Similarly to the ROS 2 commands, to use the micro-ROS commands in any given terminal window, you’ll need to source the above <code class="docutils literal notranslate"><span class="pre">local_setup.bash</span></code> file, which you can do in any
+directory by providing the absolute path to <code class="docutils literal notranslate"><span class="pre">local_setup.bash</span></code> as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>~/microros_ws/install/local_setup.bash
+</pre></div>
+</div>
+</div>
+</section>
+<section id="install-and-setup-arduino-ide-for-esp32-devices-and-micro-ros">
+<h2>2 Install and Setup Arduino IDE for ESP32 Devices and Micro ROS<a class="headerlink" href="#install-and-setup-arduino-ide-for-esp32-devices-and-micro-ros" title="Permalink to this heading"></a></h2>
+<p>As mentioned previously, our MiniBot uses an
+<a class="reference external" href="https://www.adafruit.com/product/3243">Adafruit DC Motor + Stepper FeatherWing driver</a>  plugged into an
+<a class="reference external" href="https://www.adafruit.com/product/3619">Adafruit HUZZAH32 – ESP32 Feather Board</a>. This motor driver requires use of several Adafruit libraries, and we’ll find our overall task much easier by using
+the Arduino IDE to manage these libraries for us. Hence, our first task involves downloading the Arduino IDE onto our development computer using  <code class="docutils literal notranslate"><span class="pre">snap</span></code>. Open a terminal window and type the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~$<span class="w"> </span>sudo<span class="w"> </span>snap<span class="w"> </span>install<span class="w"> </span>arduino
+</pre></div>
+</div>
+<p>This will install Arduino 1.8.19 on your development computer. You can find its launch icon by searching the <code class="docutils literal notranslate"><span class="pre">Applications</span></code> menu.</p>
+<section id="install-esp32-library-in-arduino-ide">
+<h3>2.1 Install ESP32 Library in Arduino IDE<a class="headerlink" href="#install-esp32-library-in-arduino-ide" title="Permalink to this heading"></a></h3>
+<p>To access the ESP32 library within the Arduino IDE, open the <code class="docutils literal notranslate"><span class="pre">Preferences</span></code> section under <code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">--&gt;</span> <span class="pre">Preferences</span></code>. Once open, you’ll see an option to enter a URL to obtain the ESP32 board information.
+In the blank text field next to <code class="docutils literal notranslate"><span class="pre">Additional</span> <span class="pre">Boards</span> <span class="pre">Managers</span> <span class="pre">URLs</span></code>, type the following (see image below for exact location):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>https://dl.espressif.com/dl/package_esp32_index.json
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/espressif01.png"><img alt="_images/espressif01.png" src="_images/espressif01.png" style="width: 651.75px; height: 440.25px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="install-esp32-boards-manager">
+<h3>2.2 Install ESP32 Boards Manager<a class="headerlink" href="#install-esp32-boards-manager" title="Permalink to this heading"></a></h3>
+<p>At the top of the Arduino IDE, go to the Boards Manager under <code class="docutils literal notranslate"><span class="pre">Tools</span> <span class="pre">--&gt;</span> <span class="pre">Boards</span> <span class="pre">Manager</span></code> and type <code class="docutils literal notranslate"><span class="pre">esp32</span></code> in the search field, and install
+the <code class="docutils literal notranslate"><span class="pre">esp32</span> <span class="pre">by</span> <span class="pre">Espressif</span> <span class="pre">Systems</span></code> library as shown below.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/espressif02.png"><img alt="_images/espressif02.png" src="_images/espressif02.png" style="width: 701.4px; height: 397.59999999999997px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>You now should be able to flash any ESP32 board via the Arduino IDE on your development computer.</p>
+</section>
+<section id="install-the-adafruit-motor-shield-v2-library">
+<h3>2.3 Install the Adafruit Motor Shield V2 Library<a class="headerlink" href="#install-the-adafruit-motor-shield-v2-library" title="Permalink to this heading"></a></h3>
+<p>Install the latest version of the Adafruit Motor Shield V2 Library (currently 1.1.3).</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Adafruit_MotorShield.png"><img alt="_images/Adafruit_MotorShield.png" src="_images/Adafruit_MotorShield.png" style="width: 697.1999999999999px; height: 402.5px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="install-micro-ros-arduino-humble-distribution">
+<h3>2.4 Install micro_ros_arduino (Humble Distribution)<a class="headerlink" href="#install-micro-ros-arduino-humble-distribution" title="Permalink to this heading"></a></h3>
+<p>Install <code class="docutils literal notranslate"><span class="pre">micro_ros_arduino</span></code> by Pablo Garrido, latest verions for ROS 2 Humble (Version 2.0.7-humble).</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/micro_ros_arduino_humble.png"><img alt="_images/micro_ros_arduino_humble.png" src="_images/micro_ros_arduino_humble.png" style="width: 598.8px; height: 336.0px;" /></a>
+</figure>
+</section>
+</section>
+<section id="flash-differential-drive-controller-to-robot">
+<h2>3 Flash Differential Drive Controller to Robot<a class="headerlink" href="#flash-differential-drive-controller-to-robot" title="Permalink to this heading"></a></h2>
+<section id="install-pyserial">
+<h3>3.1 Install pyserial<a class="headerlink" href="#install-pyserial" title="Permalink to this heading"></a></h3>
+<p>To access the serial port, the Arduino IDE on Ubuntu requires <code class="docutils literal notranslate"><span class="pre">pyserial</span></code>, so we’ll install it here.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~$<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pyserial
+</pre></div>
+</div>
+</section>
+<section id="flash-the-differential-drive-controller">
+<h3>3.2 Flash the Differential Drive Controller<a class="headerlink" href="#flash-the-differential-drive-controller" title="Permalink to this heading"></a></h3>
+<p>Navigate to your <code class="docutils literal notranslate"><span class="pre">minibot</span></code> folder and create an <code class="docutils literal notranslate"><span class="pre">arduino</span></code> folder as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src/minibot$<span class="w"> </span>mkdir<span class="w"> </span>arduino
+</pre></div>
+</div>
+<p>Now, save the code below it inside the <code class="docutils literal notranslate"><span class="pre">arduino</span></code> folder as <code class="docutils literal notranslate"><span class="pre">MiniBot_Drive_Micro_ROS.ino</span></code> with the following modifications:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Line 104: the third field contains the IP address for the Raspberry Pi (“192.168.0.38”). You must find the IP address for your robot (using the steps in the next section) and replace “192.168.0.38” with the actual IP address you find.</p></li>
+<li><p>Line 109: you must change this domain ID to match the one for your robot: either <code class="docutils literal notranslate"><span class="pre">101</span></code>, <code class="docutils literal notranslate"><span class="pre">102</span></code>, or <code class="docutils literal notranslate"><span class="pre">103</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">MiniBot_Drive_Micro_ROS.ino</span><a class="headerlink" href="#id5" title="Permalink to this code"></a></div>
+<div class="highlight-Arduino notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="cm">/******************************************************/</span>
+<span class="linenos">  2</span><span class="cm">/*          Micro ROS and ROS Client Libraries        */</span>
+<span class="linenos">  3</span><span class="cm">/******************************************************/</span>
+<span class="linenos">  4</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;micro_ros_arduino.h&gt;</span>
+<span class="linenos">  5</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="linenos">  6</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;rcl/rcl.h&gt;</span>
+<span class="linenos">  7</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;rcl/error_handling.h&gt;</span>
+<span class="linenos">  8</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;rclc/rclc.h&gt;</span>
+<span class="linenos">  9</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;rclc/executor.h&gt;</span>
+<span class="linenos"> 10</span>
+<span class="linenos"> 11</span><span class="c1">// message header file</span>
+<span class="linenos"> 12</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;geometry_msgs/msg/twist.h&gt;</span>
+<span class="linenos"> 13</span>
+<span class="linenos"> 14</span><span class="c1">// ROS Client Library objects</span>
+<span class="linenos"> 15</span><span class="n">rclc_executor_t</span><span class="w"> </span><span class="n">executor</span><span class="p">;</span>
+<span class="linenos"> 16</span><span class="n">rcl_allocator_t</span><span class="w"> </span><span class="n">allocator</span><span class="p">;</span>
+<span class="linenos"> 17</span><span class="n">rclc_support_t</span><span class="w"> </span><span class="n">support</span><span class="p">;</span>
+<span class="linenos"> 18</span><span class="n">rcl_init_options_t</span><span class="w"> </span><span class="n">init_options</span><span class="p">;</span>
+<span class="linenos"> 19</span><span class="n">rcl_node_t</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<span class="linenos"> 20</span>
+<span class="linenos"> 21</span><span class="c1">// rcl subscription object</span>
+<span class="linenos"> 22</span><span class="n">rcl_subscription_t</span><span class="w"> </span><span class="n">subscriber</span><span class="p">;</span>
+<span class="linenos"> 23</span>
+<span class="linenos"> 24</span><span class="c1">// subscriber object</span>
+<span class="linenos"> 25</span><span class="n">geometry_msgs__msg__Twist</span><span class="w"> </span><span class="n">msg</span><span class="p">;</span>
+<span class="linenos"> 26</span><span class="cm">/******************************************************/</span>
+<span class="linenos"> 27</span>
+<span class="linenos"> 28</span><span class="cm">/******************************************************/</span>
+<span class="linenos"> 29</span><span class="cm">/*          Subscription Callback Function            */</span>
+<span class="linenos"> 30</span><span class="cm">/******************************************************/</span>
+<span class="linenos"> 31</span><span class="cm">/*</span>
+<span class="linenos"> 32</span><span class="cm">Callback Function: A callback function is a user-defined function that is </span>
+<span class="linenos"> 33</span><span class="cm">automatically called whenever a new message arrives on a subscribed topic. </span>
+<span class="linenos"> 34</span><span class="cm">The callback function is associated with the subscriber and is triggered </span>
+<span class="linenos"> 35</span><span class="cm">each time a new message arrives.</span>
+<span class="linenos"> 36</span><span class="cm">*/</span>
+<span class="linenos"> 37</span><span class="kr">void</span><span class="w"> </span><span class="nf">subscription_callback</span><span class="p">(</span><span class="kr">const</span><span class="w"> </span><span class="kr">void</span><span class="w"> </span><span class="o">*</span><span class="n">msgin</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 38</span><span class="w">  </span><span class="kr">const</span><span class="w"> </span><span class="n">geometry_msgs__msg__Twist</span><span class="w"> </span><span class="o">*</span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kr">const</span><span class="w"> </span><span class="n">geometry_msgs__msg__Twist</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">msgin</span><span class="p">;</span>
+<span class="linenos"> 39</span><span class="w">  </span><span class="c1">// call back code</span>
+<span class="linenos"> 40</span><span class="p">}</span>
+<span class="linenos"> 41</span>
+<span class="linenos"> 42</span>
+<span class="linenos"> 43</span><span class="cm">/******************************************************/</span>
+<span class="linenos"> 44</span><span class="cm">/*           Adafruit Motor Shield Library            */</span>
+<span class="linenos"> 45</span><span class="cm">/******************************************************/</span>
+<span class="linenos"> 46</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Adafruit_MotorShield.h&gt;</span>
+<span class="linenos"> 47</span>
+<span class="linenos"> 48</span><span class="c1">// motor shield object</span>
+<span class="linenos"> 49</span><span class="n">Adafruit_MotorShield</span><span class="w"> </span><span class="n">AFMS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Adafruit_MotorShield</span><span class="p">();</span>
+<span class="linenos"> 50</span>
+<span class="linenos"> 51</span><span class="c1">// set left and right motor ports</span>
+<span class="linenos"> 52</span><span class="n">Adafruit_DCMotor</span><span class="w"> </span><span class="o">*</span><span class="n">motorLeft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AFMS</span><span class="p">.</span><span class="n">getMotor</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="linenos"> 53</span><span class="n">Adafruit_DCMotor</span><span class="w"> </span><span class="o">*</span><span class="n">motorRight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AFMS</span><span class="p">.</span><span class="n">getMotor</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="linenos"> 54</span><span class="cm">/******************************************************/</span>
+<span class="linenos"> 55</span>
+<span class="linenos"> 56</span><span class="cm">/******************************************************/</span>
+<span class="linenos"> 57</span><span class="cm">/*       Wheel, Speed, and Velocity Parameters        */</span>
+<span class="linenos"> 58</span><span class="cm">/******************************************************/</span>
+<span class="linenos"> 59</span><span class="c1">// wheel parameters</span>
+<span class="linenos"> 60</span><span class="kr">float</span><span class="w"> </span><span class="n">wheelDiam</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.065</span><span class="p">;</span><span class="w">           </span><span class="c1">// 65mm</span>
+<span class="linenos"> 61</span><span class="kr">float</span><span class="w"> </span><span class="n">wheelRad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wheelDiam</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span><span class="w">  </span><span class="c1">// 32.5mm</span>
+<span class="linenos"> 62</span><span class="kr">float</span><span class="w"> </span><span class="n">wheelSeparation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.120</span><span class="p">;</span><span class="w">     </span><span class="c1">// 120mm</span>
+<span class="linenos"> 63</span>
+<span class="linenos"> 64</span><span class="c1">// wheel speed parameters</span>
+<span class="linenos"> 65</span><span class="kr">int</span><span class="w"> </span><span class="n">maxWheelSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">255</span><span class="p">;</span>
+<span class="linenos"> 66</span><span class="kr">int</span><span class="w"> </span><span class="n">minWheelSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-255</span><span class="p">;</span>
+<span class="linenos"> 67</span>
+<span class="linenos"> 68</span><span class="c1">// maximum linear velocity @ maxWheelSpeed</span>
+<span class="linenos"> 69</span><span class="kr">const</span><span class="w"> </span><span class="kr">float</span><span class="w"> </span><span class="n">RPM_TO_RAD_PER_SEC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">60.0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">3.1415</span><span class="p">);</span>
+<span class="linenos"> 70</span><span class="kr">float</span><span class="w"> </span><span class="n">maxWheelRPM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">150</span><span class="p">;</span><span class="w">  </span><span class="c1">// experimental value</span>
+<span class="linenos"> 71</span><span class="kr">float</span><span class="w"> </span><span class="n">wheelMaxAngularVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RPM_TO_RAD_PER_SEC</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">maxWheelRPM</span><span class="p">;</span>
+<span class="linenos"> 72</span><span class="kr">float</span><span class="w"> </span><span class="n">maxLinearVel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wheelMaxAngularVelocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">wheelRad</span><span class="p">;</span>
+<span class="linenos"> 73</span><span class="kr">float</span><span class="w"> </span><span class="n">maxAngularVel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maxLinearVel</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">wheelSeparation</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.0</span><span class="p">);</span>
+<span class="linenos"> 74</span>
+<span class="linenos"> 75</span><span class="c1">//</span>
+<span class="linenos"> 76</span><span class="kr">float</span><span class="w"> </span><span class="n">linearVelocity</span><span class="p">,</span><span class="w"> </span><span class="n">angularVelocity</span><span class="p">;</span>
+<span class="linenos"> 77</span><span class="kr">float</span><span class="w"> </span><span class="n">leftWheelAngularVelocity</span><span class="p">,</span><span class="w"> </span><span class="n">rightWheelAngularVelocity</span><span class="p">;</span>
+<span class="linenos"> 78</span><span class="kr">float</span><span class="w"> </span><span class="n">leftMotorSpeed</span><span class="p">,</span><span class="w"> </span><span class="n">rightMotorSpeed</span><span class="p">;</span>
+<span class="linenos"> 79</span><span class="kr">float</span><span class="w"> </span><span class="n">linearVelocityScaled</span><span class="p">,</span><span class="w"> </span><span class="n">angularVelocityScaled</span><span class="p">;</span>
+<span class="linenos"> 80</span><span class="cm">/******************************************************/</span>
+<span class="linenos"> 81</span>
+<span class="linenos"> 82</span><span class="cp">#define LED_PIN 13</span>
+<span class="linenos"> 83</span>
+<span class="linenos"> 84</span><span class="cp">#define RCCHECK(fn) \</span>
+<span class="linenos"> 85</span><span class="cp">  { \</span>
+<span class="linenos"> 86</span><span class="cp">    rcl_ret_t temp_rc = fn; \</span>
+<span class="linenos"> 87</span><span class="cp">    if ((temp_rc != RCL_RET_OK)) { error_loop(); } \</span>
+<span class="linenos"> 88</span><span class="cp">  }</span>
+<span class="linenos"> 89</span><span class="cp">#define RCSOFTCHECK(fn) \</span>
+<span class="linenos"> 90</span><span class="cp">  { \</span>
+<span class="linenos"> 91</span><span class="cp">    rcl_ret_t temp_rc = fn; \</span>
+<span class="linenos"> 92</span><span class="cp">    if ((temp_rc != RCL_RET_OK)) { error_loop(); } \</span>
+<span class="linenos"> 93</span><span class="cp">  }</span>
+<span class="linenos"> 94</span>
+<span class="linenos"> 95</span><span class="kr">void</span><span class="w"> </span><span class="nf">error_loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 96</span><span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 97</span><span class="w">    </span><span class="nf">digitalWrite</span><span class="p">(</span><span class="n">LED_PIN</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nf">digitalRead</span><span class="p">(</span><span class="n">LED_PIN</span><span class="p">));</span>
+<span class="linenos"> 98</span><span class="w">    </span><span class="nf">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="linenos"> 99</span><span class="w">  </span><span class="p">}</span>
+<span class="linenos">100</span><span class="p">}</span>
+<span class="linenos">101</span>
+<span class="linenos">102</span><span class="kr">void</span><span class="w"> </span><span class="nb">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">103</span><span class="w">  </span><span class="n">AFMS</span><span class="p">.</span><span class="nf">begin</span><span class="p">();</span>
+<span class="linenos">104</span><span class="w">  </span><span class="n">set_microros_wifi_transports</span><span class="p">(</span><span class="s">&quot;am-network-01&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;neet-robotics01*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;192.168.0.38&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">8888</span><span class="p">);</span>
+<span class="linenos">105</span><span class="w">  </span><span class="nf">delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+<span class="linenos">106</span>
+<span class="linenos">107</span><span class="w">  </span><span class="kr">const</span><span class="w"> </span><span class="kr">char</span><span class="w"> </span><span class="o">*</span><span class="n">node_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;micro_ros_arduino_wifi_node&quot;</span><span class="p">;</span>
+<span class="linenos">108</span><span class="w">  </span><span class="c1">// const char *namespace = &quot;&quot;;</span>
+<span class="linenos">109</span><span class="w">  </span><span class="kr">const</span><span class="w"> </span><span class="kr">int</span><span class="w"> </span><span class="n">domain_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos">110</span>
+<span class="linenos">111</span><span class="w">  </span><span class="n">allocator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rcl_get_default_allocator</span><span class="p">();</span>
+<span class="linenos">112</span>
+<span class="linenos">113</span><span class="w">  </span><span class="c1">// create and initialize a support object which simplifies the initialization of an rcl-node, an rcl-subscription, an rcl-timer and an rclc-executor.</span>
+<span class="linenos">114</span><span class="w">  </span><span class="n">RCCHECK</span><span class="p">(</span><span class="n">rclc_support_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">support</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">allocator</span><span class="p">));</span>
+<span class="linenos">115</span><span class="w">  </span><span class="c1">// RCCHECK(rclc_support_init_with_options(&amp;support, 0, NULL, &amp;init_options, &amp;allocator));</span>
+<span class="linenos">116</span>
+<span class="linenos">117</span><span class="w">  </span><span class="c1">// create and initialize node</span>
+<span class="linenos">118</span><span class="w">  </span><span class="n">init_options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rcl_get_zero_initialized_init_options</span><span class="p">();</span>
+<span class="linenos">119</span><span class="w">  </span><span class="n">rcl_init_options_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">init_options</span><span class="p">,</span><span class="w"> </span><span class="n">allocator</span><span class="p">);</span>
+<span class="linenos">120</span><span class="w">  </span><span class="n">rcl_init_options_set_domain_id</span><span class="p">(</span><span class="o">&amp;</span><span class="n">init_options</span><span class="p">,</span><span class="w"> </span><span class="n">domain_id</span><span class="p">);</span>
+<span class="linenos">121</span><span class="w">  </span><span class="n">RCCHECK</span><span class="p">(</span><span class="n">rclc_node_init_default</span><span class="p">(</span><span class="o">&amp;</span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="n">node_name</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">support</span><span class="p">));</span>
+<span class="linenos">122</span>
+<span class="linenos">123</span><span class="w">  </span><span class="c1">// create and initialize subscriber</span>
+<span class="linenos">124</span><span class="w">  </span><span class="n">RCCHECK</span><span class="p">(</span><span class="n">rclc_subscription_init_default</span><span class="p">(</span>
+<span class="linenos">125</span><span class="w">    </span><span class="o">&amp;</span><span class="n">subscriber</span><span class="p">,</span>
+<span class="linenos">126</span><span class="w">    </span><span class="o">&amp;</span><span class="n">node</span><span class="p">,</span>
+<span class="linenos">127</span><span class="w">    </span><span class="n">ROSIDL_GET_MSG_TYPE_SUPPORT</span><span class="p">(</span><span class="n">geometry_msgs</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="n">Twist</span><span class="p">),</span>
+<span class="linenos">128</span><span class="w">    </span><span class="s">&quot;cmd_vel&quot;</span><span class="p">));</span>
+<span class="linenos">129</span>
+<span class="linenos">130</span><span class="w">  </span><span class="c1">// create and initilize executor</span>
+<span class="linenos">131</span><span class="w">  </span><span class="n">RCCHECK</span><span class="p">(</span><span class="n">rclc_executor_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">executor</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">support</span><span class="p">.</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">allocator</span><span class="p">));</span>
+<span class="linenos">132</span><span class="w">  </span><span class="n">RCCHECK</span><span class="p">(</span><span class="n">rclc_executor_add_subscription</span><span class="p">(</span><span class="o">&amp;</span><span class="n">executor</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">subscriber</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">subscription_callback</span><span class="p">,</span><span class="w"> </span><span class="n">ON_NEW_DATA</span><span class="p">));</span>
+<span class="linenos">133</span><span class="p">}</span>
+<span class="linenos">134</span>
+<span class="linenos">135</span><span class="kr">void</span><span class="w"> </span><span class="nb">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">136</span><span class="w">  </span><span class="nf">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="linenos">137</span><span class="w">  </span><span class="n">RCCHECK</span><span class="p">(</span><span class="n">rclc_executor_spin_some</span><span class="p">(</span><span class="o">&amp;</span><span class="n">executor</span><span class="p">,</span><span class="w"> </span><span class="n">RCL_MS_TO_NS</span><span class="p">(</span><span class="mi">100</span><span class="p">)));</span><span class="w">  </span><span class="c1">// check for new data every 100 milliseconds</span>
+<span class="linenos">138</span>
+<span class="linenos">139</span><span class="w">  </span><span class="c1">// get linear and angular velocities from the message cmd_vel</span>
+<span class="linenos">140</span><span class="w">  </span><span class="c1">// these values are scaled between -1 and +1`</span>
+<span class="linenos">141</span><span class="w">  </span><span class="n">linearVelocityScaled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">linear</span><span class="p">.</span><span class="n">x</span><span class="p">;</span><span class="w">    </span><span class="c1">// values lie from -1 to +1</span>
+<span class="linenos">142</span><span class="w">  </span><span class="n">angularVelocityScaled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">angular</span><span class="p">.</span><span class="n">z</span><span class="p">;</span><span class="w">  </span><span class="c1">// values lie from -1 to +1</span>
+<span class="linenos">143</span>
+<span class="linenos">144</span><span class="w">  </span><span class="c1">// convert to scaled to actual velocity relative to their maximums</span>
+<span class="linenos">145</span><span class="w">  </span><span class="n">linearVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">linearVelocityScaled</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">maxLinearVel</span><span class="p">;</span>
+<span class="linenos">146</span><span class="w">  </span><span class="n">angularVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">angularVelocityScaled</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">maxAngularVel</span><span class="p">;</span>
+<span class="linenos">147</span>
+<span class="linenos">148</span><span class="w">  </span><span class="c1">// differential drive equations for left and right wheel //</span>
+<span class="linenos">149</span><span class="w">  </span><span class="n">leftWheelAngularVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">linearVelocity</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">angularVelocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">wheelSeparation</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">wheelRad</span><span class="p">;</span><span class="w">   </span><span class="c1">// rad/sec</span>
+<span class="linenos">150</span><span class="w">  </span><span class="n">rightWheelAngularVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">linearVelocity</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">angularVelocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">wheelSeparation</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">wheelRad</span><span class="p">;</span><span class="w">  </span><span class="c1">// rad/sec</span>
+<span class="linenos">151</span>
+<span class="linenos">152</span><span class="w">  </span><span class="n">leftMotorSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maxWheelSpeed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">abs</span><span class="p">(</span><span class="n">leftWheelAngularVelocity</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">wheelMaxAngularVelocity</span><span class="p">);</span>
+<span class="linenos">153</span><span class="w">  </span><span class="n">rightMotorSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maxWheelSpeed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">abs</span><span class="p">(</span><span class="n">rightWheelAngularVelocity</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">wheelMaxAngularVelocity</span><span class="p">);</span>
+<span class="linenos">154</span>
+<span class="linenos">155</span><span class="w">  </span><span class="cm">/********************************************************************************/</span>
+<span class="linenos">156</span><span class="w">  </span><span class="cm">/* determine the motor rotational directions: BACKWARD, FORWARD, RELEASE (STOP) */</span>
+<span class="linenos">157</span><span class="w">  </span><span class="cm">/********************************************************************************/</span>
+<span class="linenos">158</span><span class="w">  </span><span class="c1">// rotational direction: left wheel</span>
+<span class="linenos">159</span><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">leftWheelAngularVelocity</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">160</span><span class="w">    </span><span class="n">motorLeft</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">(</span><span class="n">BACKWARD</span><span class="p">);</span>
+<span class="linenos">161</span><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">leftWheelAngularVelocity</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">162</span><span class="w">    </span><span class="n">motorLeft</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">(</span><span class="n">FORWARD</span><span class="p">);</span>
+<span class="linenos">163</span><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">164</span><span class="w">    </span><span class="n">motorLeft</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">(</span><span class="n">RELEASE</span><span class="p">);</span>
+<span class="linenos">165</span><span class="w">  </span><span class="p">}</span>
+<span class="linenos">166</span>
+<span class="linenos">167</span><span class="w">  </span><span class="c1">// rotational direction: right wheel</span>
+<span class="linenos">168</span><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rightWheelAngularVelocity</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">169</span><span class="w">    </span><span class="n">motorRight</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">(</span><span class="n">BACKWARD</span><span class="p">);</span>
+<span class="linenos">170</span><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rightWheelAngularVelocity</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">171</span><span class="w">    </span><span class="n">motorRight</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">(</span><span class="n">FORWARD</span><span class="p">);</span>
+<span class="linenos">172</span><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">173</span><span class="w">    </span><span class="n">motorRight</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">(</span><span class="n">RELEASE</span><span class="p">);</span>
+<span class="linenos">174</span><span class="w">  </span><span class="p">}</span>
+<span class="linenos">175</span><span class="w">  </span><span class="cm">/********************************************************************************/</span>
+<span class="linenos">176</span>
+<span class="linenos">177</span><span class="w">  </span><span class="n">motorLeft</span><span class="o">-&gt;</span><span class="nf">setSpeed</span><span class="p">(</span><span class="n">leftMotorSpeed</span><span class="p">);</span>
+<span class="linenos">178</span><span class="w">  </span><span class="n">motorRight</span><span class="o">-&gt;</span><span class="nf">setSpeed</span><span class="p">(</span><span class="n">rightMotorSpeed</span><span class="p">);</span>
+<span class="linenos">179</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Step 1<span class="colon">:</span></dt>
+<dd class="field-odd"><p>remove the ESP32 power cable (power provided to ESP32 from Raspberry Pi)</p>
+</dd>
+</dl>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/ESP32_power_cable.jpg"><img alt="_images/ESP32_power_cable.jpg" src="_images/ESP32_power_cable.jpg" style="width: 288.59999999999997px; height: 384.0px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Step 2<span class="colon">:</span></dt>
+<dd class="field-odd"><p>plugin a USB cable from your development computer into to the ESP32.</p>
+</dd>
+<dt class="field-even">Step 3<span class="colon">:</span></dt>
+<dd class="field-even"><p>setup permission to read/write to serial Port (/dev/ttyUSB0)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~$<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">777</span><span class="w"> </span>/dev/ttyUSB0
+</pre></div>
+</div>
+</dd>
+<dt class="field-odd">Step 4<span class="colon">:</span></dt>
+<dd class="field-odd"><p>select the board as <code class="docutils literal notranslate"><span class="pre">Adafruit</span> <span class="pre">ESP32</span> <span class="pre">Feather</span></code> under <code class="docutils literal notranslate"><span class="pre">Tools</span> <span class="pre">--&gt;</span> <span class="pre">Board:</span> <span class="pre">--&gt;</span> <span class="pre">ESP32</span> <span class="pre">Arduino</span> <span class="pre">--&gt;</span> <span class="pre">Adafruit</span> <span class="pre">ESP32</span> <span class="pre">Feather</span></code>.</p>
+</dd>
+</dl>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/ESP32_Feather.png"><img alt="_images/ESP32_Feather.png" src="_images/ESP32_Feather.png" style="width: 638.5px; height: 465.0px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Step 5<span class="colon">:</span></dt>
+<dd class="field-odd"><p>select the port as <code class="docutils literal notranslate"><span class="pre">/dev/ttyUSB0</span></code> under <code class="docutils literal notranslate"><span class="pre">Tools</span> <span class="pre">--&gt;</span> <span class="pre">Port:</span> <span class="pre">--&gt;</span> <span class="pre">/dev/ttyUSB0</span></code></p>
+</dd>
+</dl>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Port_ttyUSB0.png"><img alt="_images/Port_ttyUSB0.png" src="_images/Port_ttyUSB0.png" style="width: 530.4px; height: 426.59999999999997px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Step 6<span class="colon">:</span></dt>
+<dd class="field-odd"><p>upload the code. This code runs the node <code class="docutils literal notranslate"><span class="pre">micro_ros_arduino_wifi_node</span></code> and it subscribes to the Twist message <code class="docutils literal notranslate"><span class="pre">cmd_vel</span></code> which you’ll provide later by launching <code class="docutils literal notranslate"><span class="pre">joystick.launch.xml</span></code> that we created in Exercise 6.</p>
+</dd>
+<dt class="field-even">Step 7<span class="colon">:</span></dt>
+<dd class="field-even"><p>remove your development computer’s USB cable from the ESP32.</p>
+</dd>
+<dt class="field-odd">Step 8<span class="colon">:</span></dt>
+<dd class="field-odd"><p>plugin the ESP32 power cable.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="remote-login-to-robot-s-raspberry-pi">
+<h2>4 Remote Login to Robot’s Raspberry Pi<a class="headerlink" href="#remote-login-to-robot-s-raspberry-pi" title="Permalink to this heading"></a></h2>
+<p>Turn on your robot’s Raspberry Pi. Since it has been pre-configured to connect to our WiFi network <code class="docutils literal notranslate"><span class="pre">am-network-01</span></code>, you can login to it via ssh, but
+you’ll first need to get its IP address using an IP address scanner.</p>
+<section id="download-ip-address-scanner">
+<h3>4.1 Download IP Address Scanner<a class="headerlink" href="#download-ip-address-scanner" title="Permalink to this heading"></a></h3>
+<p>To determine the IP address of your robot’s Raspberry Pi, you’ll need to use an IP address scanner such as
+<a class="reference external" href="https://angryip.org/download/">Angry IP Scanner</a>. On Linux, download the version that says <code class="docutils literal notranslate"><span class="pre">x86</span> <span class="pre">64-bit</span> <span class="pre">DEB</span> <span class="pre">Package</span> <span class="pre">for</span> <span class="pre">Ubuntu/Debian/Mint</span></code>.</p>
+<p>In your downloads folder, you should now have the file <code class="docutils literal notranslate"><span class="pre">ipscan_3.9.1_amd64.deb</span></code>.</p>
+<p>Navigate to your downloads folder.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/Downloads
+</pre></div>
+</div>
+<p>Type the following to install Angry IP Scanner on your computer.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/Downloads$<span class="w"> </span>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>ipscan_3.9.1_amd64.deb
+</pre></div>
+</div>
+</section>
+<section id="remote-login-to-robot">
+<h3>4.2 Remote Login to Robot<a class="headerlink" href="#remote-login-to-robot" title="Permalink to this heading"></a></h3>
+<p>Open up Angry IP Scanner and press the <code class="docutils literal notranslate"><span class="pre">Start</span></code> button. To find the IP address of your robot, look under the <code class="docutils literal notranslate"><span class="pre">Hostname</span></code> column  for <code class="docutils literal notranslate"><span class="pre">am-robot-0x.local</span></code>.
+Select and copy the IP address. Open a new terminal window and type</p>
+<p>Add <code class="docutils literal notranslate"><span class="pre">MacVendor</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~$<span class="w"> </span>ssh<span class="w"> </span>neet@ip-address
+</pre></div>
+</div>
+<p>and use the password <code class="docutils literal notranslate"><span class="pre">1234</span></code> to login.</p>
+<p>Once you’ve connected to the Raspberry Pi, you should see the prompt <code class="docutils literal notranslate"><span class="pre">neet&#64;am-robot-0x:~$</span></code> which indicates you now can type shell commands. You’ll use this terminal window and
+remote connection to run the LiDAR.</p>
+<p>To run the camera, you’ll need to establish another remote connection in a separate terminal window, so follow the steps above to open another remote connect to the robot.</p>
+</section>
+<section id="set-your-domain-id">
+<h3>4.3 Set Your Domain ID<a class="headerlink" href="#set-your-domain-id" title="Permalink to this heading"></a></h3>
+<p>In both remote connections to your robot, set the domain ID in both remote to match your robot’s using the chart below.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Robot Name</p></td>
+<td><p>ROS Domain ID</p></td>
+</tr>
+<tr class="row-even"><td><p>am-robot-01</p></td>
+<td><p>101</p></td>
+</tr>
+<tr class="row-odd"><td><p>am-robot-02</p></td>
+<td><p>102</p></td>
+</tr>
+<tr class="row-even"><td><p>am-robot-03</p></td>
+<td><p>103</p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-0x:~$<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">ROS_DOMAIN_ID</span><span class="o">=</span>10x
+</pre></div>
+</div>
+</section>
+<section id="run-the-lidar">
+<h3>4.4 Run the LiDAR<a class="headerlink" href="#run-the-lidar" title="Permalink to this heading"></a></h3>
+<p>To run the LiDAR, type the following.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># source the ROS 2 underlay to access ROS 2 commands</span>
+neet@am-robot-0x:~$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash
+
+<span class="c1"># run the lidar node</span>
+neet@am-robot-0x:~$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>rplidar_ros<span class="w"> </span>rplidar_composition<span class="w"> </span>--ros-args<span class="w"> </span>-p<span class="w"> </span>serial_port:<span class="o">=</span>/dev/ttyUSB1<span class="w">  </span>-p<span class="w"> </span>frame_id:<span class="o">=</span>lidar_link<span class="w"> </span>-p<span class="w"> </span>angle_compensate:<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-p<span class="w"> </span>scan_mode:<span class="o">=</span>Standard
+</pre></div>
+</div>
+</section>
+<section id="run-the-camera">
+<h3>4.5 Run the Camera<a class="headerlink" href="#run-the-camera" title="Permalink to this heading"></a></h3>
+<p>To run the camera, type the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1"># run the camera node</span>
+neet@am-robot-0x:~$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>v4l2_camera<span class="w"> </span>v4l2_camera_node<span class="w"> </span>--ros-args<span class="w"> </span>-p<span class="w"> </span>image_size:<span class="o">=</span><span class="s2">&quot;[640,480]&quot;</span><span class="w"> </span>-p<span class="w"> </span>camera_frame_id:<span class="o">=</span>camera_optical_link
+</pre></div>
+</div>
+</section>
+</section>
+<section id="access-camera-and-lidar-data-streams-on-your-development-computer">
+<h2>5 Access Camera and LiDAR Data Streams on Your Development Computer<a class="headerlink" href="#access-camera-and-lidar-data-streams-on-your-development-computer" title="Permalink to this heading"></a></h2>
+<section id="id4">
+<h3>5.1 Set Your Domain ID<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<p>Set your domain ID to match your robot’s using the chart below.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Robot Name</p></td>
+<td><p>ROS Domain ID</p></td>
+</tr>
+<tr class="row-even"><td><p>am-robot-01</p></td>
+<td><p>101</p></td>
+</tr>
+<tr class="row-odd"><td><p>am-robot-02</p></td>
+<td><p>102</p></td>
+</tr>
+<tr class="row-even"><td><p>am-robot-03</p></td>
+<td><p>103</p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~$<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">ROS_DOMAIN_ID</span><span class="o">=</span>10X
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You must set this same domain ID in every terminal window you open from here on.</p>
+</div>
+</section>
+<section id="to-access-camera-topic">
+<h3>5.2 To Access Camera Topic<a class="headerlink" href="#to-access-camera-topic" title="Permalink to this heading"></a></h3>
+<p>To access the camera feed, type the following command in a terminal window on your development computer.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>rqt_image_view<span class="w"> </span>rqt_image_view
+</pre></div>
+</div>
+</section>
+<section id="to-access-lidar-topic">
+<h3>5.3 To Access LiDAR Topic<a class="headerlink" href="#to-access-lidar-topic" title="Permalink to this heading"></a></h3>
+<p>To access the LiDAR feed, run <code class="docutils literal notranslate"><span class="pre">rviz2</span></code> and choose the <code class="docutils literal notranslate"><span class="pre">/scan</span></code> topic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Step 1<span class="colon">:</span></dt>
+<dd class="field-odd"><p>run rviz2</p>
+</dd>
+</dl>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/ros2_ws$<span class="w"> </span>rviz2
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Step 2<span class="colon">:</span></dt>
+<dd class="field-odd"><p>inside <code class="docutils literal notranslate"><span class="pre">rviz21</span></code>, add a <code class="docutils literal notranslate"><span class="pre">LaserScan</span></code></p>
+</dd>
+<dt class="field-even">Step 3<span class="colon">:</span></dt>
+<dd class="field-even"><p>choose the <code class="docutils literal notranslate"><span class="pre">/scan</span></code> topic</p>
+</dd>
+<dt class="field-odd">Step 4<span class="colon">:</span></dt>
+<dd class="field-odd"><p>under <code class="docutils literal notranslate"><span class="pre">Fixed</span> <span class="pre">Frame</span></code> type <code class="docutils literal notranslate"><span class="pre">laser_frame</span></code> (or select <code class="docutils literal notranslate"><span class="pre">laser</span></code> if available)</p>
+</dd>
+<dt class="field-even">Step 5<span class="colon">:</span></dt>
+<dd class="field-even"><p>under <code class="docutils literal notranslate"><span class="pre">Size</span></code>, make the points 0.03 m</p>
+</dd>
+</dl>
+<p>You should now see the point cloud representation of the LiDAR within RVIZ.</p>
+</section>
+</section>
+<section id="create-and-run-micro-ros-agent">
+<h2>6 Create and Run micro-ROS Agent<a class="headerlink" href="#create-and-run-micro-ros-agent" title="Permalink to this heading"></a></h2>
+<p>To drive the robot, you’ll need to create and run a micro-ROS agent to communicate with the ESP32 board.</p>
+<section id="create-micro-ros-agent">
+<h3>6.1 Create micro-ROS Agent<a class="headerlink" href="#create-micro-ros-agent" title="Permalink to this heading"></a></h3>
+<p>The micro-ROS app is now ready to be connected to a micro-ROS agent to start talking with the rest of the ROS 2 world.
+To do that, let’s first of all create a micro-ROS agent. Open a new window and type the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download micro-ROS-Agent packages</span>
+user@am-dev-xx:~/microros_ws$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>micro_ros_setup<span class="w"> </span>create_agent_ws.sh
+</pre></div>
+</div>
+<p>Now, let’s build the agent packages and, when this is done, source the installation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build step</span>
+user@am-dev-xx:~/microros_ws$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>micro_ros_setup<span class="w"> </span>build_agent.sh
+user@am-dev-xx:~/microros_ws$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>install/local_setup.bash
+</pre></div>
+</div>
+</section>
+<section id="run-the-micro-ros-agent">
+<h3>6.2 Run the micro-ROS Agent<a class="headerlink" href="#run-the-micro-ros-agent" title="Permalink to this heading"></a></h3>
+<p>At this point, you should have both the client and the agent correctly installed in your host machine.</p>
+<p>To give micro-ROS access to the ROS 2 dataspace via WiFi, type the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run a micro-ROS agent</span>
+user@am-dev-xx:~/microros_ws$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>micro_ros_agent<span class="w"> </span>micro_ros_agent<span class="w"> </span>udp4<span class="w"> </span>--port<span class="w"> </span><span class="m">8888</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="launch-joystick-launch-xml">
+<h2>7 Launch joystick.launch.xml<a class="headerlink" href="#launch-joystick-launch-xml" title="Permalink to this heading"></a></h2>
+<p>To drive your robot, you’ll need to a joystick node we created in Section 1.5, Code for joystick.launch.xml in Exercise 6.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Step 1<span class="colon">:</span></dt>
+<dd class="field-odd"><p>connect the Playstation controller to your development computer via Bluetooth.</p>
+</dd>
+<dt class="field-even">Step 2<span class="colon">:</span></dt>
+<dd class="field-even"><p>launch a joystick node as shown below.</p>
+</dd>
+</dl>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>minibot<span class="w"> </span>joystick.launch.xml
+</pre></div>
+</div>
+<p>If everything works, you should be able to drive the MiniBot with the Playstation controller. Our system has considerable latency (sluggishness) because we’re going from the Playstation controller to
+development computer via Bluetooth, and then from development computer to ESP32 via WiFi. A better approach involves going directly from the Playstation controller to the ESP32, and this will be
+a future hack.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mobile_robot_part03.html" class="btn btn-neutral float-left" title="Mobile Robot, Part 3" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tello_edu_overview.html" class="btn btn-neutral float-right" title="Tello Edu Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, MIT-NEET Autonomous Machines.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

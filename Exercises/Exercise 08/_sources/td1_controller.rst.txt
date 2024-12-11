@@ -1,0 +1,61 @@
+
+=====================
+Td1 Controller Manual
+=====================
+
+.. note::
+
+	You will find the information on this page in the Gamesir T1d Operating Manual. We provide it here to
+	facilitate searching our website for topics of interests. We have also made small grammatical corrections
+	relative to the operating manual.
+	
+
+Introduction
+============
+The Bluetooth controller T1d supports a Bluetooth 4.0 wireless connection
+suitable for Android devices (version 4.3 or above) and Apple devices
+(system version iOS8.0 or above). The T1d controller is fully intelligent and
+automatically identifies various models of equipment; hence, you do not need to
+manually set this device for Android or iOS mode. In most case you simple connect and play.
+
+Controller Specifications
+=========================
+
++---------------------+---------------------------------+
+| Name of the product | Bluetooth controller T1d        |
++---------------------+---------------------------------+
+| Model of product    | T1d                             |
++---------------------+---------------------------------+
+| Supporting platform | Android, iOS                    |
++---------------------+---------------------------------+
+| Bluetooth           | Bluetooth 4.0                   |
++---------------------+---------------------------------+
+| Battery type        | 600mAh, polymer lithium battery |
++---------------------+---------------------------------+
+| Input               | 5V-1A                           |
++---------------------+---------------------------------+
+| Packaging size      | 185mm*180mm*80mm                |
++---------------------+---------------------------------+
+| Product size        | 162mm*101mm*67mm                |
++---------------------+---------------------------------+
+
+Controller Buttons/Functions
+============================
+
+.. image:: images/Gamesir_T1d_01.png
+    :width: 439px
+    :align: center
+    :height: 665px
+    :alt: T1d Controller Buttons/Functions
+	
+
+Function Descriptions
+=====================
+	
+1) Turning on and connect the controller
+	a) Short press the *Power Button* to turn on the T1d. If it powers up successfully, the set up *ABXY* buttons will light up. 
+	b) Power display LED flickers slowly; Enter the Bluetooth mode directly to wait for the APP connection;
+	c) Enter the flight control APP to connect the controller;
+	d) After connecting, the power display LED is always on and show the quantity of electricity.
+	e) If the controller has been connected to other phones, press the "Pair" button of the controller to force the controller to enter the state of 
+	   waiting match.

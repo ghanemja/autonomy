@@ -1,0 +1,60 @@
+=============================
+Programming via Tello SDK 2.0
+=============================
+
+For this exercise you'll learn how to write a program in Python using commands in the :download:`Tello SDK 2.0 User Guide <documents/Tello_SDK_2.0_User_Guide.pdf>` . 
+You'll begin with existing code ``Tello_Example01.py``, and once you have a grasp of how this code is structured, take a look at the 
+User Guide to learn more about the other SDK commands. After looking through the User Guide, you'll be in a good position to make modifications and create your own code.
+
+1 Example Program
+=================
+
+1.1 Download Tello_Example01.py 
+-------------------------------
+First, create a folder named ``tello`` on your computer.
+
+.. code-block:: bash
+
+	user@am-dev-xx:~$ mkdir tello 
+	
+Now, open VSCode and save the program  as ``Tello_Example01.py`` inside your ``tello`` folder. 
+
+.. literalinclude:: code/Tello_Example01.py
+	:language: Python
+	:linenos:
+	:caption: Tello_Example01.py
+
+The above program should be self-explanatory, so please look over it carefully. In this program, after establishing the required WiFi connection to your Tello, you'll see a sequence of commands such as ``takeoff``, ``up 150``, 
+``left 30``, etc.  You can find a description for all these commands in the :download:`Tello SDK 2.0 User Guide <documents/Tello_SDK_2.0_User_Guide.pdf>`.
+
+.. note:: The distances have units in centimeters and time in seconds. 
+
+Without the use of any additional libraries, all of the commands given in the Tello SDK 2.0 should perform as expected with our Ubuntu 22.04 setup except for the ``streamon`` and 
+``streamoff`` commands which enables and disables the video stream, respectively. To get the video stream working properly, we'll need to install a few other Python libraries which we'll do later on. 
+
+1.2 Running the Code
+--------------------
+Running the example program on your development computer should be straightforward following the steps below.
+
+:Step 1: Make sure you have a fully charged battery and turn on your Tello. Wait until the ``Status Indicator`` flashes yellow.
+:Step 2: On your computer, look under ``Network`` to find your Tello's WiFi ID (your Tello's WiFI ID is printed on top of your Tello). If there are several Tellos turned on in our class, make sure to select the correct Tello!
+
+.. image:: images/Connecting_to_Tello.png
+    :width: 455px
+    :height: 444px
+    :align: center
+    
+:Step 3: Within VSCode, at the top right corner, you should see a ``run`` button. Press this button, and if  all works well, your Tello should execute the commands given in the code.
+
+.. image:: images/Run_Tello_Program.png
+    :width: 312px
+    :height: 190px
+    :align: center
+
+|
+
+Now, try a few examples yourself by modifying this example code. Try changing the distances traveled, as well as the orientation angles. Write code that will fly the Tello around a square 
+with sides of 200 cm. Enjoy!
+
+To simply the process of using these basic commands, in the next section we'll use a popular package called ``DJITelloPy``. In addition, we'll also use computer vision library called ``OpenCV`` to help us grab and display 
+images from the Tello camera. 

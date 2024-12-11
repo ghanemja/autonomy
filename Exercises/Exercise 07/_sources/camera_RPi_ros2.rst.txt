@@ -1,0 +1,137 @@
+:orphan:
+
+=========================
+Raspberry Pi Camera Setup
+=========================
+
+In this class we'll be exploring how to use ROS to connect to a virtual camera in simulation or a real camera.
+
+How Cameras and Images Work
+How Cameras and images are integrated into ROS 
+How to use Gazebo to Simulate a Virtual camera 
+How to Connect a Real Camera to a Raspberry Pi
+
+Camera Types
+============
+
+when a camera takes an image it basically takes all the light that's just bouncing around in the world it
+focuses it through a lens through an aperture and onto a sensor and that data is then stored as a 2d array of
+measurements that are called pixels now for a grayscale image this is pretty straightforward each pixel just measures
+the intensity of the light that hits it but for colored images it gets a bit more complex there are a few different methods that 
+
+Installations 
+=============
+
+.. note::
+    Here, we assume you're setting up a camera on the Raspberry Pi 4 or 5 used as a robot computer with the user name
+    ``neet`` per our class setup convention. If you're using a different user name, then modify these instructions as 
+    appropriate. 
+
+.. code-block:: bash 
+
+    neet@am-robot-xx:~$ sudo apt update
+
+.. code-block:: bash 
+
+    neet@am-robot-xx:~$ sudo apt upgrade
+
+.. code-block:: bash 
+
+    neet@am-robot-xx:~$ sudo apt install libraspberrypi-bin v4l-utils ros-humble-v4l2-camera
+
+
+.. code-block:: bash 
+
+    neet@am-robot-xx:~$ sudo apt install ros-humble-image-transport-plugins
+
+
+.. code-block:: bash 
+
+    neet@am-robot-01:~$ sudo apt install ros-humble-rqt-image-view
+
+
+After installating the above, run the command ``groups`` to see which groups the current user is part of
+
+.. code-block:: bash 
+
+    neet@am-robot-xx:~$ groups
+
+and you'll receive an output similar to the following 
+
+.. code-block:: bash
+    neet adm dialout cdrom sudo audio video plugdev games users input render netdev gpio spi i2c
+
+Make sure the user ``neet`` belongs to the video group as illustrated above. 
+
+.. note:: 
+    If you don't see video in your group listing, you'll need to add the user ``neet`` as follows 
+
+    .. code-block:: bash 
+        neet@am-robot-xx:~$ sudo usermod -aG video neet
+
+    After running this command, you should log off the robot computer and then reboot it. 
+
+Enable the Camera
+=================
+
+.. code-block:: bash 
+
+    neet@am-robot-xx:~$ sudo apt-get install raspi-config
+
+
+After this installation run the following 
+
+.. code-block:: bash 
+
+    neet@am-robot-xx:~$ sudo raspi-config
+
+- Step 1: select ``3 Interface Options ... ``
+- Step 2: select ``I1 Legacy Camera ... ``
+- Step 3: Would you like to enable legacy camera support? ``Yes``
+- Step 4: click ``Ok``
+- Step 5: select ``3 Interface Options ... ``
+- Step 6: select ``I4 SPI Enable/disable automatic ...``
+- Step 7: Would you like the SPI interface to be enabled? ``Yes``
+- Step 8: The SPI interface is enabled. Click ``Ok``
+- Step 9: select ``3 Interface Options ... ``
+- Step 10: select ``I5 I2C Enable/disable automatic ...``
+- Step 11: Would you like the ARM I2C interface to be enabled? ``Yes`` 
+- Step 12: The ARM I2C interface is enabled. Click ``Ok``
+- Step 13: select ``Finish``
+- Step 14: Would you like to reboot now? ``Yes``
+
+.. code-block:: bash 
+
+    neet@am-robot-xx:~$ vcgencmd get_camera 
+
+You should receive the following output
+
+.. code-block:: bash 
+
+    supported=1 detected=1, libcamera interfaces=0
+
+If the camera isn't detected, please check to ribbon cable to make sure its properly inserted. If this doesn't solve the problem, you may have a defective camera. 
+
+.. code-block:: bash 
+
+    neet@am-robot-01:~$ ros2 run v4l2_camera v4l2_camera_node --ros-args -p image_size:="[640,480]" -p camera_frame_id:=camera_optical_link
+
+
+For this next step, you'll type the following command on a terminal window on your **development** computer 
+
+.. code-block:: bash
+
+    user@am-dev-xx:~$ ros2 run rqt_image_view rqt_image_view
+
+
+Error message
+
+.. code-block:: bash
+
+    could not connect to display 
+    This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+
+    Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, xcb.
+
+    [ros2run]: Process exited with failure 1
+

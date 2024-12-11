@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RPLiDAR A1 Setup &mdash; 16.633 NEET Autonomous Machines  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tello Edu Specifications" href="tello_edu_specs.html" />
+    <link rel="prev" title="Camera Setup" href="camera_RPi_setup.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/NEET-AutonomousMachines.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Exercise 01</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro_ros.html">Introduction to ROS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_overview.html">Linux Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_01.html">ROS 2 Humble Tutorials, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 02</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_02.html">ROS 2 Humble Tutorials, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 03</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_03.html">ROS 2 Humble Tutorials, Part 3</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 04</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part01.html">Mobile Robot, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 05</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part02.html">Mobile Robot, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 06</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part03.html">Mobile Robot, Part 3</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 07</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part04.html">Mobile Robot, Part 4</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 08</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tello_edu_overview.html">Tello Edu Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_sdk_2_0.html">Programming via Tello SDK 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_djitellopy.html">Programming via DJITelloPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Mobile Robot Setup Information</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="raspberry_pi_setup.html">Raspberry Pi Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="camera_RPi_setup.html">Camera Setup</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RPLiDAR A1 Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-ros-2-workspace">1 Create a ROS 2 Workspace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installations">2 Installations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-the-development-tools">2.1 Install the Development Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-git-on-the-robot">2.2 Install Git on the Robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-ros-humble-rplidar-ros">2.3 Install ros-humble-rplidar-ros</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clone-the-rplidar-ros-package-from-github">2.4 Clone the rplidar_ros Package from Github</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#build-rplidar-ros-package">3 Build rplidar_ros package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-udev-rules-for-rplidar">4 Create udev rules for rplidar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-rplidar-ros">5 Run rplidar_ros</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tello User Manuals and Specifications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tello_edu_specs.html">Tello Edu Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_user_manual.html">Tello User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_sdk_2_0_user_guide.html">Tello SDK 2.0 User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="td1_controller.html">Td1 Controller Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batteries_charging.html">Batteries/Charging</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">16.633 NEET Autonomous Machines</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RPLiDAR A1 Setup</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rplidar-a1-setup">
+<h1>RPLiDAR A1 Setup<a class="headerlink" href="#rplidar-a1-setup" title="Permalink to this heading"></a></h1>
+<p>In the following instructions, we assume you’re setting up an RPLIDAR A1 connected to a Raspberry Pi 4 for use on a robot. The robot’s Raspberry Pi
+should already have <a class="reference internal" href="raspberry_pi_setup.html"><span class="doc">Ubuntu 22.04.x</span></a>  and <a class="reference external" href="https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html">ROS 2 Humble</a> installed.</p>
+<p>What You Need</p>
+<ul class="simple">
+<li><p>Slamtec RPLIDAR A1</p></li>
+<li><p>Slamtec USB Adapter</p></li>
+<li><p>Raspberry Pi 4</p></li>
+<li><p>Power Supply for Raspberry Pi</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The instructions on this page are taken from the following sources and modified for ROS 2 Humble and the RPLIDAR A1.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://index.ros.org/p/rplidar_ros/">rplidar_ros package from rplidar_ros repo</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=JSWcDe5tUKQ">How to use SLAMTEC RPLidar in ROS2?</a></p></li>
+</ul>
+</div>
+<section id="create-a-ros-2-workspace">
+<h2>1 Create a ROS 2 Workspace<a class="headerlink" href="#create-a-ros-2-workspace" title="Permalink to this heading"></a></h2>
+<p>Remote login (or login directly) to the robot as the user <code class="docutils literal notranslate"><span class="pre">neet</span></code> with password <code class="docutils literal notranslate"><span class="pre">1234</span></code> on one of our the three robots: <code class="docutils literal notranslate"><span class="pre">am-robot-01</span></code>, <code class="docutils literal notranslate"><span class="pre">am-robot-02</span></code>, or <code class="docutils literal notranslate"><span class="pre">am-robot-03</span></code>.
+If a workspace <code class="docutils literal notranslate"><span class="pre">ros2_ws</span></code> doesn’t already exist, create one as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a ros2 workspace</span>
+neet@am-robot-0x:$<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ros2_ws/src
+
+<span class="c1"># cd into the src folder</span>
+neet@am-robot-0x:$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/ros2_ws/src
+</pre></div>
+</div>
+</section>
+<section id="installations">
+<h2>2 Installations<a class="headerlink" href="#installations" title="Permalink to this heading"></a></h2>
+<section id="install-the-development-tools">
+<h3>2.1 Install the Development Tools<a class="headerlink" href="#install-the-development-tools" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># update your apt repository caches</span>
+neet@am-robot-0x:$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+
+<span class="c1"># upgrade packages</span>
+neet@am-robot-0x:$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
+
+<span class="c1"># install ros2 development tools</span>
+neet@am-robot-0x:$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-dev-tools
+</pre></div>
+</div>
+</section>
+<section id="install-git-on-the-robot">
+<h3>2.2 Install Git on the Robot<a class="headerlink" href="#install-git-on-the-robot" title="Permalink to this heading"></a></h3>
+<p>If <code class="docutils literal notranslate"><span class="pre">git</span></code> isn’t already installed on the robot, then install it as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-0x:$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git
+</pre></div>
+</div>
+</section>
+<section id="install-ros-humble-rplidar-ros">
+<h3>2.3 Install ros-humble-rplidar-ros<a class="headerlink" href="#install-ros-humble-rplidar-ros" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-0x:$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-humble-rplidar-ros
+</pre></div>
+</div>
+</section>
+<section id="clone-the-rplidar-ros-package-from-github">
+<h3>2.4 Clone the rplidar_ros Package from Github<a class="headerlink" href="#clone-the-rplidar-ros-package-from-github" title="Permalink to this heading"></a></h3>
+<p>Make sure you’re inside the  <code class="docutils literal notranslate"><span class="pre">~/ros2_ws/src</span></code> folder before cloning the rplidar_ros package.
+Now, clone the rplidar_ros package from github</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-0x:~/ros2_ws/src$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span>ros2<span class="w"> </span>https://github.com/Slamtec/rplidar_ros.git
+</pre></div>
+</div>
+</section>
+</section>
+<section id="build-rplidar-ros-package">
+<h2>3 Build rplidar_ros package<a class="headerlink" href="#build-rplidar-ros-package" title="Permalink to this heading"></a></h2>
+<p>Go back up to one level to the <code class="docutils literal notranslate"><span class="pre">~/ros2_ws</span></code> workspace and build the rplidar_row package.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># source the ros2 underlay</span>
+neet@am-robot-0x:~/ros2_ws$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># build the package</span>
+neet@am-robot-0x:~/ros2_ws$<span class="w"> </span>colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># source the package overlay (package environment setup)</span>
+neet@am-robot-0x:~/ros2_ws$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+</section>
+<section id="create-udev-rules-for-rplidar">
+<h2>4 Create udev rules for rplidar<a class="headerlink" href="#create-udev-rules-for-rplidar" title="Permalink to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">rplidar_ros</span></code> running requires the read and write permissions of the serial device. You can manually modify it with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-0x:~/ros2_ws$<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">666</span><span class="w"> </span>/dev/ttyUSB0
+</pre></div>
+</div>
+<p>Another way is to create a udev rule:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-0x:~/ros2_ws$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>src/rpldiar_ros/
+neet@am-robot-0x:~/ros2_ws/src$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>scripts/create_udev_rules.sh
+</pre></div>
+</div>
+<p>The RPLIDAR A1 is now setup and ready for use.</p>
+</section>
+<section id="run-rplidar-ros">
+<h2>5 Run rplidar_ros<a class="headerlink" href="#run-rplidar-ros" title="Permalink to this heading"></a></h2>
+<p>To run an rplidar node and view it in the RVIZ, use the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-0x:~/ros2_ws$<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>rplidar_ros<span class="w"> </span>view_rplidar_a1_launch.py
+</pre></div>
+</div>
+<p>You’ll now see the point cloud representation of the LiDAR within RVIZ.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="camera_RPi_setup.html" class="btn btn-neutral float-left" title="Camera Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tello_edu_specs.html" class="btn btn-neutral float-right" title="Tello Edu Specifications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, MIT-NEET Autonomous Machines.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,969 @@
+====================
+Mobile Robot, Part 3
+====================
+
+In this exercise, you'll learn the following:
+
+	a) How to set up a joystick controller for use in ROS;
+	b) How to use ``joy_node`` to obtain joystick axes/button presses;
+	c) How to use ``teleop_node`` to convert joystick messages into velocity commands for our robot;
+	d) How to simulate a LiDAR sensor in Gazebo; and 
+	e) How to simulate a camera sensor in Gazebo. 
+	
+	
+1 Joystick Controller
+=====================
+
+|
+
+.. figure:: images/PS5_DualSense_Controller00.jpg
+		:width: 2739px
+		:height: 1326px
+		:align: center
+		:scale: 15 %
+		
+|		
+
+The joystick controller that we'll be using is a PlayStation 5 DualSense Wireless Controller shown above. This controller has more features than we plan to use but 
+most importantly it connects to our laptops wirelessly over a ROS node (``teleop_twist_joy``). Subsequently, this ROS node converts our joystick/button presses into a
+``twist`` topic (``/cmd_vel``) we can use  to drive our robot.  
+
+.. note:: 
+	There are other wireless controllers that serve the same purpose of providing a wireless 
+	connection to your laptop, so if you're planning something like this on your own, a less expensive controller will also work. 
+
+.. attention::
+	After completing this exercise, please make sure to return the DualSense controller to your instructor as we have a limited number available for classroom use. If you need to check one out, please
+	notify your instructor and make sure to return the controller on the next school day. 
+		
+1.1 Pair the Controller with Your Computer 
+------------------------------------------
+
+1) On your laptop, open Settings, select Bluetooth, and turn Bluetooth on. 
+
+|
+
+	.. figure:: images/PS5_DualSense_Controller02.png
+			:width: 728px
+			:height: 374px
+			:align: center
+			:scale: 80 %
+			
+|
+
+2) Simultaneously press the two buttons shown below. 
+
+|
+
+	.. figure:: images/PS5_DualSense_Controller01.png
+			:width: 575px
+			:height: 418px
+			:align: center
+			:scale: 65 %
+
+|			
+		
+	Hold these two buttons down until you see ``DualSense Wireless Controller             Not Set Up`` as shown below.
+	
+|
+
+	.. figure:: images/PS5_DualSense_Controller03.png
+			:width: 664px
+			:height: 87px
+			:align: center
+			:scale: 65 %
+
+|
+
+3) Press the ``Not Set Up`` button on your screen. If successful, you should immediately see the ``DualSense Wireless Controller             Connected`` message. 
+
+.. note:: 
+	Once connected, your controller should remain connected to your laptop until you disconnect from the controller, or when you shut down your laptop. 
+	Your controller is connected when the blue lights on the top are solid. 
+
+1.2 Determine the Joystick Axes and Button Numbers
+--------------------------------------------------
+To determine the joystick axes and button numbers that work in ROS, you can use the joystick tester application ``jstest-gtk``. 
+You can install ``jstest-gtk`` by typing the following in a terminal window. 
+
+.. code-block:: bash 
+
+	$ sudo apt install jstest-gtk 
+	
+To run ``jstest-gtk``, type the following. 
+
+.. code-block:: xml 
+
+	$ jstest-gtk 
+	
+Once open, you should see the ``Joystick Preferences`` screen as illustrated below. Select the ``DualSense Wireless Controller`` and then click the ``Properties`` button.
+
+|
+
+.. figure:: images/PS5_DualSense_Controller04.png
+		:width: 469px
+		:height: 358px
+		:align: center
+		:scale: 80 %
+		
+|
+
+You now should see the ``DualSense Wireless Controller`` screen as illustrated below. 
+
+|
+
+.. figure:: images/PS5_DualSense_Controller05.png
+		:width: 560px
+		:height: 600px
+		:align: center
+		:scale: 80 %
+		
+As you move the left/right joysticks and press the buttons on the controller, the orange bars corresponding to the eight axes will move, and the 12 buttons will light up. 
+We'll use the following axes and buttons to configure our joystick in ROS. 
+
+	a) Axis 1 (left joystick): forward/reverse motion along the x-axis. 
+	b) Axis 4 (right joystick): right/left rotation around the z-axis (yaw motion)
+	c) Button 4: deadman switch
+	d) Button 5: turbo speed
+
+.. note:: 
+	The deadman switch (button 4) activates the joystick controls (axes 1 and 4, and button 5). In other words, if button 4 isn't pressed, axes 1 and 4, and button 5 will not work.
+	
+1.3 Joystick Node Configuration Parameters 
+------------------------------------------
+To use our joystick controller in ROS, we'll need to set a few parameters when we spin up the ``joy_node``. We can set these parameters from the command line, however, it will
+be much easier to set them inside a parameter configuration file, such as a YAML file. 
+YAML files are used in ROS to load node configuration parameters to the `ROS Parameter Server <https://wiki.ros.org/Parameter%20Server>`_.
+
+We'll store our joystick parameters in the file ``joystick.yaml`` and we'll place this file inside a ``config`` folder. First, we'll create our ``config`` folder 
+inside our ``minibot`` package folder as follows.
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws/src/minibot$ mkdir config
+	
+
+1.4 Create joystick.yaml  
+------------------------
+We'll now create the file ``joystick.yaml`` and place it inside our ``config`` folder. This file contains parameters that initialize our ``joy_node`` and 
+``teleop_node``. A list of parameters for ``joy_node`` are located `here <https://index.ros.org/p/joy/>`_ and the parameters for ``teleop_node`` (within the 
+``teleop_twist_joy`` package are located `here <https://wiki.ros.org/teleop_twist_joy>`_ and `here <https://docs.ros.org/en/ros2_packages/iron/api/teleop_twist_joy/standard_docs/README.html>`_.
+
+1.4.1 joy_node Parameter Listing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The ``joy`` package acts as a generic Linux joystick driver, and it contains ``joy_node``, a node that interfaces a generic Linux-compatible joystick to ROS. The 
+``joy_node`` publishes the joy message ``sensor_msgs/msg/joy``, and it has the following parameters:
+
+* ``device_id (int, default: 0)``
+	* The joystick device to use. ros2 run joy joy_enumerate_devices wil list the attached devices.
+* ``device_name (string, default: “”)``
+	* The joystick name to use. This can be useful when multiple different joysticks are attached. If both device_name and device_id are specified, device_name takes precedence.
+* ``deadzone (double, default: 0.05)``
+	* Amount by which the joystick has to move before it is considered to be off-center. This parameter is specified relative to an axis normalized between -1 and 1. Thus, 0.1 means that the joystick has to move 10% of the way to the edge of an axis’s range before that axis will output a non-zero value.
+* ``autorepeat_rate (double, default: 20.0)``
+	* Rate in Hz at which a joystick that has a non-changing state will resend the previously sent message. If set to 0.0, autorepeat will be disabled, meaning joy messages will only be published when the joystick changes. Cannot be larger than 1000.0.
+* ``sticky_buttons (bool, default: false)``
+	* Whether buttons are “sticky”. If this is false (the default), then a button press will result in a 1 being output, and a button release will result in a 0 being output. If this is true, then a button press will toggle the current state of the button, and a button release will do nothing. Thus, hitting the button while it is currently 0 will switch it to 1, and keep it at 1 until the button is pressed again.
+* ``coalesce_interval_ms (int, default: 1)``
+	* The number of milliseconds to wait after an axis event before publishing a message. Since the kernel sends an event for every change, this can significantly reduce the number of messages published. Setting it to 0 disables this behavior. The default of 1 ms is a good compromise between message delays and number of messages published.
+
+1.4.2 teleop_node Parameter Listing 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The ``telop_twist_joy`` package provides a generic facility for tele-operating robots with a standard joystick, as it converts joy messages to velocity commands. 
+The ``telop_node`` within the ``telop_twist_joy`` package subscribes to and republishes ``sensor_msgs/msg/joy`` as scaled ``geometry_msgs/msg/Twist`` messages. 
+The ``telop_node`` has the following parameters:
+
+* ``require_enable_button (bool, default: true)``
+	* Whether to require the enable button for enabling movement.
+* ``enable_button (int, default: 0)``
+	* Joystick button to enable regular-speed movement.
+* ``enable_turbo_button (int, default: -1)``
+	* Joystick button to enable high-speed movement (disabled when -1).
+* ``axis_linear.<axis>``
+	* Joystick axis to use for linear movement control.
+	* ``axis_linear.x (int, default: 5)``
+	* ``axis_linear.y (int, default: -1)``
+	* ``axis_linear.z (int, default: -1)``
+* ``scale_linear.<axis>``
+	* Scale to apply to joystick linear axis for regular-speed movement.
+	* ``scale_linear.x (double, default: 0.5)``
+	* ``scale_linear.y (double, default: 0.0)``
+	* ``scale_linear.z (double, default: 0.0)``
+* ``scale_linear_turbo.<axis>``
+	* Scale to apply to joystick linear axis for high-speed movement.
+	* ``scale_linear_turbo.x (double, default: 1.0)``
+	* ``scale_linear_turbo.y (double, default: 0.0)``
+	* ``scale_linear_turbo.z (double, default: 0.0)``
+* ``axis_angular.<axis>``
+	* Joystick axis to use for angular movement control.
+	* ``axis_angular.yaw (int, default: 2)``
+	* ``axis_angular.pitch (int, default: -1)``
+	* ``axis_angular.roll (int, default: -1)``
+* ``scale_angular.<axis>``
+	* Scale to apply to joystick angular axis.
+	* ``scale_angular.yaw (double, default: 0.5)``
+	* ``scale_angular.pitch (double, default: 0.0)``
+	* ``scale_angular.roll (double, default: 0.0)``
+* ``scale_angular_turbo.<axis>``
+	* Scale to apply to joystick angular axis for high-speed movement.
+	* ``scale_angular_turbo.yaw (double, default: 1.0)``
+	* ``scale_angular_turbo.pitch (double, default: 0.0)``
+	* ``scale_angular_turbo.roll (double, default: 0.0)``
+* ``inverted_reverse (bool, default: false)``
+	* Whether to invert turning left-right while reversing (useful for differential wheeled robots).
+* ``publish_stamped_twist (bool, default: false)``
+	* Whether to publish ``geometry_msgs/msg/TwistStamped`` for command velocity messages.
+* ``frame (string, default: 'teleop_twist_joy')``
+	* Frame name used for the header of TwistStamped messages.
+
+1.4.3 Code for joystick.yaml 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Below is the code (with parameter settings) we'll use in our ``joystick.yaml`` file. Make sure to place this file inside your ``config`` folder. See the parameter listings given above for more details. 
+
+.. code-block:: yaml 
+	:linenos: 
+	
+	# parameters for joy_node
+	joy_node:
+	  ros__parameters:
+		device_id: 0
+		deadzone: 0.05
+		autorepeat_rate: 20.0
+
+	# parameters for teleop_node
+	teleop_node:
+	  ros__parameters:
+		axis_linear.x: 1 # forward/reverse axis
+		scale_linear.x: 0.5
+		scale_linear_turbo.x: 1.0
+		axis_angular.yaw: 4 # right/left axis
+		scale_angular.yaw: 0.75
+		scale_angular_turbo.yaw: 1.0
+		require_enable_button: true
+		enable_button: 4  # deadman button
+		enable_turbo_button: 5  # turbo button
+	
+	
+
+1.5 Code for joystick.launch.xml
+--------------------------------
+To test our joystick parameters and make sure they work properly, we'll create a launch file ``joystick.launch.xml`` that loads up our joystick parameters. 
+
+Create a file ``joystick.launch.xml`` with the contents given below. Place this file inside your ``launch`` folder. 
+
+.. code-block:: xml 
+	:linenos:
+
+	<launch>
+
+		<!-- start the joystick node -->
+		<node pkg="joy" exec="joy_node" name="joy_node">
+			<param from="$(find-pkg-share minibot)/config/joystick.yaml" />
+		</node>
+
+		<!-- start the teleop node -->
+		<node pkg="teleop_twist_joy" exec="teleop_node" name="teleop_node">
+			<param from="$(find-pkg-share minibot)/config/joystick.yaml" />
+		</node>
+
+	</launch>
+	
+Now, make sure you're inside the ``dev_ws`` workspace and build it using colcon.
+
+.. code-block:: bash 
+
+	user@am-dev-xx:~/dev_ws$ colcon build 
+	
+Now, source the workspace ``setup.bash`` file.
+
+.. code-block:: bash 
+
+	user@am-dev-xx:~/dev_ws$ source install/setup.bash 
+
+Now, go into Settings and make sure your joystick is still connected to Bluetooth. You may need to press the PlayStation button to turn it back on. 
+ 	
+Now, launch ``joystick.launch.xml``. 
+
+.. code-block:: bash  
+
+	user@am-dev-xx:~/dev_ws$ ros2 launch minibot joystick.launch.xml
+	
+We're interested in the ``/cmd_vel`` topic which has twist coordinates for velocity. 
+
+
+.. code-block:: bash 
+
+	$ ros2 topic echo /cmd_vel 
+	
+After pressing the deadman button, your screen should look like the following.
+
+.. figure:: images/PS5_DualSense_Controller06.png
+		:width: 658px
+		:height: 471px
+		:align: center
+		:scale: 70 %
+
+|
+
+Now, as you move the left joystick up/down, you'll get values for ``axis_linear.x``, and as you move the right joystick up/down, you'll get values for ``axis_linear.yaw``.  
+We'll publish these ``/cmd_vel`` values and Gazebo, as a subscriber, will use these values to drive our MiniBot. 
+	
+2 Updates to Existing Code
+==========================
+We'll now call the URDF files for our base (``minibot_base.xacro``), LiDAR (``lidar.xacro``), and camera (``camera.xacro``) from a more general URDF file called
+``minibot.xacro``. This requires:
+
+	1) the creation of ``minibot.xacro`` and
+	2) a slight update to ``minibot_base.xacro`` .
+
+In addition to these two updates, we'll make the following updates to our launch file ``minibot_gazebo.launch.xml``:
+
+	1) inside ``minibot_gazebo.launch.xml``, load the ``minibot.xacro`` file instead of ``minibot_base.xacro`` and
+	2) inside ``minibot_gazebo.launch.xml``, launch both the ``joy_node`` and ``teleop_node`` for joystick control.
+
+2.1 Code for minibot.xacro 
+--------------------------
+Place the code below in your ``minibot.xacro`` file.
+
+.. code-block:: xml 
+	:linenos:
+	
+	<?xml version="1.0"?>
+	<robot name="minibot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+		<xacro:include filename="minibot_base.xacro" />
+		<xacro:include filename="lidar.xacro" />
+		<xacro:include filename="camera.xacro" />
+		
+	</robot>
+
+
+2.2 Update for minibot_base.xacro
+---------------------------------
+1) Inside ``minibot_base.xacro``, replace ``<robot name="minibot_base" xmlns:xacro="http://www.ros.org/wiki/xacro">`` with ``<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >``.
+2) Inside ``minibot_base.xacro``, if you haven't done so already, flip the rotational direction of the right wheel's joint axis by placing a negative sign on the z-component as follows.
+	
+.. code-block:: xml
+	
+	<!-- right_wheel_joint -->
+	<joint name="right_wheel_joint" type="continuous">
+		<parent link="chassis_link"/>
+		<child link="right_wheel_link"/>
+		<origin xyz="${wheel_offset_x} ${-((chassis_width/2) + (wheel_thickness/2))} 0" rpy="${pi/2} 0 0"/>
+		<axis xyz="0 0 -1"/>
+	</joint>
+
+.. note:: 
+	We need to flip the rotational direction of the right wheel's joint axis to correspond with the rotational direction of the gazebo differential drive plugin. 
+	If you don't make this correction, it will appear as if the left/right joysticks on your controller are reversed with the left joystick turning the MiniBot quickly with the linear forward/reverse 
+	speed, and the right joystick driving forward/reverse slowly with the turning speed.
+	
+2.3 Updates for minibot_gazebo.launch.xml 
+-----------------------------------------
+
+1) Inside ``minibot_gazebo.launch.xml``, load the ``minibot.xacro`` file instead of ``minibot_base.xacro`` (see line 2 below).
+2) Inside ``minibot_gazebo.launch.xml``, add the ``joy_node`` and ``teleop_node`` to launch.
+
+Your updated ``minibot_gazebo.launch.xml`` file should look like the following.
+
+.. code-block:: xml 
+	:linenos:
+	
+	<launch>
+		<!-- find the minibot urdf file (inside the install folder) and assign the path to a variable -->
+		<let name="urdf_path" value="$(find-pkg-share minibot)/urdf/minibot.xacro" />
+
+		<!-- find the rviz configuration file (inside the install folder) and assign the path to a variable -->
+		<let name="rviz_config_path" value="$(find-pkg-share minibot)/rviz/minibot_config.rviz" />
+
+		<!-- start the robot-state-publisher node -->
+		<node pkg="robot_state_publisher" exec="robot_state_publisher">
+			<param name="robot_description"
+				value="$(command 'xacro $(var urdf_path)')" />
+			<param name="use_sim_time" value="true"/> 
+		</node>
+
+		<!-- open Gazebo with our saved world -->
+		<include file="$(find-pkg-share gazebo_ros)/launch/gazebo.launch.py" >
+			<arg name="world" value="$(find-pkg-share minibot)/worlds/world01.world" />
+		</include>
+
+		<!-- spawn minibot in Gazebo -->
+		<node pkg="gazebo_ros" exec="spawn_entity.py"
+			  args="-topic robot_description -entity minibot" />
+
+		<!-- start the joint-state-publisher-gui node -->
+		<node pkg="joint_state_publisher_gui" exec="joint_state_publisher_gui" />
+
+		<!-- start RVIZ2 with our save configuration File -->
+		<node pkg="rviz2" exec="rviz2" output="screen" 
+			  args="-d $(var rviz_config_path)"/>
+
+		<!-- start the joystick node -->
+		<node pkg="joy" exec="joy_node">
+			<param from="$(find-pkg-share minibot)/config/joystick.yaml" />
+		</node>
+
+		<!-- start the teleop node -->
+		<node pkg="teleop_twist_joy" exec="teleop_node" name="teleop_node">
+			<param from="$(find-pkg-share minibot)/config/joystick.yaml" />
+		</node>
+	</launch>
+
+2.4 Update CMakeLists.txt
+-----------------------------
+In your ``CMakeLists.txt`` file, add the ``config`` directory on line 13 after the ``urdf``, ``launch``, ``rviz``, and ``worlds``  directories as shown below.
+
+.. code-block:: xml 
+	:linenos:
+	
+	cmake_minimum_required(VERSION 3.8)
+	project(minibot)
+
+	if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+	  add_compile_options(-Wall -Wextra -Wpedantic)
+	endif()
+
+	# find dependencies
+	find_package(ament_cmake REQUIRED)
+
+	# install package directories
+	install(
+	  DIRECTORY urdf launch rviz worlds config
+	  DESTINATION share/${PROJECT_NAME}/
+	)
+
+	ament_package()
+
+3 LiDAR Sensor
+==============
+
+3.1 LiDAR Specifications 
+-------------------------
+Brand: RPLidar A1M8 - 360 Degree Laser Scanner
+
+* Distance Range: 0.15 - 12 m (with white object to be reflected in the test)
+* Angular Field of View: 0~360°
+* Resolution: 0.5-1.0% (minimum 0.5 mm) @ < 1.5 m
+* Angular Resolution: Less than or equal to 1° (when scanning at 5.5Hz)
+* Sampling frequency: 4000 - 8000 Hz
+* Scan frequency: 1~10Hz, typical value 5.5Hz (when RPLIDAR takes 360 points per scan, scan frequency is the typical value)
+
+		
+3.2 URDF Construction
+---------------------
+Construction of the URDF for our LiDAR sensor consists of the following.
+
+.. code-block:: xml
+	
+	<!-- constants -->
+	<xacro:property name="lidar_diam" value = "0.07" />
+	<xacro:property name="lidar_height" value = "0.055" />
+	<xacro:property name="lidar_offset_x" value = "${chassis_length/2 - 0.055}" /> 
+	<xacro:property name="lidar_offset_z" value = "${lidar_height/2 + chassis_height/2}" />
+	<xacro:property name="lidar_mass" value = "0.5" />
+
+	<!-- lidar_joint -->
+	<joint name="lidar_joint" type="fixed">
+		<parent link="chassis_link"/>
+		<child link="lidar_link"/>
+		<origin xyz="${lidar_offset_x} 0 ${lidar_offset_z}" rpy="0 0 0"/>
+	</joint>
+
+	<!-- lidar_link -->
+	<link name="lidar_link">
+		<visual>
+			<geometry>
+				<cylinder length="${lidar_height}" radius="${lidar_diam/2}" />
+			</geometry>
+            <origin xyz="0 0 0"  rpy="0 0 0"/>
+			<material name="green" />
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="${lidar_height}" radius="${lidar_diam/2}" />
+			</geometry>
+            <origin xyz="0 0 0"  rpy="0 0 0"/>
+		</collision>
+		<xacro:cylinder_inertia m="${lidar_mass}" h="${lidar_height}" r="${lidar_diam/2}"
+		                        xyz="0 0 0" rpy="0 0 0" />
+	</link>
+
+3.3 Gazebo Parameters
+---------------------
+
+3.3.1 Template 
+^^^^^^^^^^^^^^
+
+.. code-block:: xml
+
+	<!-- Gazebo parameters for lidar sensor -->
+	<gazebo reference="name_of_link_reference">
+		<material>Gazebo_material</material>
+		<sensor name="name_of_lidar" type="ray">
+			<pose>x y z Rx Ry Rz</pose>
+			<visualize>visualize_boolean</visualize>
+			<update_rate>freq_in_hz</update_rate>
+			<ray>
+				<scan>
+					<horizontal>
+						<samples>number_of_points</samples>
+						<resolution>scan_resolution</resolution>
+						<min_angle>min_angle_in_rad</min_angle>
+						<max_angle>max_angle_in_rad</max_angle>
+					</horizontal>
+				</scan>
+				<range>
+					<min>min_dist_in_meters</min>
+					<max>max_dist_in_meters</max>
+					<resolution>resolution_in_meters</resolution>
+				</range>
+			</ray>
+			<plugin name="name_of_plugin" filename="libgazebo_ros_ray_sensor.so">
+				<ros>
+					<argument>~/out:=scan</argument>
+                </ros>
+				<output_type>sensor_msgs/LaserScan</output_type>
+				<frame_name>name_of_link_reference</frame_name>
+			</plugin>
+		</sensor>
+	</gazebo>
+
+
+3.3.2 Actual
+^^^^^^^^^^^^
+Using our LiDAR specifications, we have the following.
+
+.. code-block:: xml
+	
+	<!-- Gazebo parameters for lidar sensor -->
+	 <gazebo reference="lidar_link">
+        <material>Gazebo/Green</material>
+ 
+        <sensor name="laser" type="ray">
+            <pose> 0 0 0 0 0 0 </pose>
+            <visualize>true</visualize>
+            <update_rate>10</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>360</samples>
+                        <min_angle>-3.14</min_angle>
+                        <max_angle>3.14</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.3</min>
+                    <max>12</max>
+                </range>
+            </ray>
+            <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+                <ros>
+                    <argument>~/out:=scan</argument>
+                </ros>
+                <output_type>sensor_msgs/LaserScan</output_type>
+                <frame_name>laser_frame</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>	
+
+3.4 Code for lidar.xacro
+------------------------
+The final code for our LiDAR sensor in ``lidar.xacro`` looks like the following.
+
+.. code-block:: xml
+	:linenos: 
+	
+	<?xml version="1.0"?>
+	<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+		<!-- constants -->
+		<xacro:property name="lidar_diam" value = "0.07" />
+		<xacro:property name="lidar_height" value = "0.055" />
+		<xacro:property name="lidar_offset_x" value = "${chassis_length/2 - 0.055}" /> 
+		<xacro:property name="lidar_offset_z" value = "${lidar_height/2 + chassis_height/2}" />
+		<xacro:property name="lidar_mass" value = "0.5" />
+
+		<!-- lidar_joint -->
+		<joint name="lidar_joint" type="fixed">
+			<parent link="chassis_link"/>
+			<child link="lidar_link"/>
+			<origin xyz="${lidar_offset_x} 0 ${lidar_offset_z}" rpy="0 0 0"/>
+		</joint>
+
+		<!-- lidar_link -->
+		<link name="lidar_link">
+			<visual>
+				<geometry>
+					<cylinder length="${lidar_height}" radius="${lidar_diam/2}" />
+				</geometry>
+				<origin xyz="0 0 0"  rpy="0 0 0"/>
+				<material name="green" />
+			</visual>
+			<collision>
+				<geometry>
+					<cylinder length="${lidar_height}" radius="${lidar_diam/2}" />
+				</geometry>
+				<origin xyz="0 0 0"  rpy="0 0 0"/>
+			</collision>
+			<xacro:cylinder_inertia m="${lidar_mass}" h="${lidar_height}" r="${lidar_diam/2}"
+									xyz="0 0 0" rpy="0 0 0" />
+		</link>
+
+		<!-- Gazebo parameters for lidar -->
+		 <gazebo reference="lidar_link">
+			<material>Gazebo/Green</material>
+	 
+			<sensor name="laser" type="ray">
+				<pose> 0 0 0 0 0 0 </pose>
+				<visualize>true</visualize>
+				<update_rate>10</update_rate>
+				<ray>
+					<scan>
+						<horizontal>
+							<samples>360</samples>
+							<min_angle>-3.14</min_angle>
+							<max_angle>3.14</max_angle>
+						</horizontal>
+					</scan>
+					<range>
+						<min>0.3</min>
+						<max>12</max>
+					</range>
+				</ray>
+				<plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+					<ros>
+						<argument>~/out:=scan</argument>
+					</ros>
+					<output_type>sensor_msgs/LaserScan</output_type>
+					<frame_name>laser_frame</frame_name>
+				</plugin>
+			</sensor>
+		</gazebo>	
+	</robot>
+	
+4 Camera Sensor
+===============
+
+4.1 Camera Specifications 
+-------------------------
+
+Brand: Sainsmart Wide Angle FOV160° 5-Megapixel Camera Module for Raspberry Pi
+
+Specifications
+* 2592 pixels x 1944 pixels (still image)
+* 640 pixels x 480 pixels @ 60 frames/sec
+* Field of View (FOV): 160 degrees (2.79 radians)
+
+	
+4.2 URDF 
+--------
+Construction of the URDF for our camera sensor consists of the following.
+
+.. code-block:: xml 
+
+	<!-- constants -->
+	<xacro:property name="camera_length" value = "0.02" />
+	<xacro:property name="camera_width" value = "0.025" />
+	<xacro:property name="camera_height" value = "0.025" />
+	<xacro:property name="camera_mass" value = "0.1" />
+	<xacro:property name="camera_mount_length" value = "0.01" />
+	<xacro:property name="camera_mount_width" value = "0.080" />
+	<xacro:property name="camera_mount_heigth" value = "0.115" />
+	<xacro:property name="camera_mount_mass" value = "0.1" />
+	<xacro:property name="camera_offset_x" value = "${camera_length/2 + camera_mount_length/2}" /> 
+	<xacro:property name="camera_offset_z" value = "${camera_mount_heigth/2 - camera_height/2}" />
+	<xacro:property name="camera_mount_offset_x" value = "-0.035" /> 
+	<xacro:property name="camera_mount_offset_z" value = "${camera_mount_heigth/2 + chassis_height/2}" />
+
+	<!-- camera_mount_joint -->
+	<joint name="camera_mount_joint" type="fixed">
+		<parent link="chassis_link" />
+		<child link="camera_mount_link" />
+		<origin xyz="${camera_mount_offset_x} 0 ${camera_mount_offset_z}" rpy="0 0 0" />
+	</joint>
+
+	<!-- camera_mount_link -->
+	<link name="camera_mount_link">
+		<visual>
+			<geometry>
+				<box size="${camera_mount_length} ${camera_mount_width} ${camera_mount_heigth}" />
+			</geometry>
+			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+			<material name="blue"/>
+		</visual>
+		<collision>
+			<geometry>
+				<box size="${camera_mount_length} ${camera_mount_width} ${camera_mount_heigth}" />
+			</geometry>
+			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+		</collision>
+		<xacro:box_inertia m="${camera_mass}" l="${camera_mount_length}" w="${camera_mount_width}" h="${camera_mount_heigth}"
+							xyz="0 0 0" rpy="0 0 0" />
+	</link>
+
+	<!-- camera_joint -->
+	<joint name="camera_joint" type="fixed">
+		<parent link="camera_mount_link" />
+		<child link="camera_link" />
+		<origin xyz="${camera_offset_x} 0 ${camera_offset_z}" rpy="0 0 0" />
+	</joint>
+
+	<!-- camera_link -->
+	<link name="camera_link">
+		<visual>
+			<geometry>
+				<box size="${camera_length} ${camera_width} ${camera_height}" />
+			</geometry>
+			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+			<material name="red"/>
+		</visual>
+		<collision>
+			<geometry>
+				<box size="${camera_length} ${camera_width} ${camera_height}" />
+			</geometry>
+			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+		</collision>
+		<xacro:box_inertia m="${camera_mass}" l="${camera_length}" w="${camera_width}" h="${camera_height}"
+							xyz="0 0 0" rpy="0 0 0" />
+	</link>
+	
+
+4.3 Gazebo Parameters
+---------------------
+
+4.3.1 Template
+^^^^^^^^^^^^^^
+
+.. code-block:: xml
+	:linenos:
+	
+	<!-- Gazebo parameters for camera sensor -->
+	<gazebo reference="name_of_link">
+		<material>Gazebo_material</material>
+		<sensor name="camera" type="camera">
+			<pose>x y z Rx Ry Rz</pose>
+			<visualize>true</visualize>
+			<update_rate>frequency_in_hz</update_rate>
+			<camera>
+				<horizontal_fov>fov_in_radians</horizontal_fov>
+				<image>
+					<format>R8G8B8</format>
+					<width>width_in_pixels</width>
+					<height>height_in_pixels</height>
+				</image>
+				<clip>
+					<near>near_plane_in_meters</near>
+					<far>far_plane_in_meters</far>
+				</clip>
+			</camera>
+			<plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+				<frame_name>name_of_joint</frame_name>
+			</plugin>
+		</sensor>
+	</gazebo>
+
+	
+4.3.2 Actual
+^^^^^^^^^^^^
+
+.. code-block:: xml 
+	
+	<!-- Gazebo parameters for camera sensor -->
+	<gazebo reference="camera_link">
+		<material>Gazebo/Red</material>
+ 
+		<sensor name="camera" type="camera">
+			<pose> 0 0 0 0 0 0 </pose>
+			<visualize>true</visualize>
+			<update_rate>10</update_rate>
+			<camera>
+				<horizontal_fov>1.089</horizontal_fov>
+				<image>
+					<format>R8G8B8</format>
+					<width>640</width>
+					<height>480</height>
+				</image>
+				<clip>
+					<near>0.05</near>
+					<far>8.0</far>
+				</clip>
+			</camera>
+			<plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+				<frame_name>camera_link_optical</frame_name>
+			</plugin>
+		</sensor>
+	</gazebo>
+	
+4.4 Code for camera.xacro
+-------------------------
+The final code for our camera sensor in ``camera.xacro`` looks like the following.
+
+.. code-block:: xml 
+	:linenos: 
+	
+	<?xml version="1.0"?>
+	<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+		<!-- constants -->
+		<xacro:property name="camera_length" value = "0.02" />
+		<xacro:property name="camera_width" value = "0.025" />
+		<xacro:property name="camera_height" value = "0.025" />
+		<xacro:property name="camera_mass" value = "0.1" />
+		<xacro:property name="camera_mount_length" value = "0.01" />
+		<xacro:property name="camera_mount_width" value = "0.080" />
+		<xacro:property name="camera_mount_heigth" value = "0.115" />
+		<xacro:property name="camera_mount_mass" value = "0.1" />
+		<xacro:property name="camera_offset_x" value = "${camera_length/2 + camera_mount_length/2}" /> 
+		<xacro:property name="camera_offset_z" value = "${camera_mount_heigth/2 - camera_height/2}" />
+		<xacro:property name="camera_mount_offset_x" value = "-0.035" /> 
+		<xacro:property name="camera_mount_offset_z" value = "${camera_mount_heigth/2 + chassis_height/2}" />
+
+		<!-- camera_mount_joint -->
+		<joint name="camera_mount_joint" type="fixed">
+			<parent link="chassis_link" />
+			<child link="camera_mount_link" />
+			<origin xyz="${camera_mount_offset_x} 0 ${camera_mount_offset_z}" rpy="0 0 0" />
+		</joint>
+
+		<!-- camera_mount_link -->
+		<link name="camera_mount_link">
+			<visual>
+				<geometry>
+					<box size="${camera_mount_length} ${camera_mount_width} ${camera_mount_heigth}" />
+				</geometry>
+				<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+				<material name="blue"/>
+			</visual>
+			<collision>
+				<geometry>
+					<box size="${camera_mount_length} ${camera_mount_width} ${camera_mount_heigth}" />
+				</geometry>
+				<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+			</collision>
+			<xacro:box_inertia m="${camera_mass}" l="${camera_mount_length}" w="${camera_mount_width}" h="${camera_mount_heigth}"
+							   xyz="0 0 0" rpy="0 0 0" />
+		</link>
+
+		<!-- camera_joint -->
+		<joint name="camera_joint" type="fixed">
+			<parent link="camera_mount_link" />
+			<child link="camera_link" />
+			<origin xyz="${camera_offset_x} 0 ${camera_offset_z}" rpy="0 0 0" />
+		</joint>
+
+		<!-- camera_link -->
+		<link name="camera_link">
+			<visual>
+				<geometry>
+					<box size="${camera_length} ${camera_width} ${camera_height}" />
+				</geometry>
+				<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+				<material name="red"/>
+			</visual>
+			<collision>
+				<geometry>
+					<box size="${camera_length} ${camera_width} ${camera_height}" />
+				</geometry>
+				<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+			</collision>
+			<xacro:box_inertia m="${camera_mass}" l="${camera_length}" w="${camera_width}" h="${camera_height}"
+							   xyz="0 0 0" rpy="0 0 0" />
+		</link>
+
+		<!-- Gazebo parameters for camera sensor -->
+		<gazebo reference="camera_link">
+			<material>Gazebo/Red</material>
+	 
+			<sensor name="camera" type="camera">
+				<pose> 0 0 0 0 0 0 </pose>
+				<visualize>true</visualize>
+				<update_rate>10</update_rate>
+				<camera>
+					<horizontal_fov>1.089</horizontal_fov>
+					<image>
+						<format>R8G8B8</format>
+						<width>640</width>
+						<height>480</height>
+					</image>
+					<clip>
+						<near>0.05</near>
+						<far>8.0</far>
+					</clip>
+				</camera>
+				<plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+					<frame_name>camera_link_optical</frame_name>
+				</plugin>
+			</sensor>
+		</gazebo>
+		
+
+	</robot>
+	
+5 Drive MiniBot Inside Gazebo with Joystick Controller
+======================================================
+Now, we're finally ready to drive our MiniBot inside our Gazebo world using the differential drive controller and the joystick.
+
+5.1 Build the Package 
+---------------------
+
+.. code-block:: bash
+	
+	user@am-dev-xx:~/dev_ws$ colcon build
+	
+5.2 Source the Workspace 
+------------------------
+
+.. code-block:: bash
+	
+	user@am-dev-xx:~/dev_ws$ source install/setup.bash	
+
+5.3 Launch minibot_gazebo.launch.xml 
+------------------------------------
+
+.. code-block:: bash 
+
+	user@am-dev-xx:~/dev_ws$ ros2 launch minibot minibot_gazebo.launch.xml
+	
+	
+5.4 Visualizing Camera Data
+---------------------------
+While we drive our MiniBot inside Gazebo, if we want to view our camera data, we could type ``ros2 topic echo /camera/image_raw``, but this would only print a string of numbers. However, to visualize our 
+data, we can use RVIZ by adding ``Image`` in our ``Displays`` panel as follows.
+
+1) Click the ``Add`` button at the bottom of the ``Displays`` panel.
+
+2) When the ``Create visualization`` window opens, select ``Image`` and then click ``OK``. 
+
+|
+
+.. figure:: images/Camera_Data_RVIZ01.png
+		:width: 500px
+		:height: 696px
+		:align: center
+		:scale: 70 %
+
+|
+
+3) Now, under ``Image``, select the ``/camera/image_raw`` topic. 
+
+|
+
+.. figure:: images/Camera_Data_RVIZ02.png
+		:width: 398px
+		:height: 249px
+		:align: center
+		:scale: 70 %
+
+|
+
+You now should see a small window with an image of what the camera sees in our Gazebo simulation. 
+
+|
+
+.. figure:: images/Camera_Data_RVIZ03.png
+		:width: 398px
+		:height: 249px
+		:align: center
+		:scale: 70 %
+

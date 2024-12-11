@@ -1,0 +1,127 @@
+:orphan:
+
+================
+RPLiDAR A1 Setup
+================
+In the following instructions, we assume you're setting up an RPLIDAR A1 connected to a Raspberry Pi 4 for use on a robot. The robot's Raspberry Pi 
+should already have :doc:`Ubuntu 22.04.x </raspberry_pi_setup>`  and `ROS 2 Humble <https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html>`_ installed. 
+
+
+What You Need 
+
+- Slamtec RPLIDAR A1 
+- Slamtec USB Adapter 
+- Raspberry Pi 4
+- Power Supply for Raspberry Pi
+
+
+.. note::
+    The instructions on this page are taken from the following sources and modified for ROS 2 Humble and the RPLIDAR A1. 
+
+    - `rplidar_ros package from rplidar_ros repo  <https://index.ros.org/p/rplidar_ros/>`_ 
+    - `How to use SLAMTEC RPLidar in ROS2? <https://www.youtube.com/watch?v=JSWcDe5tUKQ>`_
+ 
+
+1 Create a ROS 2 Workspace 
+==========================
+Remote login (or login directly) to the robot as the user ``neet`` with password ``1234`` on one of our the three robots: ``am-robot-01``, ``am-robot-02``, or ``am-robot-03``.
+If a workspace ``ros2_ws`` doesn't already exist, create one as follows: 
+
+.. code-block:: bash
+
+	# create a ros2 workspace
+	neet@am-robot-0x:$ mkdir -p ~/ros2_ws/src
+	
+	# cd into the src folder
+	neet@am-robot-0x:$ cd ~/ros2_ws/src
+
+
+2 Installations
+===============
+
+2.1 Install the Development Tools 
+---------------------------------
+
+.. code-block:: bash 
+
+	# update your apt repository caches
+	neet@am-robot-0x:$ sudo apt update 
+
+	# upgrade packages
+	neet@am-robot-0x:$ sudo apt upgrade
+
+	# install ros2 development tools
+	neet@am-robot-0x:$ sudo apt install ros-dev-tools
+
+
+2.2 Install Git on the Robot 
+----------------------------
+If ``git`` isn't already installed on the robot, then install it as follows:
+
+.. code-block:: bash  
+
+    neet@am-robot-0x:$ sudo apt install git 
+
+
+2.3 Install ros-humble-rplidar-ros
+----------------------------------
+
+.. code-block:: bash 
+
+	neet@am-robot-0x:$ sudo apt install ros-humble-rplidar-ros
+	
+2.4 Clone the rplidar_ros Package from Github 
+---------------------------------------------
+Make sure you're inside the  ``~/ros2_ws/src`` folder before cloning the rplidar_ros package.
+Now, clone the rplidar_ros package from github
+
+.. code-block:: bash 
+
+    neet@am-robot-0x:~/ros2_ws/src$ git clone -b ros2 https://github.com/Slamtec/rplidar_ros.git
+
+3 Build rplidar_ros package
+===========================
+Go back up to one level to the ``~/ros2_ws`` workspace and build the rplidar_row package.
+
+.. code-block:: bash
+
+	# source the ros2 underlay
+	neet@am-robot-0x:~/ros2_ws$ source /opt/ros/humble/setup.bash
+	
+.. code-block:: bash 
+
+	# build the package
+	neet@am-robot-0x:~/ros2_ws$ colcon build --symlink-install
+
+.. code-block:: bash
+
+	# source the package overlay (package environment setup)
+	neet@am-robot-0x:~/ros2_ws$ source install/setup.bash
+
+4 Create udev rules for rplidar
+===============================
+``rplidar_ros`` running requires the read and write permissions of the serial device. You can manually modify it with the following command:
+
+.. code-block:: bash 
+
+    neet@am-robot-0x:~/ros2_ws$ sudo chmod 666 /dev/ttyUSB0
+
+Another way is to create a udev rule:
+
+.. code-block:: bash 
+
+	neet@am-robot-0x:~/ros2_ws$ cd src/rpldiar_ros/
+	neet@am-robot-0x:~/ros2_ws/src$ source scripts/create_udev_rules.sh
+
+The RPLIDAR A1 is now setup and ready for use. 
+
+5 Run rplidar_ros 
+=================
+To run an rplidar node and view it in the RVIZ, use the following command:
+
+.. code-block:: bash 
+ 
+    neet@am-robot-0x:~/ros2_ws$ ros2 launch rplidar_ros view_rplidar_a1_launch.py
+
+You'll now see the point cloud representation of the LiDAR within RVIZ.
+

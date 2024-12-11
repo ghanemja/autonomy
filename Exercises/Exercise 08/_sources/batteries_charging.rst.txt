@@ -1,0 +1,29 @@
+Batteries/Charging
+==================
+
+You can charge your batteries directly via your Tello or you can use Tello Battery Charging Hub. 
+
+Charging via the Tello
+----------------------
+
+To charge a battery with via the Tello itself, use a USB Type-A to micro USB cable, placing the USB Type-A end into an appropriate USB 5V power supply and 
+the micro USB end into the Tello's micro USB Port.
+
+Charging Hub
+------------
+
+.. image:: images/Battery_Charger.png
+    :width: 500px
+    :height: 365px
+    :align: center
+    :alt: Battery Charging Hub
+		
+		
+The Tello charging hub can accommodate up to three batteries at the same time, and it charges each battery 
+in sequence according to their voltage levels, from the highest voltage to lowest voltage---this will give you a fully-charged battery 
+quickest. Each battery can take an hour or more to fully charge, depending on their discharge level 
+and the amperage of charger being used. The lights next to each battery have the following meanings:
+
+a) Solid Yellow -- waiting to be charged
+b) Flashing Green --- charging
+c) Solid Green --- fully charged

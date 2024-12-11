@@ -1,0 +1,249 @@
+:orphan:
+
+==================
+Raspberry Pi Setup
+==================
+
+These instructions illustrate how to setup Ubuntu 22.04.x and ROS2 Humble on your robot using a 
+*headless setup* without a keyboard, mouse, or monitor. 
+
+
+1 Standard Setup Requirements
+==============================
+
+To get your robot's computer ready for a headless setup, you'll need the following items handy
+
+	1) a development PC 
+	2) Raspberry Pi 4
+	3) Raspberry Pi Power Supply
+	4) microSD memory card
+	5) Raspberry Pi Imager software
+
+
+2 Create an Ubuntu 22.04.x Image for Raspberry Pi 
+=================================================
+
+2.1 Step 1: Download and install the Raspberry Pi Imager  on your PC 
+--------------------------------------------------------------------
+Download the `Raspberry Pi Imager <https://www.raspberrypi.com/software/>`_ that matches your 
+operating system (Windows, MacOX, or Linux). The Pi Imager allows you to flash the Ubuntu operating system to a microSD which is 
+used by the Raspberry Pi 4. 
+
+If your PC or MAC doesn't have a microSD port, but it does have an SD or a USB port, you'll need to use a  
+microSD-to-SD adapter or a microSD-to-USB adapter, respectively, to image the microSD. 
+
+.. note:: On a Linux machine, you can readily install the Raspberry Pi Imager using snap as follows:
+
+		.. code-block:: bash 
+		
+			$ sudo snap install rpi-imager
+	
+	
+
+2.2 Step 2: Open up the Raspberry Pi Imager
+-------------------------------------------
+Open the Raspberry Pi Imager and make the following settings:
+
+.. figure:: images/RPI_Imager01.png
+		:width: 682px
+		:height: 482px
+		:align: center
+		:scale: 60 %
+		
+|	
+
+	a) Raspberry Pi Device: choose the device as the Raspberry Pi 4;
+	b) Operating System: choose the Ubuntu Server 22.04.x LTS (64-BIT) operating system within the dropdown menu (``Other general-purpose OS --> Ubuntu --> Ubuntu SERVER 22.04.x LTS (64-bit)``);
+	c) Storage: choose your storage device (the microSD card). 
+
+.. note:: If you're using the Anker microSD to USB adapter, your storage device will say something like "NORELSYS 1081 CS0 USB Device - X GB".
+	
+
+2.3 Step 3: Use OS customisation?
+---------------------------------
+After making the above settings, click ``NEXT`` and another popup window will say ``Use OS customization?`` as shown below.
+
+.. figure:: images/RPI_Imager02.png
+		:width: 527px
+		:height: 168px
+		:align: center
+		:scale: 70 %
+		
+|	
+
+Now, click the ``EDIT SETTINGS`` option and you'll see the following three tabs: ``GENERAL``, ``SERVICES``, and ``OPTIONS``. We'll examine the settings under
+each tab in the following three sections. 
+
+2.3.1 GENERAL Tab 
+^^^^^^^^^^^^^^^^^
+On the ``GENERAL`` 	tab, make the settings shown below, with
+
+	- Set hostname: am-robot-0x (for our robots, we'll use -01, -02, and -03)
+	- Set username and password
+		- Username: neet 
+		- Password: 1234
+		
+.. figure:: images/RPI_Imager03.png
+			:width: 541px
+			:height: 662px
+			:align: center
+			:scale: 70 %
+
+|
+			
+2.3.2 SERVICES Tab 
+^^^^^^^^^^^^^^^^^^
+On the ``SERVICES`` tab, make the settings shown below.
+
+.. figure:: images/RPI_Imager04.png
+		:width: 541px
+		:height: 662px
+		:align: center
+		:scale: 60 %
+
+|
+
+2.3.2 OPTIONS Tab
+^^^^^^^^^^^^^^^^^
+On the ``OPTIONS`` tab, make the settings shown below.
+
+.. figure:: images/RPI_Imager05.png
+		:width: 541px
+		:height: 662px
+		:align: center
+		:scale: 60 %
+
+|
+	
+After clicking ``SAVE``, you see the following two questions (click ``YES`` to accept): 
+	
+	- "Would you like to apply OS customization setings?" ``YES``
+	- "All existing data on 'NORELSYS 1081CSO USB Device' will erased. Are you sure you want to continue?" ``YES`` 
+
+After clicking continue, you'll see the following screen.
+
+.. figure:: images/RPI_Imager06.png
+		:width: 682px
+		:height: 482px
+		:align: center
+		:scale: 70 %
+
+|
+
+Once complete, you'll see the following screen.
+
+.. figure:: images/RPI_Imager07.png
+		:width: 526px
+		:height: 227px
+		:align: center
+		:scale: 70 %
+		
+|
+
+After you've flashed Ubuntu 22.04.x on to your microSD card, you can plug it into your Raspberry Pi, but make sure your Raspberry Pi is powered off. 
+
+3 Remote Login to Robot's Raspberry Pi
+======================================
+
+3.1 Remote Login to Raspberry Pi 
+--------------------------------
+Turn on your robot's Raspberry Pi. Since it has been pre-configured to connect to our WiFi network ``am-network-01``, you can login to it via ssh, but
+you'll first need to get its IP address using an IP address scanner. 
+
+
+3.1.1 Download IP Address Scanner 
+---------------------------------
+To determine the IP address of your robot's Raspberry Pi, you'll need to use an IP address scanner such as 
+`Angry IP Scanner <https://angryip.org/download/>`_. On Linux, download the version that says ``x86 64-bit DEB Package for Ubuntu/Debian/Mint``.
+
+In your downloads folder, you should now have the file ``ipscan_3.9.1_amd64.deb``.
+
+
+Navigate to your downloads folder.
+
+.. code-block:: bash 
+
+    user@am-dev-xx:~$ cd ~/Downloads 
+
+Type the following to install Angry IP Scanner on your computer. 
+
+.. code-block:: bash 
+
+     user@am-dev-xx:~/Downloads$ sudo dpkg -i ipscan_3.9.1_amd64.deb
+
+Open Angry IP Scanner and press the ``Start`` button. To find the IP address of your robot, look under the ``Hostname`` column  for ``am-robot-0x.local``.
+Select and copy the IP address. Open a new terminal window and type 
+
+.. code-block::  bash
+
+     user@am-dev-xx:~$ ssh neet@ip-address
+
+and use the password ``1234`` to login. 
+
+Once you've connected to the Raspberry Pi, you should see the prompt ``neet@am-robot-0x:~$`` which indicates you now can type shell commands. 
+	
+4 Install ROS 2 Humble 
+======================
+These instructions to install ROS 2 Humble on your robot are taken directly from the `ROS 2 Documentation <https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html>`_.
+
+4.1 Set Locale 
+--------------
+Make sure you have a locale which supports UTF-8.  We test with the following settings. However, it should be fine if you’re using a different UTF-8 supported locale.
+
+.. code-block:: bash 
+
+	locale  # check for UTF-8
+
+	sudo apt update && sudo apt install locales
+	sudo locale-gen en_US en_US.UTF-8
+	sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+	export LANG=en_US.UTF-8
+
+	locale  # verify settings
+
+4.2 Setup Sources 
+-----------------
+You will need to add the ROS 2 apt repository to your system. First ensure that the Ubuntu Universe repository is enabled.
+
+.. code-block:: bash 
+
+	sudo apt install software-properties-common
+	sudo add-apt-repository universe
+
+Now add the ROS 2 GPG key with apt.
+
+.. code-block:: bash 
+
+	sudo apt update && sudo apt install curl -y
+	sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+	
+Then add the repository to your sources list.
+
+.. code-block:: bash 
+
+	echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+	
+4.3 Install ROS 2 Packages 
+--------------------------
+Update your apt repository caches after setting up the repositories, and update your system. 
+
+.. code-block:: bash 
+
+	sudo apt upgrade && upgrade
+
+We now have a choice of installing ROS 2 ``Desktop``, ``ROS-Base``, or ``Development Tools``, and we'll install the desktop version to insure we have everything required.
+
+.. code-block:: bash 
+
+	sudo apt install ros-humble-desktop
+	
+	
+4.4 Environment Setup 
+--------------------- 
+Set up your environment by sourcing the following file.
+
+.. code-block:: bash  
+
+	source /opt/ros/humble/setup.bash
+	
+Your robot's Raspberry Pi is now ready for you to set up the camera and LiDAR.  

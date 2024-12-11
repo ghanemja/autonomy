@@ -1,0 +1,47 @@
+==============================
+ROS 2 Humble Tutorials, Part 3
+==============================
+
+1 PDF Viewer
+============
+When the need arises for you to view a pdf document, Ubuntu has a default viewer called ``Evince`` that you can use from the terminal window as follows
+::
+	$ evince <document_name>
+	
+where ``<document_name>`` is the name of the document you would like to view. 
+
+2 Launch 
+========
+ROS 2 Launch files allow you to start up and configure a number of executables containing ROS 2 nodes simultaneously.
+
+* `Creating a launch file. <https://docs.ros.org/en/humble/Tutorials/Intermediate/Launch/Creating-Launch-Files.html>`_ (10 minutes)
+
+3 URDF
+======
+URDF (Unified Robot Description Format) is a file format for specifying the geometry and organization of robots in ROS.
+
+* `Building a visual robot model from scratch <https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Building-a-Visual-Robot-Model-with-URDF-from-Scratch.html>`_ (20 minutes)
+* `Building a movable robot model <https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Building-a-Movable-Robot-Model-with-URDF.html>`_ (10 minutes)
+* `Adding physical and collision properties <https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Adding-Physical-and-Collision-Properties-to-a-URDF-Model.html>`_ (10 minutes)
+* `Using Xacro to clean up your code <https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Using-Xacro-to-Clean-Up-a-URDF-File.html>`_ (20 minutes)
+* `Using URDF with robot_state_publisher <https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Using-URDF-with-Robot-State-Publisher.html>`_ (15 minutes)
+* `Generating an URDF File <https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Exporting-an-URDF-File.html>`_ (5 minutes)
+	
+	
+4 RViz 
+======
+RViz is a 3D visualizer for the Robot Operating System (ROS) framework.
+
+
+.. raw:: html
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/i--Sd4xH9ZE" frameborder="0" allowfullscreen></iframe>
+	
+.. note::
+	RViz was installed on your laptop with the ROS2 Humble installation and you don't need to install it again. 
+	
+* `RViz User Guide <https://docs.ros.org/en/humble/Tutorials/Intermediate/RViz/RViz-User-Guide/RViz-User-Guide.html>`_ (20 minutes)
+* `Building a Custom RViz Display <https://docs.ros.org/en/humble/Tutorials/Intermediate/RViz/RViz-Custom-Display/RViz-Custom-Display.html>`_ (20 minutes)
+
+
+

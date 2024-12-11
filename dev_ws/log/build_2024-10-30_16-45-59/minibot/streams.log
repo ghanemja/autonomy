@@ -1,0 +1,41 @@
+[0.027s] Invoking command in '/home/janelleg/dev_ws/build/minibot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/janelleg/dev_ws/build/minibot -- -j8 -l8
+[0.084s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.518s] -- Configuring done
+[0.524s] -- Generating done
+[0.527s] -- Build files have been written to: /home/janelleg/dev_ws/build/minibot
+[0.571s] Invoked command in '/home/janelleg/dev_ws/build/minibot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/janelleg/dev_ws/build/minibot -- -j8 -l8
+[0.647s] Invoking command in '/home/janelleg/dev_ws/build/minibot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/janelleg/dev_ws/build/minibot
+[0.662s] -- Install configuration: ""
+[0.662s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot//urdf
+[0.663s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot//urdf/minibot_gazebo.xacro
+[0.663s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot//urdf/minibot.xacro
+[0.663s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot//urdf/lidar.xacro
+[0.664s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot//urdf/inertia_macros.xacro
+[0.664s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot//urdf/camera.xacro
+[0.664s] -- Installing: /home/janelleg/dev_ws/install/minibot/share/minibot//urdf/minibot_base.xacro
+[0.664s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot//launch
+[0.664s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot//launch/display.launch.xml
+[0.664s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot//launch/joystick.launch.xml
+[0.664s] -- Installing: /home/janelleg/dev_ws/install/minibot/share/minibot//launch/minibot_gazebo.launch.xml
+[0.664s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot//rviz
+[0.664s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot//rviz/minibot_config.rviz
+[0.664s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot//worlds
+[0.665s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot//worlds/world01.world
+[0.665s] -- Installing: /home/janelleg/dev_ws/install/minibot/share/minibot//config
+[0.665s] -- Installing: /home/janelleg/dev_ws/install/minibot/share/minibot//config/joystick.yaml
+[0.665s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/ament_index/resource_index/package_run_dependencies/minibot
+[0.665s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/ament_index/resource_index/parent_prefix_path/minibot
+[0.665s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot/environment/ament_prefix_path.sh
+[0.665s] -- Installing: /home/janelleg/dev_ws/install/minibot/share/minibot/environment/ament_prefix_path.dsv
+[0.666s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot/environment/path.sh
+[0.666s] -- Installing: /home/janelleg/dev_ws/install/minibot/share/minibot/environment/path.dsv
+[0.666s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot/local_setup.bash
+[0.666s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot/local_setup.sh
+[0.666s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot/local_setup.zsh
+[0.666s] -- Installing: /home/janelleg/dev_ws/install/minibot/share/minibot/local_setup.dsv
+[0.666s] -- Installing: /home/janelleg/dev_ws/install/minibot/share/minibot/package.dsv
+[0.666s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/ament_index/resource_index/packages/minibot
+[0.666s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot/cmake/minibotConfig.cmake
+[0.667s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot/cmake/minibotConfig-version.cmake
+[0.668s] -- Up-to-date: /home/janelleg/dev_ws/install/minibot/share/minibot/package.xml
+[0.669s] Invoked command in '/home/janelleg/dev_ws/build/minibot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/janelleg/dev_ws/build/minibot

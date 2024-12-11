@@ -1,0 +1,650 @@
+====================
+Mobile Robot, Part 2
+====================
+In this exercise we'll learn how to drive our MiniBot inside Gazebo using a control plugin (``gazebo_ros_diff_drive``) that receives messages from 
+a node (``teleop_twist_keyboard``) connected to our keyboard. We'll then refresh our memory about how to determine information about the active nodes, topics, and messages
+for our system. 
+
+1 Auto Sourcing dev_ws Overlay
+==============================
+In the previous exercise we learned how to setup sourcing of the ROS2 Humble underlay whenever we open a new terminal window. Similarly, we also can set up 
+sourcing of our workspace overlay (``dev_ws``)  in our ``.bashrc`` file. 
+
+To set this up, navigate to your home directory and open up your ``.bashrc`` file with gedit. 
+
+.. code-block:: bash 
+	
+	user@am-dev-xx:~$ gedit .bashrc
+
+Now, add the following two lines to this file. 
+
+.. code-block:: bash 
+	
+	# source the dev_ws Overlay 
+	source ~/dev_ws/install/setup.bash
+	
+After adding these lines, your ``.bashrc`` file should look something like this.
+
+.. figure:: images/bashrc-03.png
+		:width: 576px
+		:height: 259px
+		:align: center
+		:alt: bashrc file
+		:scale: 70 %
+		
+|
+	
+2 Create a Gazebo World
+=======================
+Gazebo is a powerful simulation tool for you to use in your robotics applications. Unfortunately, due to our time constraints, we'll only use a small portion of its capabilities. 
+If you're interested in learning more, you'll find some tutorials located here: `https://classic.gazebosim.org/tutorials <https://classic.gazebosim.org/tutorials>`_.
+
+In this section, we'll create a scene (or world) in Gazebo that we'll spawn our MiniBot inside. We'll save this scene inside our MiniBot package that we'll launch every time with 
+our ``minibot_gazebo.launch.xml`` file. 
+
+2.1 Create a Worlds Folder 
+--------------------------
+Open a terminal window, navigate to your ``minibot`` folder, and create a new folder named ``worlds``.
+
+.. code-block:: bash
+
+	user@am-dev-xx:~/dev_ws/src/minibot$ mkdir worlds
+
+
+2.2 Create and Save a Gazebo World 
+----------------------------------
+In preparation for using the Gazebo camera and LiDAR plugins, you should place some objects inside your Gazebo world. Gazebo has many pre-built objects such as a bookshelf, cabinet, 
+construction cone, fire hydrant, walls, buildings, and an entire RoboCup field. The objects you choose for this example is up to you, but we'll demonstrate how add some construction cones.  
+
+1. Open Gazebo in a terminal window using the following command. 
+
+.. code-block:: bash 
+
+	$ gazebo 
+	
+2. Click the ``Insert`` tab, scroll down to the ``Construction Cone``, and insert several construction cones into your world. The exact number and location of the cones doesn't matter, but you can use 
+the illustration below as example. 
+
+.. figure:: images/Gazebo_World01.png
+		:width: 440px
+		:height: 452px
+		:align: center
+		:scale: 70 %
+
+|
+
+.. figure:: images/Gazebo_World02.png
+		:width: 1156px
+		:height: 963px
+		:align: center
+		:scale: 50 %
+
+|
+
+.. note:: 
+	The size of these cones is much larger than our MiniBot.
+	Although Gazebo allows scaling of objects within the user interface, this doesn't seem possible with the construction cones, so we'll scale them down later inside of our saved world file. 
+
+
+3) We can place the cones at any location on the grid by dragging them into place, or we can locate them more precisely by 1) selecting the cone and 2) entering its coordinates under the ``pose`` drop-down box.
+
+.. figure:: images/Gazebo_World03.png
+		:width: 817px
+		:height: 596px
+		:align: center
+		:scale: 70 %
+		
+|
+		
+4) After you have arranged you cones (or other objects), save this world as ``world01.world`` in your ``user/dev_ws_src/minibot/worlds`` folder. 
+
+.. figure:: images/Gazebo_World04.png
+		:width: 1423px
+		:height: 502px
+		:align: center
+		:scale: 50 %
+
+|
+	
+5) To change the scale of your cones, open the ``world01.world`` file using VSCode. Once open, replace every instance of ``<scale>10 10 10</scale>`` with ``<scale>3 3 3</scale>``
+
+.. figure:: images/Gazebo_World05.png
+		:width: 619px
+		:height: 575px
+		:align: center
+		:scale: 70 %
+		
+|
+
+.. figure:: images/Gazebo_World06.png
+		:width: 619px
+		:height: 619px
+		:align: center
+		:scale: 70 %
+		
+|
+		
+2.3 Install the Worlds Folder
+-----------------------------
+Open ``CMakeLists.txt`` and add the ``worlds`` folder with the installation of your ``urdf``, ``launch``, and ``rviz`` folders as shown below. 
+
+.. code-block:: cmake 
+
+	# install package directories
+	install(
+	  DIRECTORY urdf launch rviz worlds
+	  DESTINATION share/${PROJECT_NAME}/
+	)
+	
+	
+2.4 Launch with the Saved Gazebo World  
+--------------------------------------
+Open your launch file ``minibot_gazebo.launch.xml`` and insert the following lines of code. 
+
+.. code-block:: xml 
+	
+	<!-- open Gazebo with our saved world -->
+	<include file="$(find-pkg-share gazebo_ros)/launch/gazebo.launch.py" >
+		<arg name="world" value="$(find-pkg-share minibot)/worlds/world01.world" />
+	</include>
+
+This will open Gazebo with our saved world ``world01.world``. 
+
+2.5 Launch robot-state-publisher with Simulation Time Enabled
+-------------------------------------------------------------
+Normally, the ROS client libraries uses your computer's system clock as a time source. 
+However, when you're running a Gazebo simulation, you want your nodes to follow the simulated time within Gazebo itself. 
+
+In order for a ROS node to use simulation time according to the ``/clock`` topic, we need to specify the ``use_sim_time`` parameter when our nodes are initialized. 
+
+Inside our ``minibot_gazebo.launch.xml`` file we initialize the robot-state-publisher node, so we'll set the ``use_sim_time`` parameter to ``true`` heere as follows.
+
+.. code-block:: xml 
+
+	<!-- start the robot-state-publisher node -->
+	<node pkg="robot_state_publisher" exec="robot_state_publisher">
+		<param name="robot_description"
+			value="$(command 'xacro $(var urdf_path)')" />
+		<param name="use_sim_time" value="true"/> 
+	</node>
+	
+	
+3 Gazebo Differential Drive Plugin
+==================================
+In this section, we'll demonstrate how to implement a differential drive plugin that drives
+our MiniBot forward/reverse and turns it left/right. Although the
+documentation on how to use these plugins is minimal, 
+we often can find a template for a specific plugin at  
+this GitHub site `https://github.com/ros-simulation/gazebo_ros_pkgs <https://github.com/ros-simulation/gazebo_ros_pkgs>`_. 
+
+Let's walk through the process of finding the template for the
+Gazebo differential drive controller (``gazebo_ros_diff_drive``) that we'll include in our ``minibot_gazebo.xacro`` file. 
+
+3.1 Locate the gazebo_ros_diff_drive Template
+---------------------------------------------
+1) Open a browser and go to the GitHub page `https://github.com/ros-simulation/gazebo_ros_pkgs <https://github.com/ros-simulation/gazebo_ros_pkgs>`_.
+
+2) Click the ``branch`` drop-down box that says ``noetic-devel``, scroll down, and select the ``ros2`` branch. 
+
+	.. figure:: images/Gazebo_Plugins01.png
+			:width: 862px
+			:height: 790px
+			:align: center
+			:alt: Gazebo Plugins
+			:scale: 50 %
+
+|
+
+3) Now, open the ``gazebo_plugins`` folder. 
+ 
+	 .. figure:: images/Gazebo_Plugins02.png
+			:width: 610px
+			:height: 530px
+			:align: center
+			:alt: Gazebo Plugins
+			:scale: 50 %
+
+|
+
+4) Now, open the ``include/gazebo_plugins`` folder.	
+
+.. figure:: images/Gazebo_Plugins03.png
+		:width: 806px
+		:height: 519px
+		:align: center
+		:alt: Gazebo Plugins
+		:scale: 50 %
+
+|
+
+5) Click the file ``gazebo_ros_diff_drive.hpp``.	
+
+	.. figure:: images/Gazebo_Plugins04.png
+			:width: 761px
+			:height: 392px
+			:align: center
+			:alt: Gazebo Plugins
+			:scale: 50 %
+		
+|
+	
+5) Scroll down to line 54 where it says "Example Usage." 
+
+	.. figure:: images/Gazebo_Plugins05.png
+			:width: 913px
+			:height: 406px
+			:align: center
+			:alt: Gazebo Plugins
+			:scale: 50 %
+	
+|
+	
+6) The template we need is on lines 56 -- 92, so we'll copy and paste these lines inside our ``minibot_gazebo.xacro`` file (within a Gazebo tag) as follows (see lines 21 -- 58 below).
+
+	.. code-block:: xml
+		:linenos:
+		 
+		<?xml version="1.0"?>
+		<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+			<!-- colors -->
+			<gazebo reference="chassis_link">
+				<material>Gazebo/Blue</material>
+			</gazebo>
+
+			<gazebo reference="right_wheel_link">
+				<material>Gazebo/Orange</material>
+			</gazebo>
+
+			<gazebo reference="left_wheel_link">
+				<material>Gazebo/Orange</material>
+			</gazebo>
+
+			<gazebo reference="caster_wheel_link">
+				<material>Gazebo/Orange</material>
+			</gazebo>
+
+			<gazebo>
+				<plugin name="gazebo_ros_diff_drive" filename="libgazebo_ros_diff_drive.so">
+
+					<ros>
+
+					  <!-- Add a namespace -->
+					  <namespace>/test</namespace>
+			  
+					</ros>
+			  
+					<!-- Update rate in Hz -->
+					<update_rate>50</update_rate>
+			  
+					<!-- wheels -->
+					<left_joint>left_wheel_joint</left_joint>
+					<right_joint>right_wheel_joint</right_joint>
+			  
+					<!-- kinematics -->
+					<wheel_separation>1.25</wheel_separation>
+					<wheel_diameter>0.6</wheel_diameter>
+			  
+					<!-- limits -->
+					<max_wheel_torque>20</max_wheel_torque>
+					<max_wheel_acceleration>1.0</max_wheel_acceleration>
+			  
+					<!-- input -->
+					<command_topic>cmd_vel</command_topic>
+			  
+					<!-- output -->
+					<publish_odom>true</publish_odom>
+					<publish_odom_tf>true</publish_odom_tf>
+					<publish_wheel_tf>true</publish_wheel_tf>
+			  
+					<odometry_topic>odom</odometry_topic>
+					<odometry_frame>odom</odometry_frame>
+					<robot_base_frame>chassis</robot_base_frame>
+			  
+				  </plugin>
+			</gazebo>
+		
+		</robot>
+
+3.2 Modify the gazebo_ros_diff_drive Template
+---------------------------------------------
+1) Lines 24 -- 29: delete these lines, we don't need them.
+	
+		.. code-block:: xml 
+			 
+			<ros>
+
+				<!-- Add a namespace -->
+				<namespace>/test</namespace>
+      
+			</ros>
+	
+2) Lines 39 and 40: change these lines (we already defined xacro constants for the ``chassis_width`` and ``wheel_diam``).
+		
+		From 
+		
+		.. code-block:: xml 
+		
+			<wheel_separation>1.25</wheel_separation>
+			<wheel_diameter>0.6</wheel_diameter>
+	
+		To
+		
+		.. code-block:: xml 
+		
+			<wheel_separation>${chassis_width + wheel_diam/2}</wheel_separation>
+			<wheel_diameter>${wheel_diam}</wheel_diameter>
+			
+3) Lines 46 -- 48: delete these lines, we don't need them.
+	
+		.. code-block:: xml 
+		
+			<!-- input -->
+			<command_topic>cmd_vel</command_topic>
+			
+4) Line 56: change ``chassis`` to ``base_link``. 
+		From
+		
+		.. code-block:: xml
+		
+			<robot_base_frame>chassis</robot_base_frame>
+			
+		To
+		
+		.. code-block:: xml
+		
+			<robot_base_frame>base_link</robot_base_frame>
+	
+	
+		This completes our modifications to the differential drive plugin, and we'll wrap up editing our ``minibot_gazebo.xacro`` file by making one last addition in the next step below. 
+
+3.3 Add Dynamic Friction to the Ball Caster
+-------------------------------------------	
+
+We set the coefficients of dynamic friction for the ball caster's  x and y-axes inside the Gazebo reference block ``caster_wheel_link`` given on lines 17 -- 19. 
+
+.. code-block:: xml 
+
+	<gazebo reference="caster_wheel_link">
+		<material>Gazebo/Orange</material>
+	</gazebo>
+			
+We'll set values for ``mu1`` (x-axis) and ``mu2`` (y-axis) close to zero to minimize the friction.  
+
+.. code-block:: xml 
+
+	<gazebo reference="caster_wheel_link">
+		<material>Gazebo/Orange</material>
+		<mu1 value="0.001" />
+		<mu2 value="0.001" />
+	</gazebo>
+		
+3.4 Final Version of minibot_gazebo.xacro
+-----------------------------------------
+After the above additions/modifications, your ``minibot_gazebo.xacro`` file should look like the following.
+
+	.. code-block:: xml 
+		:linenos:
+		
+		<?xml version="1.0"?>
+		<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+			<!-- colors -->
+			<gazebo reference="chassis_link">
+				<material>Gazebo/Blue</material>
+			</gazebo>
+
+			<gazebo reference="right_wheel_link">
+				<material>Gazebo/Orange</material>
+			</gazebo>
+
+			<gazebo reference="left_wheel_link">
+				<material>Gazebo/Orange</material>
+			</gazebo>
+
+			<gazebo reference="caster_wheel_link">
+				<material>Gazebo/Orange</material>
+				<mu1 value="0.001" />
+				<mu2 value="0.001" />
+			</gazebo>
+
+			<gazebo>
+				<plugin name="gazebo_ros_diff_drive" filename="libgazebo_ros_diff_drive.so">
+			  
+					<!-- Update rate in Hz -->
+					<update_rate>50</update_rate>
+			  
+					<!-- wheels -->
+					<left_joint>left_wheel_joint</left_joint>
+					<right_joint>right_wheel_joint</right_joint>
+			  
+					<!-- kinematics -->
+					<wheel_separation>${chassis_width + wheel_diam/2}</wheel_separation>
+					<wheel_diameter>${wheel_diam}</wheel_diameter>
+			  
+					<!-- limits -->
+					<max_wheel_torque>20</max_wheel_torque>
+					<max_wheel_acceleration>1.0</max_wheel_acceleration>
+			  
+					<!-- output -->
+					<publish_odom>true</publish_odom>
+					<publish_odom_tf>true</publish_odom_tf>
+					<publish_wheel_tf>true</publish_wheel_tf>
+			  
+					<odometry_topic>odom</odometry_topic>
+					<odometry_frame>odom</odometry_frame>
+					<robot_base_frame>base_link</robot_base_frame>
+			  
+				  </plugin>
+			</gazebo>
+		</robot>
+		
+For now, we'll keep the default values for ``max_wheel_torque`` and ``max_wheel_acceleration``, and we'll change them later, if necessary. 
+
+
+4 Edit minibot_base.xacro
+-------------------------
+We now need to make a slight modification to our ``minibot_base.xacro`` file. 
+In ``minibot_gazebo.xacro``, on lines 34 and 35, we make reference to the ``chassis_width`` and the ``wheel_diam``. To make sure we don't receive an error when we try 
+run our Gazebo simulation, we'll move our inclusion of ``inertia_macros.xacro`` and 
+``minibot_gazebo.xacro`` until after we define our constants as follows (see lines 37 and 38).
+
+.. code-block:: xml 
+	:linenos:
+
+	<?xml version="1.0"?>
+	<robot name="minibot_base" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+		<!-- colors -->
+		<material name="white">
+			<color rgba="1 1 1 1"/>
+		</material>
+
+		<material name="black">
+			<color rgba="0 0 0 1"/>
+		</material>
+			
+		<material name="orange">
+			<color rgba="1 0.3 0.1 1"/>
+		</material>
+
+		<material name="blue">
+			<color rgba="0.2 0.2 1 1"/>
+		</material>
+		
+		<!-- constants -->
+		<xacro:property name="chassis_length" value = "0.216" />
+		<xacro:property name="chassis_width" value = "0.114" />
+		<xacro:property name="chassis_height" value = "0.036" />
+		<xacro:property name="wheel_diam" value = "0.065" />
+		<xacro:property name="wheel_thickness" value = "0.015" />
+		<xacro:property name="wheel_offset_x" value = "${(chassis_length/2) - (wheel_diam/2)}" />
+		<xacro:property name="wheel_offset_y" value = "${(chassis_width/2) + (wheel_diam/2) }" />
+		<xacro:property name="wheel_offset_z" value = "${wheel_diam/2}" />
+		<xacro:property name="ball_caster_diam" value = "0.0254" />
+		<xacro:property name="ball_caster_offset_x" value = "-${(chassis_length/2) - ball_caster_diam}" /> 
+		<xacro:property name="ball_caster_offset_z" value = "-${((wheel_diam/2) - (ball_caster_diam/2))}" />
+		<xacro:property name="chassis_mass" value = "2" />
+		<xacro:property name="wheel_mass" value = "0.5" />
+		<xacro:property name="ball_caster_mass" value = "0.5" />
+
+		<xacro:include filename="inertia_macros.xacro" />
+		<xacro:include filename="minibot_gazebo.xacro" />
+
+		<!-- base_link -->
+		<link name="base_link">
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<box size="0 0 0"/>
+				</geometry>
+			</visual>
+		</link>
+	
+5 Drive MiniBot Inside Gazebo
+=============================
+Now, we're finally ready to drive our MiniBot inside our Gazebo world using the differential drive controller and the keyboard using a node called
+``teleop_twist_keyboard``.
+
+5.1 Build the Package 
+---------------------
+
+.. code-block:: bash
+	
+	user@am-dev-xx:~/dev_ws$ colcon build
+	
+5.2 Source the Workspace 
+------------------------
+
+.. code-block:: bash
+	
+	user@am-dev-xx:~/dev_ws$ source install/setup.bash	
+
+5.3 Launch minibot_gazebo.launch.xml 
+------------------------------------
+
+.. code-block:: bash 
+
+	user@am-dev-xx:~/dev_ws$ ros2 launch minibot minibot_gazebo.launch.xml
+
+If you used the scaled down cones with the (x, y) coordinates given previously, your screen should look similar to the image given below. 
+
+.. figure:: images/minibot_launch_gazebo_world.png
+			:width: 1350px
+			:height: 575px
+			:align: center
+			:scale: 80 %
+			
+|
+			
+5.4 Run teleop_twist_keyboard
+-----------------------------
+Open a separate terminal window and run ``teleop_twist_keyboard`` as follows. 
+
+.. code-block:: bash 
+
+	$ ros2 run teleop_twist_keyboard teleop_twist_keyboard 
+	
+You now should see the following message. 
+
+.. figure:: images/teleop_twist_keyboard.png
+			:width: 525px
+			:height: 456px
+			:align: center
+			:scale: 80 %
+
+|			
+
+Make sure this new terminal window is active, and use the given keys above to drive your MiniBot around. 
+
+6 ROS2 Nodes/Topics
+===================
+Now, we'll take a quick look at the nodes and topics for our system. 
+
+6.1 ros2 node list 
+------------------
+To list the current nodes.
+
+.. code-block:: bash 
+
+	$ ros2 node list 
+	/gazebo
+	/gazebo_ros_diff_drive 
+	/joint_state_publisher
+	/robot_state_publisher 
+	/rviz 
+	/teloeop_twist_keyboard 
+	/transform_listener_impl_610ee6ac7780
+	
+
+
+6.2 ros2 topic list
+-------------------
+To list the current topics.
+
+.. code-block:: bash 
+
+	$ ros2 topic list 
+	/clicked_point
+	/clock 
+	/cmd_vel 
+	/goal_pose 
+	/initialpose
+	/joint_states 
+	/odom 
+	/parameter_events 
+	/performance_metrics 
+	/robot_description 
+	/rosout 
+	/tf 
+	/tf_static 
+	
+6.3 rqt_graph
+-------------
+To see how the nodes and topics are related. 
+
+.. code-block:: bash 
+
+	$ rqt_graph
+	
+.. figure:: images/rosgraph01.png
+			:width: 2328px
+			:height: 226px
+			:align: center
+			:scale: 35 %	
+	
+|
+	
+6.3 ros2 topic info 
+-------------------
+To get more information about a specific topic.
+
+.. code-block:: bash 
+
+	$ ros2 topic info /cmd_vel 
+	Type: geometry_msgs/msg/Twist
+	Publisher count: 1
+	Subscription count: 1
+	
+This means that in the package ``geometry_msgs`` there is a ``msg`` called ``Twist``.
+
+6.4 ros2 interface show 
+-----------------------
+To learn more about the message type.
+
+.. code-block:: bash 
+
+	$ ros2 interface show geometry_msgs/msg/Twist
+	# This expresses velocity in free space broken into its linear and angular parts. 
+	
+	Vector3  linear
+			float64 x
+			float64 y 
+			float64 z 
+	Vector3  angular
+			float64 x
+			float64 y 
+			float64 z 
+	
+So the ``Twist`` message consists of two 3-vectors comprised of 64-bit floats representing the x, y, and z axes, respectively. 
+

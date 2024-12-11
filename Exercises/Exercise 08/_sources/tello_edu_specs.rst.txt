@@ -1,0 +1,61 @@
+========================
+Tello Edu Specifications
+========================
+
++--------------------+---------------------------------------------------------------------------------------------------------------+
+|                    | 5MP Camera - Supports Picture,Video, and Live Stream FPV (first person view)                                  |
+|                    |                                                                                                               |
+|                    | Automatic Takeoff and Landing                                                                                 |
+|                    |                                                                                                               |
+|                    | Range Finder                                                                                                  |
+|                    |                                                                                                               |
+|                    | Barometric Altimeter                                                                                          |
+|                    |                                                                                                               |
+|                    | LED Indicator                                                                                                 |
+|                    |                                                                                                               |
+|                    | Bounce Mode                                                                                                   |
+|                    |                                                                                                               |
+| Features           | 8 Different Flips, 360 Spin, Circle Fly                                                                       |
+|                    |                                                                                                               |
+|                    | Speed Adjust                                                                                                  |
+|                    |                                                                                                               |
+|                    | Up-Down, Forward-Backward, Left-Right, Yaw                                                                    |
+|                    |                                                                                                               |
+|                    | Gyroscope Control                                                                                             |
+|                    |                                                                                                               |
+|                    | Supports Andriod, iOS, Tablets, and Smartphones                                                               |
+|                    |                                                                                                               |
+|                    | Bluetooth and Wi-Fi enabled                                                                                   |
+|                    |                                                                                                               |
+|                    | Code via Scratch, Swift, and Python                                                                           |
+|                    |                                                                                                               |
+|                    | Charge via micro USB                                                                                          |
++--------------------+---------------------------------------------------------------------------------------------------------------+
+|                    | Weight: 87 grams (propellers and battery included)                                                            |
+|                    |                                                                                                               |
+|                    | Dimensions: 98 x 92.5 x 41 mm                                                                                 |
+|                    |                                                                                                               |
+| Aircraft           | Propeller: 3 in [76.2 mm]                                                                                     |
+|                    |                                                                                                               |
+|                    | Battery: Detachable, 1.1Ah/3.8V, charge via Micro USB port, 1.5 hour charge   time                            |
+|                    |                                                                                                               |
+|                    | Compatibility: Tello App and Tello Edu App (iOS and Andriod)                                                  |
++--------------------+---------------------------------------------------------------------------------------------------------------+
+|                    | Max Flight Distance: 100   meters                                                                             |
+|                    |                                                                                                               |
+| Flight Performance | Max Speed: 8 m/s                                                                                              |
+|                    |                                                                                                               |
+|                    | Max Flight Time: 13 minutes                                                                                   |
+|                    |                                                                                                               |
+|                    | Max Flight Height: 30 meters                                                                                  |
++--------------------+---------------------------------------------------------------------------------------------------------------+
+|                    | Photo: 5MP (2592x1936)                                                                                        |
+|                    |                                                                                                               |
+|                    | FOV (field of view): 82.6°                                                                                    |
+|                    |                                                                                                               |
+| Camera             | Video: HD 720P 30 fps                                                                                         |
+|                    |                                                                                                               |
+|                    | Format: JPG (Photo); MP4 (Video)                                                                              |
+|                    |                                                                                                               |
+|                    | EIS (electronic image stabilization): Yes                                                                     |
++--------------------+---------------------------------------------------------------------------------------------------------------+

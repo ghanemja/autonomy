@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Headless Raspberry Pi Setup &mdash; 16.633 NEET Autonomous Machines  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/NEET-AutonomousMachines.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Exercise 01</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro_ros.html">Introduction to ROS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_overview.html">Linux Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_01.html">ROS 2 Humble Tutorials, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 02</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_02.html">ROS 2 Humble Tutorials, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 03</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_03.html">ROS 2 Humble Tutorials, Part 3</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 04</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part01.html">Mobile Robot, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 05</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part02.html">Mobile Robot, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 06</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part03.html">Mobile Robot, Part 3</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 07</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part04.html">Mobile Robot, Part 4</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="raspberry_pi_setup.html">Raspberry Pi Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="camera_RPi_setup.html">Camera Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rplidar_a1_setup.html">RPLIDAR A1 Setup</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">16.633 NEET Autonomous Machines</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Headless Raspberry Pi Setup</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="headless-raspberry-pi-setup">
+<h1>Headless Raspberry Pi Setup<a class="headerlink" href="#headless-raspberry-pi-setup" title="Permalink to this heading"></a></h1>
+<p>These instructions illustrate how to setup Ubuntu 22.04.x and ROS2 Humble on your robot using a
+<em>headless setup</em> without a keyboard, mouse, or monitor.</p>
+<section id="setup-requirements">
+<h2>1 Setup Requirements<a class="headerlink" href="#setup-requirements" title="Permalink to this heading"></a></h2>
+<p>To get your robot’s computer ready for a headless setup, you’ll need the following items handy</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>a development PC</p></li>
+<li><p>Raspberry Pi 4 (for your robot)</p></li>
+<li><p>Raspberry Pi Power Supply</p></li>
+<li><p>microSD memory card</p></li>
+<li><p>Raspberry Pi Imager software</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="create-an-ubuntu-22-04-x-image-for-raspberry-pi">
+<h2>2 Create an Ubuntu 22.04.x Image for Raspberry Pi<a class="headerlink" href="#create-an-ubuntu-22-04-x-image-for-raspberry-pi" title="Permalink to this heading"></a></h2>
+<section id="step-1-download-and-install-the-raspberry-pi-imager-on-your-pc">
+<h3>2.1 Step 1: Download and install the Raspberry Pi Imager  on your PC<a class="headerlink" href="#step-1-download-and-install-the-raspberry-pi-imager-on-your-pc" title="Permalink to this heading"></a></h3>
+<p>Download the <a class="reference external" href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a> that matches your
+operating system (Windows, MacOX, or Linux). The Pi Imager allows you to flash the Ubuntu operating system to a microSD which is
+used by the Raspberry Pi 4.</p>
+<p>If your PC or MAC doesn’t have a microSD port, but it does have an SD or a USB port, you’ll need to use a
+microSD-to-SD adapter or a microSD-to-USB adapter, respectively, to image the microSD.</p>
+</section>
+<section id="step-2-open-up-the-raspberry-pi-imager">
+<h3>2.2 Step 2: Open up the Raspberry Pi Imager<a class="headerlink" href="#step-2-open-up-the-raspberry-pi-imager" title="Permalink to this heading"></a></h3>
+<p>Open the Raspberry Pi Imager and make the following settings:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/RPI_Imager01.png"><img alt="_images/RPI_Imager01.png" src="_images/RPI_Imager01.png" style="width: 409.2px; height: 289.2px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p>Raspberry Pi Device: choose the device as the Raspberry Pi 4;</p></li>
+<li><p>Operating System: choose the Ubuntu Server 22.04.x operating system within the dropdown menu (<code class="docutils literal notranslate"><span class="pre">Other</span> <span class="pre">general-purpose</span> <span class="pre">OS</span> <span class="pre">--&gt;</span> <span class="pre">Ubuntu</span> <span class="pre">--&gt;</span> <span class="pre">Ubuntu</span> <span class="pre">Server</span> <span class="pre">22.04.x</span> <span class="pre">LTS</span> <span class="pre">(64-bit)</span></code>);</p></li>
+<li><p>Storage: choose your storage device (the microSD card).</p></li>
+</ol>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you’re using the Anker microSD to USB adapter, your storage device will say something like “NORELSYS 1081 CS0 USB Device - X GB”.</p>
+</div>
+</section>
+<section id="step-3-use-os-customisation">
+<h3>2.3 Step 3: Use OS customisation?<a class="headerlink" href="#step-3-use-os-customisation" title="Permalink to this heading"></a></h3>
+<p>Click <code class="docutils literal notranslate"><span class="pre">NEXT</span></code> and another popup window will say <code class="docutils literal notranslate"><span class="pre">Use</span> <span class="pre">OS</span> <span class="pre">customization?</span></code> as shown below.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/RPI_Imager02.png"><img alt="_images/RPI_Imager02.png" src="_images/RPI_Imager02.png" style="width: 368.9px; height: 117.6px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Now, click the <code class="docutils literal notranslate"><span class="pre">EDIT</span> <span class="pre">SETTINGS</span></code> option and you’ll see the following three tabs: <code class="docutils literal notranslate"><span class="pre">GENERAL</span></code>, <code class="docutils literal notranslate"><span class="pre">SERVICES</span></code>, and <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code>. We’ll examine the settings under
+each tab in the following three sections.</p>
+<section id="general-tab">
+<h4>2.3.1 GENERAL Tab<a class="headerlink" href="#general-tab" title="Permalink to this heading"></a></h4>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/RPI_Imager03.png"><img alt="_images/RPI_Imager03.png" src="_images/RPI_Imager03.png" style="width: 378.7px; height: 463.4px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>On the <code class="docutils literal notranslate"><span class="pre">GENERAL</span></code>      tab, make the settings shown above, with</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Set hostname: am-robot-xx (where xx can be any number greater than 30. For our robots, we’ll use 30, 40, and 50)</p></li>
+<li><dl class="simple">
+<dt>Set username and password</dt><dd><ul>
+<li><p>Username: neet</p></li>
+<li><p>Password: neet1234</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="services-tab">
+<h4>2.3.2 SERVICES Tab<a class="headerlink" href="#services-tab" title="Permalink to this heading"></a></h4>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/RPI_Imager04.png"><img alt="_images/RPI_Imager04.png" src="_images/RPI_Imager04.png" style="width: 324.59999999999997px; height: 397.2px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>On the <code class="docutils literal notranslate"><span class="pre">SERVICES</span></code> tab, make the settings shown above.</p>
+</section>
+<section id="options-tab">
+<h4>2.3.2 OPTIONS Tab<a class="headerlink" href="#options-tab" title="Permalink to this heading"></a></h4>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/RPI_Imager05.png"><img alt="_images/RPI_Imager05.png" src="_images/RPI_Imager05.png" style="width: 324.59999999999997px; height: 397.2px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>On the <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> tab, make the settings shown above.</p>
+<p>After clicking <code class="docutils literal notranslate"><span class="pre">SAVE</span></code>, you see the following two questions (click <code class="docutils literal notranslate"><span class="pre">YES</span></code> to accept):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>“Would you like to apply OS customization setings?” <code class="docutils literal notranslate"><span class="pre">YES</span></code></p></li>
+<li><p>“All existing data on ‘NORELSYS 1081CSO USB Device’ will erased. Are you sure you want to continue?” <code class="docutils literal notranslate"><span class="pre">YES</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>After clicking continue, you’ll see the following screen.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/RPI_Imager06.png"><img alt="_images/RPI_Imager06.png" src="_images/RPI_Imager06.png" style="width: 477.4px; height: 337.4px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Once complete, you’ll see the following screen.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/RPI_Imager07.png"><img alt="_images/RPI_Imager07.png" src="_images/RPI_Imager07.png" style="width: 368.2px; height: 158.89999999999998px;" /></a>
+</figure>
+</section>
+</section>
+</section>
+<section id="remote-login-to-raspberry-pi">
+<h2>3 Remote Login to Raspberry Pi<a class="headerlink" href="#remote-login-to-raspberry-pi" title="Permalink to this heading"></a></h2>
+<p>After you’ve flashed Ubuntu 22.04.x on your microSD card, you can plug it into your Raspberry Pi, but make sure your Raspberry Pi is powered off.
+The Raspberry Pi should automatically connect to our network, but you’ll need to get its IP address for remote logging in.</p>
+<section id="download-ip-address-scanner">
+<h3>3.1 Download IP Address Scanner<a class="headerlink" href="#download-ip-address-scanner" title="Permalink to this heading"></a></h3>
+<p>To determine the IP address of your robot’s Raspberry Pi, you’ll need to use a IP address scanner such as
+<a class="reference external" href="https://angryip.org/download/">Angry IP Scanner</a>.</p>
+<p>On Ubuntu, download version that says <code class="docutils literal notranslate"><span class="pre">x86</span> <span class="pre">64-bit</span> <span class="pre">DEB</span> <span class="pre">Package</span> <span class="pre">for</span> <span class="pre">Ubuntu/Debian/Mint</span></code></p>
+<p>In your downloads folder, you should now have a file with a similar name as the following</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ipscan_3.9.1_amd64.deb
+</pre></div>
+</div>
+<p>Navigate to your downloads folder</p>
+<p><code class="docutils literal notranslate"><span class="pre">~/Downloads/ipscan_3.9.1_amd64.deb</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/Downloads
+</pre></div>
+</div>
+<p>Now, list the files inside this directory to make it is there.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ls<span class="w"> </span>-l
+</pre></div>
+</div>
+<p>Once downloaded,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>ipscan_3.9.1_amd64.deb
+</pre></div>
+</div>
+<p>Open up Angry IP Scanner.</p>
+<p>Select MAC Vendor
+Press start</p>
+<p>Sort the list by clicking Ports
+Under Hostname, find the robot. In this case, am-robot-01.local.</p>
+<p>Note the ip address.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ssh<span class="w"> </span>neet@ip-address
+</pre></div>
+</div>
+<p>Once you have connected to the Raspberry Pi, you should receive a message similar
+to the following</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-xx:~$
+</pre></div>
+</div>
+<p>Also, at the top of your terminal window, you’ll see <code class="docutils literal notranslate"><span class="pre">neet&#64;am-robot-xx:~$</span></code></p>
+<p>Now you can finish the Ubuntu installation</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-xx:~$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-01:~$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
+</pre></div>
+</div>
+<p>After the upgrade process has completed, go ahead and install ROS 2 Humble using the
+instructions given on this page.</p>
+<p>See screenshots on ubuntu home computer.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-01:~$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>autoremove
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neet@am-robot-01:~$<span class="w"> </span>sudo<span class="w"> </span>reboot
+</pre></div>
+</div>
+<p>Now wait for about 2 minutes for the Raspberry Pi to reboot. If you receive the following
+message</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ssh:<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>host<span class="w"> </span><span class="m">192</span>.168.1.29<span class="w"> </span>port<span class="w"> </span><span class="m">22</span>:<span class="w"> </span>Connection<span class="w"> </span>refused
+</pre></div>
+</div>
+<p>The Raspberry Pi might still be rebooting, so wait a bit longer. If after waiting and
+still no connection, run Angry IP Scanner again to make sure the IP address hasn’t
+changed. If after verifying the IP address and you’re still unable to connect, please
+see your instructor or TA and perhaps they can help resolve the issue.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To obtain the IP address for a computer that your currently connected to, you can type the following</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>hostname<span class="w"> </span>-I
+</pre></div>
+</div>
+</div>
+</section>
+<section id="test-communication-between-computers">
+<h3>Test Communication Between Computers<a class="headerlink" href="#test-communication-between-computers" title="Permalink to this heading"></a></h3>
+<p>To determine if your computer can communicate with another computer, you can use the <code class="docutils literal notranslate"><span class="pre">ping</span></code> command using
+the IP address of the computer you want to communicate with. For instance, let’s say the IP address of the
+computer you would like to communicate with has an IP address of xyz.abc.jkl.z, then you can issue the command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ping<span class="w"> </span>xyz.abc.jkl.z
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, MIT-NEET Autonomous Machines.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

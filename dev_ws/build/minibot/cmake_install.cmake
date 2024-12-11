@@ -48,6 +48,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     "/home/janelleg/dev_ws/src/minibot/launch"
     "/home/janelleg/dev_ws/src/minibot/rviz"
     "/home/janelleg/dev_ws/src/minibot/worlds"
+    "/home/janelleg/dev_ws/src/minibot/config"
     )
 endif()
 

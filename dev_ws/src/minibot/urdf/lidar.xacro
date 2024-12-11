@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+
+        <!-- constants -->
+
+        <xacro:property name="lidar_diam" value = "0.07" />
+
+        <xacro:property name="lidar_height" value = "0.055" />
+
+        <xacro:property name="lidar_offset_x" value = "${chassis_length/2 - 0.055}" />
+
+        <xacro:property name="lidar_offset_z" value = "${lidar_height/2 + chassis_height/2}" />
+
+        <xacro:property name="lidar_mass" value = "0.5" />
+
+
+        <!-- lidar_joint -->
+
+        <joint name="lidar_joint" type="fixed">
+
+                <parent link="chassis_link"/>
+
+                <child link="lidar_link"/>
+
+                <origin xyz="${lidar_offset_x} 0 ${lidar_offset_z}" rpy="0 0 0"/>
+
+        </joint>
+
+
+        <!-- lidar_link -->
+
+        <link name="lidar_link">
+
+                <visual>
+
+                        <geometry>
+
+                                <cylinder length="${lidar_height}" radius="${lidar_diam/2}" />
+
+                        </geometry>
+
+                        <origin xyz="0 0 0"  rpy="0 0 0"/>
+
+                        <material name="green" />
+
+                </visual>
+
+                <collision>
+
+                        <geometry>
+
+                                <cylinder length="${lidar_height}" radius="${lidar_diam/2}" />
+
+                        </geometry>
+
+                        <origin xyz="0 0 0"  rpy="0 0 0"/>
+
+                </collision>
+
+                <xacro:cylinder_inertia m="${lidar_mass}" h="${lidar_height}" r="${lidar_diam/2}"
+
+                                                                xyz="0 0 0" rpy="0 0 0" />
+
+        </link>
+
+
+        <!-- Gazebo parameters for lidar -->
+
+         <gazebo reference="lidar_link">
+
+                <material>Gazebo/Green</material>
+
+
+                <sensor name="laser" type="ray">
+
+                        <pose> 0 0 0 0 0 0 </pose>
+
+                        <visualize>true</visualize>
+
+                        <update_rate>10</update_rate>
+
+                        <ray>
+
+                                <scan>
+
+                                        <horizontal>
+
+                                                <samples>360</samples>
+
+                                                <min_angle>-3.14</min_angle>
+
+                                                <max_angle>3.14</max_angle>
+
+                                        </horizontal>
+
+                                </scan>
+
+                                <range>
+
+                                        <min>0.3</min>
+
+                                        <max>12</max>
+
+                                </range>
+
+                        </ray>
+
+                        <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+
+                                <ros>
+
+                                        <argument>~/out:=scan</argument>
+
+                                </ros>
+
+                                <output_type>sensor_msgs/LaserScan</output_type>
+
+                                <frame_name>laser_frame</frame_name>
+
+                        </plugin>
+
+                </sensor>
+
+        </gazebo>
+
+</robot>

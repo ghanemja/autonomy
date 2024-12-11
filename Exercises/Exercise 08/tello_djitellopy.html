@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programming via DJITelloPy &mdash; 16.633 NEET Autonomous Machines  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Raspberry Pi Setup" href="raspberry_pi_setup.html" />
+    <link rel="prev" title="Programming via Tello SDK 2.0" href="tello_sdk_2_0.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/NEET-AutonomousMachines.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Exercise 01</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro_ros.html">Introduction to ROS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_overview.html">Linux Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_01.html">ROS 2 Humble Tutorials, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 02</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_02.html">ROS 2 Humble Tutorials, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 03</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_03.html">ROS 2 Humble Tutorials, Part 3</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 04</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part01.html">Mobile Robot, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 05</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part02.html">Mobile Robot, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 06</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part03.html">Mobile Robot, Part 3</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 07</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part04.html">Mobile Robot, Part 4</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 08</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tello_edu_overview.html">Tello Edu Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_sdk_2_0.html">Programming via Tello SDK 2.0</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Programming via DJITelloPy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installations">1 Installations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download-tello-example02-py">2 Download Tello_Example02.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-with-camera-feed">3 Example with Camera Feed</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Mobile Robot Setup Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="raspberry_pi_setup.html">Raspberry Pi Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="camera_RPi_setup.html">Camera Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rplidar_a1_setup.html">RPLiDAR A1 Setup</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tello User Manuals and Specifications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tello_edu_specs.html">Tello Edu Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_user_manual.html">Tello User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_sdk_2_0_user_guide.html">Tello SDK 2.0 User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="td1_controller.html">Td1 Controller Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batteries_charging.html">Batteries/Charging</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">16.633 NEET Autonomous Machines</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Programming via DJITelloPy</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="programming-via-djitellopy">
+<h1>Programming via DJITelloPy<a class="headerlink" href="#programming-via-djitellopy" title="Permalink to this heading"></a></h1>
+<p>For this section you’ll see how to write a program using the <a class="reference external" href="https://github.com/damiafuentes/DJITelloPy">DJITelloPy</a> library as well as using OpenCV to view images from the camera</p>
+<section id="installations">
+<h2>1 Installations<a class="headerlink" href="#installations" title="Permalink to this heading"></a></h2>
+<p>First, you’ll need to install the following libraries using <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><a class="reference external" href="https://github.com/damiafuentes/DJITelloPy/tree/master">djitellopy</a></p></li>
+<li><p><a class="reference external" href="https://opencv.org/">opencv</a></p></li>
+<li><p><a class="reference external" href="https://numpy.org/">numpy</a></p></li>
+<li><p><a class="reference external" href="https://www.pygame.org/">pygame</a></p></li>
+</ol>
+</div></blockquote>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># install dijtellopy</span>
+pip<span class="w"> </span>install<span class="w"> </span>djitellopy
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># install opencv</span>
+pip<span class="w"> </span>install<span class="w"> </span>opency-python
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># install numpy</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">numpy</span><span class="o">==</span><span class="m">1</span>.26.4
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># install pygame</span>
+pip<span class="w"> </span>install<span class="w"> </span>pygame
+</pre></div>
+</div>
+</section>
+<section id="download-tello-example02-py">
+<h2>2 Download Tello_Example02.py<a class="headerlink" href="#download-tello-example02-py" title="Permalink to this heading"></a></h2>
+<p>This second example employs the same sequence of drone commands as our first example, but this time we’ll use the <code class="docutils literal notranslate"><span class="pre">DJITellopy</span></code> library to simplify the overall program construction.
+You can find all of the commands listed in this example at <a class="reference external" href="https://djitellopy.readthedocs.io/en/latest/tello/">DJITelloPy API Reference</a>.</p>
+<p>Open VSCode and save the program  as <code class="docutils literal notranslate"><span class="pre">Tello_Example02.py</span></code> inside your <code class="docutils literal notranslate"><span class="pre">tello</span></code> folder.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">Tello_Example02.py</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">##################################</span>
+<span class="linenos"> 2</span><span class="c1"># Tello EDU Sample Program 02 </span>
+<span class="linenos"> 3</span><span class="c1">#</span>
+<span class="linenos"> 4</span><span class="c1"># MIT NEET-AM Autonomous Machines</span>
+<span class="linenos"> 5</span><span class="c1">#</span>
+<span class="linenos"> 6</span><span class="c1"># 11/20/2024</span>
+<span class="linenos"> 7</span><span class="c1">##################################</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">djitellopy</span> <span class="kn">import</span> <span class="n">Tello</span>
+<span class="linenos">10</span><span class="kn">import</span> <span class="nn">time</span> 
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="n">tello</span> <span class="o">=</span> <span class="n">Tello</span><span class="p">()</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="n">tello</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="linenos">15</span><span class="n">tello</span><span class="o">.</span><span class="n">takeoff</span><span class="p">()</span>
+<span class="linenos">16</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="n">tello</span><span class="o">.</span><span class="n">move_up</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+<span class="linenos">19</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="n">tello</span><span class="o">.</span><span class="n">move_left</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="linenos">22</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="n">tello</span><span class="o">.</span><span class="n">move_right</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+<span class="linenos">25</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="n">tello</span><span class="o">.</span><span class="n">move_left</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="linenos">28</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="n">tello</span><span class="o">.</span><span class="n">move_forward</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="linenos">31</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="n">tello</span><span class="o">.</span><span class="n">move_back</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+<span class="linenos">34</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="n">tello</span><span class="o">.</span><span class="n">move_forward</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="linenos">37</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span><span class="n">tello</span><span class="o">.</span><span class="n">flip_left</span><span class="p">()</span>
+<span class="linenos">40</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">41</span>
+<span class="linenos">42</span><span class="n">tello</span><span class="o">.</span><span class="n">flip_right</span><span class="p">()</span>
+<span class="linenos">43</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">44</span>
+<span class="linenos">45</span><span class="n">tello</span><span class="o">.</span><span class="n">flip_right</span><span class="p">()</span>
+<span class="linenos">46</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">47</span>
+<span class="linenos">48</span><span class="n">tello</span><span class="o">.</span><span class="n">flip_left</span><span class="p">()</span>
+<span class="linenos">49</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">50</span>
+<span class="linenos">51</span><span class="n">tello</span><span class="o">.</span><span class="n">rotate_clockwise</span><span class="p">(</span><span class="mi">360</span><span class="p">)</span>
+<span class="linenos">52</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">53</span>
+<span class="linenos">54</span><span class="n">tello</span><span class="o">.</span><span class="n">get_battery</span><span class="p">()</span>
+<span class="linenos">55</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">56</span>
+<span class="linenos">57</span><span class="n">tello</span><span class="o">.</span><span class="n">land</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>As you can see, we’ve executed the same drone commands as our first example but this time with 82 lines of code less.</p>
+</section>
+<section id="example-with-camera-feed">
+<h2>3 Example with Camera Feed<a class="headerlink" href="#example-with-camera-feed" title="Permalink to this heading"></a></h2>
+<p>This third example was taken directly from the <a class="reference external" href="https://github.com/damiafuentes/DJITelloPy/blob/master/examples/manual-control-pygame.py">DJITello GitHhub site</a>. This code has a camera feed and
+it allows you to manually control the Tello using your keyboard.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When you’re manually controlling the Tello via the keyboard, make sure to keep the mouse cursor within the video frame (Tello video stream). Otherwise, your keyboard presses will
+appear other currently open windows, and will have no effect on controlling the Tello.</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">Tello_Example03.py</span><a class="headerlink" href="#id3" title="Permalink to this code"></a></div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="kn">from</span> <span class="nn">djitellopy</span> <span class="kn">import</span> <span class="n">Tello</span>
+<span class="linenos">  2</span><span class="kn">import</span> <span class="nn">cv2</span>
+<span class="linenos">  3</span><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="linenos">  4</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos">  5</span><span class="kn">import</span> <span class="nn">time</span>
+<span class="linenos">  6</span>
+<span class="linenos">  7</span><span class="c1"># Speed of the drone</span>
+<span class="linenos">  8</span><span class="n">S</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="linenos">  9</span>
+<span class="linenos"> 10</span><span class="c1"># Frames per second of the pygame window display</span>
+<span class="linenos"> 11</span><span class="c1"># A low number also results in input lag, as input information is processed once per frame.</span>
+<span class="linenos"> 12</span><span class="n">FPS</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="linenos"> 13</span>
+<span class="linenos"> 14</span>
+<span class="linenos"> 15</span><span class="k">class</span> <span class="nc">FrontEnd</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="linenos"> 16</span><span class="w">    </span><span class="sd">&quot;&quot;&quot; Maintains the Tello display and moves it through the keyboard keys.</span>
+<span class="linenos"> 17</span><span class="sd">        Press escape key to quit.</span>
+<span class="linenos"> 18</span><span class="sd">        The controls are:</span>
+<span class="linenos"> 19</span><span class="sd">            - T: Takeoff</span>
+<span class="linenos"> 20</span><span class="sd">            - L: Land</span>
+<span class="linenos"> 21</span><span class="sd">            - Arrow keys: Forward, backward, left and right.</span>
+<span class="linenos"> 22</span><span class="sd">            - A and D: Counter clockwise and clockwise rotations (yaw)</span>
+<span class="linenos"> 23</span><span class="sd">            - W and S: Up and down.</span>
+<span class="linenos"> 24</span>
+<span class="linenos"> 25</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 26</span>
+<span class="linenos"> 27</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos"> 28</span>        <span class="c1"># Init pygame</span>
+<span class="linenos"> 29</span>        <span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="linenos"> 30</span>
+<span class="linenos"> 31</span>        <span class="c1"># Create pygame window</span>
+<span class="linenos"> 32</span>        <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;Tello video stream&quot;</span><span class="p">)</span>
+<span class="linenos"> 33</span>        <span class="bp">self</span><span class="o">.</span><span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">([</span><span class="mi">960</span><span class="p">,</span> <span class="mi">720</span><span class="p">])</span>
+<span class="linenos"> 34</span>
+<span class="linenos"> 35</span>        <span class="c1"># Init Tello object that interacts with the Tello drone</span>
+<span class="linenos"> 36</span>        <span class="bp">self</span><span class="o">.</span><span class="n">tello</span> <span class="o">=</span> <span class="n">Tello</span><span class="p">()</span>
+<span class="linenos"> 37</span>
+<span class="linenos"> 38</span>        <span class="c1"># Drone velocities between -100~100</span>
+<span class="linenos"> 39</span>        <span class="bp">self</span><span class="o">.</span><span class="n">for_back_velocity</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 40</span>        <span class="bp">self</span><span class="o">.</span><span class="n">left_right_velocity</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 41</span>        <span class="bp">self</span><span class="o">.</span><span class="n">up_down_velocity</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 42</span>        <span class="bp">self</span><span class="o">.</span><span class="n">yaw_velocity</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 43</span>        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="linenos"> 44</span>
+<span class="linenos"> 45</span>        <span class="bp">self</span><span class="o">.</span><span class="n">send_rc_control</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 46</span>
+<span class="linenos"> 47</span>        <span class="c1"># create update timer</span>
+<span class="linenos"> 48</span>        <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">set_timer</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">USEREVENT</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span> <span class="o">//</span> <span class="n">FPS</span><span class="p">)</span>
+<span class="linenos"> 49</span>
+<span class="linenos"> 50</span>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos"> 51</span>
+<span class="linenos"> 52</span>        <span class="bp">self</span><span class="o">.</span><span class="n">tello</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="linenos"> 53</span>        <span class="bp">self</span><span class="o">.</span><span class="n">tello</span><span class="o">.</span><span class="n">set_speed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="p">)</span>
+<span class="linenos"> 54</span>
+<span class="linenos"> 55</span>        <span class="c1"># In case streaming is on. This happens when we quit this program without the escape key.</span>
+<span class="linenos"> 56</span>        <span class="bp">self</span><span class="o">.</span><span class="n">tello</span><span class="o">.</span><span class="n">streamoff</span><span class="p">()</span>
+<span class="linenos"> 57</span>        <span class="bp">self</span><span class="o">.</span><span class="n">tello</span><span class="o">.</span><span class="n">streamon</span><span class="p">()</span>
+<span class="linenos"> 58</span>
+<span class="linenos"> 59</span>        <span class="n">frame_read</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tello</span><span class="o">.</span><span class="n">get_frame_read</span><span class="p">()</span>
+<span class="linenos"> 60</span>
+<span class="linenos"> 61</span>        <span class="n">should_stop</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 62</span>        <span class="k">while</span> <span class="ow">not</span> <span class="n">should_stop</span><span class="p">:</span>
+<span class="linenos"> 63</span>
+<span class="linenos"> 64</span>            <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+<span class="linenos"> 65</span>                <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">USEREVENT</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos"> 66</span>                    <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+<span class="linenos"> 67</span>                <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
+<span class="linenos"> 68</span>                    <span class="n">should_stop</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos"> 69</span>                <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">KEYDOWN</span><span class="p">:</span>
+<span class="linenos"> 70</span>                    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_ESCAPE</span><span class="p">:</span>
+<span class="linenos"> 71</span>                        <span class="n">should_stop</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos"> 72</span>                    <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 73</span>                        <span class="bp">self</span><span class="o">.</span><span class="n">keydown</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+<span class="linenos"> 74</span>                <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">KEYUP</span><span class="p">:</span>
+<span class="linenos"> 75</span>                    <span class="bp">self</span><span class="o">.</span><span class="n">keyup</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+<span class="linenos"> 76</span>
+<span class="linenos"> 77</span>            <span class="k">if</span> <span class="n">frame_read</span><span class="o">.</span><span class="n">stopped</span><span class="p">:</span>
+<span class="linenos"> 78</span>                <span class="k">break</span>
+<span class="linenos"> 79</span>
+<span class="linenos"> 80</span>            <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">fill</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="linenos"> 81</span>
+<span class="linenos"> 82</span>            <span class="n">frame</span> <span class="o">=</span> <span class="n">frame_read</span><span class="o">.</span><span class="n">frame</span>
+<span class="linenos"> 83</span>            <span class="c1"># battery </span>
+<span class="linenos"> 84</span>            <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Battery: </span><span class="si">{}</span><span class="s2">%&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tello</span><span class="o">.</span><span class="n">get_battery</span><span class="p">())</span>
+<span class="linenos"> 85</span>            <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">720</span> <span class="o">-</span> <span class="mi">5</span><span class="p">),</span>
+<span class="linenos"> 86</span>                <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_SIMPLEX</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos"> 87</span>            <span class="n">frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+<span class="linenos"> 88</span>            <span class="n">frame</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+<span class="linenos"> 89</span>            <span class="n">frame</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+<span class="linenos"> 90</span>
+<span class="linenos"> 91</span>            <span class="n">frame</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">surfarray</span><span class="o">.</span><span class="n">make_surface</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+<span class="linenos"> 92</span>            <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="linenos"> 93</span>            <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+<span class="linenos"> 94</span>
+<span class="linenos"> 95</span>            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">FPS</span><span class="p">)</span>
+<span class="linenos"> 96</span>
+<span class="linenos"> 97</span>        <span class="c1"># Call it always before finishing. To deallocate resources.</span>
+<span class="linenos"> 98</span>        <span class="bp">self</span><span class="o">.</span><span class="n">tello</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
+<span class="linenos"> 99</span>
+<span class="linenos">100</span>    <span class="k">def</span> <span class="nf">keydown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<span class="linenos">101</span><span class="w">        </span><span class="sd">&quot;&quot;&quot; Update velocities based on key pressed</span>
+<span class="linenos">102</span><span class="sd">        Arguments:</span>
+<span class="linenos">103</span><span class="sd">            key: pygame key</span>
+<span class="linenos">104</span>
+<span class="linenos">105</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">106</span>        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_UP</span><span class="p">:</span>  <span class="c1"># set forward velocity</span>
+<span class="linenos">107</span>            <span class="bp">self</span><span class="o">.</span><span class="n">for_back_velocity</span> <span class="o">=</span> <span class="n">S</span>
+<span class="linenos">108</span>        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_DOWN</span><span class="p">:</span>  <span class="c1"># set backward velocity</span>
+<span class="linenos">109</span>            <span class="bp">self</span><span class="o">.</span><span class="n">for_back_velocity</span> <span class="o">=</span> <span class="o">-</span><span class="n">S</span>
+<span class="linenos">110</span>        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_LEFT</span><span class="p">:</span>  <span class="c1"># set left velocity</span>
+<span class="linenos">111</span>            <span class="bp">self</span><span class="o">.</span><span class="n">left_right_velocity</span> <span class="o">=</span> <span class="o">-</span><span class="n">S</span>
+<span class="linenos">112</span>        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_RIGHT</span><span class="p">:</span>  <span class="c1"># set right velocity</span>
+<span class="linenos">113</span>            <span class="bp">self</span><span class="o">.</span><span class="n">left_right_velocity</span> <span class="o">=</span> <span class="n">S</span>
+<span class="linenos">114</span>        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_w</span><span class="p">:</span>  <span class="c1"># set up velocity</span>
+<span class="linenos">115</span>            <span class="bp">self</span><span class="o">.</span><span class="n">up_down_velocity</span> <span class="o">=</span> <span class="n">S</span>
+<span class="linenos">116</span>        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_s</span><span class="p">:</span>  <span class="c1"># set down velocity</span>
+<span class="linenos">117</span>            <span class="bp">self</span><span class="o">.</span><span class="n">up_down_velocity</span> <span class="o">=</span> <span class="o">-</span><span class="n">S</span>
+<span class="linenos">118</span>        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_a</span><span class="p">:</span>  <span class="c1"># set yaw counter clockwise velocity</span>
+<span class="linenos">119</span>            <span class="bp">self</span><span class="o">.</span><span class="n">yaw_velocity</span> <span class="o">=</span> <span class="o">-</span><span class="n">S</span>
+<span class="linenos">120</span>        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_d</span><span class="p">:</span>  <span class="c1"># set yaw clockwise velocity</span>
+<span class="linenos">121</span>            <span class="bp">self</span><span class="o">.</span><span class="n">yaw_velocity</span> <span class="o">=</span> <span class="n">S</span>
+<span class="linenos">122</span>
+<span class="linenos">123</span>    <span class="k">def</span> <span class="nf">keyup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<span class="linenos">124</span><span class="w">        </span><span class="sd">&quot;&quot;&quot; Update velocities based on key released</span>
+<span class="linenos">125</span><span class="sd">        Arguments:</span>
+<span class="linenos">126</span><span class="sd">            key: pygame key</span>
+<span class="linenos">127</span>
+<span class="linenos">128</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">129</span>        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_UP</span> <span class="ow">or</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_DOWN</span><span class="p">:</span>  <span class="c1"># set zero forward/backward velocity</span>
+<span class="linenos">130</span>            <span class="bp">self</span><span class="o">.</span><span class="n">for_back_velocity</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">131</span>        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_LEFT</span> <span class="ow">or</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_RIGHT</span><span class="p">:</span>  <span class="c1"># set zero left/right velocity</span>
+<span class="linenos">132</span>            <span class="bp">self</span><span class="o">.</span><span class="n">left_right_velocity</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">133</span>        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_w</span> <span class="ow">or</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_s</span><span class="p">:</span>  <span class="c1"># set zero up/down velocity</span>
+<span class="linenos">134</span>            <span class="bp">self</span><span class="o">.</span><span class="n">up_down_velocity</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">135</span>        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_a</span> <span class="ow">or</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_d</span><span class="p">:</span>  <span class="c1"># set zero yaw velocity</span>
+<span class="linenos">136</span>            <span class="bp">self</span><span class="o">.</span><span class="n">yaw_velocity</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">137</span>        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_t</span><span class="p">:</span>  <span class="c1"># takeoff</span>
+<span class="linenos">138</span>            <span class="bp">self</span><span class="o">.</span><span class="n">tello</span><span class="o">.</span><span class="n">takeoff</span><span class="p">()</span>
+<span class="linenos">139</span>            <span class="bp">self</span><span class="o">.</span><span class="n">send_rc_control</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">140</span>        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_l</span><span class="p">:</span>  <span class="c1"># land</span>
+<span class="linenos">141</span>            <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tello</span><span class="o">.</span><span class="n">land</span><span class="p">()</span>
+<span class="linenos">142</span>            <span class="bp">self</span><span class="o">.</span><span class="n">send_rc_control</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">143</span>
+<span class="linenos">144</span>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">145</span><span class="w">        </span><span class="sd">&quot;&quot;&quot; Update routine. Send velocities to Tello.</span>
+<span class="linenos">146</span>
+<span class="linenos">147</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">148</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_rc_control</span><span class="p">:</span>
+<span class="linenos">149</span>            <span class="bp">self</span><span class="o">.</span><span class="n">tello</span><span class="o">.</span><span class="n">send_rc_control</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left_right_velocity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">for_back_velocity</span><span class="p">,</span>
+<span class="linenos">150</span>                <span class="bp">self</span><span class="o">.</span><span class="n">up_down_velocity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaw_velocity</span><span class="p">)</span>
+<span class="linenos">151</span>
+<span class="linenos">152</span>
+<span class="linenos">153</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos">154</span>    <span class="n">frontend</span> <span class="o">=</span> <span class="n">FrontEnd</span><span class="p">()</span>
+<span class="linenos">155</span>
+<span class="linenos">156</span>    <span class="c1"># run frontend</span>
+<span class="linenos">157</span>
+<span class="linenos">158</span>    <span class="n">frontend</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="linenos">159</span>
+<span class="linenos">160</span>
+<span class="linenos">161</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">162</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tello_sdk_2_0.html" class="btn btn-neutral float-left" title="Programming via Tello SDK 2.0" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="raspberry_pi_setup.html" class="btn btn-neutral float-right" title="Raspberry Pi Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, MIT-NEET Autonomous Machines.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+:orphan:
+
+============
+Camera Setup
+============
+In the following instructions, we assume you're setting up a Raspberry Pi camera for use on a robot with a Raspberry Pi. The robot's Raspberry Pi 
+should already have :doc:`Ubuntu 22.04.x </raspberry_pi_setup>`  and `ROS 2 Humble <https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html>`_ installed. 
+
+
+What You Need 
+
+- Development computer
+- Raspberry Pi Camera with connector cable
+- Raspberry Pi 4
+- Power Supply for Raspberry Pi
+
+1 Create a ROS 2 Workspace 
+==========================
+Remote login (or login directly) to the robot as the user ``neet`` with password ``1234`` on one of our the three robots: ``am-robot-01``, ``am-robot-02``, or ``am-robot-03``.
+If a workspace ``ros2_ws`` doesn't already exist, create one as follows: 
+
+.. code-block:: bash
+
+	# create a ros2 workspace
+	neet@am-robot-0x:$ mkdir -p ~/ros2_ws/src
+	
+	# cd into the src folder
+	neet@am-robot-0x:$ cd ~/ros2_ws/src
+	
+
+2 Installations 
+===============
+
+2.1 Install the Raspberry Pi Camera Library
+-------------------------------------------
+
+.. code-block:: bash 
+
+	# update your apt repository caches
+	neet@am-robot-0x:~$ sudo apt update
+
+	# upgrade packages
+	neet@am-robot-0x:~$ sudo apt upgrade
+
+	# install the Raspberry Pi camera library 
+	neet@am-robot-0x:~$ sudo apt install libraspberrypi-bin v4l-utils ros-humble-v4l2-camera
+
+2.2 Install Image Transport Plugin 
+----------------------------------
+
+.. code-block:: bash 
+
+	# image_transport plugin for sending sensor_msgs/Image topics in compressed representations
+	neet@am-robot-0x:~$ sudo apt install ros-humble-image-transport-plugins
+
+
+2.3 Install rqt_image_view 
+--------------------------
+``rqt_image_view`` provides a GUI plugin for displaying images using image_transport.
+
+.. code-block:: bash 
+
+    neet@am-robot-01:~$ sudo apt install ros-humble-rqt-image-view
+
+
+After installing the above, run the command ``groups`` to make sure the user ``neet`` belongs to the video group as follows:
+
+.. code-block:: bash 
+
+	neet@am-robot-0x:~$ groups
+	neet adm dialout cdrom sudo audio video plugdev games users input render netdev gpio spi i2c
+
+
+If you don't see video in the group listing, you'll need to add the user ``neet`` as follows.
+
+.. code-block:: bash 
+	
+	neet@am-robot-0x:~$ sudo usermod -aG video neet
+
+After running this command, you should log off the robot's computer and then reboot it. 
+
+3 Configure the Camera
+======================
+The camera requires configuration for SPI and I2C, and this is done using 
+``raspi-config`` to change the device settings for the Raspberry Pi. Since ``raspi-config`` isn't included included in Ubuntu 22.04.x, we'll need to 
+install it as follows: 
+
+.. code-block:: bash 
+
+	# install raspi-config
+	neet@am-robot-0x:~$ sudo apt-get install raspi-config
+
+	# run raspi-config
+	neet@am-robot-0x:~$ sudo raspi-config
+
+After running ``raspi-coonfig`` follow the steps below to configure the camera for SPI and I2C:
+
+- Step 1: select ``3 Interface Options ...``
+- Step 2: select ``I1 Legacy Camera ...``
+- Step 3: Would you like to enable legacy camera support? ``Yes``
+- Step 4: click ``Ok``
+- Step 5: select ``3 Interface Options ...``
+- Step 6: select ``I4 SPI Enable/disable automatic ...``
+- Step 7: Would you like the SPI interface to be enabled? ``Yes``
+- Step 8: The SPI interface is enabled. Click ``Ok``
+- Step 9: select ``3 Interface Options ...``
+- Step 10: select ``I5 I2C Enable/disable automatic ...``
+- Step 11: Would you like the ARM I2C interface to be enabled? ``Yes`` 
+- Step 12: The ARM I2C interface is enabled. Click ``Ok``
+- Step 13: select ``Finish``
+- Step 14: Would you like to reboot now? ``Yes``
+
+4 Test the Camera 
+=================
+4.1 Determine if Camera is Recognized 
+-------------------------------------
+To determine whether the Raspberry Pi recognizes the camera, type the following  
+
+.. code-block:: bash 
+
+    neet@am-robot-0x:~$ vcgencmd get_camera 
+
+If it recognizes the camera, you should receive ``supported=1 detected=1`` as follows:
+
+.. code-block:: bash 
+
+    supported=1 detected=1, libcamera interfaces=0
+
+.. note:: If the camera isn't detected, please check to ribbon cable to make sure its properly inserted. If this doesn't solve the problem, you may have another issue such as a defective camera. 
+
+4.2 Run a Camera Node and rqt_image_view 
+----------------------------------------
+If your robot's Raspberry Pi is connected to a monitor, you can view the camera feed directly from the Raspberry Pi itself by running a camera node and then 
+viewing the images via ``rqt_image_view`` as follows:
+
+.. code-block:: bash 
+
+	# run a camera node
+	neet@am-robot-0x:~$ ros2 run v4l2_camera v4l2_camera_node --ros-args -p image_size:="[640,480]" -p camera_frame_id:=camera_optical_link
+
+	# run rqt_image_view
+	neet@am-robot-0x:~$ ros2 run rqt_image_view rqt_image_view
+
+
+.. note:: If your robot isn't connected to a monitor, you can view the camera feed on your development computer by following the steps outlined in 
+	:ref:`5 Access Camera and LiDAR Data Streams on Your Development Computer`.

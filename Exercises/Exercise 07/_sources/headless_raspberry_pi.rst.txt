@@ -1,0 +1,246 @@
+:orphan:
+
+===========================
+Headless Raspberry Pi Setup
+===========================
+
+These instructions illustrate how to setup Ubuntu 22.04.x and ROS2 Humble on your robot using a 
+*headless setup* without a keyboard, mouse, or monitor. 
+
+
+1 Setup Requirements
+====================
+
+To get your robot's computer ready for a headless setup, you'll need the following items handy
+
+	1) a development PC 
+	2) Raspberry Pi 4 (for your robot)
+	3) Raspberry Pi Power Supply
+	4) microSD memory card
+	5) Raspberry Pi Imager software
+
+
+2 Create an Ubuntu 22.04.x Image for Raspberry Pi 
+=================================================
+
+2.1 Step 1: Download and install the Raspberry Pi Imager  on your PC 
+--------------------------------------------------------------------
+Download the `Raspberry Pi Imager <https://www.raspberrypi.com/software/>`_ that matches your 
+operating system (Windows, MacOX, or Linux). The Pi Imager allows you to flash the Ubuntu operating system to a microSD which is 
+used by the Raspberry Pi 4. 
+
+If your PC or MAC doesn't have a microSD port, but it does have an SD or a USB port, you'll need to use a  
+microSD-to-SD adapter or a microSD-to-USB adapter, respectively, to image the microSD. 
+
+2.2 Step 2: Open up the Raspberry Pi Imager
+-------------------------------------------
+Open the Raspberry Pi Imager and make the following settings:
+
+.. figure:: images/RPI_Imager01.png
+		:width: 682px
+		:height: 482px
+		:align: center
+		:scale: 60 %
+		
+|	
+
+	a) Raspberry Pi Device: choose the device as the Raspberry Pi 4;
+	b) Operating System: choose the Ubuntu Server 22.04.x operating system within the dropdown menu (``Other general-purpose OS --> Ubuntu --> Ubuntu Server 22.04.x LTS (64-bit)``);
+	c) Storage: choose your storage device (the microSD card). 
+
+.. note:: If you're using the Anker microSD to USB adapter, your storage device will say something like "NORELSYS 1081 CS0 USB Device - X GB".
+	
+
+2.3 Step 3: Use OS customisation?
+---------------------------------
+Click ``NEXT`` and another popup window will say ``Use OS customization?`` as shown below.
+
+.. figure:: images/RPI_Imager02.png
+		:width: 527px
+		:height: 168px
+		:align: center
+		:scale: 70 %
+		
+|	
+
+Now, click the ``EDIT SETTINGS`` option and you'll see the following three tabs: ``GENERAL``, ``SERVICES``, and ``OPTIONS``. We'll examine the settings under
+each tab in the following three sections. 
+
+2.3.1 GENERAL Tab 
+^^^^^^^^^^^^^^^^^
+.. figure:: images/RPI_Imager03.png
+			:width: 541px
+			:height: 662px
+			:align: center
+			:scale: 70 %
+
+|
+
+On the ``GENERAL`` 	tab, make the settings shown above, with
+
+	- Set hostname: am-robot-xx (where xx can be any number greater than 30. For our robots, we'll use 30, 40, and 50)
+	- Set username and password
+		- Username: neet 
+		- Password: neet1234
+
+			
+2.3.2 SERVICES Tab 
+^^^^^^^^^^^^^^^^^^
+.. figure:: images/RPI_Imager04.png
+		:width: 541px
+		:height: 662px
+		:align: center
+		:scale: 60 %
+
+|
+
+On the ``SERVICES`` tab, make the settings shown above.
+
+2.3.2 OPTIONS Tab
+^^^^^^^^^^^^^^^^^
+.. figure:: images/RPI_Imager05.png
+		:width: 541px
+		:height: 662px
+		:align: center
+		:scale: 60 %
+
+|
+
+On the ``OPTIONS`` tab, make the settings shown above.
+	
+After clicking ``SAVE``, you see the following two questions (click ``YES`` to accept): 
+	
+	- "Would you like to apply OS customization setings?" ``YES``
+	- "All existing data on 'NORELSYS 1081CSO USB Device' will erased. Are you sure you want to continue?" ``YES`` 
+
+After clicking continue, you'll see the following screen.
+
+.. figure:: images/RPI_Imager06.png
+		:width: 682px
+		:height: 482px
+		:align: center
+		:scale: 70 %
+
+|
+
+Once complete, you'll see the following screen.
+
+.. figure:: images/RPI_Imager07.png
+		:width: 526px
+		:height: 227px
+		:align: center
+		:scale: 70 %
+		
+3 Remote Login to Raspberry Pi 
+==============================
+After you've flashed Ubuntu 22.04.x on your microSD card, you can plug it into your Raspberry Pi, but make sure your Raspberry Pi is powered off.
+The Raspberry Pi should automatically connect to our network, but you'll need to get its IP address for remote logging in. 
+
+3.1 Download IP Address Scanner 
+-------------------------------
+To determine the IP address of your robot's Raspberry Pi, you'll need to use a IP address scanner such as 
+`Angry IP Scanner <https://angryip.org/download/>`_. 
+
+On Ubuntu, download version that says ``x86 64-bit DEB Package for Ubuntu/Debian/Mint``
+
+In your downloads folder, you should now have a file with a similar name as the following
+
+.. code-block:: bash
+
+    ipscan_3.9.1_amd64.deb
+
+Navigate to your downloads folder
+
+``~/Downloads/ipscan_3.9.1_amd64.deb``
+
+.. code-block:: bash 
+
+    $ cd ~/Downloads 
+
+Now, list the files inside this directory to make it is there.
+
+.. code-block:: bash 
+
+    $ ls -l
+	
+Once downloaded, 
+
+.. code-block:: bash 
+
+    sudo dpkg -i ipscan_3.9.1_amd64.deb
+
+Open up Angry IP Scanner.
+
+Select MAC Vendor
+Press start
+
+Sort the list by clicking Ports
+Under Hostname, find the robot. In this case, am-robot-01.local.
+
+Note the ip address. 
+
+.. code-block::  bash
+
+    $ ssh neet@ip-address
+
+Once you have connected to the Raspberry Pi, you should receive a message similar 
+to the following
+
+.. code-block:: bash 
+
+    neet@am-robot-xx:~$
+
+Also, at the top of your terminal window, you'll see ``neet@am-robot-xx:~$``
+
+Now you can finish the Ubuntu installation 
+
+.. code-block:: bash
+
+    neet@am-robot-xx:~$ sudo apt update
+
+.. code-block:: bash
+
+    neet@am-robot-01:~$ sudo apt upgrade
+
+After the upgrade process has completed, go ahead and install ROS 2 Humble using the 
+instructions given on this page. 
+
+See screenshots on ubuntu home computer.
+
+.. code-block:: bash 
+ 
+    neet@am-robot-01:~$ sudo apt autoremove
+
+.. code-block:: bash 
+
+    neet@am-robot-01:~$ sudo reboot
+
+Now wait for about 2 minutes for the Raspberry Pi to reboot. If you receive the following 
+message
+
+.. code-block:: bash
+
+    $ ssh: connect to host 192.168.1.29 port 22: Connection refused
+
+The Raspberry Pi might still be rebooting, so wait a bit longer. If after waiting and 
+still no connection, run Angry IP Scanner again to make sure the IP address hasn't 
+changed. If after verifying the IP address and you're still unable to connect, please
+see your instructor or TA and perhaps they can help resolve the issue. 
+
+.. note::
+    To obtain the IP address for a computer that your currently connected to, you can type the following 
+
+    .. code-block:: bash
+	
+        $ hostname -I 
+
+Test Communication Between Computers
+------------------------------------
+
+To determine if your computer can communicate with another computer, you can use the ``ping`` command using 
+the IP address of the computer you want to communicate with. For instance, let's say the IP address of the 
+computer you would like to communicate with has an IP address of xyz.abc.jkl.z, then you can issue the command 
+
+.. code-block:: bash 
+
+    ping xyz.abc.jkl.z

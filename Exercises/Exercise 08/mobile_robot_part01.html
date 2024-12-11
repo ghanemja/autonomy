@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile Robot, Part 1 &mdash; 16.633 NEET Autonomous Machines  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Mobile Robot, Part 2" href="mobile_robot_part02.html" />
+    <link rel="prev" title="ROS 2 Humble Tutorials, Part 3" href="ros2_tutorials_03.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/NEET-AutonomousMachines.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Exercise 01</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro_ros.html">Introduction to ROS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_overview.html">Linux Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_01.html">ROS 2 Humble Tutorials, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 02</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_02.html">ROS 2 Humble Tutorials, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 03</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_03.html">ROS 2 Humble Tutorials, Part 3</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 04</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mobile Robot, Part 1</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mobile-robot-overview">1 Mobile Robot Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-your-ros-domain-id-variable">2 Set Your ROS_DOMAIN_ID Variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#automatic-command-line-execution-via-the-bashrc-file">3 Automatic Command Line Execution via the .bashrc File</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modifying-your-bashrc-file">3.1 Modifying Your .bashrc File</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#setup-the-development-workspace-and-package">4 Setup the Development Workspace and Package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setup-the-workspace">4.1 Setup the Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-the-package">4.2 Create the Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-urdf-folder">4.3 Create a URDF Folder</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#urdf-overview">5 URDF Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#additional-notes-on-coordinate-frames-and-joints">5.1 Additional Notes on Coordinate Frames and Joints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#link-description">5.2 Link Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#visual-properties">5.3 Visual Properties</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#visual-origin">5.3.1 Visual Origin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visual-geometry">5.3.2 Visual Geometry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#material">5.3.3 Material</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#minibot-base-assembly">6 MiniBot Base Assembly</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#colors">6.1 Colors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#constants">6.2 Constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#base-link">6.3 base_link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chassis">6.4 Chassis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#chassis-joint">6.4.1 chassis_joint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#chassis-link">6.4.2 chassis_link</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#right-wheel">6.5 Right Wheel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#right-wheel-joint">6.5.1 right_wheel_joint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#right-wheel-link">6.5.2 right_wheel_link</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#left-wheel">6.5 Left Wheel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#left-wheel-joint">6.5.1 left_wheel_joint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#left-wheel-link">6.5.2 left_wheel_link</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ball-caster">6.6 Ball Caster</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#caster-wheel-joint">6.6.1 caster_wheel_joint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#caster-wheel-link">6.6.2 caster_wheel_link</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#minibot-link-inertias">7 MiniBot Link Inertias</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#chassis-inertia">7.1 Chassis Inertia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wheel-inertia">7.2 Wheel Inertia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ball-caster-inertia">7.3 Ball Caster Inertia</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#install-relevant-packages">8 Install Relevant Packages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-xacro">8.1 Install Xacro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-joint-state-publisher">8.2 Install joint_state_publisher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-joint-state-publisher-gui">8.3 Install joint_state_publisher_gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-ros-gazebo-integration-packages">8.3 Install ROS Gazebo Integration Packages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#visualize-minibot-using-rviz">9 Visualize MiniBot using RVIZ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#run-robot-state-publisher">9.1 Run robot_state_publisher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-joint-state-publisher">9.2 Run joint_state_publisher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-rviz-to-visualize-robot">9.3 Run RVIZ to Visualize Robot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#select-the-fixed-frame">9.3.1 Select the Fixed Frame</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-robotmodel-to-visualize">9.3.2 Add RobotModel to Visualize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-tf-to-visualize">9.3.3 Add TF to Visualize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#select-the-robot-description-topic">9.3.4 Select the robot_description Topic</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#save-our-rviz-configuration-file-for-later-use">9.4 Save Our RVIZ Configuration File for Later Use</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-launch-file-for-visualization">10 Create a Launch File for Visualization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-the-launch-file">10.1 Create the Launch File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modify-cmakelists-txt">10.2 Modify CMakeLists.txt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-the-package">10.3 Build the Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source-the-workspace">10.4 Source the Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#launch-display-launch-xml">10.5 Launch display.launch.xml</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#simulate-minibot-using-gazebo">11 Simulate MiniBot using Gazebo</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gazebo-material-colors">11.1 Gazebo Material Colors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">11.2 Run Robot State Publisher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#launch-gazebo-with-empty-environment">11.3 Launch Gazebo with Empty Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spawn-minibot-in-gazebo">11.4 Spawn MiniBot in Gazebo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">11.5 Create the Launch File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modify-package-xml">11.6 Modify package.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">11.7 Build the Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">11.8 Source the Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#launch-minibot-gazebo-launch-xml">11.9 Launch minibot_gazebo.launch.xml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 05</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part02.html">Mobile Robot, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 06</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part03.html">Mobile Robot, Part 3</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 07</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part04.html">Mobile Robot, Part 4</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 08</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tello_edu_overview.html">Tello Edu Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_sdk_2_0.html">Programming via Tello SDK 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_djitellopy.html">Programming via DJITelloPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Mobile Robot Setup Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="raspberry_pi_setup.html">Raspberry Pi Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="camera_RPi_setup.html">Camera Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rplidar_a1_setup.html">RPLiDAR A1 Setup</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tello User Manuals and Specifications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tello_edu_specs.html">Tello Edu Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_user_manual.html">Tello User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_sdk_2_0_user_guide.html">Tello SDK 2.0 User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="td1_controller.html">Td1 Controller Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batteries_charging.html">Batteries/Charging</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">16.633 NEET Autonomous Machines</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Mobile Robot, Part 1</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mobile-robot-part-1">
+<h1>Mobile Robot, Part 1<a class="headerlink" href="#mobile-robot-part-1" title="Permalink to this heading"></a></h1>
+<section id="mobile-robot-overview">
+<h2>1 Mobile Robot Overview<a class="headerlink" href="#mobile-robot-overview" title="Permalink to this heading"></a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/MiniBot02.png"><img alt="MiniBot" src="_images/MiniBot02.png" style="width: 415.8px; height: 527.25px;" /></a>
+</figure>
+<p>The mobile robot (MiniBot) that we’ll be modeling is shown above. It has FIT0450 DC motors with magnetic encoders (same motors used in 16.632) connected to an
+<a class="reference external" href="https://www.adafruit.com/product/3243">Adafruit DC Motor + Stepper FeatherWing driver</a> that’s plugged into an
+<a class="reference external" href="https://www.adafruit.com/product/3619">Adafruit HUZZAH32 – ESP32 Feather Board</a>. The ESP32 Feather Board is Arduino compatible with a built-in WiFi module, so we’ll program it using the
+Arduino language running <a class="reference external" href="https://micro.ros.org/">micro-ROS</a>.</p>
+<p>On top, the MiniBot has an <a class="reference external" href="https://www.robotshop.com/products/rplidar-a1m8-360-degree-laser-scanner-development-kit?variant=42359633805473">RPLidar A1M8 - 360 degree laser scanner</a>
+and <a class="reference external" href="https://www.amazon.com/gp/product/B00N1YJKFS/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&amp;psc=1">camera</a> attached to a Raspberry Pi 4 running Ubuntu and ROS2 Humble.</p>
+<p>Getting everything running with ROS will take several steps, which include simulating the MiniBot and sensors in Gazebo, and using ROS to run both the simulation and the actual
+MiniBot itself. For this exercise, we’ll focus on constructing the MiniBot base and simulating it in Gazebo. After we get this part running, we’ll then add the sensors to our model.
+Specifically, in this exercise, we plan to accomplish the following:</p>
+<ul class="simple">
+<li><p>Create a URDF file for our MiniBot chassis, wheels, and ball caster (base assembly)</p></li>
+<li><p>Visualize our MiniBot base assembly using RVIZ</p></li>
+<li><p>Simulate our Minibot base assembly using Gazebo</p></li>
+</ul>
+</section>
+<section id="set-your-ros-domain-id-variable">
+<h2>2 Set Your ROS_DOMAIN_ID Variable<a class="headerlink" href="#set-your-ros-domain-id-variable" title="Permalink to this heading"></a></h2>
+<p>As discussed in Section <a class="reference internal" href="ros2_tutorials_01.html#ros-domain-id"><span class="std std-ref">1 ROS_DOMAIN_ID Variable</span></a>, you should set the domain ID to ensure you’re only discovering ROS messages deployed by you
+on your laptop. If you don’t set a domain ID, you will receive ROS messages from other users on our network which will create some confusion and possibly a few errors.</p>
+<p>To set the domain ID for your laptop <code class="docutils literal notranslate"><span class="pre">am-dev-xx</span></code>, as our class standard,  type</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~$<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">ROS_DOMAIN_ID</span><span class="o">=</span>xx
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If your development computer has a number less that 10 such as <code class="docutils literal notranslate"><span class="pre">am-dev-01</span></code>, <code class="docutils literal notranslate"><span class="pre">am-dev-02</span></code>, <code class="docutils literal notranslate"><span class="pre">am-dev-03</span></code>, etc., you would set your domain ID to 1, 2, 3, etc.</p>
+</div>
+</section>
+<section id="automatic-command-line-execution-via-the-bashrc-file">
+<h2>3 Automatic Command Line Execution via the .bashrc File<a class="headerlink" href="#automatic-command-line-execution-via-the-bashrc-file" title="Permalink to this heading"></a></h2>
+<p>Now is a good time to introduce you to the <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file which is located in your home directory <code class="docutils literal notranslate"><span class="pre">user&#64;am-dev-xx:~$</span></code>.
+This file is executed whenever you open a new terminal window, and it contains a series of configurations for the given terminal session.
+In your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file, you can automatically execute a command, such as setting your domain variable or even sourcing the ROS2 Humble underlay everytime you open a new terminal window.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file is hidden, if you want to see it in your home directory, you’ll need to type <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-a</span></code> as follows.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~$<span class="w"> </span>ls<span class="w"> </span>-a
+</pre></div>
+</div>
+</div>
+<section id="modifying-your-bashrc-file">
+<h3>3.1 Modifying Your .bashrc File<a class="headerlink" href="#modifying-your-bashrc-file" title="Permalink to this heading"></a></h3>
+<p>You can modify your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file from the command line and also directly edit it using any text editor. You should currently have an editor called
+<a class="reference external" href="https://gedit-technology.github.io/apps/gedit/">gedit</a>, so we’ll illustrate the editing process with it.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If don’t already have <code class="docutils literal notranslate"><span class="pre">gedit</span></code> installed, you can install it as follows.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>gedit
+</pre></div>
+</div>
+</div>
+<p>To use <code class="docutils literal notranslate"><span class="pre">gedit</span></code> to open and edit your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file, type the following.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~$<span class="w"> </span>gedit<span class="w"> </span>.bashrc
+</pre></div>
+</div>
+<p>Once open, your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file should look something like this.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/bashrc-01.png"><img alt="bashrc file" src="_images/bashrc-01.png" style="width: 540.6px; height: 316.8px;" /></a>
+</figure>
+<p>Along with setting our domain ID for each new terminal window, we’ll also setup automatic sourcing of the ROS2 Humble underlay as well.
+We’ll go ahead and add these two tasks</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># replace xx with your laptop number or domain number</span>
+<span class="n">export</span> <span class="n">ROS_DOMAIN_ID</span><span class="o">=</span><span class="n">xx</span>
+
+<span class="c1"># source the ROS2 Humble underlay</span>
+<span class="n">source</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ros</span><span class="o">/</span><span class="n">humble</span><span class="o">/</span><span class="n">setup</span><span class="o">.</span><span class="n">bash</span>
+</pre></div>
+</div>
+<p>to our  <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file near the bottom. Hence, your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file should now look like.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/bashrc-02.png"><img alt="bashrc file" src="_images/bashrc-02.png" style="width: 540.6px; height: 316.8px;" /></a>
+</figure>
+<p>Once you’ve made these additions, click Save and then exit <code class="docutils literal notranslate"><span class="pre">gedit</span></code> by clicking close (the x on the far right).
+Now, we’ll source <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> so these changes take affect in the current window.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~$ source ~/.bashrc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="setup-the-development-workspace-and-package">
+<h2>4 Setup the Development Workspace and Package<a class="headerlink" href="#setup-the-development-workspace-and-package" title="Permalink to this heading"></a></h2>
+<section id="setup-the-workspace">
+<h3>4.1 Setup the Workspace<a class="headerlink" href="#setup-the-workspace" title="Permalink to this heading"></a></h3>
+<p>In our following exercises, we’ll be developing our code on our development computer and then deploy any necessary packages to our robot, so our first
+task will be to create a workspace folder <code class="docutils literal notranslate"><span class="pre">dev_ws</span></code> in our home directory as follows.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~$<span class="w"> </span>mkdir<span class="w"> </span>dev_ws
+</pre></div>
+</div>
+<p>Within this development folder, our Minibot package will lie inside a folder called <code class="docutils literal notranslate"><span class="pre">src</span></code>, so let’s create this folder now.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span>mkdir<span class="w"> </span>src
+</pre></div>
+</div>
+<p>Now, we’ll step back up one directory to our workspace <code class="docutils literal notranslate"><span class="pre">dev_ws</span></code>, and then build our workspace with colcon.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span>colcon<span class="w"> </span>build
+</pre></div>
+</div>
+<p>After following these steps you should receive the “colcon build sucessful” message. If we now list the files inside our workspace, we’ll
+see that colcon has creatd a <code class="docutils literal notranslate"><span class="pre">build</span></code>, <code class="docutils literal notranslate"><span class="pre">install</span></code>, <code class="docutils literal notranslate"><span class="pre">log</span></code> directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span>ls
+build<span class="w"> </span>install<span class="w"> </span>log<span class="w"> </span>src
+</pre></div>
+</div>
+</section>
+<section id="create-the-package">
+<h3>4.2 Create the Package<a class="headerlink" href="#create-the-package" title="Permalink to this heading"></a></h3>
+<p>Since we create packages inside the <code class="docutils literal notranslate"><span class="pre">src</span></code> folder, so go inside that folder now. Notice it is currently empty.</p>
+<p>Now, if you haven’t setup automatic sourcing in your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file, source the ROS 2 Humble underlay to access the ROS 2 commands.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash
+</pre></div>
+</div>
+<p>Now, we can create our minibot package as follows.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src$<span class="w"> </span>ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </span>minibot
+</pre></div>
+</div>
+<p>Go inside the <code class="docutils literal notranslate"><span class="pre">minibot</span></code> directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>minibot
+</pre></div>
+</div>
+<p>You’ll now see the``CMakeLists.txt`` and <code class="docutils literal notranslate"><span class="pre">package.xml</span></code> files, as well as the <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">src</span></code> directories.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src/minibot$<span class="w"> </span>ls
+CMakeLists.txt<span class="w"> </span>include<span class="w"> </span>package.xml<span class="w"> </span>src
+</pre></div>
+</div>
+<p>Since we don’t need the <code class="docutils literal notranslate"><span class="pre">include</span></code> folder nor this specific <code class="docutils literal notranslate"><span class="pre">src</span></code> folder, we’ll remove them as follows.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src/minibot$<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>include<span class="w"> </span>src
+</pre></div>
+</div>
+</section>
+<section id="create-a-urdf-folder">
+<h3>4.3 Create a URDF Folder<a class="headerlink" href="#create-a-urdf-folder" title="Permalink to this heading"></a></h3>
+<p>Now, create a <code class="docutils literal notranslate"><span class="pre">urdf</span></code> folder inside the <code class="docutils literal notranslate"><span class="pre">minibot</span></code> folder. This is where we’ll create and leave our robot urdf files.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src/minibot$<span class="w"> </span>mkdir<span class="w"> </span>urdf
+</pre></div>
+</div>
+<p>We’re now setup to create our robot model inside of the <code class="docutils literal notranslate"><span class="pre">urdf</span></code> folder. Before we start creating our model, let’s review some concepts behind URDF files.</p>
+</section>
+</section>
+<section id="urdf-overview">
+<h2>5 URDF Overview<a class="headerlink" href="#urdf-overview" title="Permalink to this heading"></a></h2>
+<p>A URDF (<a class="reference external" href="https://wiki.ros.org/urdf/XML/model">Unified Robot Description Format</a>) file is an XML file used to describe a robot’s structure
+which consists of links and joints as shown below.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/urdf_structure.png"><img alt="URDF Structure" src="_images/urdf_structure.png" style="width: 320.0px; height: 397.6px;" /></a>
+</figure>
+<p>There is usually a single base link (Link 1 above) with other links attached to it via joints. A robot can have any number of links provided any two given links are
+connected with a single joint. Each link and each joint must have a unique name. A typical XML file for a robot has the following structure.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;robot_name&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;link1_name&quot;</span><span class="nt">&gt;</span><span class="w"> </span>...<span class="w"> </span><span class="nt">&lt;/link&gt;</span>
+<span class="w">        </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;link2_name&quot;</span><span class="nt">&gt;</span><span class="w"> </span>...<span class="w"> </span><span class="nt">&lt;/link&gt;</span>
+<span class="w">        </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;link3_name&quot;</span><span class="nt">&gt;</span><span class="w"> </span>...<span class="w"> </span><span class="nt">&lt;/link&gt;</span>
+
+<span class="w">        </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint1_name&quot;</span><span class="nt">&gt;</span><span class="w">  </span>...<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w">        </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint2_name&quot;</span><span class="nt">&gt;</span><span class="w">  </span>...<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w">        </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint3_name&quot;</span><span class="nt">&gt;</span><span class="w">  </span>...<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="nt">&lt;/robot&gt;</span>
+</pre></div>
+</div>
+<section id="additional-notes-on-coordinate-frames-and-joints">
+<h3>5.1 Additional Notes on Coordinate Frames and Joints<a class="headerlink" href="#additional-notes-on-coordinate-frames-and-joints" title="Permalink to this heading"></a></h3>
+<p>Unfortunately, the ROS documentation uses the word <strong>origin</strong> to specify an entire <strong>Cartesian coordinate frame</strong> with its x, y, and z axes as well as its origin (traditionally the term
+origin applies to a single point that indicates the intersection of the x, y, and z axes).
+The coordinate frame called <code class="docutils literal notranslate"><span class="pre">base_link</span></code> is rigidly attached to the mobile robot base and its orientation is usually as follows:</p>
+<ul class="simple">
+<li><p>x-forward</p></li>
+<li><p>y-left</p></li>
+<li><p>z-up</p></li>
+</ul>
+<p>When setting up the coordinate frames and joints in our robot, we should keep the following in mind:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><dl class="simple">
+<dt>Each link has a <strong>local reference frame</strong>. For the standard box, cylinder, and sphere, the local reference frame’s origin is located at the center-of-mass (i.e., center of the box,</dt><dd><p>cylinder, or sphere) with its z-axis pointing upward, x-axis forward, and y-axis towards the left.</p>
+</dd>
+</dl>
+</li>
+<li><p>Each joint has associated with it two links: a <strong>parent link</strong> and a <strong>child link</strong>.</p></li>
+<li><p>A joint’s reference frame is specified relative to its parent’s local reference frame using the origin tag, via a set of six rigid body transformations.</p></li>
+<li><p>The local reference frame for the child link is initially placed “coincident” with the joint’s reference frame.</p></li>
+<li><p>Each link has a so-called “visual origin” (or visual frame) which is actually a set of six independent transformations (relative to the local reference frame). The
+visual frame places the link for “visual purposes.”</p></li>
+<li><p>Once a link is placed visually, it still rotates/translates relative to the specified joint axis.</p></li>
+<li><p>Its best to first specify the joint’s reference frame when building your model.</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="link-description">
+<h3>5.2 Link Description<a class="headerlink" href="#link-description" title="Permalink to this heading"></a></h3>
+<p>Each link has the following <strong>visual</strong>, <strong>collision</strong>, and <strong>inertial</strong> properties. We will discuss each property in the following sections.</p>
+<dl class="simple">
+<dt><strong>Visual Properties</strong></dt><dd><ul class="simple">
+<li><p>geometry</p></li>
+<li><p>origin</p></li>
+<li><p>material</p></li>
+</ul>
+</dd>
+<dt><strong>Collision Properties</strong></dt><dd><ul class="simple">
+<li><p>geometry</p></li>
+<li><p>origin</p></li>
+</ul>
+</dd>
+<dt><strong>Inertial Properties</strong></dt><dd><ul class="simple">
+<li><p>mass</p></li>
+<li><p>inertia</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="visual-properties">
+<h3>5.3 Visual Properties<a class="headerlink" href="#visual-properties" title="Permalink to this heading"></a></h3>
+<p>The visual properties of a link are for visualization purposes only. A link’s visual properties consist of
+a location for its <em>visual reference coordinate frame</em> (origin), its geometry (shape),
+and material attributes such as color and/or texture. A link’s visual properties are optional, but if you
+use them they must be included inside of <code class="docutils literal notranslate"><span class="pre">&lt;visual&gt;</span></code> tag as follows.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;link_name&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;visual&gt;</span><span class="w"> </span><span class="cm">&lt;!-- OPTIONAL --&gt;</span>
+<span class="w">                </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;x y z&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;roll pitch yaw&quot;</span><span class="nt">/&gt;</span><span class="w"> </span><span class="cm">&lt;!-- OPTIONAL --&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span><span class="w"> </span><span class="cm">&lt;!-- REQUIRED --&gt;</span>
+<span class="w">                        </span><span class="cm">&lt;!-- geometric shape: box, cylinder, sphere, or mesh --&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">                </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;material_name&quot;</span><span class="nt">&gt;</span><span class="w"> </span><span class="cm">&lt;!-- OPTIONAL --&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">rgba=</span><span class="s">&quot;r g b a&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;texture</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;filename&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/material&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/visual&gt;</span>
+<span class="nt">&lt;/link&gt;</span>
+</pre></div>
+</div>
+<section id="visual-origin">
+<h4>5.3.1 Visual Origin<a class="headerlink" href="#visual-origin" title="Permalink to this heading"></a></h4>
+<p>Each link has a “visual origin” which is actually a set of six independent transformations that locates the link for “visual purposes.” Once placed visually, the link
+still rotates/translates relative the specified location of the joint axis.</p>
+<p>The origin tag has the form</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;x y z&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;roll pitch yaw&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">z</span></code> are translations from the link’s local reference frame (origin) which lies at the link’s center-of-mass, and <code class="docutils literal notranslate"><span class="pre">roll</span></code>,
+<code class="docutils literal notranslate"><span class="pre">pitch</span></code>, and <code class="docutils literal notranslate"><span class="pre">yaw</span></code> are absolute rotations about the local reference frame’s <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">z</span></code> axes, respectively.</p>
+</section>
+<section id="visual-geometry">
+<h4>5.3.2 Visual Geometry<a class="headerlink" href="#visual-geometry" title="Permalink to this heading"></a></h4>
+<p>Describes the visual shape of the link in terms of a box, cylinder, sphere, or mesh file. Lenghts in
+meters. Generic code block has the following form.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">        </span><span class="nt">&lt;geometric_shape</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/geometry&gt;</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">&lt;geometric_shape</span> <span class="pre">/&gt;</span></code> can be any one of the following.</p>
+<blockquote>
+<div><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Geometry</p></th>
+<th class="head"><p>XML</p></th>
+<th class="head"><p>Shape Local Origin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>box</p></td>
+<td><p>&lt;box size=”x y z”/&gt;</p></td>
+<td><p>center of box</p></td>
+</tr>
+<tr class="row-odd"><td><p>cylinder</p></td>
+<td><p>&lt;cylinder radius=”r” length=”l”/&gt;</p></td>
+<td><p>center of cylinder</p></td>
+</tr>
+<tr class="row-even"><td><p>sphere</p></td>
+<td><p>&lt;sphere radius=”r”/&gt;</p></td>
+<td><p>center of sphere</p></td>
+</tr>
+<tr class="row-odd"><td><p>mesh</p></td>
+<td><p>&lt;mesh filename=”file_path” scale=”x y z”/&gt;</p></td>
+<td><p>geometric center</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Each of the above geometric shapes have a local reference frame (origin) specified at the shape’s center-of-mass as given in the table above.</p>
+</section>
+<section id="material">
+<h4>5.3.3 Material<a class="headerlink" href="#material" title="Permalink to this heading"></a></h4>
+<p>The material of the visual element. You can specify the material properties inside the visual element or outside of it. To specify the material within the visual element, you
+use the following format.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;link_name&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;visual&gt;</span>
+<span class="w">                </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;x y z&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;roll pitch yaw&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">                        </span><span class="cm">&lt;!-- geometric shape: box, cylinder, sphere, or mesh --&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">                </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;material_name&quot;</span><span class="nt">&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">rgba=</span><span class="s">&quot;r g b a&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;texture</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;filename&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/material&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/visual&gt;</span>
+<span class="nt">&lt;/link&gt;</span>
+</pre></div>
+</div>
+<p>where, r g b a represent red/green/blue/alpha, each in the range of [0,1] and the material
+texture is specified by a filename.</p>
+<p>To specify the material outside of the visual element, you use the following format.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;material_name&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">rgba=</span><span class="s">&quot;r g b a&quot;</span><span class="w"> </span><span class="nt">/&gt;</span><span class="w"> </span><span class="cm">&lt;!-- OPTIONAL --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;texture</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;filename&quot;</span><span class="nt">/&gt;</span><span class="w"> </span><span class="cm">&lt;!-- OPTIONAL --&gt;</span>
+<span class="nt">&lt;/material&gt;</span>
+
+<span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;link_name&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;visual&gt;</span><span class="w"> </span><span class="cm">&lt;!-- OPTIONAL --&gt;</span>
+<span class="w">                </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;x y z&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;roll pitch yaw&quot;</span><span class="nt">/&gt;</span><span class="w"> </span><span class="cm">&lt;!-- OPTIONAL --&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span><span class="w"> </span><span class="cm">&lt;!-- REQUIRED --&gt;</span>
+<span class="w">                        </span><span class="cm">&lt;!-- geometric shape: box, cylinder, sphere, or mesh --&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">                </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;material_name&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/visual&gt;</span>
+<span class="nt">&lt;/link&gt;</span>
+</pre></div>
+</div>
+<p>It is allowed to specify a material element outside of the ‘link’ object, in the top level ‘robot’ element. From within a link element you can then reference the material by name.
+name name of the material</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;link_name&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;visual&gt;</span><span class="w"> </span><span class="cm">&lt;!-- OPTIONAL --&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">                        </span><span class="cm">&lt;!-- Geometry Specific Code --&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span><span class="w"> </span><span class="cm">&lt;!-- REQUIRED --&gt;</span>
+<span class="w">                </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;r p y&quot;</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;x y z&quot;</span><span class="nt">/&gt;</span><span class="w"> </span><span class="cm">&lt;!-- OPTIONAL --&gt;</span>
+<span class="w">                </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;color_name&quot;</span><span class="nt">/&gt;</span><span class="w"> </span><span class="cm">&lt;!-- OPTIONAL --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/visual&gt;</span>
+
+<span class="w">        </span><span class="nt">&lt;collision&gt;</span><span class="w"> </span><span class="cm">&lt;!-- OPTIONAL --&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span><span class="w"> </span><span class="cm">&lt;!-- REQUIRED --&gt;</span>
+<span class="w">                        </span><span class="cm">&lt;!-- Geometry Specific Code --&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">                </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;r p y&quot;</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;x y z&quot;</span><span class="nt">/&gt;</span><span class="w"> </span><span class="cm">&lt;!-- OPTIONAL --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/collision&gt;</span>
+
+<span class="w">        </span><span class="nt">&lt;inertial&gt;</span><span class="w"> </span><span class="cm">&lt;!-- OPTIONAL --&gt;</span>
+<span class="w">                </span><span class="nt">&lt;mass</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;mass_in_kg&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;inertia</span>
+<span class="w">                        </span><span class="na">ixx=</span><span class="s">&quot;ixx&quot;</span><span class="w"> </span><span class="na">ixy=</span><span class="s">&quot;ixy&quot;</span><span class="w"> </span><span class="na">ixz=</span><span class="s">&quot;ixz&quot;</span>
+<span class="w">                        </span><span class="na">iyy=</span><span class="s">&quot;iyy&quot;</span><span class="w"> </span><span class="na">iyz=</span><span class="s">&quot;iyz&quot;</span>
+<span class="w">                        </span><span class="na">izz=</span><span class="s">&quot;izz&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/inertial&gt;</span>
+<span class="nt">&lt;/link&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="minibot-base-assembly">
+<h2>6 MiniBot Base Assembly<a class="headerlink" href="#minibot-base-assembly" title="Permalink to this heading"></a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/MiniBot03.png"><img alt="MiniBot Model" src="_images/MiniBot03.png" style="width: 474.5px; height: 176.5px;" /></a>
+</figure>
+<p>For our Minibot we’ll create a single model named <code class="docutils literal notranslate"><span class="pre">minibot_base.xacro</span></code> that contains the chassis, wheels, and ball caster, and we’ll create separate models for the sensors such as the
+camera and LiDAR.
+By separating our models into different files, we’ll have a more modular setup that allows us to more easily swap out or add additional sensors if necessary.</p>
+<p>We will move the chassis_link backward along the x-axis in the negative direction in order to place the drive wheels in the front of the Minibot.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In our <code class="docutils literal notranslate"><span class="pre">minibot_base</span></code> we’ll be using Xacro commands within our URDF file; hence, the <code class="docutils literal notranslate"><span class="pre">.xacro</span></code> extension is required. If we didn’t use any Xacro commands, we would give our file a
+<code class="docutils literal notranslate"><span class="pre">.urdf</span></code> extension and call it <code class="docutils literal notranslate"><span class="pre">minibot_base.urdf</span></code>.</p>
+</div>
+<p>Go inside the <code class="docutils literal notranslate"><span class="pre">urdf</span></code> folder and open VSCode as follows</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src/minibot/urdf$<span class="w"> </span>code<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Inside VSCode, add the <code class="docutils literal notranslate"><span class="pre">urdf</span></code> extension from smilerobotics and the <code class="docutils literal notranslate"><span class="pre">ROS</span> <span class="pre">Snippets</span></code> extension from Liews Wuttipat as this will add syntax highlighting and autocompletion to
+your <code class="docutils literal notranslate"><span class="pre">.urdf</span></code> and <code class="docutils literal notranslate"><span class="pre">.xacro</span></code> code.</p>
+<p>Now, create the file <code class="docutils literal notranslate"><span class="pre">minibot_base.xacro</span></code> and type in the following.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;minibot_base&quot;</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="nt">&gt;</span>
+
+<span class="w">        </span><span class="nt">&lt;xacro:include</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;inertia_macros.xacro&quot;</span><span class="nt">/&gt;</span>
+
+<span class="w">        </span><span class="cm">&lt;!-- add additional code here --&gt;</span>
+
+<span class="nt">&lt;/robot&gt;</span>
+</pre></div>
+</div>
+<section id="colors">
+<h3>6.1 Colors<a class="headerlink" href="#colors" title="Permalink to this heading"></a></h3>
+<p>Here, define a few colors that we’ll use for our chassis, wheels, and ball caster. We’ll specify our colors by name using red, green, blue, and alpha values.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- colors --&gt;</span>
+<span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;white&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">rgba=</span><span class="s">&quot;1 1 1 1&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/material&gt;</span>
+
+<span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;black&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">rgba=</span><span class="s">&quot;0 0 0 1&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/material&gt;</span>
+
+<span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;orange&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">rgba=</span><span class="s">&quot;1 0.3 0.1 1&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/material&gt;</span>
+
+<span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;blue&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">rgba=</span><span class="s">&quot;0.2 0.2 1 1&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/material&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="constants">
+<h3>6.2 Constants<a class="headerlink" href="#constants" title="Permalink to this heading"></a></h3>
+<p>Using Xacro we’ll create a few constants that we’ll use later in our model.  Here, we’ll give the chassis length, width, and height all in meters inside
+of the robot tag.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- constants --&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;chassis_length&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.216&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;chassis_width&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.114&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;chassis_height&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.036&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wheel_diam&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.065&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wheel_thickness&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.015&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wheel_offset_x&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;${(chassis_length/2) - (wheel_diam/2)}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wheel_offset_y&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;${(chassis_width/2) + (wheel_diam/2) }&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wheel_offset_z&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;${wheel_diam/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ball_caster_diam&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.0254&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ball_caster_offset_x&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;-${(chassis_length/2) - ball_caster_diam}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ball_caster_offset_z&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;-${((wheel_diam/2) - (ball_caster_diam/2))}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;chassis_mass&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wheel_mass&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.5&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ball_caster_mass&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.5&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="base-link">
+<h3>6.3 base_link<a class="headerlink" href="#base-link" title="Permalink to this heading"></a></h3>
+<p>All robot structures in ROS should have a <code class="docutils literal notranslate"><span class="pre">base_link</span></code> or a <code class="docutils literal notranslate"><span class="pre">base_footprint</span></code> that lies on the ground directly beneath the robot.
+This <code class="docutils literal notranslate"><span class="pre">base_link</span></code> has no dimensions or weight, and it moves with the robot. The <code class="docutils literal notranslate"><span class="pre">base_link</span></code>’s z-axis point upward, perpendicular to
+the floor, and for our purposes, its x-axis will point towards the front of our MiniBot.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- base_link --&gt;</span>
+<span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;base_link&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;visual&gt;</span>
+<span class="w">    </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">        </span><span class="nt">&lt;box</span><span class="w"> </span><span class="na">size=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="nt">&lt;/visual&gt;</span>
+<span class="nt">&lt;/link&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="chassis">
+<h3>6.4 Chassis<a class="headerlink" href="#chassis" title="Permalink to this heading"></a></h3>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/MiniBot_Chassis.png"><img alt="MiniBot Chassis" src="_images/MiniBot_Chassis.png" style="width: 568.8000000000001px; height: 321.20000000000005px;" /></a>
+</figure>
+<p>rigid body transformation of chassis_link frame relative to base_link frame</p>
+<section id="chassis-joint">
+<h4>6.4.1 chassis_joint<a class="headerlink" href="#chassis-joint" title="Permalink to this heading"></a></h4>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- chassis_joint --&gt;</span>
+<span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;chassis_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fixed&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;base_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;chassis_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;${-wheel_offset_x} 0 ${wheel_diam/2}&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="chassis-link">
+<h4>6.4.2 chassis_link<a class="headerlink" href="#chassis-link" title="Permalink to this heading"></a></h4>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- chassis_link --&gt;</span>
+<span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;chassis_link&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;visual&gt;</span>
+<span class="w">    </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">        </span><span class="nt">&lt;box</span><span class="w"> </span><span class="na">size=</span><span class="s">&quot;${chassis_length} ${chassis_width} ${chassis_height}&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">                </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;blue&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/visual&gt;</span>
+<span class="w">        </span><span class="nt">&lt;collision&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;box</span><span class="w"> </span><span class="na">size=</span><span class="s">&quot;${chassis_length} ${chassis_width} ${chassis_height}&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">                </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/collision&gt;</span>
+<span class="w">        </span><span class="nt">&lt;xacro:box_inertia</span><span class="w"> </span><span class="na">m=</span><span class="s">&quot;${chassis_mass}&quot;</span><span class="w"> </span><span class="na">l=</span><span class="s">&quot;${chassis_length}&quot;</span><span class="w"> </span><span class="na">w=</span><span class="s">&quot;${chassis_width}&quot;</span><span class="w"> </span><span class="na">h=</span><span class="s">&quot;${chassis_height}&quot;</span>
+<span class="w">                           </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/link&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="right-wheel">
+<h3>6.5 Right Wheel<a class="headerlink" href="#right-wheel" title="Permalink to this heading"></a></h3>
+<section id="right-wheel-joint">
+<h4>6.5.1 right_wheel_joint<a class="headerlink" href="#right-wheel-joint" title="Permalink to this heading"></a></h4>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- right_wheel_joint --&gt;</span>
+<span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;right_wheel_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;continuous&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;chassis_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;right_wheel_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;${wheel_offset_x} ${-((chassis_width/2) + (wheel_thickness/2))} 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;${pi/2} 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 1&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="right-wheel-link">
+<h4>6.5.2 right_wheel_link<a class="headerlink" href="#right-wheel-link" title="Permalink to this heading"></a></h4>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- right_wheel_link --&gt;</span>
+<span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;right_wheel_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;visual&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;cylinder</span><span class="w"> </span><span class="na">length=</span><span class="s">&quot;${wheel_thickness}&quot;</span><span class="w"> </span><span class="na">radius=</span><span class="s">&quot;${wheel_diam/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">    </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w">  </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;orange&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/visual&gt;</span>
+<span class="w">        </span><span class="nt">&lt;collision&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;cylinder</span><span class="w"> </span><span class="na">length=</span><span class="s">&quot;${wheel_thickness}&quot;</span><span class="w"> </span><span class="na">radius=</span><span class="s">&quot;${wheel_diam/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">    </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w">  </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/collision&gt;</span>
+<span class="w">        </span><span class="nt">&lt;xacro:cylinder_inertia</span><span class="w"> </span><span class="na">m=</span><span class="s">&quot;${wheel_mass}&quot;</span><span class="w"> </span><span class="na">h=</span><span class="s">&quot;${wheel_thickness}&quot;</span><span class="w"> </span><span class="na">r=</span><span class="s">&quot;${wheel_diam/2}&quot;</span>
+<span class="w">                                </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/link&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="left-wheel">
+<h3>6.5 Left Wheel<a class="headerlink" href="#left-wheel" title="Permalink to this heading"></a></h3>
+<section id="left-wheel-joint">
+<h4>6.5.1 left_wheel_joint<a class="headerlink" href="#left-wheel-joint" title="Permalink to this heading"></a></h4>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- left_wheel_joint --&gt;</span>
+<span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_wheel_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;continuous&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;chassis_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;left_wheel_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;${wheel_offset_x} ${(chassis_width/2) + (wheel_thickness/2)} 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;${-pi/2} 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 1&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="left-wheel-link">
+<h4>6.5.2 left_wheel_link<a class="headerlink" href="#left-wheel-link" title="Permalink to this heading"></a></h4>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- left_wheel_link --&gt;</span>
+<span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_wheel_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;visual&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;cylinder</span><span class="w"> </span><span class="na">length=</span><span class="s">&quot;${wheel_thickness}&quot;</span><span class="w"> </span><span class="na">radius=</span><span class="s">&quot;${wheel_diam/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">    </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w">  </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;orange&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/visual&gt;</span>
+<span class="w">        </span><span class="nt">&lt;collision&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;cylinder</span><span class="w"> </span><span class="na">length=</span><span class="s">&quot;${wheel_thickness}&quot;</span><span class="w"> </span><span class="na">radius=</span><span class="s">&quot;${wheel_diam/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">    </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w">  </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/collision&gt;</span>
+<span class="w">        </span><span class="nt">&lt;xacro:cylinder_inertia</span><span class="w"> </span><span class="na">m=</span><span class="s">&quot;${wheel_mass}&quot;</span><span class="w"> </span><span class="na">h=</span><span class="s">&quot;${wheel_thickness}&quot;</span><span class="w"> </span><span class="na">r=</span><span class="s">&quot;${wheel_diam/2}&quot;</span>
+<span class="w">                                </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/link&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="ball-caster">
+<h3>6.6 Ball Caster<a class="headerlink" href="#ball-caster" title="Permalink to this heading"></a></h3>
+<section id="caster-wheel-joint">
+<h4>6.6.1 caster_wheel_joint<a class="headerlink" href="#caster-wheel-joint" title="Permalink to this heading"></a></h4>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- caster_wheel_joint --&gt;</span>
+<span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;caster_wheel_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fixed&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;chassis_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;caster_wheel_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;${ball_caster_offset_x} 0 ${ball_caster_offset_z}&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="caster-wheel-link">
+<h4>6.6.2 caster_wheel_link<a class="headerlink" href="#caster-wheel-link" title="Permalink to this heading"></a></h4>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- caster_wheel_link --&gt;</span>
+<span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;caster_wheel_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;visual&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;sphere</span><span class="w"> </span><span class="na">radius=</span><span class="s">&quot;${ball_caster_diam/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">                </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w">  </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;orange&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/visual&gt;</span>
+<span class="w">        </span><span class="nt">&lt;collision&gt;</span>
+<span class="w">                </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;sphere</span><span class="w"> </span><span class="na">radius=</span><span class="s">&quot;${ball_caster_diam/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">                </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w">  </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/collision&gt;</span>
+<span class="w">        </span><span class="nt">&lt;xacro:sphere_inertia</span><span class="w"> </span><span class="na">m=</span><span class="s">&quot;${ball_caster_mass}&quot;</span><span class="w"> </span><span class="na">r=</span><span class="s">&quot;${ball_caster_diam/2}&quot;</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/link&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="minibot-link-inertias">
+<h2>7 MiniBot Link Inertias<a class="headerlink" href="#minibot-link-inertias" title="Permalink to this heading"></a></h2>
+<p>Create a file named <code class="docutils literal notranslate"><span class="pre">inertia_macros.xacro</span></code> and place it in your <code class="docutils literal notranslate"><span class="pre">urdf</span></code> folder. The overall structure of this file has the form.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="w"> </span><span class="nt">&gt;</span>
+
+<span class="cm">&lt;!-- place interia macros here --&gt;</span>
+
+<span class="nt">&lt;/robot&gt;</span>
+</pre></div>
+</div>
+<p>We’ll use the inertia matrices for a box, cylinder, and sphere to model our chassis, wheel, and ball caster, respectively.</p>
+<section id="chassis-inertia">
+<h3>7.1 Chassis Inertia<a class="headerlink" href="#chassis-inertia" title="Permalink to this heading"></a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;box_inertia&quot;</span><span class="w"> </span><span class="na">params=</span><span class="s">&quot;m l w h xyz rpy&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;inertial&gt;</span>
+<span class="w">    </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;${xyz}&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;${rpy}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;mass</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;${m}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;inertia</span><span class="w"> </span><span class="na">ixx=</span><span class="s">&quot;${(m/12)*(w*w + h*h)}&quot;</span><span class="w"> </span><span class="na">ixy=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">ixz=</span><span class="s">&quot;0&quot;</span>
+<span class="w">             </span><span class="na">iyy=</span><span class="s">&quot;${(m/12)*(l*l + h*h)}&quot;</span><span class="w"> </span><span class="na">iyz=</span><span class="s">&quot;0&quot;</span>
+<span class="w">             </span><span class="na">izz=</span><span class="s">&quot;${(m/12)*(l*l + w*w)}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/inertial&gt;</span>
+<span class="nt">&lt;/xacro:macro&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="wheel-inertia">
+<h3>7.2 Wheel Inertia<a class="headerlink" href="#wheel-inertia" title="Permalink to this heading"></a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;cylinder_inertia&quot;</span><span class="w"> </span><span class="na">params=</span><span class="s">&quot;m h r xyz rpy&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;inertial&gt;</span>
+<span class="w">        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;${xyz}&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;${rpy}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;mass</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;${m}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;inertia</span><span class="w"> </span><span class="na">ixx=</span><span class="s">&quot;${(m/12)*(3*r*r + h*h)}&quot;</span><span class="w"> </span><span class="na">ixy=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">ixz=</span><span class="s">&quot;0&quot;</span>
+<span class="w">                 </span><span class="na">iyy=</span><span class="s">&quot;${(m/12)*(3*r*r + h*h)}&quot;</span><span class="w"> </span><span class="na">iyz=</span><span class="s">&quot;0&quot;</span>
+<span class="w">                 </span><span class="na">izz=</span><span class="s">&quot;${(m/12)*(r*r)}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/inertial&gt;</span>
+<span class="nt">&lt;/xacro:macro&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="ball-caster-inertia">
+<h3>7.3 Ball Caster Inertia<a class="headerlink" href="#ball-caster-inertia" title="Permalink to this heading"></a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;sphere_inertia&quot;</span><span class="w"> </span><span class="na">params=</span><span class="s">&quot;m r xyz rpy&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;inertial&gt;</span>
+<span class="w">    </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;${xyz}&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;${rpy}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;mass</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;${m}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;inertia</span><span class="w"> </span><span class="na">ixx=</span><span class="s">&quot;${(2/5)*m*r*r}&quot;</span><span class="w"> </span><span class="na">ixy=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">ixz=</span><span class="s">&quot;0&quot;</span>
+<span class="w">             </span><span class="na">iyy=</span><span class="s">&quot;${(2/5)*m*r*r}&quot;</span><span class="w"> </span><span class="na">iyz=</span><span class="s">&quot;0&quot;</span>
+<span class="w">             </span><span class="na">izz=</span><span class="s">&quot;${(2/5)*m*r*r}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/inertial&gt;</span>
+<span class="nt">&lt;/xacro:macro&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="install-relevant-packages">
+<h2>8 Install Relevant Packages<a class="headerlink" href="#install-relevant-packages" title="Permalink to this heading"></a></h2>
+<p>Before installing the packages listed below, you should update and upgrade your system.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>upgrade
+</pre></div>
+</div>
+<section id="install-xacro">
+<h3>8.1 Install Xacro<a class="headerlink" href="#install-xacro" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-humble-xacro
+</pre></div>
+</div>
+</section>
+<section id="install-joint-state-publisher">
+<h3>8.2 Install joint_state_publisher<a class="headerlink" href="#install-joint-state-publisher" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-humble-joint-state-publisher
+</pre></div>
+</div>
+</section>
+<section id="install-joint-state-publisher-gui">
+<h3>8.3 Install joint_state_publisher_gui<a class="headerlink" href="#install-joint-state-publisher-gui" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-humble-joint-state-publisher-gui
+</pre></div>
+</div>
+</section>
+<section id="install-ros-gazebo-integration-packages">
+<h3>8.3 Install ROS Gazebo Integration Packages<a class="headerlink" href="#install-ros-gazebo-integration-packages" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-humble-gazebo-ros-pkgs
+</pre></div>
+</div>
+</section>
+</section>
+<section id="visualize-minibot-using-rviz">
+<h2>9 Visualize MiniBot using RVIZ<a class="headerlink" href="#visualize-minibot-using-rviz" title="Permalink to this heading"></a></h2>
+<p>In this section we illustrate how to visualize our URDF MiniBot model using RVIZ.</p>
+<section id="run-robot-state-publisher">
+<h3>9.1 Run robot_state_publisher<a class="headerlink" href="#run-robot-state-publisher" title="Permalink to this heading"></a></h3>
+<p>Open a new window and run <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code> giving it our <code class="docutils literal notranslate"><span class="pre">minibot_base.xacro</span></code> model as our <code class="docutils literal notranslate"><span class="pre">robot_description</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src/minibot/urdf$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>robot_state_publisher<span class="w"> </span>robot_state_publisher<span class="w"> </span>--ros-args<span class="w"> </span>-p<span class="w"> </span>robot_description:<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>xacro<span class="w"> </span>minibot_base.xacro<span class="k">)</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="run-joint-state-publisher">
+<h3>9.2 Run joint_state_publisher<a class="headerlink" href="#run-joint-state-publisher" title="Permalink to this heading"></a></h3>
+<p>Open a new window and run <code class="docutils literal notranslate"><span class="pre">joint_state_publisher</span></code> which allows us to joint values for the wheels.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src/minibot/urdf$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>joint_state_publisher_gui<span class="w"> </span>joint_state_publisher_gui
+</pre></div>
+</div>
+</section>
+<section id="run-rviz-to-visualize-robot">
+<h3>9.3 Run RVIZ to Visualize Robot<a class="headerlink" href="#run-rviz-to-visualize-robot" title="Permalink to this heading"></a></h3>
+<p>Now that we have both robot-state-publisher and joint-state-publisher running, we’ll visualize the MiniBot using RVIZ.
+Open a new window and type the following.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>rviz2<span class="w"> </span>rviz2
+</pre></div>
+</div>
+<p>This will open up a RVIZ with an empty environment, and we’ll need to set it up by specifying the <strong>Fixed Frame</strong> transform, adding the <strong>RobotModel</strong>, and adding the <strong>TF</strong>.</p>
+<section id="select-the-fixed-frame">
+<h4>9.3.1 Select the Fixed Frame<a class="headerlink" href="#select-the-fixed-frame" title="Permalink to this heading"></a></h4>
+<p>On the left side of RVIZ there’s a panel called <strong>Displays</strong> with a drop-down box that says <strong>Global Options</strong>. Under <strong>Global Options</strong> you’ll see <strong>Fixed Frame</strong>. To the right of <strong>Fixed Frame</strong>,
+you’ll see <strong>map</strong>. Click <strong>map</strong> and then select <strong>base_link</strong> in the drop-down box as shown below.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/rviz-01.png"><img alt="MiniBot Chassis" src="_images/rviz-01.png" style="width: 568.8000000000001px; height: 321.20000000000005px;" /></a>
+</figure>
+<p>This places the <code class="docutils literal notranslate"><span class="pre">base_link</span></code> frame coincident with the map frame at the center of the grid.</p>
+</section>
+<section id="add-robotmodel-to-visualize">
+<h4>9.3.2 Add RobotModel to Visualize<a class="headerlink" href="#add-robotmodel-to-visualize" title="Permalink to this heading"></a></h4>
+<p>On the bottom left side of RVIZ click the <strong>Add</strong> button.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/rviz-02.png"><img alt="RVIZ Add" src="_images/rviz-02.png" style="width: 360.8px; height: 222.75000000000003px;" /></a>
+</figure>
+<p>After clicking <strong>Add</strong> you’ll see the <strong>Create visualization</strong> window with several items to visualize. Scroll down, select <strong>RobotModel</strong>, and then click <strong>OK</strong>.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/rviz-03.png"><img alt="RobotModel" src="_images/rviz-03.png" style="width: 295.2px; height: 386.55px;" /></a>
+</figure>
+</section>
+<section id="add-tf-to-visualize">
+<h4>9.3.3 Add TF to Visualize<a class="headerlink" href="#add-tf-to-visualize" title="Permalink to this heading"></a></h4>
+<p>Click <strong>Add</strong> again, and in the <strong>Create visualization</strong> window select <strong>TF</strong>, and then click <strong>OK</strong>.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/rviz-04.png"><img alt="TF" src="_images/rviz-04.png" style="width: 321.75px; height: 404.1px;" /></a>
+</figure>
+</section>
+<section id="select-the-robot-description-topic">
+<h4>9.3.4 Select the robot_description Topic<a class="headerlink" href="#select-the-robot-description-topic" title="Permalink to this heading"></a></h4>
+<p>Now that we’ve added our RobotModel to <strong>Displays</strong>, we need to choose the <strong>robot_description</strong> topic which is located under <strong>RobotModel</strong> –&gt; <strong>Description Topic</strong> —&gt; <strong>robot_description</strong> as
+shown below.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/rviz-05.png"><img alt="robot_description" src="_images/rviz-05.png" style="width: 276.5px; height: 294.5px;" /></a>
+</figure>
+<p>Your MiniBot should now appear in the visualization environment as shown below with our MiniBot model and the TF.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/rviz-06.png"><img alt="MiniBot 01" src="_images/rviz-06.png" style="width: 372.0px; height: 352.8px;" /></a>
+</figure>
+<p>This image currently looks a bit cluttered, so if you want to hide the TF, uncheck the <strong>TF</strong> checkbox in the <strong>Displays</strong> panel as shown below.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/rviz-07.png"><img alt="TF Checkbox" src="_images/rviz-07.png" style="width: 225.0px; height: 237.0px;" /></a>
+</figure>
+<p>After rotating the view window, our MiniBot model looks as follows.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/rviz-08.png"><img alt="MiniBot" src="_images/rviz-08.png" style="width: 462.0px; height: 312.59999999999997px;" /></a>
+</figure>
+<p>Keep this RVIZ session open and we’ll see how to save it as a configuration file in the next section.</p>
+</section>
+</section>
+<section id="save-our-rviz-configuration-file-for-later-use">
+<h3>9.4 Save Our RVIZ Configuration File for Later Use<a class="headerlink" href="#save-our-rviz-configuration-file-for-later-use" title="Permalink to this heading"></a></h3>
+<p>We’ll now save the RVIZ configuration we set up in the previous section so we can automate the entire process via a launch file.</p>
+<p>First, open a new window, navigate to our minibot folder, and then create a new folder named <code class="docutils literal notranslate"><span class="pre">rviz</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src/minibot$<span class="w"> </span>mkdir<span class="w"> </span>rviz
+</pre></div>
+</div>
+<p>Now, go back into RVIZ and save your current session inside a configuration file <code class="docutils literal notranslate"><span class="pre">minibot_config.rviz</span></code>, inside the <code class="docutils literal notranslate"><span class="pre">rviz</span></code> folder.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/rviz-09.png"><img alt="Save Config" src="_images/rviz-09.png" style="width: 226.79999999999998px; height: 207.6px;" /></a>
+</figure>
+<p>Again, make sure to save <code class="docutils literal notranslate"><span class="pre">minibot_config.rviz</span></code> inside the folder <code class="docutils literal notranslate"><span class="pre">~/dev_ws/src/minibot/rviz</span></code>.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/rviz-10.png"><img alt="minibot_config.rviz" src="_images/rviz-10.png" style="width: 462.0px; height: 220.79999999999998px;" /></a>
+</figure>
+</section>
+</section>
+<section id="create-a-launch-file-for-visualization">
+<h2>10 Create a Launch File for Visualization<a class="headerlink" href="#create-a-launch-file-for-visualization" title="Permalink to this heading"></a></h2>
+<p>In this section we illustrate how to create a launch file (<code class="docutils literal notranslate"><span class="pre">display.launch.xml</span></code>) that performs all the tasks we covered previously to visualize our MiniBot model with RVIZ.</p>
+<p>First, open a new window, navigate to our minibot folder, and then create a new folder named <code class="docutils literal notranslate"><span class="pre">launch</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src/minibot$<span class="w"> </span>mkdir<span class="w"> </span>launch
+</pre></div>
+</div>
+<section id="create-the-launch-file">
+<h3>10.1 Create the Launch File<a class="headerlink" href="#create-the-launch-file" title="Permalink to this heading"></a></h3>
+<p>Go inside the <code class="docutils literal notranslate"><span class="pre">launch</span></code> folder and open VSCode.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src/minibot/launch$<span class="w"> </span>code<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Create a new file named <code class="docutils literal notranslate"><span class="pre">display.launch.xml</span></code> and paste the code below in it.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nt">&lt;launch&gt;</span>
+<span class="linenos"> 2</span><span class="w">        </span><span class="cm">&lt;!-- find the minibot urdf file (inside the install folder) and assign the path to a variable --&gt;</span>
+<span class="linenos"> 3</span><span class="w">        </span><span class="nt">&lt;let</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;urdf_path&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;$(find-pkg-share minibot)/urdf/minibot_base.xacro&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="w">         </span><span class="cm">&lt;!-- find the rviz configuration file (inside the install folder) and assign the path to a variable --&gt;</span>
+<span class="linenos"> 6</span><span class="w">        </span><span class="nt">&lt;let</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;rviz_config_path&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;$(find-pkg-share minibot)/rviz/minibot_config.rviz&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="cm">&lt;!-- start the robot-state-publisher node --&gt;</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;robot_state_publisher&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;robot_state_publisher&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">10</span><span class="w">                </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;robot_description&quot;</span>
+<span class="linenos">11</span><span class="w">                        </span><span class="na">value=</span><span class="s">&quot;$(command &#39;xacro $(var urdf_path)&#39;)&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">12</span><span class="w">        </span><span class="nt">&lt;/node&gt;</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="w">        </span><span class="cm">&lt;!-- start the joint-state-publisher-gui node --&gt;</span>
+<span class="linenos">15</span><span class="w">        </span><span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;joint_state_publisher_gui&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;joint_state_publisher_gui&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="w">        </span><span class="cm">&lt;!-- start RVIZ2 with our save configuration File --&gt;</span>
+<span class="linenos">18</span><span class="w">        </span><span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;rviz2&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;rviz2&quot;</span><span class="w"> </span><span class="na">output=</span><span class="s">&quot;screen&quot;</span>
+<span class="linenos">19</span><span class="w">                  </span><span class="na">args=</span><span class="s">&quot;-d $(var rviz_config_path)&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">20</span><span class="nt">&lt;/launch&gt;</span>
+</pre></div>
+</div>
+<p>This launch file performs the following five tasks:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>It finds the path to the copy of <code class="docutils literal notranslate"><span class="pre">minibot_base.xacro</span></code> that colcon has created.</p></li>
+<li><p>It finds the path to the copy of <code class="docutils literal notranslate"><span class="pre">minibot_config.rviz</span></code> that colcon has created.</p></li>
+<li><p>It starts a robot-state-publisher node and gives it minibot_base.xacro as the robot_description.</p></li>
+<li><p>it starts a joint-state-publsher-gui node.</p></li>
+<li><p>It starts RVIZ with the configuration filed we previously saved.</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="modify-cmakelists-txt">
+<h3>10.2 Modify CMakeLists.txt<a class="headerlink" href="#modify-cmakelists-txt" title="Permalink to this heading"></a></h3>
+<p><a class="reference external" href="https://cmake.org/">CMake</a>  manages the build process for ROS, and the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file provides instructions to CMake on how to build our package.
+Our starter <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file was created when we created our minibot package in Section 4.2.
+If you want more information on the contents/structure of a <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file, you can find extensive documentation
+<a class="reference external" href="https://docs.ros.org/en/humble/How-To-Guides/Ament-CMake-Documentation.html">here</a>. Fortunately, we only need to make a few modifications to
+our <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file which include installing the locations of our <code class="docutils literal notranslate"><span class="pre">urdf</span></code>, <code class="docutils literal notranslate"><span class="pre">rviz</span></code>, and <code class="docutils literal notranslate"><span class="pre">launch</span></code> folders we created previously.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When editing files that use CMake in VSCode, you will find it handy to install the <strong>CMake</strong> language support extension (by twxs) as well as the
+<strong>CMake Tools</strong> extension by Microsoft.</p>
+</div>
+<p>To modify our <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file, navigate to our minibot package folder and open VSCode.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src/minibot$<span class="w"> </span>code<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Inside VSCode, open the file <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> and you’ll see the following</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.8</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="nb">project</span><span class="p">(</span><span class="s">minibot</span><span class="p">)</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="nb">if</span><span class="p">(</span><span class="s">CMAKE_COMPILER_IS_GNUCXX</span><span class="w"> </span><span class="s">OR</span><span class="w"> </span><span class="s">CMAKE_CXX_COMPILER_ID</span><span class="w"> </span><span class="s">MATCHES</span><span class="w"> </span><span class="s2">&quot;Clang&quot;</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="w">  </span><span class="nb">add_compile_options</span><span class="p">(</span><span class="s">-Wall</span><span class="w"> </span><span class="s">-Wextra</span><span class="w"> </span><span class="s">-Wpedantic</span><span class="p">)</span>
+<span class="linenos"> 6</span><span class="nb">endif</span><span class="p">()</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="c"># find dependencies</span>
+<span class="linenos"> 9</span><span class="nb">find_package</span><span class="p">(</span><span class="s">ament_cmake</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+<span class="linenos">10</span><span class="c"># uncomment the following section in order to fill in</span>
+<span class="linenos">11</span><span class="c"># further dependencies manually.</span>
+<span class="linenos">12</span><span class="c"># find_package(&lt;dependency&gt; REQUIRED)</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="nb">if</span><span class="p">(</span><span class="s">BUILD_TESTING</span><span class="p">)</span>
+<span class="linenos">15</span><span class="w">  </span><span class="nb">find_package</span><span class="p">(</span><span class="s">ament_lint_auto</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+<span class="linenos">16</span><span class="w">  </span><span class="c"># the following line skips the linter which checks for copyrights</span>
+<span class="linenos">17</span><span class="w">  </span><span class="c"># comment the line when a copyright and license is added to all source files</span>
+<span class="linenos">18</span><span class="w">  </span><span class="nb">set</span><span class="p">(</span><span class="s">ament_cmake_copyright_FOUND</span><span class="w"> </span><span class="s">TRUE</span><span class="p">)</span>
+<span class="linenos">19</span><span class="w">  </span><span class="c"># the following line skips cpplint (only works in a git repo)</span>
+<span class="linenos">20</span><span class="w">  </span><span class="c"># comment the line when this package is in a git repo and when</span>
+<span class="linenos">21</span><span class="w">  </span><span class="c"># a copyright and license is added to all source files</span>
+<span class="linenos">22</span><span class="w">  </span><span class="nb">set</span><span class="p">(</span><span class="s">ament_cmake_cpplint_FOUND</span><span class="w"> </span><span class="s">TRUE</span><span class="p">)</span>
+<span class="linenos">23</span><span class="w">  </span><span class="nb">ament_lint_auto_find_test_dependencies</span><span class="p">()</span>
+<span class="linenos">24</span><span class="nb">endif</span><span class="p">()</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="nb">ament_package</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Since we don’t have any package dependencies and we’re not planning build testing, we’ll first delete lines 10 – 24. Now, we’ll add code to install our <code class="docutils literal notranslate"><span class="pre">urdf</span></code>, <code class="docutils literal notranslate"><span class="pre">rviz</span></code>, and <code class="docutils literal notranslate"><span class="pre">launch</span></code> folders
+as shown in our new lines 11 – 15  below.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.8</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="nb">project</span><span class="p">(</span><span class="s">minibot</span><span class="p">)</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="nb">if</span><span class="p">(</span><span class="s">CMAKE_COMPILER_IS_GNUCXX</span><span class="w"> </span><span class="s">OR</span><span class="w"> </span><span class="s">CMAKE_CXX_COMPILER_ID</span><span class="w"> </span><span class="s">MATCHES</span><span class="w"> </span><span class="s2">&quot;Clang&quot;</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="w">  </span><span class="nb">add_compile_options</span><span class="p">(</span><span class="s">-Wall</span><span class="w"> </span><span class="s">-Wextra</span><span class="w"> </span><span class="s">-Wpedantic</span><span class="p">)</span>
+<span class="linenos"> 6</span><span class="nb">endif</span><span class="p">()</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="c"># find dependencies</span>
+<span class="linenos"> 9</span><span class="nb">find_package</span><span class="p">(</span><span class="s">ament_cmake</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="c"># install package directories</span>
+<span class="linenos">12</span><span class="nb">install</span><span class="p">(</span>
+<span class="linenos">13</span><span class="w">  </span><span class="s">DIRECTORY</span><span class="w"> </span><span class="s">urdf</span><span class="w"> </span><span class="s">launch</span><span class="w"> </span><span class="s">rviz</span>
+<span class="linenos">14</span><span class="w">  </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s">share/</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="s">/</span>
+<span class="linenos">15</span><span class="p">)</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="nb">ament_package</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="build-the-package">
+<h3>10.3 Build the Package<a class="headerlink" href="#build-the-package" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span>colcon<span class="w"> </span>build
+</pre></div>
+</div>
+</section>
+<section id="source-the-workspace">
+<h3>10.4 Source the Workspace<a class="headerlink" href="#source-the-workspace" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+</section>
+<section id="launch-display-launch-xml">
+<h3>10.5 Launch display.launch.xml<a class="headerlink" href="#launch-display-launch-xml" title="Permalink to this heading"></a></h3>
+<p>We’ll now use our launch file to display our MiniBot using RVIZ.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>minibot<span class="w"> </span>display.launch.xml
+</pre></div>
+</div>
+<p>As you can see, RVIZ opens and displays our MiniBot with the same settings/configuration we previously saved.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/rviz-08.png"><img alt="MiniBot" src="_images/rviz-08.png" style="width: 462.0px; height: 312.59999999999997px;" /></a>
+</figure>
+</section>
+</section>
+<section id="simulate-minibot-using-gazebo">
+<h2>11 Simulate MiniBot using Gazebo<a class="headerlink" href="#simulate-minibot-using-gazebo" title="Permalink to this heading"></a></h2>
+<p>We’ll now demonstrate how to display our MiniBot model in Gazebo.</p>
+<section id="gazebo-material-colors">
+<h3>11.1 Gazebo Material Colors<a class="headerlink" href="#gazebo-material-colors" title="Permalink to this heading"></a></h3>
+<p>The colors we created in our URDF file will show up in RVIZ but not Gazebo. Instead, for Gazebo, we must use a Gazebo material tag to indicate link colors.
+We can place our Gazebo maerial tags directly in <code class="docutils literal notranslate"><span class="pre">minibot_base.xacro</span></code>, but we’ll place our Gazebo tags in a separate file <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.xacro</span></code> that
+we’ll also place in our <code class="docutils literal notranslate"><span class="pre">urdf</span></code> folder.</p>
+<p>If don’t already have VSCode open, Navigate to the <code class="docutils literal notranslate"><span class="pre">urdf</span></code> folder and open it.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src/minibot/urdf$<span class="w"> </span>code<span class="w"> </span>.
+</pre></div>
+</div>
+<p>While inside VSCode, create the file <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.xacro</span></code>  and paste the following code.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="nt">&gt;</span>
+
+<span class="w">        </span><span class="cm">&lt;!-- colors --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;chassis_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;material&gt;</span>Gazebo/Blue<span class="nt">&lt;/material&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/gazebo&gt;</span>
+
+<span class="w">        </span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;right_wheel_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;material&gt;</span>Gazebo/Orange<span class="nt">&lt;/material&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/gazebo&gt;</span>
+
+<span class="w">        </span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;left_wheel_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;material&gt;</span>Gazebo/Orange<span class="nt">&lt;/material&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/gazebo&gt;</span>
+
+<span class="w">        </span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;caster_wheel_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;material&gt;</span>Gazebo/Orange<span class="nt">&lt;/material&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/gazebo&gt;</span>
+
+<span class="nt">&lt;/robot&gt;</span>
+</pre></div>
+</div>
+<p>Now, open <code class="docutils literal notranslate"><span class="pre">minibot_base.xacro</span></code> and include <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.xacro</span></code> on line 5 after we include <code class="docutils literal notranslate"><span class="pre">inertia_macros.xacro</span></code> as follows.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;minibot_base&quot;</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="nt">&gt;</span>
+
+<span class="w">         </span><span class="nt">&lt;xacro:include</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;inertia_macros.xacro&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">         </span><span class="nt">&lt;xacro:include</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;minibot_gazebo.xacro&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+
+<span class="w">        </span><span class="cm">&lt;!-- colors --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;white&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">rgba=</span><span class="s">&quot;1 1 1 1&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/material&gt;</span>
+
+<span class="w">        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;black&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">rgba=</span><span class="s">&quot;0 0 0 1&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/material&gt;</span>
+
+<span class="w">        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;orange&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">rgba=</span><span class="s">&quot;1 0.3 0.1 1&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/material&gt;</span>
+
+<span class="w">        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;blue&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">rgba=</span><span class="s">&quot;0.2 0.2 1 1&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/material&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>11.2 Run Robot State Publisher<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>Open a new window and run <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code> giving it our <code class="docutils literal notranslate"><span class="pre">minibot_base.xacro</span></code> model as our <code class="docutils literal notranslate"><span class="pre">robot_description</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src/minibot/urdf$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>robot_state_publisher<span class="w"> </span>robot_state_publisher<span class="w"> </span>--ros-args<span class="w"> </span>-p<span class="w"> </span>robot_description:<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>xacro<span class="w"> </span>minibot_base.xacro<span class="k">)</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="launch-gazebo-with-empty-environment">
+<h3>11.3 Launch Gazebo with Empty Environment<a class="headerlink" href="#launch-gazebo-with-empty-environment" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros<span class="w"> </span>gazebo.launch.py
+</pre></div>
+</div>
+</section>
+<section id="spawn-minibot-in-gazebo">
+<h3>11.4 Spawn MiniBot in Gazebo<a class="headerlink" href="#spawn-minibot-in-gazebo" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros<span class="w"> </span>spawn_entity.py<span class="w"> </span>-topic<span class="w"> </span>robot_description<span class="w"> </span>-entity<span class="w"> </span>minibot
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>11.5 Create the Launch File<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<p>We’ll now create a new launch file that opens Gazebo and spawns our MiniBot.</p>
+<p>Go into the <code class="docutils literal notranslate"><span class="pre">launch</span></code> folder, create the file  <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.launch.xml</span></code>, and paste the following code.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;launch&gt;</span>
+<span class="w">        </span><span class="cm">&lt;!-- find the minibot urdf file (inside the install folder) and assign the path to a variable --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;let</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;urdf_path&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;$(find-pkg-share minibot)/urdf/minibot_base.xacro&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+
+<span class="w">        </span><span class="cm">&lt;!-- find the rviz configuration file (inside the install folder) and assign the path to a variable --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;let</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;rviz_config_path&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;$(find-pkg-share minibot)/rviz/minibot_config.rviz&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+
+<span class="w">        </span><span class="cm">&lt;!-- start the robot-state-publisher node --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;robot_state_publisher&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;robot_state_publisher&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;robot_description&quot;</span>
+<span class="w">                        </span><span class="na">value=</span><span class="s">&quot;$(command &#39;xacro $(var urdf_path)&#39;)&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/node&gt;</span>
+
+<span class="w">        </span><span class="cm">&lt;!-- open Gazebo with an empty environment --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;include</span><span class="w"> </span><span class="na">file=</span><span class="s">&quot;$(find-pkg-share gazebo_ros)/launch/gazebo.launch.py&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+
+<span class="w">        </span><span class="cm">&lt;!-- spawn minibot in Gazebo --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;gazebo_ros&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;spawn_entity.py&quot;</span>
+<span class="w">                  </span><span class="na">args=</span><span class="s">&quot;-topic robot_description -entity minibot&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+
+<span class="w">        </span><span class="cm">&lt;!-- start RVIZ2 with our save configuration File --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;rviz2&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;rviz2&quot;</span><span class="w"> </span><span class="na">output=</span><span class="s">&quot;screen&quot;</span>
+<span class="w">                  </span><span class="na">args=</span><span class="s">&quot;-d $(var rviz_config_path)&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/launch&gt;</span>
+</pre></div>
+</div>
+<p>This launch file performs the following four tasks:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>It finds the path to the copy of <code class="docutils literal notranslate"><span class="pre">minibot_base.xacro</span></code> that colcon has created.</p></li>
+<li><p>It finds the path to the copy of <code class="docutils literal notranslate"><span class="pre">minibot_config.rviz</span></code> that colcon has created.</p></li>
+<li><p>It starts a robot-state-publisher node and gives it minibot_base.xacro as the robot_description.</p></li>
+<li><p>It opens Gazebo with an empty environment.</p></li>
+<li><p>It spawns our MiniBot in Gazebo.</p></li>
+<li><p>It starts RVIZ with the configuration filed we previously saved.</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="modify-package-xml">
+<h3>11.6 Modify package.xml<a class="headerlink" href="#modify-package-xml" title="Permalink to this heading"></a></h3>
+<p>Go into the <code class="docutils literal notranslate"><span class="pre">minibot</span></code> directory, open the file <code class="docutils literal notranslate"><span class="pre">package.xml</span></code>, and add the <code class="docutils literal notranslate"><span class="pre">minibot</span></code>, <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code>, and <code class="docutils literal notranslate"><span class="pre">gazebo_ros</span></code> package dependencies.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- packages --&gt;</span>
+<span class="nt">&lt;exec_depend&gt;</span>robot_state_publisher<span class="nt">&lt;/exec_depend&gt;</span>
+<span class="nt">&lt;exec_depend&gt;</span>gazebo_ros<span class="nt">&lt;/exec_depend&gt;</span>
+</pre></div>
+</div>
+<p>So, your <code class="docutils literal notranslate"><span class="pre">package.xml</span></code> file should look something like this.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="cp">&lt;?xml-model href=&quot;http://download.ros.org/schema/package_format3.xsd&quot; schematypens=&quot;http://www.w3.org/2001/XMLSchema&quot;?&gt;</span>
+<span class="nt">&lt;package</span><span class="w"> </span><span class="na">format=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;name&gt;</span>minibot<span class="nt">&lt;/name&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>0.0.0<span class="nt">&lt;/version&gt;</span>
+<span class="w">  </span><span class="nt">&lt;description&gt;</span>TODO:<span class="w"> </span>Package<span class="w"> </span>description<span class="nt">&lt;/description&gt;</span>
+<span class="w">  </span><span class="nt">&lt;maintainer</span><span class="w"> </span><span class="na">email=</span><span class="s">&quot;user@todo.todo&quot;</span><span class="nt">&gt;</span>user<span class="nt">&lt;/maintainer&gt;</span>
+<span class="w">  </span><span class="nt">&lt;license&gt;</span>TODO:<span class="w"> </span>License<span class="w"> </span>declaration<span class="nt">&lt;/license&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;buildtool_depend&gt;</span>ament_cmake<span class="nt">&lt;/buildtool_depend&gt;</span>
+
+<span class="w">  </span><span class="cm">&lt;!-- packages --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;exec_depend&gt;</span>robot_state_publisher<span class="nt">&lt;/exec_depend&gt;</span>
+<span class="w">  </span><span class="nt">&lt;exec_depend&gt;</span>gazebo_ros<span class="nt">&lt;/exec_depend&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;test_depend&gt;</span>ament_lint_auto<span class="nt">&lt;/test_depend&gt;</span>
+<span class="w">  </span><span class="nt">&lt;test_depend&gt;</span>ament_lint_common<span class="nt">&lt;/test_depend&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;export&gt;</span>
+<span class="w">        </span><span class="nt">&lt;build_type&gt;</span>ament_cmake<span class="nt">&lt;/build_type&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/export&gt;</span>
+<span class="nt">&lt;/package&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>11.7 Build the Package<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span>colcon<span class="w"> </span>build
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h3>11.8 Source the Workspace<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+</section>
+<section id="launch-minibot-gazebo-launch-xml">
+<h3>11.9 Launch minibot_gazebo.launch.xml<a class="headerlink" href="#launch-minibot-gazebo-launch-xml" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>minibot<span class="w"> </span>minibot_gazebo.launch.xml
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ros2_tutorials_03.html" class="btn btn-neutral float-left" title="ROS 2 Humble Tutorials, Part 3" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mobile_robot_part02.html" class="btn btn-neutral float-right" title="Mobile Robot, Part 2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, MIT-NEET Autonomous Machines.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

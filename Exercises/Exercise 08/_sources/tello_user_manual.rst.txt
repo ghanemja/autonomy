@@ -1,0 +1,14 @@
+=================
+Tello User Manual
+=================
+
+.. note::
+	Download the :download:`Tello User Manual <documents/Tello_User_Manual_V1_2.pdf>` by clicking this link. 
+	
+
+
+
+   
+   
+
+   

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction to ROS &mdash; 16.633 NEET Autonomous Machines  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Linux Overview" href="linux_overview.html" />
+    <link rel="prev" title="Welcome to 16.633 NEET Autonomous Machines’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/NEET-AutonomousMachines.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Exercise 01</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to ROS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#origins-of-ros">1 Origins of ROS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-ros">2 What is ROS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ros-support">3 ROS Support</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">3.1 ROS Package Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3.2 Robotics Stack Exchange</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">3.3 ROS Discourse Forums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">3.4 Open Robotics Discord Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">3.5 ROS Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">3.6 Issue Trackers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linux_overview.html">Linux Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_01.html">ROS 2 Humble Tutorials, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 02</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_02.html">ROS 2 Humble Tutorials, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 03</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_03.html">ROS 2 Humble Tutorials, Part 3</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 04</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part01.html">Mobile Robot, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 05</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part02.html">Mobile Robot, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 06</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part03.html">Mobile Robot, Part 3</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 07</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part04.html">Mobile Robot, Part 4</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 08</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tello_edu_overview.html">Tello Edu Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_sdk_2_0.html">Programming via Tello SDK 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_djitellopy.html">Programming via DJITelloPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Mobile Robot Setup Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="raspberry_pi_setup.html">Raspberry Pi Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="camera_RPi_setup.html">Camera Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rplidar_a1_setup.html">RPLiDAR A1 Setup</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tello User Manuals and Specifications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tello_edu_specs.html">Tello Edu Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_user_manual.html">Tello User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tello_sdk_2_0_user_guide.html">Tello SDK 2.0 User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="td1_controller.html">Td1 Controller Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batteries_charging.html">Batteries/Charging</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">16.633 NEET Autonomous Machines</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Introduction to ROS</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction-to-ros">
+<h1>Introduction to ROS<a class="headerlink" href="#introduction-to-ros" title="Permalink to this heading"></a></h1>
+<section id="origins-of-ros">
+<h2>1 Origins of ROS<a class="headerlink" href="#origins-of-ros" title="Permalink to this heading"></a></h2>
+<p>In the year 2000, the first pieces of what eventually would become ROS (Robot Operating System) began coalescing at Stanford University.
+Eric Berger and Keenan Wyrobek, PhD students working in Kenneth Salisbury’s Personal Robotics Program at Stanford.
+While working on robots to do manipulation tasks in human environments, the two students noticed that many of their colleagues were held back by
+the diverse nature of robotics: an excellent software developer might not have the hardware knowledge required, or someone developing state of the
+art path planning might not know how to do the computer vision required. In an attempt to remedy this situation, the two students set out to make
+a baseline system that would provide a starting place for others in academia to build upon. In the words of Eric Berger,
+“something that didn’t suck, in all of those different dimensions” (<a class="reference external" href="https://en.wikipedia.org/wiki/Robot_Operating_System">Wikipedia</a>).</p>
+<figure class="align-center" id="id13">
+<a class="reference internal image-reference" href="_images/ROS_Reinventing_The_Wheel.png"><img alt="Reinventing the Wheel" src="_images/ROS_Reinventing_The_Wheel.png" style="width: 442.8px; height: 573.7px;" /></a>
+<figcaption>
+<p><span class="caption-text">Comic commissioned at Willow Garage, from Jorge Cham, to illustrate the wasted time in robotics R&amp;D.</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="what-is-ros">
+<h2>2 What is ROS<a class="headerlink" href="#what-is-ros" title="Permalink to this heading"></a></h2>
+<p>Wyrobek and Berger later met Scott Hassan (a key player at Google) who provided them funding and set them up in his Willow Garage incubator to create the “Linux of Robotics.”
+Over the years, at their Willow Garage facility, they enlisted the help of many robotics researchers to develop ROS 1 which enabled entrepreneurs and corporations to build products and
+businesses on top of ROS. The <a class="reference external" href="https://www.openrobotics.org/">Open Source Robotics Foundation</a> would become an enduring steward of ROS. And the ROS community would grow exponentially.</p>
+<p>ROS isn’t an operating system, and its essentially
+a software development kit that helps you build robot applications. The video below gives you a good idea about what ROS does.</p>
+<iframe width="560" height="315" src="https://player.vimeo.com/video/639236696" frameborder="0" allowfullscreen></iframe></section>
+<section id="ros-support">
+<h2>3 ROS Support<a class="headerlink" href="#ros-support" title="Permalink to this heading"></a></h2>
+<p>There are several mechanisms in place to provide support to the ROS community, each with its own purpose: package documentation, Q&amp;A forum, discussion forum, package index,
+and of course the issue trackers. It is important to pick the right resource to reduce response time, avoid message duplication, and promote the discussion of new ideas.</p>
+<section id="id1">
+<h3>3.1 <a class="reference external" href="https://docs.ros.org/">ROS Package Documentation</a><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>Documentation for core ROS packages as well as package specific content is hosted on docs.ros.org. On this site you can find the core tutorials and documentation for the project
+as well as generated API documentation for individual packages (<a class="reference external" href="https://docs.ros.org/">ROS Package Documentation</a> ).</p>
+</section>
+<section id="id3">
+<h3>3.2 <a class="reference external" href="https://robotics.stackexchange.com/">Robotics Stack Exchange</a><a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<p>If the documentation doesn’t address your problem, Robotics Stack Exchange is next. Take heart: it is very likely that someone else has faced the same problem before, and that
+it’s covered among the more than 60,000 questions at ROS Answers. Start by searching for questions similar to yours; if your question isn’t already asked, post a new one.
+Be sure to check the guidelines on how to prepare your question before posting (<a class="reference external" href="https://robotics.stackexchange.com/">Robotics Stack Exchange</a> ).</p>
+</section>
+<section id="id5">
+<h3>3.3 <a class="reference external" href="https://discourse.ros.org/">ROS Discourse Forums</a><a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<p>To stay up-to-date on the latest developments within the ROS community, you’ll want to join the ROS Discourse forums. These forums are the place for announcements, news,
+and discussions of general interest. The ROS Discourse is not the right place to ask troubleshooting questions or report bugs; please use the other support resources listed above instead
+(<a class="reference external" href="https://discourse.ros.org/">ROS Discourse Forums</a> ).</p>
+</section>
+<section id="id7">
+<h3>3.4 <a class="reference external" href="https://www.ros.org/blog/discord/">Open Robotics Discord Server</a><a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<p>Open Robotics hosts a community Discord server where ROS, Gazebo, and Open-RMF users can meet with each other, chat, and coordinate on open-source development. If you are looking to
+connect with ROS users this a great place to start (<a class="reference external" href="https://www.ros.org/blog/discord/">Open Robotics Discord Server</a> ).</p>
+</section>
+<section id="id9">
+<h3>3.5 <a class="reference external" href="https://index.ros.org/">ROS Index</a><a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+<p>When you want to find out information about a specific package the index is the best place to start. It connects you to all the important locations relevant to a package. In addition
+to the official documentation for ROS packages, the wiki contains two key resources you should consult: the Troubleshooting guide and the FAQ. Solutions to many common problems are
+covered in these two pages. If you have ever used PyPI you should feel right at home on ROS Index (<a class="reference external" href="https://index.ros.org/">ROS Index</a> ).</p>
+</section>
+<section id="id11">
+<h3>3.6 <a class="reference external" href="https://github.com/ros2/ros2/issues">Issue Trackers</a><a class="headerlink" href="#id11" title="Permalink to this heading"></a></h3>
+<p>When you’ve identified a bug (e.g., as a result of a discussion at Robotics Stack Exchange), or when you want to request a new feature, head to the issue trackers. Links are provided in
+the packages metadata available on ROS Index. When reporting a bug, be sure to provide a detailed description of the problem, the environment in which it occurs, any detail that may help
+developers to reproduce the issue, and if possible, a debug backtrace (<a class="reference external" href="https://github.com/ros2/ros2/issues">Issue Trackers</a> ).</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to 16.633 NEET Autonomous Machines’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="linux_overview.html" class="btn btn-neutral float-right" title="Linux Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, MIT-NEET Autonomous Machines.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

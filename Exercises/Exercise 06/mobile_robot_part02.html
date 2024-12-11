@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile Robot, Part 2 &mdash; 16.633 NEET Autonomous Machines  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Mobile Robot, Part 3" href="mobile_robot_part03.html" />
+    <link rel="prev" title="Mobile Robot, Part 1" href="mobile_robot_part01.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/NEET-AutonomousMachines.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Exercise 01</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro_ros.html">Introduction to ROS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_overview.html">Linux Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_01.html">ROS 2 Humble Tutorials, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 02</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_02.html">ROS 2 Humble Tutorials, Part 2</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 03</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorials_03.html">ROS 2 Humble Tutorials, Part 3</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 04</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part01.html">Mobile Robot, Part 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 05</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mobile Robot, Part 2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#auto-sourcing-dev-ws-overlay">1 Auto Sourcing dev_ws Overlay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-gazebo-world">2 Create a Gazebo World</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-worlds-folder">2.1 Create a Worlds Folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-and-save-a-gazebo-world">2.2 Create and Save a Gazebo World</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-the-worlds-folder">2.3 Install the Worlds Folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#launch-with-the-saved-gazebo-world">2.4 Launch with the Saved Gazebo World</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#launch-robot-state-publisher-with-simulation-time-enabled">2.5 Launch robot-state-publisher with Simulation Time Enabled</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gazebo-differential-drive-plugin">3 Gazebo Differential Drive Plugin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#locate-the-gazebo-ros-diff-drive-template">3.1 Locate the gazebo_ros_diff_drive Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modify-the-gazebo-ros-diff-drive-template">3.2 Modify the gazebo_ros_diff_drive Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-dynamic-friction-to-the-ball-caster">3.3 Add Dynamic Friction to the Ball Caster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#final-version-of-minibot-gazebo-xacro">3.4 Final Version of minibot_gazebo.xacro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#edit-minibot-base-xacro">4 Edit minibot_base.xacro</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#drive-minibot-inside-gazebo">5 Drive MiniBot Inside Gazebo</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build-the-package">5.1 Build the Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source-the-workspace">5.2 Source the Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#launch-minibot-gazebo-launch-xml">5.3 Launch minibot_gazebo.launch.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-teleop-twist-keyboard">5.4 Run teleop_twist_keyboard</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ros2-nodes-topics">6 ROS2 Nodes/Topics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ros2-node-list">6.1 ros2 node list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ros2-topic-list">6.2 ros2 topic list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rqt-graph">6.3 rqt_graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ros2-topic-info">6.3 ros2 topic info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ros2-interface-show">6.4 ros2 interface show</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exercise 06</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mobile_robot_part03.html">Mobile Robot, Part 3</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">16.633 NEET Autonomous Machines</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Mobile Robot, Part 2</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mobile-robot-part-2">
+<h1>Mobile Robot, Part 2<a class="headerlink" href="#mobile-robot-part-2" title="Permalink to this heading"></a></h1>
+<p>In this exercise we’ll learn how to drive our MiniBot inside Gazebo using a control plugin (<code class="docutils literal notranslate"><span class="pre">gazebo_ros_diff_drive</span></code>) that receives messages from
+a node (<code class="docutils literal notranslate"><span class="pre">teleop_twist_keyboard</span></code>) connected to our keyboard. We’ll then refresh our memory about how to determine information about the active nodes, topics, and messages
+for our system.</p>
+<section id="auto-sourcing-dev-ws-overlay">
+<h2>1 Auto Sourcing dev_ws Overlay<a class="headerlink" href="#auto-sourcing-dev-ws-overlay" title="Permalink to this heading"></a></h2>
+<p>In the previous exercise we learned how to setup sourcing of the ROS2 Humble underlay whenever we open a new terminal window. Similarly, we also can set up
+sourcing of our workspace overlay (<code class="docutils literal notranslate"><span class="pre">dev_ws</span></code>)  in our <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file.</p>
+<p>To set this up, navigate to your home directory and open up your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file with gedit.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~$<span class="w"> </span>gedit<span class="w"> </span>.bashrc
+</pre></div>
+</div>
+<p>Now, add the following two lines to this file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># source the dev_ws Overlay</span>
+<span class="nb">source</span><span class="w"> </span>~/dev_ws/install/setup.bash
+</pre></div>
+</div>
+<p>After adding these lines, your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file should look something like this.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/bashrc-03.png"><img alt="bashrc file" src="_images/bashrc-03.png" style="width: 403.2px; height: 181.29999999999998px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="create-a-gazebo-world">
+<h2>2 Create a Gazebo World<a class="headerlink" href="#create-a-gazebo-world" title="Permalink to this heading"></a></h2>
+<p>Gazebo is a powerful simulation tool for you to use in your robotics applications. Unfortunately, due to our time constraints, we’ll only use a small portion of its capabilities.
+If you’re interested in learning more, you’ll find some tutorials located here: <a class="reference external" href="https://classic.gazebosim.org/tutorials">https://classic.gazebosim.org/tutorials</a>.</p>
+<p>In this section, we’ll create a scene (or world) in Gazebo that we’ll spawn our MiniBot inside. We’ll save this scene inside our MiniBot package that we’ll launch every time with
+our <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.launch.xml</span></code> file.</p>
+<section id="create-a-worlds-folder">
+<h3>2.1 Create a Worlds Folder<a class="headerlink" href="#create-a-worlds-folder" title="Permalink to this heading"></a></h3>
+<p>Open a terminal window, navigate to your <code class="docutils literal notranslate"><span class="pre">minibot</span></code> folder, and create a new folder named <code class="docutils literal notranslate"><span class="pre">worlds</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws/src/minibot$<span class="w"> </span>mkdir<span class="w"> </span>worlds
+</pre></div>
+</div>
+</section>
+<section id="create-and-save-a-gazebo-world">
+<h3>2.2 Create and Save a Gazebo World<a class="headerlink" href="#create-and-save-a-gazebo-world" title="Permalink to this heading"></a></h3>
+<p>In preparation for using the Gazebo camera and LiDAR plugins, you should place some objects inside your Gazebo world. Gazebo has many pre-built objects such as a bookshelf, cabinet,
+construction cone, fire hydrant, walls, buildings, and an entire RoboCup field. The objects you choose for this example is up to you, but we’ll demonstrate how add some construction cones.</p>
+<ol class="arabic simple">
+<li><p>Open Gazebo in a terminal window using the following command.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>gazebo
+</pre></div>
+</div>
+<p>2. Click the <code class="docutils literal notranslate"><span class="pre">Insert</span></code> tab, scroll down to the <code class="docutils literal notranslate"><span class="pre">Construction</span> <span class="pre">Cone</span></code>, and insert several construction cones into your world. The exact number and location of the cones doesn’t matter, but you can use
+the illustration below as example.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Gazebo_World01.png"><img alt="_images/Gazebo_World01.png" src="_images/Gazebo_World01.png" style="width: 308.0px; height: 316.4px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Gazebo_World02.png"><img alt="_images/Gazebo_World02.png" src="_images/Gazebo_World02.png" style="width: 578.0px; height: 481.5px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The size of these cones is much larger than our MiniBot.
+Although Gazebo allows scaling of objects within the user interface, this doesn’t seem possible with the construction cones, so we’ll scale them down later inside of our saved world file.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>We can place the cones at any location on the grid by dragging them into place, or we can locate them more precisely by 1) selecting the cone and 2) entering its coordinates under the <code class="docutils literal notranslate"><span class="pre">pose</span></code> drop-down box.</p></li>
+</ol>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Gazebo_World03.png"><img alt="_images/Gazebo_World03.png" src="_images/Gazebo_World03.png" style="width: 571.9px; height: 417.2px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>After you have arranged you cones (or other objects), save this world as <code class="docutils literal notranslate"><span class="pre">world01.world</span></code> in your <code class="docutils literal notranslate"><span class="pre">user/dev_ws_src/minibot/worlds</span></code> folder.</p></li>
+</ol>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Gazebo_World04.png"><img alt="_images/Gazebo_World04.png" src="_images/Gazebo_World04.png" style="width: 711.5px; height: 251.0px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>To change the scale of your cones, open the <code class="docutils literal notranslate"><span class="pre">world01.world</span></code> file using VSCode. Once open, replace every instance of <code class="docutils literal notranslate"><span class="pre">&lt;scale&gt;10</span> <span class="pre">10</span> <span class="pre">10&lt;/scale&gt;</span></code> with <code class="docutils literal notranslate"><span class="pre">&lt;scale&gt;3</span> <span class="pre">3</span> <span class="pre">3&lt;/scale&gt;</span></code></p></li>
+</ol>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Gazebo_World05.png"><img alt="_images/Gazebo_World05.png" src="_images/Gazebo_World05.png" style="width: 433.29999999999995px; height: 402.5px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Gazebo_World06.png"><img alt="_images/Gazebo_World06.png" src="_images/Gazebo_World06.png" style="width: 433.29999999999995px; height: 433.29999999999995px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="install-the-worlds-folder">
+<h3>2.3 Install the Worlds Folder<a class="headerlink" href="#install-the-worlds-folder" title="Permalink to this heading"></a></h3>
+<p>Open <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> and add the <code class="docutils literal notranslate"><span class="pre">worlds</span></code> folder with the installation of your <code class="docutils literal notranslate"><span class="pre">urdf</span></code>, <code class="docutils literal notranslate"><span class="pre">launch</span></code>, and <code class="docutils literal notranslate"><span class="pre">rviz</span></code> folders as shown below.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># install package directories</span>
+<span class="nb">install</span><span class="p">(</span>
+<span class="w">  </span><span class="s">DIRECTORY</span><span class="w"> </span><span class="s">urdf</span><span class="w"> </span><span class="s">launch</span><span class="w"> </span><span class="s">rviz</span><span class="w"> </span><span class="s">worlds</span>
+<span class="w">  </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s">share/</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="s">/</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="launch-with-the-saved-gazebo-world">
+<h3>2.4 Launch with the Saved Gazebo World<a class="headerlink" href="#launch-with-the-saved-gazebo-world" title="Permalink to this heading"></a></h3>
+<p>Open your launch file <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.launch.xml</span></code> and insert the following lines of code.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- open Gazebo with our saved world --&gt;</span>
+<span class="nt">&lt;include</span><span class="w"> </span><span class="na">file=</span><span class="s">&quot;$(find-pkg-share gazebo_ros)/launch/gazebo.launch.py&quot;</span><span class="w"> </span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;world&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;$(find-pkg-share minibot)/worlds/world01.world&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/include&gt;</span>
+</pre></div>
+</div>
+<p>This will open Gazebo with our saved world <code class="docutils literal notranslate"><span class="pre">world01.world</span></code>.</p>
+</section>
+<section id="launch-robot-state-publisher-with-simulation-time-enabled">
+<h3>2.5 Launch robot-state-publisher with Simulation Time Enabled<a class="headerlink" href="#launch-robot-state-publisher-with-simulation-time-enabled" title="Permalink to this heading"></a></h3>
+<p>Normally, the ROS client libraries uses your computer’s system clock as a time source.
+However, when you’re running a Gazebo simulation, you want your nodes to follow the simulated time within Gazebo itself.</p>
+<p>In order for a ROS node to use simulation time according to the <code class="docutils literal notranslate"><span class="pre">/clock</span></code> topic, we need to specify the <code class="docutils literal notranslate"><span class="pre">use_sim_time</span></code> parameter when our nodes are initialized.</p>
+<p>Inside our <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.launch.xml</span></code> file we initialize the robot-state-publisher node, so we’ll set the <code class="docutils literal notranslate"><span class="pre">use_sim_time</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">true</span></code> heere as follows.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- start the robot-state-publisher node --&gt;</span>
+<span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;robot_state_publisher&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;robot_state_publisher&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;robot_description&quot;</span>
+<span class="w">                </span><span class="na">value=</span><span class="s">&quot;$(command &#39;xacro $(var urdf_path)&#39;)&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;use_sim_time&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/node&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="gazebo-differential-drive-plugin">
+<h2>3 Gazebo Differential Drive Plugin<a class="headerlink" href="#gazebo-differential-drive-plugin" title="Permalink to this heading"></a></h2>
+<p>In this section, we’ll demonstrate how to implement a differential drive plugin that drives
+our MiniBot forward/reverse and turns it left/right. Although the
+documentation on how to use these plugins is minimal,
+we often can find a template for a specific plugin at
+this GitHub site <a class="reference external" href="https://github.com/ros-simulation/gazebo_ros_pkgs">https://github.com/ros-simulation/gazebo_ros_pkgs</a>.</p>
+<p>Let’s walk through the process of finding the template for the
+Gazebo differential drive controller (<code class="docutils literal notranslate"><span class="pre">gazebo_ros_diff_drive</span></code>) that we’ll include in our <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.xacro</span></code> file.</p>
+<section id="locate-the-gazebo-ros-diff-drive-template">
+<h3>3.1 Locate the gazebo_ros_diff_drive Template<a class="headerlink" href="#locate-the-gazebo-ros-diff-drive-template" title="Permalink to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Open a browser and go to the GitHub page <a class="reference external" href="https://github.com/ros-simulation/gazebo_ros_pkgs">https://github.com/ros-simulation/gazebo_ros_pkgs</a>.</p></li>
+<li><p>Click the <code class="docutils literal notranslate"><span class="pre">branch</span></code> drop-down box that says <code class="docutils literal notranslate"><span class="pre">noetic-devel</span></code>, scroll down, and select the <code class="docutils literal notranslate"><span class="pre">ros2</span></code> branch.</p>
+<blockquote>
+<div><figure class="align-center">
+<a class="reference internal image-reference" href="_images/Gazebo_Plugins01.png"><img alt="Gazebo Plugins" src="_images/Gazebo_Plugins01.png" style="width: 431.0px; height: 395.0px;" /></a>
+</figure>
+</div></blockquote>
+</li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic" start="3">
+<li><p>Now, open the <code class="docutils literal notranslate"><span class="pre">gazebo_plugins</span></code> folder.</p>
+<blockquote>
+<div><figure class="align-center">
+<a class="reference internal image-reference" href="_images/Gazebo_Plugins02.png"><img alt="Gazebo Plugins" src="_images/Gazebo_Plugins02.png" style="width: 305.0px; height: 265.0px;" /></a>
+</figure>
+</div></blockquote>
+</li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Now, open the <code class="docutils literal notranslate"><span class="pre">include/gazebo_plugins</span></code> folder.</p></li>
+</ol>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Gazebo_Plugins03.png"><img alt="Gazebo Plugins" src="_images/Gazebo_Plugins03.png" style="width: 403.0px; height: 259.5px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic" start="5">
+<li><p>Click the file <code class="docutils literal notranslate"><span class="pre">gazebo_ros_diff_drive.hpp</span></code>.</p>
+<blockquote>
+<div><figure class="align-center">
+<a class="reference internal image-reference" href="_images/Gazebo_Plugins04.png"><img alt="Gazebo Plugins" src="_images/Gazebo_Plugins04.png" style="width: 380.5px; height: 196.0px;" /></a>
+</figure>
+</div></blockquote>
+</li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic" start="5">
+<li><p>Scroll down to line 54 where it says “Example Usage.”</p>
+<blockquote>
+<div><figure class="align-center">
+<a class="reference internal image-reference" href="_images/Gazebo_Plugins05.png"><img alt="Gazebo Plugins" src="_images/Gazebo_Plugins05.png" style="width: 456.5px; height: 203.0px;" /></a>
+</figure>
+</div></blockquote>
+</li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic" start="6">
+<li><p>The template we need is on lines 56 – 92, so we’ll copy and paste these lines inside our <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.xacro</span></code> file (within a Gazebo tag) as follows (see lines 21 – 58 below).</p>
+<blockquote>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="linenos"> 2</span><span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="nt">&gt;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="w">        </span><span class="cm">&lt;!-- colors --&gt;</span>
+<span class="linenos"> 5</span><span class="w">        </span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;chassis_link&quot;</span><span class="nt">&gt;</span>
+<span class="linenos"> 6</span><span class="w">                </span><span class="nt">&lt;material&gt;</span>Gazebo/Blue<span class="nt">&lt;/material&gt;</span>
+<span class="linenos"> 7</span><span class="w">        </span><span class="nt">&lt;/gazebo&gt;</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;right_wheel_link&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">10</span><span class="w">                </span><span class="nt">&lt;material&gt;</span>Gazebo/Orange<span class="nt">&lt;/material&gt;</span>
+<span class="linenos">11</span><span class="w">        </span><span class="nt">&lt;/gazebo&gt;</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="w">        </span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;left_wheel_link&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">14</span><span class="w">                </span><span class="nt">&lt;material&gt;</span>Gazebo/Orange<span class="nt">&lt;/material&gt;</span>
+<span class="linenos">15</span><span class="w">        </span><span class="nt">&lt;/gazebo&gt;</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="w">        </span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;caster_wheel_link&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">18</span><span class="w">                </span><span class="nt">&lt;material&gt;</span>Gazebo/Orange<span class="nt">&lt;/material&gt;</span>
+<span class="linenos">19</span><span class="w">        </span><span class="nt">&lt;/gazebo&gt;</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="w">        </span><span class="nt">&lt;gazebo&gt;</span>
+<span class="linenos">22</span><span class="w">                </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo_ros_diff_drive&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros_diff_drive.so&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="w">                        </span><span class="nt">&lt;ros&gt;</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="w">                          </span><span class="cm">&lt;!-- Add a namespace --&gt;</span>
+<span class="linenos">27</span><span class="w">                          </span><span class="nt">&lt;namespace&gt;</span>/test<span class="nt">&lt;/namespace&gt;</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="w">                        </span><span class="nt">&lt;/ros&gt;</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="w">                        </span><span class="cm">&lt;!-- Update rate in Hz --&gt;</span>
+<span class="linenos">32</span><span class="w">                        </span><span class="nt">&lt;update_rate&gt;</span>50<span class="nt">&lt;/update_rate&gt;</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span><span class="w">                        </span><span class="cm">&lt;!-- wheels --&gt;</span>
+<span class="linenos">35</span><span class="w">                        </span><span class="nt">&lt;left_joint&gt;</span>left_wheel_joint<span class="nt">&lt;/left_joint&gt;</span>
+<span class="linenos">36</span><span class="w">                        </span><span class="nt">&lt;right_joint&gt;</span>right_wheel_joint<span class="nt">&lt;/right_joint&gt;</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span><span class="w">                        </span><span class="cm">&lt;!-- kinematics --&gt;</span>
+<span class="linenos">39</span><span class="w">                        </span><span class="nt">&lt;wheel_separation&gt;</span>1.25<span class="nt">&lt;/wheel_separation&gt;</span>
+<span class="linenos">40</span><span class="w">                        </span><span class="nt">&lt;wheel_diameter&gt;</span>0.6<span class="nt">&lt;/wheel_diameter&gt;</span>
+<span class="linenos">41</span>
+<span class="linenos">42</span><span class="w">                        </span><span class="cm">&lt;!-- limits --&gt;</span>
+<span class="linenos">43</span><span class="w">                        </span><span class="nt">&lt;max_wheel_torque&gt;</span>20<span class="nt">&lt;/max_wheel_torque&gt;</span>
+<span class="linenos">44</span><span class="w">                        </span><span class="nt">&lt;max_wheel_acceleration&gt;</span>1.0<span class="nt">&lt;/max_wheel_acceleration&gt;</span>
+<span class="linenos">45</span>
+<span class="linenos">46</span><span class="w">                        </span><span class="cm">&lt;!-- input --&gt;</span>
+<span class="linenos">47</span><span class="w">                        </span><span class="nt">&lt;command_topic&gt;</span>cmd_vel<span class="nt">&lt;/command_topic&gt;</span>
+<span class="linenos">48</span>
+<span class="linenos">49</span><span class="w">                        </span><span class="cm">&lt;!-- output --&gt;</span>
+<span class="linenos">50</span><span class="w">                        </span><span class="nt">&lt;publish_odom&gt;</span>true<span class="nt">&lt;/publish_odom&gt;</span>
+<span class="linenos">51</span><span class="w">                        </span><span class="nt">&lt;publish_odom_tf&gt;</span>true<span class="nt">&lt;/publish_odom_tf&gt;</span>
+<span class="linenos">52</span><span class="w">                        </span><span class="nt">&lt;publish_wheel_tf&gt;</span>true<span class="nt">&lt;/publish_wheel_tf&gt;</span>
+<span class="linenos">53</span>
+<span class="linenos">54</span><span class="w">                        </span><span class="nt">&lt;odometry_topic&gt;</span>odom<span class="nt">&lt;/odometry_topic&gt;</span>
+<span class="linenos">55</span><span class="w">                        </span><span class="nt">&lt;odometry_frame&gt;</span>odom<span class="nt">&lt;/odometry_frame&gt;</span>
+<span class="linenos">56</span><span class="w">                        </span><span class="nt">&lt;robot_base_frame&gt;</span>chassis<span class="nt">&lt;/robot_base_frame&gt;</span>
+<span class="linenos">57</span>
+<span class="linenos">58</span><span class="w">                  </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="linenos">59</span><span class="w">        </span><span class="nt">&lt;/gazebo&gt;</span>
+<span class="linenos">60</span>
+<span class="linenos">61</span><span class="nt">&lt;/robot&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="modify-the-gazebo-ros-diff-drive-template">
+<h3>3.2 Modify the gazebo_ros_diff_drive Template<a class="headerlink" href="#modify-the-gazebo-ros-diff-drive-template" title="Permalink to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Lines 24 – 29: delete these lines, we don’t need them.</p>
+<blockquote>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros&gt;</span>
+
+<span class="w">        </span><span class="cm">&lt;!-- Add a namespace --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;namespace&gt;</span>/test<span class="nt">&lt;/namespace&gt;</span>
+
+<span class="nt">&lt;/ros&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Lines 39 and 40: change these lines (we already defined xacro constants for the <code class="docutils literal notranslate"><span class="pre">chassis_width</span></code> and <code class="docutils literal notranslate"><span class="pre">wheel_diam</span></code>).</p>
+<blockquote>
+<div><p>From</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;wheel_separation&gt;</span>1.25<span class="nt">&lt;/wheel_separation&gt;</span>
+<span class="nt">&lt;wheel_diameter&gt;</span>0.6<span class="nt">&lt;/wheel_diameter&gt;</span>
+</pre></div>
+</div>
+<p>To</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;wheel_separation&gt;</span>${chassis_width<span class="w"> </span>+<span class="w"> </span>wheel_diam/2}<span class="nt">&lt;/wheel_separation&gt;</span>
+<span class="nt">&lt;wheel_diameter&gt;</span>${wheel_diam}<span class="nt">&lt;/wheel_diameter&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Lines 46 – 48: delete these lines, we don’t need them.</p>
+<blockquote>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- input --&gt;</span>
+<span class="nt">&lt;command_topic&gt;</span>cmd_vel<span class="nt">&lt;/command_topic&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><dl>
+<dt>Line 56: change <code class="docutils literal notranslate"><span class="pre">chassis</span></code> to <code class="docutils literal notranslate"><span class="pre">base_link</span></code>.</dt><dd><p>From</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;robot_base_frame&gt;</span>chassis<span class="nt">&lt;/robot_base_frame&gt;</span>
+</pre></div>
+</div>
+<p>To</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;robot_base_frame&gt;</span>base_link<span class="nt">&lt;/robot_base_frame&gt;</span>
+</pre></div>
+</div>
+<p>This completes our modifications to the differential drive plugin, and we’ll wrap up editing our <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.xacro</span></code> file by making one last addition in the next step below.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</section>
+<section id="add-dynamic-friction-to-the-ball-caster">
+<h3>3.3 Add Dynamic Friction to the Ball Caster<a class="headerlink" href="#add-dynamic-friction-to-the-ball-caster" title="Permalink to this heading"></a></h3>
+<p>We set the coefficients of dynamic friction for the ball caster’s  x and y-axes inside the Gazebo reference block <code class="docutils literal notranslate"><span class="pre">caster_wheel_link</span></code> given on lines 17 – 19.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;caster_wheel_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;material&gt;</span>Gazebo/Orange<span class="nt">&lt;/material&gt;</span>
+<span class="nt">&lt;/gazebo&gt;</span>
+</pre></div>
+</div>
+<p>We’ll set values for <code class="docutils literal notranslate"><span class="pre">mu1</span></code> (x-axis) and <code class="docutils literal notranslate"><span class="pre">mu2</span></code> (y-axis) close to zero to minimize the friction.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;caster_wheel_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;material&gt;</span>Gazebo/Orange<span class="nt">&lt;/material&gt;</span>
+<span class="w">        </span><span class="nt">&lt;mu1</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;0.001&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;mu2</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;0.001&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/gazebo&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="final-version-of-minibot-gazebo-xacro">
+<h3>3.4 Final Version of minibot_gazebo.xacro<a class="headerlink" href="#final-version-of-minibot-gazebo-xacro" title="Permalink to this heading"></a></h3>
+<p>After the above additions/modifications, your <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.xacro</span></code> file should look like the following.</p>
+<blockquote>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="linenos"> 2</span><span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="nt">&gt;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="w">        </span><span class="cm">&lt;!-- colors --&gt;</span>
+<span class="linenos"> 5</span><span class="w">        </span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;chassis_link&quot;</span><span class="nt">&gt;</span>
+<span class="linenos"> 6</span><span class="w">                </span><span class="nt">&lt;material&gt;</span>Gazebo/Blue<span class="nt">&lt;/material&gt;</span>
+<span class="linenos"> 7</span><span class="w">        </span><span class="nt">&lt;/gazebo&gt;</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;right_wheel_link&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">10</span><span class="w">                </span><span class="nt">&lt;material&gt;</span>Gazebo/Orange<span class="nt">&lt;/material&gt;</span>
+<span class="linenos">11</span><span class="w">        </span><span class="nt">&lt;/gazebo&gt;</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="w">        </span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;left_wheel_link&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">14</span><span class="w">                </span><span class="nt">&lt;material&gt;</span>Gazebo/Orange<span class="nt">&lt;/material&gt;</span>
+<span class="linenos">15</span><span class="w">        </span><span class="nt">&lt;/gazebo&gt;</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="w">        </span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;caster_wheel_link&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">18</span><span class="w">                </span><span class="nt">&lt;material&gt;</span>Gazebo/Orange<span class="nt">&lt;/material&gt;</span>
+<span class="linenos">19</span><span class="w">                </span><span class="nt">&lt;mu1</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;0.001&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">20</span><span class="w">                </span><span class="nt">&lt;mu2</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;0.001&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">21</span><span class="w">        </span><span class="nt">&lt;/gazebo&gt;</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="w">        </span><span class="nt">&lt;gazebo&gt;</span>
+<span class="linenos">24</span><span class="w">                </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo_ros_diff_drive&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros_diff_drive.so&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="w">                        </span><span class="cm">&lt;!-- Update rate in Hz --&gt;</span>
+<span class="linenos">27</span><span class="w">                        </span><span class="nt">&lt;update_rate&gt;</span>50<span class="nt">&lt;/update_rate&gt;</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="w">                        </span><span class="cm">&lt;!-- wheels --&gt;</span>
+<span class="linenos">30</span><span class="w">                        </span><span class="nt">&lt;left_joint&gt;</span>left_wheel_joint<span class="nt">&lt;/left_joint&gt;</span>
+<span class="linenos">31</span><span class="w">                        </span><span class="nt">&lt;right_joint&gt;</span>right_wheel_joint<span class="nt">&lt;/right_joint&gt;</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="w">                        </span><span class="cm">&lt;!-- kinematics --&gt;</span>
+<span class="linenos">34</span><span class="w">                        </span><span class="nt">&lt;wheel_separation&gt;</span>${chassis_width<span class="w"> </span>+<span class="w"> </span>wheel_diam/2}<span class="nt">&lt;/wheel_separation&gt;</span>
+<span class="linenos">35</span><span class="w">                        </span><span class="nt">&lt;wheel_diameter&gt;</span>${wheel_diam}<span class="nt">&lt;/wheel_diameter&gt;</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="w">                        </span><span class="cm">&lt;!-- limits --&gt;</span>
+<span class="linenos">38</span><span class="w">                        </span><span class="nt">&lt;max_wheel_torque&gt;</span>20<span class="nt">&lt;/max_wheel_torque&gt;</span>
+<span class="linenos">39</span><span class="w">                        </span><span class="nt">&lt;max_wheel_acceleration&gt;</span>1.0<span class="nt">&lt;/max_wheel_acceleration&gt;</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span><span class="w">                        </span><span class="cm">&lt;!-- output --&gt;</span>
+<span class="linenos">42</span><span class="w">                        </span><span class="nt">&lt;publish_odom&gt;</span>true<span class="nt">&lt;/publish_odom&gt;</span>
+<span class="linenos">43</span><span class="w">                        </span><span class="nt">&lt;publish_odom_tf&gt;</span>true<span class="nt">&lt;/publish_odom_tf&gt;</span>
+<span class="linenos">44</span><span class="w">                        </span><span class="nt">&lt;publish_wheel_tf&gt;</span>true<span class="nt">&lt;/publish_wheel_tf&gt;</span>
+<span class="linenos">45</span>
+<span class="linenos">46</span><span class="w">                        </span><span class="nt">&lt;odometry_topic&gt;</span>odom<span class="nt">&lt;/odometry_topic&gt;</span>
+<span class="linenos">47</span><span class="w">                        </span><span class="nt">&lt;odometry_frame&gt;</span>odom<span class="nt">&lt;/odometry_frame&gt;</span>
+<span class="linenos">48</span><span class="w">                        </span><span class="nt">&lt;robot_base_frame&gt;</span>base_link<span class="nt">&lt;/robot_base_frame&gt;</span>
+<span class="linenos">49</span>
+<span class="linenos">50</span><span class="w">                  </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="linenos">51</span><span class="w">        </span><span class="nt">&lt;/gazebo&gt;</span>
+<span class="linenos">52</span><span class="nt">&lt;/robot&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>For now, we’ll keep the default values for <code class="docutils literal notranslate"><span class="pre">max_wheel_torque</span></code> and <code class="docutils literal notranslate"><span class="pre">max_wheel_acceleration</span></code>, and we’ll change them later, if necessary.</p>
+</section>
+<section id="edit-minibot-base-xacro">
+<h3>4 Edit minibot_base.xacro<a class="headerlink" href="#edit-minibot-base-xacro" title="Permalink to this heading"></a></h3>
+<p>We now need to make a slight modification to our <code class="docutils literal notranslate"><span class="pre">minibot_base.xacro</span></code> file.
+In <code class="docutils literal notranslate"><span class="pre">minibot_gazebo.xacro</span></code>, on lines 34 and 35, we make reference to the <code class="docutils literal notranslate"><span class="pre">chassis_width</span></code> and the <code class="docutils literal notranslate"><span class="pre">wheel_diam</span></code>. To make sure we don’t receive an error when we try
+run our Gazebo simulation, we’ll move our inclusion of <code class="docutils literal notranslate"><span class="pre">inertia_macros.xacro</span></code> and
+<code class="docutils literal notranslate"><span class="pre">minibot_gazebo.xacro</span></code> until after we define our constants as follows (see lines 37 and 38).</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="linenos"> 2</span><span class="nt">&lt;robot</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;minibot_base&quot;</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="nt">&gt;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="w">        </span><span class="cm">&lt;!-- colors --&gt;</span>
+<span class="linenos"> 5</span><span class="w">        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;white&quot;</span><span class="nt">&gt;</span>
+<span class="linenos"> 6</span><span class="w">                </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">rgba=</span><span class="s">&quot;1 1 1 1&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos"> 7</span><span class="w">        </span><span class="nt">&lt;/material&gt;</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;black&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">10</span><span class="w">                </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">rgba=</span><span class="s">&quot;0 0 0 1&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">11</span><span class="w">        </span><span class="nt">&lt;/material&gt;</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="w">        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;orange&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">14</span><span class="w">                </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">rgba=</span><span class="s">&quot;1 0.3 0.1 1&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">15</span><span class="w">        </span><span class="nt">&lt;/material&gt;</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="w">        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;blue&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">18</span><span class="w">                </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">rgba=</span><span class="s">&quot;0.2 0.2 1 1&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">19</span><span class="w">        </span><span class="nt">&lt;/material&gt;</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="w">        </span><span class="cm">&lt;!-- constants --&gt;</span>
+<span class="linenos">22</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;chassis_length&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.216&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">23</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;chassis_width&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.114&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">24</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;chassis_height&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.036&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">25</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wheel_diam&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.065&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">26</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wheel_thickness&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.015&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">27</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wheel_offset_x&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;${(chassis_length/2) - (wheel_diam/2)}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">28</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wheel_offset_y&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;${(chassis_width/2) + (wheel_diam/2) }&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">29</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wheel_offset_z&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;${wheel_diam/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">30</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ball_caster_diam&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.0254&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">31</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ball_caster_offset_x&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;-${(chassis_length/2) - ball_caster_diam}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">32</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ball_caster_offset_z&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;-${((wheel_diam/2) - (ball_caster_diam/2))}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">33</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;chassis_mass&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">34</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wheel_mass&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.5&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">35</span><span class="w">        </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ball_caster_mass&quot;</span><span class="w"> </span><span class="na">value =</span><span class="w"> </span><span class="s">&quot;0.5&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="w">        </span><span class="nt">&lt;xacro:include</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;inertia_macros.xacro&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">38</span><span class="w">        </span><span class="nt">&lt;xacro:include</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;minibot_gazebo.xacro&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span><span class="w">        </span><span class="cm">&lt;!-- base_link --&gt;</span>
+<span class="linenos">41</span><span class="w">        </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;base_link&quot;</span><span class="nt">&gt;</span>
+<span class="linenos">42</span><span class="w">                </span><span class="nt">&lt;visual&gt;</span>
+<span class="linenos">43</span><span class="w">                        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">44</span><span class="w">                        </span><span class="nt">&lt;geometry&gt;</span>
+<span class="linenos">45</span><span class="w">                                </span><span class="nt">&lt;box</span><span class="w"> </span><span class="na">size=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="linenos">46</span><span class="w">                        </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="linenos">47</span><span class="w">                </span><span class="nt">&lt;/visual&gt;</span>
+<span class="linenos">48</span><span class="w">        </span><span class="nt">&lt;/link&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="drive-minibot-inside-gazebo">
+<h2>5 Drive MiniBot Inside Gazebo<a class="headerlink" href="#drive-minibot-inside-gazebo" title="Permalink to this heading"></a></h2>
+<p>Now, we’re finally ready to drive our MiniBot inside our Gazebo world using the differential drive controller and the keyboard using a node called
+<code class="docutils literal notranslate"><span class="pre">teleop_twist_keyboard</span></code>.</p>
+<section id="build-the-package">
+<h3>5.1 Build the Package<a class="headerlink" href="#build-the-package" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span>colcon<span class="w"> </span>build
+</pre></div>
+</div>
+</section>
+<section id="source-the-workspace">
+<h3>5.2 Source the Workspace<a class="headerlink" href="#source-the-workspace" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+</section>
+<section id="launch-minibot-gazebo-launch-xml">
+<h3>5.3 Launch minibot_gazebo.launch.xml<a class="headerlink" href="#launch-minibot-gazebo-launch-xml" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@am-dev-xx:~/dev_ws$<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>minibot<span class="w"> </span>minibot_gazebo.launch.xml
+</pre></div>
+</div>
+<p>If you used the scaled down cones with the (x, y) coordinates given previously, your screen should look similar to the image given below.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/minibot_launch_gazebo_world.png"><img alt="_images/minibot_launch_gazebo_world.png" src="_images/minibot_launch_gazebo_world.png" style="width: 1080.0px; height: 460.0px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="run-teleop-twist-keyboard">
+<h3>5.4 Run teleop_twist_keyboard<a class="headerlink" href="#run-teleop-twist-keyboard" title="Permalink to this heading"></a></h3>
+<p>Open a separate terminal window and run <code class="docutils literal notranslate"><span class="pre">teleop_twist_keyboard</span></code> as follows.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>teleop_twist_keyboard<span class="w"> </span>teleop_twist_keyboard
+</pre></div>
+</div>
+<p>You now should see the following message.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/teleop_twist_keyboard.png"><img alt="_images/teleop_twist_keyboard.png" src="_images/teleop_twist_keyboard.png" style="width: 420.0px; height: 364.8px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Make sure this new terminal window is active, and use the given keys above to drive your MiniBot around.</p>
+</section>
+</section>
+<section id="ros2-nodes-topics">
+<h2>6 ROS2 Nodes/Topics<a class="headerlink" href="#ros2-nodes-topics" title="Permalink to this heading"></a></h2>
+<p>Now, we’ll take a quick look at the nodes and topics for our system.</p>
+<section id="ros2-node-list">
+<h3>6.1 ros2 node list<a class="headerlink" href="#ros2-node-list" title="Permalink to this heading"></a></h3>
+<p>To list the current nodes.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>node<span class="w"> </span>list
+/gazebo
+/gazebo_ros_diff_drive
+/joint_state_publisher
+/robot_state_publisher
+/rviz
+/teloeop_twist_keyboard
+/transform_listener_impl_610ee6ac7780
+</pre></div>
+</div>
+</section>
+<section id="ros2-topic-list">
+<h3>6.2 ros2 topic list<a class="headerlink" href="#ros2-topic-list" title="Permalink to this heading"></a></h3>
+<p>To list the current topics.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>list
+/clicked_point
+/clock
+/cmd_vel
+/goal_pose
+/initialpose
+/joint_states
+/odom
+/parameter_events
+/performance_metrics
+/robot_description
+/rosout
+/tf
+/tf_static
+</pre></div>
+</div>
+</section>
+<section id="rqt-graph">
+<h3>6.3 rqt_graph<a class="headerlink" href="#rqt-graph" title="Permalink to this heading"></a></h3>
+<p>To see how the nodes and topics are related.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>rqt_graph
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/rosgraph01.png"><img alt="_images/rosgraph01.png" src="_images/rosgraph01.png" style="width: 814.8px; height: 79.1px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="ros2-topic-info">
+<h3>6.3 ros2 topic info<a class="headerlink" href="#ros2-topic-info" title="Permalink to this heading"></a></h3>
+<p>To get more information about a specific topic.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/cmd_vel
+Type:<span class="w"> </span>geometry_msgs/msg/Twist
+Publisher<span class="w"> </span>count:<span class="w"> </span><span class="m">1</span>
+Subscription<span class="w"> </span>count:<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+<p>This means that in the package <code class="docutils literal notranslate"><span class="pre">geometry_msgs</span></code> there is a <code class="docutils literal notranslate"><span class="pre">msg</span></code> called <code class="docutils literal notranslate"><span class="pre">Twist</span></code>.</p>
+</section>
+<section id="ros2-interface-show">
+<h3>6.4 ros2 interface show<a class="headerlink" href="#ros2-interface-show" title="Permalink to this heading"></a></h3>
+<p>To learn more about the message type.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>interface<span class="w"> </span>show<span class="w"> </span>geometry_msgs/msg/Twist
+<span class="c1"># This expresses velocity in free space broken into its linear and angular parts.</span>
+
+Vector3<span class="w">  </span>linear
+<span class="w">                </span>float64<span class="w"> </span>x
+<span class="w">                </span>float64<span class="w"> </span>y
+<span class="w">                </span>float64<span class="w"> </span>z
+Vector3<span class="w">  </span>angular
+<span class="w">                </span>float64<span class="w"> </span>x
+<span class="w">                </span>float64<span class="w"> </span>y
+<span class="w">                </span>float64<span class="w"> </span>z
+</pre></div>
+</div>
+<p>So the <code class="docutils literal notranslate"><span class="pre">Twist</span></code> message consists of two 3-vectors comprised of 64-bit floats representing the x, y, and z axes, respectively.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mobile_robot_part01.html" class="btn btn-neutral float-left" title="Mobile Robot, Part 1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mobile_robot_part03.html" class="btn btn-neutral float-right" title="Mobile Robot, Part 3" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, MIT-NEET Autonomous Machines.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

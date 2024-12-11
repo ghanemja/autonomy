@@ -1,0 +1,66 @@
+===========================
+Programming via DJITelloPy
+===========================
+
+For this section you'll see how to write a program using the `DJITelloPy <https://github.com/damiafuentes/DJITelloPy>`_ library as well as using OpenCV to view images from the camera
+
+
+
+1 Installations
+===============
+First, you'll need to install the following libraries using ``pip``:
+
+	1) `djitellopy <https://github.com/damiafuentes/DJITelloPy/tree/master>`_
+	2) `opencv <https://opencv.org/>`_ 
+	3) `numpy <https://numpy.org/>`_ 
+	4) `pygame <https://www.pygame.org/>`_
+	
+.. code-block:: bash 
+
+	# install dijtellopy
+	pip install djitellopy
+	
+.. code-block:: bash 
+
+	# install opencv 
+	pip install opency-python
+	
+.. code-block:: bash 
+
+	# install numpy 
+	pip install numpy==1.26.4
+	
+.. code-block:: bash 
+
+	# install pygame 
+	pip install pygame
+	
+	
+2 Download Tello_Example02.py 
+=============================
+This second example employs the same sequence of drone commands as our first example, but this time we'll use the ``DJITellopy`` library to simplify the overall program construction.
+You can find all of the commands listed in this example at `DJITelloPy API Reference <https://djitellopy.readthedocs.io/en/latest/tello/>`_.
+
+Open VSCode and save the program  as ``Tello_Example02.py`` inside your ``tello`` folder. 
+
+.. literalinclude:: code/Tello_Example02.py
+	:language: Python
+	:linenos:
+	:caption: Tello_Example02.py
+
+As you can see, we've executed the same drone commands as our first example but this time with 82 lines of code less. 
+
+3 Example with Camera Feed
+==========================
+This third example was taken directly from the `DJITello GitHhub site <https://github.com/damiafuentes/DJITelloPy/blob/master/examples/manual-control-pygame.py>`_. This code has a camera feed and 
+it allows you to manually control the Tello using your keyboard. 
+
+.. note:: When you're manually controlling the Tello via the keyboard, make sure to keep the mouse cursor within the video frame (Tello video stream). Otherwise, your keyboard presses will 
+	appear other currently open windows, and will have no effect on controlling the Tello. 
+	
+.. literalinclude:: code/Tello_Example03.py
+	:language: Python
+	:linenos:
+	:caption: Tello_Example03.py
+	
+	
